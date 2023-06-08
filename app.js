@@ -3,6 +3,8 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const http = require("http");
+const cors = require('cors');
+
 require("dotenv").config(); //configuration dotenv
 const mongoose = require('mongoose')
 
@@ -20,6 +22,7 @@ mongoose.connect(process.env.URL_MONGO, {
   (error)=>{console.log(error.message);}
 );
 
+app.use(cors()); // Enable CORS for all routes
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -44,6 +47,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 const server=http.createServer(app);
 server.listen(5000,()=>{console.log("app is runnig on port 5000")});

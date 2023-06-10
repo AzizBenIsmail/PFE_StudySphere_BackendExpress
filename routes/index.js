@@ -11,8 +11,10 @@ const {
   forgotpwd,
 } = require("../controllers/authControllers");
 
+const {requireAuth} = require("../middlewares/authMiddleware");
+
 /* GET home page. */
-router.get("/", function (req, res, next) {
+router.get("/", requireAuth,function (req, res, next) {
   res.json("work");
 });
 

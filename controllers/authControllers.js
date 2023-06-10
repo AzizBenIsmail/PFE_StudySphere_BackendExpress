@@ -13,7 +13,7 @@ const createToken = (id) => {
 
 module.exports.signup_get = (req, res) => {
   const token = createToken(213);
-  res.cookie('jwt_token', token, { httpOnly: true , maxAge: 3 * 24 * 60 * 60 });
+  res.cookie('jwt_token', token, { httpOnly: true, maxAge: 20 * 1000 });
   res.status(200).json("signup_get");
 };
 
@@ -25,7 +25,7 @@ module.exports.signup_post = async (req, res) => {
     const user = await userModel.create({username,password,email,image_user: filename,
     });
     const token = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.cookie('jwt_token', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user });
 
   } catch (error) {
@@ -41,6 +41,8 @@ module.exports.login_post = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await userModel.login(email, password);
+    const token = createToken(user._id);
+    res.cookie('jwt_token', token, { httpOnly: true , maxAge: 3 * 24 * 60 * 60 });
     res.status(200).json("login_post");
   } catch (error) {
     res.status(400).json( {message: error.message});

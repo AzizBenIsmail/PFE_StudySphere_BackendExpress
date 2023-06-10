@@ -22,7 +22,7 @@ router.post("/register", upload.single("image_user"), auth.addUser);
 router.put("/update/:id", auth.updateUser);
 
 /* GET users listing. */
-router.get("/AllUsers", auth.getUsers);
+// router.get("/AllUsers", auth.getUsers);
 
 /* GET user by ID. */
 router.get("/:id", auth.getUsers);

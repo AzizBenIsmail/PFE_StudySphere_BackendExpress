@@ -50,6 +50,11 @@ module.exports.login_post = async (req, res) => {
   }
 };
 
+module.exports.logout = (req, res) => {
+  res.cookie('jwt_token', '', { maxAge: 1 });
+  res.status(200).json("logout");
+};
+
 module.exports.getUsers = async (req, res, next) => {
   try {
     const users = await userModel.find();

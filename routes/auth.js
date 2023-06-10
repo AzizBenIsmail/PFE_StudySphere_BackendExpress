@@ -15,6 +15,9 @@ router.get("/login", auth.login_get);
 /* GET user by ID. */
 router.post("/login", auth.login_post);
 
+/* GET user by ID. */
+router.get("/logout", auth.logout);
+
 /* Add User */
 router.post("/register", upload.single("image_user"), auth.addUser);
 

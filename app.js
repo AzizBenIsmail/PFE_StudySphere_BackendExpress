@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const http = require("http");
 const cors = require('cors');
+const logMiddleware = require('./middlewares/logMiddleware');
 
 require("dotenv").config(); //configuration dotenv
 const mongoose = require('mongoose')
@@ -27,7 +28,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(logMiddleware);
 // app.use(express.static(path.join(__dirname, 'public')));
+
 const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true
@@ -50,7 +53,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json('error');
 });
 
 

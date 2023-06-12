@@ -11,19 +11,19 @@ const {
   forgotpwd,
 } = require("../controllers/authControllers");
 
-const {requireAuth} = require("../middlewares/authMiddleware");
+const {requireAuth,requireAuth_checkUser} = require("../middlewares/authMiddleware");
 
 /* GET home page. */
-router.get("/", requireAuth,function (req, res, next) {
-  res.json("work");
+router.get("/", requireAuth_checkUser,function (req, res, next) {
+  res.json({ message: "Utilisateur connecté", username: req.user.username });
 });
 
 router.get("/set-cookies", (req, res) => {
   // res.setHeader('Set-Cookie', 'hh=true');
   // res.setHeader('Cache-Control', 'no-cache');
-  res.cookie("youta", false);
-  res.cookie("zizou", true, { maxAge: 3600 });
-  res.json("you got the cookies");
+  // res.cookie("youta", false);
+  // res.cookie("zizou", true, { maxAge: 3600 });
+  // res.json("you got the cookies");
 });
 
 router.get("/read-cookies", (req, res) => {

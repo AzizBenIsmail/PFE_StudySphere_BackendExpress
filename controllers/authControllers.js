@@ -1,20 +1,20 @@
 const userModel = require("../models/userSchema");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
+const nodemailer = require("nodemailer");
 
-
-const maxAge = 3 * 24 * 60 * 60 // 3 days
+const maxAge = 2 * 60 * 60; // 2 heures
 
 const createToken = (id) => {
-  return jwt.sign({id},'net attijari secret',{
-    expiresIn : maxAge 
-  })
-}
+  return jwt.sign({ id }, "net attijari secret", {
+    expiresIn: maxAge,
+  });
+};
 
 module.exports.signup_get = (req, res) => {
-  const token = createToken(213);
-  res.cookie('jwt_token', token, { httpOnly: true, maxAge: 20 * 1000 });
-  res.status(200).json("signup_get");
+  // const token = createToken(213);
+  // res.cookie('jwt_token', token, { httpOnly: true, maxAge: 20 * 1000 });
+  // res.status(200).json("signup_get");
 };
 
 module.exports.signup_post = async (req, res) => {
@@ -22,12 +22,17 @@ module.exports.signup_post = async (req, res) => {
   const { email, password, username } = req.body;
 
   try {
-    const user = await userModel.create({username,password,email,image_user: filename,
+    const user = await userModel.create({
+      username,
+      password,
+      email,
+      image_user: filename,
     });
+    // Envoi de l'e-mail à l'adresse e-mail de l'utilisateur
+    sendWelcomeEmail(email, username);
     const token = createToken(user._id);
-    res.cookie('jwt_token', token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.cookie("jwt_token", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user });
-
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -42,16 +47,44 @@ module.exports.login_post = async (req, res) => {
   try {
     const user = await userModel.login(email, password);
     const token = createToken(user._id);
-    res.cookie('jwt_token', token, { httpOnly: true , maxAge: 3 * 24 * 60 * 60 });
+    res.cookie("jwt_token", token, {
+      httpOnly: true,
+      maxAge: 3 * 24 * 60 * 60,
+    });
     res.status(200).json("login_post");
   } catch (error) {
-    res.status(400).json( {message: error.message});
-
+    res.status(400).json({ message: error.message });
   }
 };
 
+// Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
+function sendWelcomeEmail(email, username) {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "greencrowd2223@gmail.com",
+      pass: "zothevkvkhobyyzw",
+    },
+  });
+
+  const mailOptions = {
+    from: "attijaripfa@gmail.com",
+    to: email,
+    subject: "Bienvenue sur notre site",
+    text: `Cher ${username},\n\nBienvenue sur notre site. Nous sommes ravis de vous accueillir parmi nous !\n\nCordialement,\nL'équipe du site`,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.error("Erreur lors de l'envoi de l'e-mail de bienvenue :", error);
+    } else {
+      console.log("E-mail de bienvenue envoyé avec succès !");
+    }
+  });
+}
+
 module.exports.logout = (req, res) => {
-  res.cookie('jwt_token', '', { maxAge: 1 });
+  res.cookie("jwt_token", "", { maxAge: 1 });
   res.status(200).json("logout");
 };
 

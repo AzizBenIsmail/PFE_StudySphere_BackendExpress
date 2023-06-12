@@ -11,12 +11,6 @@ const createToken = (id) => {
   });
 };
 
-module.exports.signup_get = (req, res) => {
-  // const token = createToken(213);
-  // res.cookie('jwt_token', token, { httpOnly: true, maxAge: 20 * 1000 });
-  // res.status(200).json("signup_get");
-};
-
 module.exports.signup_post = async (req, res) => {
   const { filename } = req.file;
   const { email, password, username } = req.body;
@@ -38,8 +32,33 @@ module.exports.signup_post = async (req, res) => {
   }
 };
 
-module.exports.login_get = (req, res) => {
-  res.status(200).json("login_get");
+module.exports.activation = async (req, res) => {
+  try {
+    const email = req.query.email;
+    const checkIfUserExists = await userModel.findOne({ email });
+
+    if (!checkIfUserExists) {
+      throw new Error("User not found!");
+    }
+    if (checkIfUserExists.enabled) {
+      res.status(200).json("Utilisateur_est_deja_active");
+    }
+
+    const currentDate = new Date();
+    const updatedUser = await userModel.findByIdAndUpdate(
+      checkIfUserExists._id,
+      {
+        $set: {
+          enabled: true,
+          updated_at: currentDate,
+        },
+      },
+      { new: true } // Set the { new: true } option to return the updated user
+    );
+    res.status(200).json("Utilisateur_active");
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports.login_post = async (req, res) => {
@@ -47,10 +66,7 @@ module.exports.login_post = async (req, res) => {
   try {
     const user = await userModel.login(email, password);
     const token = createToken(user._id);
-    res.cookie("jwt_token", token, {
-      httpOnly: true,
-      maxAge: 3 * 24 * 60 * 60,
-    });
+    res.cookie("jwt_token", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(200).json("login_post");
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -58,7 +74,7 @@ module.exports.login_post = async (req, res) => {
 };
 
 // Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
-function sendWelcomeEmail(email, username) {
+function sendWelcomeEmail(email, username , id) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -66,14 +82,63 @@ function sendWelcomeEmail(email, username) {
       pass: "zothevkvkhobyyzw",
     },
   });
-
+  const activationLink = `http://localhost:5000/auth/validation?email=${encodeURIComponent(email)}`;
   const mailOptions = {
-    from: "attijaripfa@gmail.com",
+    from: "greencrowd2223@gmail.com",
     to: email,
     subject: "Bienvenue sur notre site",
-    text: `Cher ${username},\n\nBienvenue sur notre site. Nous sommes ravis de vous accueillir parmi nous !\n\nCordialement,\nL'équipe du site`,
+    html: `
+      <html>
+        <head>
+          <style>
+            /* Add your custom styles here */
+            body {
+              font-family: Arial, sans-serif;
+              background-color: #f2f2f2;
+              padding: 20px;
+            }
+            .container {
+              max-width: 500px;
+              margin: 0 auto;
+              background-color: #ffffff;
+              padding: 30px;
+              border-radius: 5px;
+              box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+              color: #333333;
+            }
+            p {
+              color: #555555;
+            }
+            h2 {
+              color: #0000FF;
+            }
+            .button {
+              display: inline-block;
+              background-color: #007bff;
+              color: #ffffff;
+              text-decoration: none;
+              padding: 10px 20px;
+              border-radius: 4px;
+              margin-top: 20px;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h1>Bienvenue sur notre site</h1>
+            <p>Cher</p> <h2> ${username},</h2>
+            <p>Nous sommes ravis de vous accueillir parmi nous !</p>
+            <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
+            <a href="${activationLink}" ${id} class="button">Activer mon compte</a>
+            <p>Cordialement,<br>L'équipe du site</p>
+          </div>
+        </body>
+      </html>
+    `,
   };
-
+  
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.error("Erreur lors de l'envoi de l'e-mail de bienvenue :", error);

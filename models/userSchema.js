@@ -12,7 +12,7 @@ userSchema = new mongoose.Schema(
     updatedAt: Date,
     userType: String,
     image_user: String,
-    enabled: Boolean, //
+    enabled: Boolean, //true or false
     phoneNumber: Number, //length 8
   },
   { timestamps: true }
@@ -32,7 +32,7 @@ userSchema.pre("save", async function (next) {
     User.password = await bcrypt.hash(User.password, salt);
     User.createdAt = new Date();
     User.updatedAt = new Date();
-    User.enabled = true;
+    User.enabled = false; //false
     next();
   } catch (error) {
     next(error);

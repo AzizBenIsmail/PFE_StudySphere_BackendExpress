@@ -165,3 +165,223 @@ Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"55
 Execution Time: 12 ms
 Body: N/A
 
+2023-06-12T13:35:56.069Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: N/A | username: N/A 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568444","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundaryKBp3lu7sREYNBOxm","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7"}
+Execution Time: 0 ms
+Body: N/A
+
+2023-06-12T13:49:22.828Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 64871f3c7ebea7df06674ae1 | username: admin 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568454","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundarykvyJs9nhIEYCCRh2","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODcxZjNjN2ViZWE3ZGYwNjY3NGFlMSIsImlhdCI6MTY4NjU3Njk1NiwiZXhwIjoxNjg2NTg0MTU2fQ.rZMGvpogW7YOVInauBaHPTqdDrHhi8bn3PZppwCEEoM"}
+Execution Time: 42 ms
+Body: N/A
+
+2023-06-12T14:03:56.636Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 648722624db42c765b212fe3 | username: admin 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568454","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundaryuDI0ZbBXlmzR2B7J","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODcyMjYyNGRiNDJjNzY1YjIxMmZlMyIsImlhdCI6MTY4NjU3Nzc2MywiZXhwIjoxNjg2NTg0OTYzfQ.M9LQZsXc8AsV6eQusDpdFZ42L8O0Oz9wHs3HWs9clRE"}
+Execution Time: 43 ms
+Body: N/A
+
+2023-06-12T14:05:25.950Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 648725ccb96bae809831ba9a | username: admin 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568454","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundaryXrJ3QVl1dt6maOYm","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODcyNWNjYjk2YmFlODA5ODMxYmE5YSIsImlhdCI6MTY4NjU3ODYzNywiZXhwIjoxNjg2NTg1ODM3fQ.bu9gTTq0yPKPp1MgNIlBhr3Wt6pvRoLjVySuTbHXzw4"}
+Execution Time: 41 ms
+Body: N/A
+
+2023-06-12T14:11:50.409Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 64872626995e7a97b178ed56 | username: admin 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568446","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundaryg0i7vyMIb84APcbS","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODcyNjI2OTk1ZTdhOTdiMTc4ZWQ1NiIsImlhdCI6MTY4NjU3ODcyNiwiZXhwIjoxNjg2NTg1OTI2fQ.rwOLzr-UfUkLJCpaKZubFk2aAj7C81mIjLXMvF3-24k"}
+Execution Time: 42 ms
+Body: N/A
+
+2023-06-12T14:23:29.471Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 648727a60c5de6f865713dd8 | username: sam3oul 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568446","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundary6VM7A1E1u3NmnbYV","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODcyN2E2MGM1ZGU2Zjg2NTcxM2RkOCIsImlhdCI6MTY4NjU3OTExMCwiZXhwIjoxNjg2NTg2MzEwfQ.jrSR7jZUHiyTsg6xEEYGuORNM9jDEVVsu3c1kj1oFrA"}
+Execution Time: 62 ms
+Body: N/A
+
+2023-06-12T14:27:42.071Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 64872a616b27be6bff56c9c0 | username: sam3oul 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568446","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundaryrjD569ibj2AUTk05","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODcyYTYxNmIyN2JlNmJmZjU2YzljMCIsImlhdCI6MTY4NjU3OTgxMCwiZXhwIjoxNjg2NTg3MDEwfQ.EbP6TUGpUqUczLPsgPD-F-UGATZFKvuRwe2tpDXCUYI"}
+Execution Time: 50 ms
+Body: N/A
+
+2023-06-12T14:29:47.052Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 64872b5eb5a4133d6afe8fac | username: sam3oul 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568446","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundary19kBJWlxIoJoIkNS","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODcyYjVlYjVhNDEzM2Q2YWZlOGZhYyIsImlhdCI6MTY4NjU4MDA2MiwiZXhwIjoxNjg2NTg3MjYyfQ.66MdJtD6tDWGUNamdRrzPzKjq_4MrRRaNvgkIZCE5J4"}
+Execution Time: 42 ms
+Body: N/A
+
+2023-06-12T14:53:34.625Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 64872bdbe46123368b933644 | username: sam3oul 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568446","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundarydoBXCyCyz8TdAo36","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODcyYmRiZTQ2MTIzMzY4YjkzMzY0NCIsImlhdCI6MTY4NjU4MDE4NywiZXhwIjoxNjg2NTg3Mzg3fQ.6UYJahmDhePRyWmYmuwbUgctzC8U79ff51feqP8CEjY"}
+Execution Time: 14 ms
+Body: N/A
+
+2023-06-12T15:19:16.022Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"458a0267-d711-4aa9-9b55-1a837929a4f9","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"51"}
+Execution Time: 0 ms
+Body: {"email":"mohamedaziz.benismail@esprit.tn"}
+
+2023-06-12T15:19:43.016Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"8a31527d-cca0-47ac-9fc1-c089006adae9","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"51"}
+Execution Time: 0 ms
+Body: {"email":"mohamedaziz.benismail@esprit.tn"}
+
+2023-06-12T15:19:59.680Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"213fb785-a630-47d3-801d-1f1ade4e29bb","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"51"}
+Execution Time: 0 ms
+Body: {"email":"mohamedaziz.benismail@esprit.tn"}
+
+2023-06-12T15:20:29.345Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"d56211b2-4bd9-410c-a2c5-2ea2348a7e78","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"51"}
+Execution Time: 0 ms
+Body: {"email":"mohamedaziz.benismail@esprit.tn"}
+
+2023-06-12T15:20:52.547Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"05e0f7f2-9e36-4d2a-bbb0-3b235b42f3c1","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"51"}
+Execution Time: 0 ms
+Body: {"email":"mohamedaziz.benismail@esprit.tn"}
+
+2023-06-12T15:22:36.119Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"6c7d4f12-e5a7-4e71-af85-5daed12fa7b5","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"51"}
+Execution Time: 0 ms
+Body: {"email":"mohamedaziz.benismail@esprit.tn"}
+
+2023-06-12T15:23:29.971Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"3b87f344-ccfb-41e3-9f75-de7681ab710d","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"51"}
+Execution Time: 0 ms
+Body: {"email":"mohamedaziz.benismail@esprit.tn"}
+
+2023-06-12T15:25:20.765Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"ce4e0866-b1b7-44a6-b938-19c7d91baefe","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"51"}
+Execution Time: 0 ms
+Body: {"email":"mohamedaziz.benismail@esprit.tn"}
+
+2023-06-12T15:28:46.233Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"d3f3ef18-e912-4c49-95e2-7ed378583953","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"51"}
+Execution Time: 0 ms
+Body: {"email":"mohamedaziz.benismail@esprit.tn"}
+
+2023-06-12T15:28:48.451Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"9b966804-291d-4008-bbfe-9db6a8dc0656","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"51"}
+Execution Time: 0 ms
+Body: {"email":"mohamedaziz.benismail@esprit.tn"}
+
+2023-06-12T15:29:08.736Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"c9e5cc04-2d5a-457f-8ba6-b2b07ccab6fd","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"51"}
+Execution Time: 0 ms
+Body: {"email":"mohamedaziz.benismail@esprit.tn"}
+
+2023-06-12T15:29:10.971Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"1c571f51-ed96-4baf-b4a6-dcea4f40218c","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"51"}
+Execution Time: 0 ms
+Body: {"email":"mohamedaziz.benismail@esprit.tn"}
+
+2023-06-12T15:36:20.435Z - POST - /auth/login - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"5f2d689d-139f-48fc-bbb8-dc4dc6397181","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"48"}
+Execution Time: 0 ms
+Body: {"email":"aziz","password":"aziz"}
+
+2023-06-12T15:36:32.045Z - POST - /auth/logout - ::1 - Referer: N/A - 200 - User_id: 6483e508722ccf15901e4679 | username: Hama 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"2272fa83-43cb-46df-91fa-114f15a23857","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"48","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODNlNTA4NzIyY2NmMTU5MDFlNDY3OSIsImlhdCI6MTY4NjU4NDE4MCwiZXhwIjoxNjg2NTkxMzgwfQ.whuoHSjhhyFIEHCHqygzUT3RJ6pRoSfQQIPywG0Ib-A"}
+Execution Time: 4 ms
+Body: {"email":"aziz","password":"aziz"}
+
+2023-06-12T15:36:50.108Z - POST - /auth/logout - ::1 - Referer: N/A - 200 - User_id: 6483e508722ccf15901e4679 | username: Hama 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"46173694-c5ad-4753-a82d-9679bbe3d813","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"48","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODNlNTA4NzIyY2NmMTU5MDFlNDY3OSIsImlhdCI6MTY4NjU4NDE4MCwiZXhwIjoxNjg2NTkxMzgwfQ.whuoHSjhhyFIEHCHqygzUT3RJ6pRoSfQQIPywG0Ib-A"}
+Execution Time: 2 ms
+Body: {"email":"aziz","password":"aziz"}
+
+2023-06-12T15:36:55.349Z - GET - /auth/logout - ::1 - Referer: N/A - 200 - User_id: 6483e508722ccf15901e4679 | username: Hama 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"eb6237bb-5c6a-4a8f-8ba0-3db0a24762f4","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"48","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODNlNTA4NzIyY2NmMTU5MDFlNDY3OSIsImlhdCI6MTY4NjU4NDE4MCwiZXhwIjoxNjg2NTkxMzgwfQ.whuoHSjhhyFIEHCHqygzUT3RJ6pRoSfQQIPywG0Ib-A"}
+Execution Time: 2 ms
+Body: {"email":"aziz","password":"aziz"}
+
+2023-06-12T15:37:00.331Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"72b348b7-dd30-4e92-9190-2618477f467a","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"48"}
+Execution Time: 0 ms
+Body: {"email":"aziz","password":"aziz"}
+
+2023-06-12T15:44:16.546Z - GET - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"1daf4e86-03c1-442a-904b-d164f1ebb8e8","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"48"}
+Execution Time: 0 ms
+Body: {"email":"aziz","password":"aziz"}
+
+2023-06-12T15:44:25.797Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"b96c478e-7c90-4e10-ac18-3f1c9019356b","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"48"}
+Execution Time: 1 ms
+Body: {"email":"aziz","password":"aziz"}
+
+2023-06-12T15:44:27.611Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"21e0dfbb-3a2f-4c6f-9784-b3d12c566a99","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"48"}
+Execution Time: 0 ms
+Body: {"email":"aziz","password":"aziz"}
+
+2023-06-12T15:49:25.417Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"e9cf85d7-5b12-4251-9365-fed1c00282b5","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"30"}
+Execution Time: 0 ms
+Body: {"email":"aziz"}
+
+2023-06-12T15:49:27.907Z - POST - /auth/validation - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"56fce33b-5be4-4432-9640-7b8867aeab58","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"30"}
+Execution Time: 0 ms
+Body: {"email":"aziz"}
+
+2023-06-12T15:51:16.121Z - POST - /auth/validation?email:hamaz - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"59a8be0a-2ecd-4f96-ba8b-dabd06041060","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"27"}
+Execution Time: 0 ms
+Body: {"email":"hamaz"}
+
+2023-06-12T15:51:27.025Z - POST - /auth/validation?email=hamaz - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"31b434c8-2c29-42c3-9c0d-5219a238f8fe","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"27"}
+Execution Time: 0 ms
+Body: {"email":"hamaz"}
+
+2023-06-12T15:54:14.513Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 64872bdbe46123368b933644 | username: sam3oul 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568448","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundaryWsperBo9Rp2kwK6M","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODcyYmRiZTQ2MTIzMzY4YjkzMzY0NCIsImlhdCI6MTY4NjU4MDE4NywiZXhwIjoxNjg2NTg3Mzg3fQ.6UYJahmDhePRyWmYmuwbUgctzC8U79ff51feqP8CEjY"}
+Execution Time: 14 ms
+Body: N/A
+
+2023-06-12T15:54:27.879Z - GET - /auth/validation?email=mohamedaziz.benismail%40esprit.tn - ::1 - Referer: N/A - 200 - User_id: 64873fa6c5784269a0d22991 | username: eya 
+Headers: {"host":"localhost:5000","connection":"keep-alive","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-fetch-site":"cross-site","sec-fetch-mode":"navigate","sec-fetch-user":"?1","sec-fetch-dest":"document","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","sec-ch-ua-mobile":"?0","sec-ch-ua-platform":"\"Windows\"","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODczZmE2YzU3ODQyNjlhMGQyMjk5MSIsImlhdCI6MTY4NjU4NTI1NCwiZXhwIjoxNjg2NTkyNDU0fQ._voPVf3xjf0yGGqTcZ_2kRu3dAcwsw3AusKPl9sP34k"}
+Execution Time: 5 ms
+Body: N/A
+
+2023-06-12T15:54:58.826Z - GET - /auth/validation?email=mohamedaziz.benismail@esprit.tn - ::1 - Referer: N/A - 200 - User_id: 64873fa6c5784269a0d22991 | username: eya 
+Headers: {"host":"localhost:5000","connection":"keep-alive","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","sec-ch-ua-mobile":"?0","sec-ch-ua-platform":"\"Windows\"","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-fetch-site":"none","sec-fetch-mode":"navigate","sec-fetch-user":"?1","sec-fetch-dest":"document","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODczZmE2YzU3ODQyNjlhMGQyMjk5MSIsImlhdCI6MTY4NjU4NTI1NCwiZXhwIjoxNjg2NTkyNDU0fQ._voPVf3xjf0yGGqTcZ_2kRu3dAcwsw3AusKPl9sP34k"}
+Execution Time: 5 ms
+Body: N/A
+
+2023-06-12T15:55:58.605Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 64873fa6c5784269a0d22991 | username: eya 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568448","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundaryce7sNF3pS5yAG2Mb","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODczZmE2YzU3ODQyNjlhMGQyMjk5MSIsImlhdCI6MTY4NjU4NTI1NCwiZXhwIjoxNjg2NTkyNDU0fQ._voPVf3xjf0yGGqTcZ_2kRu3dAcwsw3AusKPl9sP34k"}
+Execution Time: 4 ms
+Body: N/A
+
+2023-06-12T15:56:37.892Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: N/A | username: N/A 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568448","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundarycLUunYC3M3RCeQ5A","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODc0MDBlYzU3ODQyNjlhMGQyMjk5OCIsImlhdCI6MTY4NjU4NTM1OCwiZXhwIjoxNjg2NTkyNTU4fQ.pKIYbojmjq9A_jBQ0gfohFa_SQpjTF6FsDcPFVpXBNA"}
+Execution Time: 3 ms
+Body: N/A
+
+2023-06-12T15:56:56.245Z - GET - /auth/validation?email=mohamedaziz.benismail%40esprit.tn - ::1 - Referer: N/A - 200 - User_id: 64874035c5784269a0d2299b | username: eya 
+Headers: {"host":"localhost:5000","connection":"keep-alive","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-fetch-site":"cross-site","sec-fetch-mode":"navigate","sec-fetch-user":"?1","sec-fetch-dest":"document","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","sec-ch-ua-mobile":"?0","sec-ch-ua-platform":"\"Windows\"","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODc0MDM1YzU3ODQyNjlhMGQyMjk5YiIsImlhdCI6MTY4NjU4NTM5OCwiZXhwIjoxNjg2NTkyNTk4fQ.MKSShFVB3cS2rK2UnoOcwysVfJFC_s_wixnwA-kch0w","if-none-match":"W/\"2027-HsRFVnq9vbM+iCjup1mfRD0HeL8\""}
+Execution Time: 6 ms
+Body: N/A
+
+2023-06-12T15:57:19.292Z - GET - /auth/validation?email=mohamedaziz.benismail@esprit.tn - ::1 - Referer: N/A - 200 - User_id: 64874035c5784269a0d2299b | username: eya 
+Headers: {"host":"localhost:5000","connection":"keep-alive","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","sec-ch-ua-mobile":"?0","sec-ch-ua-platform":"\"Windows\"","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-fetch-site":"none","sec-fetch-mode":"navigate","sec-fetch-user":"?1","sec-fetch-dest":"document","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODc0MDM1YzU3ODQyNjlhMGQyMjk5YiIsImlhdCI6MTY4NjU4NTM5OCwiZXhwIjoxNjg2NTkyNTk4fQ.MKSShFVB3cS2rK2UnoOcwysVfJFC_s_wixnwA-kch0w","if-none-match":"W/\"2027-HsRFVnq9vbM+iCjup1mfRD0HeL8\""}
+Execution Time: 3 ms
+Body: N/A
+
+2023-06-12T15:57:27.126Z - GET - /auth/validation?email=mohamedaziz.benismail@esprit.tn - ::1 - Referer: N/A - 200 - User_id: 64874035c5784269a0d2299b | username: eya 
+Headers: {"host":"localhost:5000","connection":"keep-alive","cache-control":"max-age=0","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","sec-ch-ua-mobile":"?0","sec-ch-ua-platform":"\"Windows\"","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-fetch-site":"none","sec-fetch-mode":"navigate","sec-fetch-user":"?1","sec-fetch-dest":"document","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODc0MDM1YzU3ODQyNjlhMGQyMjk5YiIsImlhdCI6MTY4NjU4NTM5OCwiZXhwIjoxNjg2NTkyNTk4fQ.MKSShFVB3cS2rK2UnoOcwysVfJFC_s_wixnwA-kch0w","if-none-match":"W/\"13d-/dpK6jvlffX9gxJAPDYXMudhoQQ\""}
+Execution Time: 3 ms
+Body: N/A
+
+2023-06-12T16:02:40.727Z - GET - /auth/validation?email=mohamedaziz.benismail%40esprit.tn - ::1 - Referer: N/A - 200 - User_id: 64874035c5784269a0d2299b | username: eya 
+Headers: {"host":"localhost:5000","connection":"keep-alive","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-fetch-site":"cross-site","sec-fetch-mode":"navigate","sec-fetch-user":"?1","sec-fetch-dest":"document","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","sec-ch-ua-mobile":"?0","sec-ch-ua-platform":"\"Windows\"","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODc0MDM1YzU3ODQyNjlhMGQyMjk5YiIsImlhdCI6MTY4NjU4NTM5OCwiZXhwIjoxNjg2NTkyNTk4fQ.MKSShFVB3cS2rK2UnoOcwysVfJFC_s_wixnwA-kch0w","if-none-match":"W/\"13d-/dpK6jvlffX9gxJAPDYXMudhoQQ\""}
+Execution Time: 11 ms
+Body: N/A
+
+2023-06-12T16:03:20.263Z - GET - /auth/validation?email=mohamedaziz.benismail%40esprit.tn - ::1 - Referer: N/A - 200 - User_id: 64874035c5784269a0d2299b | username: eya 
+Headers: {"host":"localhost:5000","connection":"keep-alive","cache-control":"max-age=0","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","sec-ch-ua-mobile":"?0","sec-ch-ua-platform":"\"Windows\"","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-fetch-site":"cross-site","sec-fetch-mode":"navigate","sec-fetch-user":"?1","sec-fetch-dest":"document","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODc0MDM1YzU3ODQyNjlhMGQyMjk5YiIsImlhdCI6MTY4NjU4NTM5OCwiZXhwIjoxNjg2NTkyNTk4fQ.MKSShFVB3cS2rK2UnoOcwysVfJFC_s_wixnwA-kch0w","if-none-match":"W/\"14-uCivtnHMZiku26Mk+u9qhsZybNE\""}
+Execution Time: 11 ms
+Body: N/A
+
+2023-06-12T16:03:50.440Z - GET - /auth/validation?email=mohamedaziz.benismail%40esprit.tn - ::1 - Referer: N/A - 200 - User_id: 64874035c5784269a0d2299b | username: eya 
+Headers: {"host":"localhost:5000","connection":"keep-alive","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","sec-fetch-site":"cross-site","sec-fetch-mode":"navigate","sec-fetch-user":"?1","sec-fetch-dest":"document","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","sec-ch-ua-mobile":"?0","sec-ch-ua-platform":"\"Windows\"","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODc0MDM1YzU3ODQyNjlhMGQyMjk5YiIsImlhdCI6MTY4NjU4NTM5OCwiZXhwIjoxNjg2NTkyNTk4fQ.MKSShFVB3cS2rK2UnoOcwysVfJFC_s_wixnwA-kch0w","if-none-match":"W/\"1d-dAiywPkRk05b5sdU1TjCi5zunhM\""}
+Execution Time: 12 ms
+Body: N/A
+

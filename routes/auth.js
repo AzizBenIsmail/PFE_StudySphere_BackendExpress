@@ -4,16 +4,13 @@ const upload = require("../middlewares/upload");
 const auth = require("../controllers/authControllers");
 
 /* GET user by ID. */
-router.get("/signup", auth.signup_get);
-
-/* GET user by ID. */
 router.post("/signup",upload.single("image_user"), auth.signup_post);
 
 /* GET user by ID. */
-router.get("/login", auth.login_get);
-
-/* GET user by ID. */
 router.post("/login", auth.login_post);
+
+/* GET user by ID. */   
+router.get("/validation", auth.activation);
 
 /* GET user by ID. */
 router.get("/logout", auth.logout);

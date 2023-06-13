@@ -10,11 +10,21 @@ const {
   updateUser,
   forgotpwd,
 } = require("../controllers/authControllers");
+const session = require('express-session');
 
-const {requireAuth,requireAuth_checkUser} = require("../middlewares/authMiddleware");
+const {requireAuthUser} = require("../middlewares/authMiddleware");
+
+// Configuration de la session
+router.use(session({
+  secret: 'net attijari secret',
+  resave: false,
+  saveUninitialized: false
+}));
+
 
 /* GET home page. */
-router.get("/", requireAuth_checkUser,function (req, res, next) {
+router.get("/", requireAuthUser,function (req, res, next) {
+    console.log('hello  ',req.session.user.email);
   res.json({ message: "Utilisateur connecté", username: req.user.username });
 });
 
@@ -27,9 +37,9 @@ router.get("/set-cookies", (req, res) => {
 });
 
 router.get("/read-cookies", (req, res) => {
-  const cookies = req.cookies;
-  console.log(cookies);
-  res.json(cookies);
+  // const cookies = req.cookies;
+  // console.log(cookies);
+  // res.json(cookies);
 });
 
 module.exports = router;

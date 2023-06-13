@@ -5,6 +5,7 @@ var logger = require('morgan');
 const http = require("http");
 const cors = require('cors');
 const logMiddleware = require('./middlewares/logMiddleware');
+const session = require('express-session');
 
 require("dotenv").config(); //configuration dotenv
 const mongoose = require('mongoose')
@@ -29,6 +30,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(logMiddleware);
+
+// Configuration de la session
+app.use(session({
+  secret: 'net attijari secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false, // À définir sur true si vous utilisez HTTPS
+    maxAge: 24 * 60 * 60 * 1000, // Durée de validité du cookie de session (en millisecondes)
+  },
+}));
+
+
 // app.use(express.static(path.join(__dirname, 'public')));
 
 const corsOptions = {

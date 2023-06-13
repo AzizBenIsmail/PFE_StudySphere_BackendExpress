@@ -385,3 +385,403 @@ Headers: {"host":"localhost:5000","connection":"keep-alive","upgrade-insecure-re
 Execution Time: 12 ms
 Body: N/A
 
+2023-06-13T08:33:24.153Z - GET - /auth/AllUsers - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDMxOTAyODQwZTUwOTBmYjk5ZTY2MTAiLCJlbWFpbCI6IkF6aXpCZW5pc21haWwxMjNAZ21haWwuY29tIiwidXNlclR5cGUiOiJ1c2VyIiwiaWF0IjoxNjgxNDkwMDc1LCJleHAiOjE2ODE1NjIwNzV9.ftY0LwtT2EWXGF_3woLA4GCNxkOqHf4Sys-7bjPAxNw","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"e0f5c9cb-0c8b-43c8-be81-5260a47e0adf","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:07:42.485Z - GET - /auth/ - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"dca6ca07-596b-4692-8049-17d0ffdd3205","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:07:49.947Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"f3624aa4-7b42-496b-98b2-a34add58e2e2","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:08:11.932Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"07f1e84b-81cc-4fe6-ab0d-b7e8da16629e","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:08:13.695Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"5cb4fb6c-1ff7-4425-a6b7-1524e7c6b1e9","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:10:54.378Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: N/A | username: N/A 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568440","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundaryYJ22BkApZ7r4cVef","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:11:00.173Z - GET - /auth/AllUsers - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDMxOTAyODQwZTUwOTBmYjk5ZTY2MTAiLCJlbWFpbCI6IkF6aXpCZW5pc21haWwxMjNAZ21haWwuY29tIiwidXNlclR5cGUiOiJ1c2VyIiwiaWF0IjoxNjgxNDkwMDc1LCJleHAiOjE2ODE1NjIwNzV9.ftY0LwtT2EWXGF_3woLA4GCNxkOqHf4Sys-7bjPAxNw","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"c0832dee-7473-496a-9217-03b96c04cb7f","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:11:54.159Z - GET - /auth/signup - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"b15eb2a1-e482-406b-8e6e-0d8671827d7a","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"65"}
+Execution Time: 0 ms
+Body: {"email":"aziz.270700@gmail.com","password":"aziz"}
+ - undefined
+2023-06-13T09:12:01.576Z - POST - /auth/signup - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"925be7fd-2f96-419d-a110-4341fcc819a6","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"65"}
+Execution Time: 0 ms
+Body: {"email":"aziz.270700@gmail.com","password":"aziz"}
+ - undefined
+2023-06-13T09:13:37.765Z - GET - /auth/AllUsers - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDMxOTAyODQwZTUwOTBmYjk5ZTY2MTAiLCJlbWFpbCI6IkF6aXpCZW5pc21haWwxMjNAZ21haWwuY29tIiwidXNlclR5cGUiOiJ1c2VyIiwiaWF0IjoxNjgxNDkwMDc1LCJleHAiOjE2ODE1NjIwNzV9.ftY0LwtT2EWXGF_3woLA4GCNxkOqHf4Sys-7bjPAxNw","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"e3376f8c-d0ea-45a1-a511-9b34c4e74159","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:13:45.984Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"fc173c8f-975b-44e0-8371-08af55076ba5","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:13:51.762Z - POST - /auth/login - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"a4b6edb3-9113-4585-9bdd-3d2b0084b1c3","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"65"}
+Execution Time: 0 ms
+Body: {"email":"aziz.270700@gmail.com","password":"aziz"}
+ - undefined
+2023-06-13T09:14:05.522Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"64513c17-adae-4a72-aa69-6f804b25e1ac","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 14 ms
+Body: N/A
+ - undefined
+2023-06-13T09:15:31.291Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"8e2b91db-e400-40f8-86a5-a30f572a4fa3","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 42 ms
+Body: N/A
+ - undefined
+2023-06-13T09:21:32.397Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"3a9dcfca-21db-4438-9d5b-50f12fa51784","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 42 ms
+Body: N/A
+ - undefined
+2023-06-13T09:21:43.428Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"3acc970d-8973-40f5-8267-43ec0c5b9eb6","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 47 ms
+Body: N/A
+ - undefined
+2023-06-13T09:22:04.101Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"2837f78b-8fea-44bc-997c-3bfdfc0e2fe8","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 46 ms
+Body: N/A
+ - undefined
+2023-06-13T09:22:26.572Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"940c98d8-545f-4c55-a9d6-196940c67a54","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 80 ms
+Body: N/A
+ - undefined
+2023-06-13T09:22:34.603Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"47aa3cbb-96a7-40d0-9deb-792effedc4f0","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 49 ms
+Body: N/A
+ - undefined
+2023-06-13T09:23:04.746Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"f34d81b2-43b3-4348-a0e6-85781fb0ebbe","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 46 ms
+Body: N/A
+ - undefined
+2023-06-13T09:23:23.304Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"81e9601d-3781-4fe8-80ee-38acec0bc09e","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 47 ms
+Body: N/A
+ - undefined
+2023-06-13T09:23:36.346Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"4f2752aa-4c28-4b4b-b943-f848f0e01923","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 47 ms
+Body: N/A
+ - undefined
+2023-06-13T09:24:21.596Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"7db6f85a-b0c1-4aa1-b74a-efb33c7f7191","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 45 ms
+Body: N/A
+ - undefined
+2023-06-13T09:24:32.220Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"0f95394a-0210-4542-a7aa-9d40d5675589","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 41 ms
+Body: N/A
+ - undefined
+2023-06-13T09:34:43.432Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"13b186c9-c4fb-4213-be89-f0c5ccd73c0d","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak8Gz2pZpTrkI1sL9zZIcjQkfyVa7M0nZ.rg9x%2BIPGg%2BR%2BdmWnp6e6JlDFBQaZbenhhK5xzIXMZss; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 48 ms
+Body: N/A
+ - undefined
+2023-06-13T09:35:31.033Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"abd7d355-ba60-4cc9-beeb-db6e9049c5b9","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AcREZEVWCRkDOy49-Zyu8H7DkAxjKjnkU.YN9Zpc7L4a5Wr4GbENuoek%2FNBUC%2BGqrbxTnbV8panMY; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 51 ms
+Body: N/A
+ - undefined
+2023-06-13T09:46:12.436Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"bcab6e97-80ee-4604-8ab0-191cca80316b","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3A1eJzQ35z0n-DNLX9qUxxS6UYCmn68zmn.fJxaedhMRgql4qurLKOkPGJTPGXuzjKdShcZBVFYIxs; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 13 ms
+Body: N/A
+ - undefined
+2023-06-13T09:47:34.135Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"98d97179-f1bd-4400-acc6-18e2f9942eed","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AyydoAQIpMT2shPVbllB9aA0nk0KAMBpk.HsNMnWvOjd0eBrjAGFCv24Kdl3d6TXrNc0lDgPQDy0Y; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 11 ms
+Body: N/A
+ - undefined
+2023-06-13T09:49:27.379Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"8ee96b10-56a6-4dde-bd7e-ae8ba8ee6cca","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AqpK8wTsdhCDw2bcDqeSFYd8WbVP4Lov-.dKidkXQ%2BwTaNI2T%2BClrVGk%2FWoNwl1qWMf4NNpYTIG%2Fc; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 12 ms
+Body: N/A
+ - undefined
+2023-06-13T09:54:57.390Z - GET - /logout - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"8773a25b-40c7-4b25-93f4-f255cb484999","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AteUkezOzzDUxiGXtKGaB-7Kr-8njWyrE.%2FOtTIVqkBVO5GRkioR%2BqbhHTaWp69LSrwNYqbaHztzA; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 11 ms
+Body: N/A
+ - undefined
+2023-06-13T09:55:10.946Z - GET - /auth/logout - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"2521a9ae-bfba-4f90-a1ea-aca896e5cdd4","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3A1Qxg_yuJAVaPIVLaAdzr6qNPd1U7ec87.eVtjyBoRKIlxyIpjCXF1PyVTjfMU8ZTGRqwR3w10L6k; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzYzMSwiZXhwIjoxNjg2NjU0ODMxfQ.GzdLGzV9VqAdENFd2P80ux5Vb8I17z_MPEC_KKNTR9Q"}
+Execution Time: 4 ms
+Body: N/A
+ - undefined
+2023-06-13T09:55:15.717Z - GET - /auth/logout - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"1e00584c-0deb-46c7-9dd5-4be21472492f","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3A1Qxg_yuJAVaPIVLaAdzr6qNPd1U7ec87.eVtjyBoRKIlxyIpjCXF1PyVTjfMU8ZTGRqwR3w10L6k"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:55:16.189Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"5d948956-53fc-478b-b532-749499656630","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3ARqGyF_Eb6JxR9gS70mPw3mqMx-1of1Mf.EMbbKivekzvnzNmUXVLrTQ1ipfNchnR9as%2B4Rvs%2F1N8"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:55:54.091Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"3f25c2e8-c9db-4d8e-a51f-5fd37843b9ca","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3ARqGyF_Eb6JxR9gS70mPw3mqMx-1of1Mf.EMbbKivekzvnzNmUXVLrTQ1ipfNchnR9as%2B4Rvs%2F1N8"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:56:06.648Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"695afaea-74f8-4a8c-92a6-4e58590c32d2","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3Ak7RevzwC_Qv-9qc5JQlUlQj5RTGczTe5.F7aQgjU3eU92oV879dIxpkVCuf29DXcdowc5Xdlk4is"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:56:11.323Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"932f7a09-3be6-45a8-902b-2832d3a12493","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AhvYR0OpRa1IsXyfv1apoKYiG59UUVzz2.eeUNaVMCWVn9l%2BoXiwVSooH3oRHrG6kot45er8D313g"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:56:33.916Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"4b02f05a-73f9-4b14-b850-f7d695680358","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AhvYR0OpRa1IsXyfv1apoKYiG59UUVzz2.eeUNaVMCWVn9l%2BoXiwVSooH3oRHrG6kot45er8D313g"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:56:41.004Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"63af670d-d614-478f-80c8-f781b4ccdcc2","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AzULRl82hy2UpNU2V84bAcXs1TfTWCB1_.ReXaiopc%2FlHGztwiSulrplhQNA2xmmBYQhYWjB9C5OQ"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:56:44.874Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"e49c356d-204c-4248-adff-c630871feecf","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AiY9MlZ0trrRQoVBZ5yHU7oGzyk4oxoa_.Q13xRlcJHQRrOTs8eiuqakjj9k2mDdN9Pk9uFBuCzHI"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:57:28.033Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"791a2ee2-4252-48ba-a796-03bff3c7aca4","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AiY9MlZ0trrRQoVBZ5yHU7oGzyk4oxoa_.Q13xRlcJHQRrOTs8eiuqakjj9k2mDdN9Pk9uFBuCzHI"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:57:30.594Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"3f82e3a4-85cb-43fb-8eb7-5b5e99d4bbf2","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AxlRqfjuVRy2uFZkiHkMk-Ob9ug9zN3Lq.9GmRzKiOUSOvviOE5%2B0poz05bHefNFAF%2Fg4Gtz7vLQ4"}
+Execution Time: 1 ms
+Body: N/A
+ - undefined
+2023-06-13T09:57:39.852Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"f22a7b0f-59ed-4502-9507-2889dddce5f7","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AxlRqfjuVRy2uFZkiHkMk-Ob9ug9zN3Lq.9GmRzKiOUSOvviOE5%2B0poz05bHefNFAF%2Fg4Gtz7vLQ4"}
+Execution Time: 1 ms
+Body: N/A
+ - undefined
+2023-06-13T09:57:46.807Z - GET - / - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"379b17d7-ad3d-4649-b196-290b5f594d56","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3A0aTCENUAPmE1hfq81lBoBlHb0w7CAKvg.fhTb38Cd6cX68BYh7h3uqdlie9%2BPpK6JzCxixm67WNs"}
+Execution Time: 0 ms
+Body: N/A
+ - undefined
+2023-06-13T09:58:10.881Z - POST - /auth/login - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"c1e3b04c-8c20-4600-80ce-39a46a74674d","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"65","cookie":"connect.sid=s%3AEYKOdoGwt_52_6B5V8SyFv8k1jfp6uWo.t4Fp3KrpAB4QJ%2Bjxq7R4L1SvXABkIXICTANBSWVElEU"}
+Execution Time: 1 ms
+Body: {"email":"aziz.270700@gmail.com","password":"aziz"}
+ - undefined
+2023-06-13T09:58:13.869Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"0c6b3398-99a4-418d-b457-e9552cf560c5","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3ApZ5jmNPV4dsfm6rdQ8lDVOpBbqzdvJm4.XMnLoSEU4gurGRtPq2T1Czk3ddnTAvwrKaETOsEE9B8; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MDI5MCwiZXhwIjoxNjg2NjU3NDkwfQ.FWMd2QOvbgO63CNsZFPopyMXQH0A58ElVkfhGKvd5Fg"}
+Execution Time: 7 ms
+Body: N/A
+ - undefined
+2023-06-13T09:58:36.063Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"82c1c811-2658-4a41-90f6-43e03adc960c","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3ApZ5jmNPV4dsfm6rdQ8lDVOpBbqzdvJm4.XMnLoSEU4gurGRtPq2T1Czk3ddnTAvwrKaETOsEE9B8; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MDI5MCwiZXhwIjoxNjg2NjU3NDkwfQ.FWMd2QOvbgO63CNsZFPopyMXQH0A58ElVkfhGKvd5Fg"}
+Execution Time: 11 ms
+Body: N/A
+ - undefined
+2023-06-13T09:58:41.126Z - GET - / - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"ae8fb408-174c-45ab-a670-581bd1b760b1","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3A9MIT6SZTYb2skreU139wm5EDzbJI4hdt.Wgv6rR6U8znncoA%2FNnaFtxeJJZa9hhK7w2%2FdqhQbXWo; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MDI5MCwiZXhwIjoxNjg2NjU3NDkwfQ.FWMd2QOvbgO63CNsZFPopyMXQH0A58ElVkfhGKvd5Fg"}
+Execution Time: 15 ms
+Body: N/A
+ - undefined
+2023-06-13T10:17:29.352Z - GET - /auth/AllUsers - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDMxOTAyODQwZTUwOTBmYjk5ZTY2MTAiLCJlbWFpbCI6IkF6aXpCZW5pc21haWwxMjNAZ21haWwuY29tIiwidXNlclR5cGUiOiJ1c2VyIiwiaWF0IjoxNjgxNDkwMDc1LCJleHAiOjE2ODE1NjIwNzV9.ftY0LwtT2EWXGF_3woLA4GCNxkOqHf4Sys-7bjPAxNw","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"07789dfc-0699-4155-aea0-e0f3b651ef51","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AtM3ufcbKXE_AeqWsJjhWOGBokIzGK1vv.jHFtyAzw6LSQO6Jglyy14F7T9XAD2%2FrirXnF8jtEDE8; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MDI5MCwiZXhwIjoxNjg2NjU3NDkwfQ.FWMd2QOvbgO63CNsZFPopyMXQH0A58ElVkfhGKvd5Fg"}
+Execution Time: 12 ms
+Body: N/A
+ - undefined
+2023-06-13T10:17:48.927Z - POST - /auth/login - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"f4c20a55-550c-4836-a408-80e3454beff5","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"65","cookie":"connect.sid=s%3A3kEvkhiLciViqcWa30OWnUMCGIxts0f4.NXw53AOgZBxCukLiqLbe6moE%2BEwmQPDueNuEZEyw1lY; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MDI5MCwiZXhwIjoxNjg2NjU3NDkwfQ.FWMd2QOvbgO63CNsZFPopyMXQH0A58ElVkfhGKvd5Fg"}
+Execution Time: 3 ms
+Body: {"email":"aziz.270700@gmail.com","password":"aziz"}
+ - undefined
+2023-06-13T10:18:24.945Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"e41d7179-614b-48c1-afc9-6bc5675d5417","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"30","cookie":"connect.sid=s%3A3kEvkhiLciViqcWa30OWnUMCGIxts0f4.NXw53AOgZBxCukLiqLbe6moE%2BEwmQPDueNuEZEyw1lY; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 2 ms
+Body: {"usernname":"azizos"}
+ - undefined
+2023-06-13T10:18:32.939Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"ae416248-99de-46a5-b1d1-91f8170d18c1","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"29","cookie":"connect.sid=s%3A3kEvkhiLciViqcWa30OWnUMCGIxts0f4.NXw53AOgZBxCukLiqLbe6moE%2BEwmQPDueNuEZEyw1lY; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 3 ms
+Body: {"username":"azizos"}
+ - undefined
+2023-06-13T10:19:07.513Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"23db5fc7-cf13-4666-9029-13e139bf5581","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"29","cookie":"connect.sid=s%3A3kEvkhiLciViqcWa30OWnUMCGIxts0f4.NXw53AOgZBxCukLiqLbe6moE%2BEwmQPDueNuEZEyw1lY; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 11 ms
+Body: {"username":"azizos"}
+ - undefined
+2023-06-13T10:19:18.893Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"a75c0ff5-9295-49f9-ac6e-b8012d3ba4f1","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"29","cookie":"connect.sid=s%3AzacBnT5Nnwxj4znewsidYUhjtAGeqwnp.N2pdHMCGAdX0huZx3HISpN2fXOUv1eTypF2eYFEMWVo; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 11 ms
+Body: {"username":"azizos"}
+ - undefined
+2023-06-13T10:21:43.483Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"25e3ebd2-bcae-4693-a795-b96572e9dc8e","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"29","cookie":"connect.sid=s%3Aaz7B_ZPMUGOxw7MfnY6ubrLKarQBPXua.GueMJb9PmBDjH46X3uTS6AwWg0HRiBzHTDbwVmyJyjA; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 12 ms
+Body: {"username":"azizos"}
+ - undefined
+2023-06-13T10:21:46.664Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"78cb9f64-145e-4697-b9f3-7a23755a55ea","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"29","cookie":"connect.sid=s%3Aoyc16Zs2VFa3v4Hc8jPwmXrWjngn7FXy.q7R7NPvHK7P77gETVFREWJMJmTVkzdr4k0ibLHZ7JRg; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 4 ms
+Body: {"username":"azizos"}
+ - undefined
+2023-06-13T10:22:32.278Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"fe1d658c-e824-4fbf-8ef7-057c4ea5ae69","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"29","cookie":"connect.sid=s%3Aoyc16Zs2VFa3v4Hc8jPwmXrWjngn7FXy.q7R7NPvHK7P77gETVFREWJMJmTVkzdr4k0ibLHZ7JRg; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 15 ms
+Body: {"username":"azizos"}
+ - undefined
+2023-06-13T10:22:42.223Z - GET - /auth/AllUsers - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDMxOTAyODQwZTUwOTBmYjk5ZTY2MTAiLCJlbWFpbCI6IkF6aXpCZW5pc21haWwxMjNAZ21haWwuY29tIiwidXNlclR5cGUiOiJ1c2VyIiwiaWF0IjoxNjgxNDkwMDc1LCJleHAiOjE2ODE1NjIwNzV9.ftY0LwtT2EWXGF_3woLA4GCNxkOqHf4Sys-7bjPAxNw","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"73745b89-8b23-4620-b893-37e0dc72c025","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AS4GcAsdVwqN5oztI0_FlB2R82HwIJ-KD.dr5HgX5fJzZqPObNu8SqfQF2VrlPj%2BMECaLeMn6shAs; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 4 ms
+Body: N/A
+ - undefined
+2023-06-13T10:23:12.076Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"f8c1c470-aa15-4236-aef7-763366b40b5d","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"31","cookie":"connect.sid=s%3AS4GcAsdVwqN5oztI0_FlB2R82HwIJ-KD.dr5HgX5fJzZqPObNu8SqfQF2VrlPj%2BMECaLeMn6shAs; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 3 ms
+Body: {"first_Name":"azizos"}
+ - undefined
+2023-06-13T10:23:49.502Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"70f0a1e3-095e-46ec-a54f-16aa66252247","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"31","cookie":"connect.sid=s%3AS4GcAsdVwqN5oztI0_FlB2R82HwIJ-KD.dr5HgX5fJzZqPObNu8SqfQF2VrlPj%2BMECaLeMn6shAs; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 13 ms
+Body: {"first_Name":"azizos"}
+ - undefined
+2023-06-13T10:24:07.101Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"cb00439a-2170-4fbe-a89c-1dc67abb42bd","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"31","cookie":"connect.sid=s%3AFvNf2x-6wVOwuJmKbJYMAQwiQ9Uzivp1.0xOuDiDZkFjUdbWSLO5TbOhVSemr9b2y3S1AECsr694; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 11 ms
+Body: {"first_Name":"azizos"}
+ - undefined
+2023-06-13T10:24:24.464Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"1a781c19-e590-4977-84a4-d30b7fa7c38d","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"31","cookie":"connect.sid=s%3AFTTp9QLQF59-xtHZyuJIacM0i7btY6Qf.I0MOi%2FZxhMfoxq2LfkR8m8bQkCGf4LTOuSmOBIl744g; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 13 ms
+Body: {"first_Name":"azizos"}
+ - undefined
+2023-06-13T10:24:40.450Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"9ce9075f-2e58-49b9-b668-a597e634e07c","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"31","cookie":"connect.sid=s%3AkLoQOCFpFWKtvvh20TUk9po6KdO-9RBH.FXYVcpvuvesE2AeDpZ1iPsUBEyJmFp3QQ6RmaKmlYm8; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 12 ms
+Body: {"first_Name":"azizos"}
+ - undefined
+2023-06-13T10:24:50.751Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"0a5d1d8b-0b78-4432-900d-1b4a558d0dd0","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"31","cookie":"connect.sid=s%3AWHZnjefryd8gOCnphQUAZY8wrqPLudUa.S0xwFOD5arlEAGO96%2FlEShh25SzYkv9BCEFg1eUU5kY; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 11 ms
+Body: {"first_Name":"azizos"}
+ - undefined
+2023-06-13T10:24:55.673Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"b2476552-d6b7-467d-8f6d-9e7e96d68202","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"27","cookie":"connect.sid=s%3AnBMN3WtPQQkYnEKifjlJ9erZv7RZz_bC.QbeQfUT5cDZ8D97ew1wJIWQB7RT7JSc32mQtZpIeK2M; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 5 ms
+Body: {"first_Name":"hh"}
+ - undefined
+2023-06-13T10:24:58.539Z - PUT - /auth/update - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"1037b8de-6ce8-4080-9669-986a04698663","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"31","cookie":"connect.sid=s%3AnBMN3WtPQQkYnEKifjlJ9erZv7RZz_bC.QbeQfUT5cDZ8D97ew1wJIWQB7RT7JSc32mQtZpIeK2M; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 3 ms
+Body: {"first_Name":"azizos"}
+ - undefined
+2023-06-13T10:34:29.404Z - GET - /auth/AllUsers - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDMxOTAyODQwZTUwOTBmYjk5ZTY2MTAiLCJlbWFpbCI6IkF6aXpCZW5pc21haWwxMjNAZ21haWwuY29tIiwidXNlclR5cGUiOiJ1c2VyIiwiaWF0IjoxNjgxNDkwMDc1LCJleHAiOjE2ODE1NjIwNzV9.ftY0LwtT2EWXGF_3woLA4GCNxkOqHf4Sys-7bjPAxNw","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"baf9a72e-987d-4b87-ab3b-a0261b1afffe","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AnBMN3WtPQQkYnEKifjlJ9erZv7RZz_bC.QbeQfUT5cDZ8D97ew1wJIWQB7RT7JSc32mQtZpIeK2M; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 13 ms
+Body: N/A
+ - undefined
+2023-06-13T10:34:34.949Z - PUT - /auth/ - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"e4cdf4a1-7c66-4fe4-9ee9-8ee6d86e5168","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"31","cookie":"connect.sid=s%3ApBUVV2CL6xk1XQ20M-39jWoweA-5r0lQ.jsttUitXXZArUPEMd8iq1vlM%2BdRh9V%2Fcd5GIaLzDWm0; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 2 ms
+Body: {"first_Name":"azizos"}
+ - undefined
+2023-06-13T10:34:37.709Z - GET - /auth/ - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"48d09577-1c31-41d8-a343-b141ddbfca36","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"31","cookie":"connect.sid=s%3ApBUVV2CL6xk1XQ20M-39jWoweA-5r0lQ.jsttUitXXZArUPEMd8iq1vlM%2BdRh9V%2Fcd5GIaLzDWm0; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 3 ms
+Body: {"first_Name":"azizos"}
+ - undefined
+2023-06-13T10:34:42.472Z - DELETE - /auth/ - ::1 - Referer: N/A - 200 - User_id: 6488329efefa2f013ca49ac6 | username: aziz 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"f8860af5-63be-4da6-b427-940af3522ce9","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"31","cookie":"connect.sid=s%3ApBUVV2CL6xk1XQ20M-39jWoweA-5r0lQ.jsttUitXXZArUPEMd8iq1vlM%2BdRh9V%2Fcd5GIaLzDWm0; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 3 ms
+Body: {"first_Name":"azizos"}
+ - undefined
+2023-06-13T10:34:47.913Z - GET - /auth/ - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"692feec1-e561-4bfe-805c-f405e6ff496c","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"31","cookie":"connect.sid=s%3ApBUVV2CL6xk1XQ20M-39jWoweA-5r0lQ.jsttUitXXZArUPEMd8iq1vlM%2BdRh9V%2Fcd5GIaLzDWm0; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 2 ms
+Body: {"first_Name":"azizos"}
+ - undefined
+2023-06-13T10:35:06.038Z - GET - /auth/AllUsers - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDMxOTAyODQwZTUwOTBmYjk5ZTY2MTAiLCJlbWFpbCI6IkF6aXpCZW5pc21haWwxMjNAZ21haWwuY29tIiwidXNlclR5cGUiOiJ1c2VyIiwiaWF0IjoxNjgxNDkwMDc1LCJleHAiOjE2ODE1NjIwNzV9.ftY0LwtT2EWXGF_3woLA4GCNxkOqHf4Sys-7bjPAxNw","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"be709bcc-2bca-4b8f-861a-f9e62e4532e1","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3ApBUVV2CL6xk1XQ20M-39jWoweA-5r0lQ.jsttUitXXZArUPEMd8iq1vlM%2BdRh9V%2Fcd5GIaLzDWm0; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 2 ms
+Body: N/A
+ - undefined
+2023-06-13T10:44:41.576Z - GET - /auth/AllUsers - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDMxOTAyODQwZTUwOTBmYjk5ZTY2MTAiLCJlbWFpbCI6IkF6aXpCZW5pc21haWwxMjNAZ21haWwuY29tIiwidXNlclR5cGUiOiJ1c2VyIiwiaWF0IjoxNjgxNDkwMDc1LCJleHAiOjE2ODE1NjIwNzV9.ftY0LwtT2EWXGF_3woLA4GCNxkOqHf4Sys-7bjPAxNw","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"73491364-ad8c-41a2-9654-6103c64fce5f","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3ApBUVV2CL6xk1XQ20M-39jWoweA-5r0lQ.jsttUitXXZArUPEMd8iq1vlM%2BdRh9V%2Fcd5GIaLzDWm0; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 9 ms
+Body: N/A
+ - undefined
+2023-06-13T10:45:32.963Z - POST - /auth/signup - ::1 - Referer: http://localhost:3000/ - 200 - User_id: N/A | username: N/A 
+Headers: {"host":"localhost:5000","connection":"keep-alive","content-length":"5568448","sec-ch-ua":"\"Chromium\";v=\"112\", \"Not_A Brand\";v=\"24\", \"Opera GX\";v=\"98\"","accept":"application/json, text/plain, */*","content-type":"multipart/form-data; boundary=----WebKitFormBoundaryD6FMVA0xH7bpEPFI","sec-ch-ua-mobile":"?0","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","cookie":"jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY0NzQ1NCwiZXhwIjoxNjg2NjU0NjU0fQ.DMAq3Hwa10NnL1sIupwF2T0KXYZwrNrN1N-InKAfEuo"}
+Execution Time: 5 ms
+Body: N/A
+ - undefined
+2023-06-13T10:45:37.068Z - GET - /auth/AllUsers - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDMxOTAyODQwZTUwOTBmYjk5ZTY2MTAiLCJlbWFpbCI6IkF6aXpCZW5pc21haWwxMjNAZ21haWwuY29tIiwidXNlclR5cGUiOiJ1c2VyIiwiaWF0IjoxNjgxNDkwMDc1LCJleHAiOjE2ODE1NjIwNzV9.ftY0LwtT2EWXGF_3woLA4GCNxkOqHf4Sys-7bjPAxNw","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"284544d6-eccd-40a5-ac65-826aeb455f0b","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","cookie":"connect.sid=s%3AEVL0HfGj7NloavlCCHwejUXNQolMoWsB.j8YdYYWn%2Bx7LsCVKqvw7bqtbYblyALd2BtxRAXKf4KI; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 2 ms
+Body: N/A
+ - undefined
+2023-06-13T10:46:01.986Z - POST - /auth/login - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"55364325-1514-4e33-9c61-70b395b11978","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"65","cookie":"connect.sid=s%3AEVL0HfGj7NloavlCCHwejUXNQolMoWsB.j8YdYYWn%2Bx7LsCVKqvw7bqtbYblyALd2BtxRAXKf4KI; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 3 ms
+Body: {"email":"aziz.270700@gmail.com","password":"aziz"}
+ - undefined
+2023-06-13T10:46:08.778Z - POST - /auth/login - ::1 - Referer: N/A - 200 - User_id: N/A | username: N/A 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"cd75e4db-c437-4df4-aeb8-e92fd49cd960","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"65","cookie":"connect.sid=s%3AEVL0HfGj7NloavlCCHwejUXNQolMoWsB.j8YdYYWn%2Bx7LsCVKqvw7bqtbYblyALd2BtxRAXKf4KI; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODgzMjllZmVmYTJmMDEzY2E0OWFjNiIsImlhdCI6MTY4NjY1MTQ2OCwiZXhwIjoxNjg2NjU4NjY4fQ._mluA_iDbTJxMEUm4oEy6iQmTxWmmyRJ9HpGSxXBrlk"}
+Execution Time: 3 ms
+Body: {"email":"Aziz.270700@gmail.com","password":"aziz"}
+ - undefined
+2023-06-13T10:46:18.666Z - POST - /auth/login - ::1 - Referer: N/A - 200 - User_id: 648848cd334b06375318479f | username: Sam3oulation 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"9670f317-4102-4008-92ef-3603f4ac59ae","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"65","cookie":"connect.sid=s%3AEVL0HfGj7NloavlCCHwejUXNQolMoWsB.j8YdYYWn%2Bx7LsCVKqvw7bqtbYblyALd2BtxRAXKf4KI; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODg0OGNkMzM0YjA2Mzc1MzE4NDc5ZiIsImlhdCI6MTY4NjY1MzE2OCwiZXhwIjoxNjg2NjYwMzY4fQ.loHXEAFezKip-imMTiqTOxKbBMM8jqEbH-U6aP7E0fM"}
+Execution Time: 3 ms
+Body: {"email":"Aziz.270700@gmail.com","password":"aziz"}
+ - undefined
+2023-06-13T10:46:54.711Z - POST - /auth/login - ::1 - Referer: N/A - 200 - User_id: 648848cd334b06375318479f | username: Sam3oulation 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"081887f6-3b59-421d-8d78-11755bd0795c","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"65","cookie":"connect.sid=s%3AEVL0HfGj7NloavlCCHwejUXNQolMoWsB.j8YdYYWn%2Bx7LsCVKqvw7bqtbYblyALd2BtxRAXKf4KI; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODg0OGNkMzM0YjA2Mzc1MzE4NDc5ZiIsImlhdCI6MTY4NjY1MzE3OCwiZXhwIjoxNjg2NjYwMzc4fQ.3GFzOQrfQNuFFsxu6Gy1b8bZOQHmLaPUKguqf2zfMxg"}
+Execution Time: 11 ms
+Body: {"email":"Aziz.270700@gmail.com","password":"aziz"}
+ - undefined
+2023-06-13T10:48:18.279Z - POST - /auth/login - ::1 - Referer: N/A - 200 - User_id: 648848cd334b06375318479f | username: Sam3oulation 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"5f8001b8-c2bd-4a17-936d-504dd91d0fe9","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"65","cookie":"connect.sid=s%3An_E6bnhbesrtTpaHRB__LnFljBdCaw2x.kMRjuu8yz%2BZb14vx7PI%2B4DG%2FeTZkR9LlXa%2Fmx%2B5xIJc; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODg0OGNkMzM0YjA2Mzc1MzE4NDc5ZiIsImlhdCI6MTY4NjY1MzIxNCwiZXhwIjoxNjg2NjYwNDE0fQ.CeoEAn0tsj94ASq7pD7CyfaXsNIGTqpWlWm1waRGOtc"}
+Execution Time: 12 ms
+Body: {"email":"Aziz.270700@gmail.com","password":"aziz"}
+ - undefined
+2023-06-13T10:48:43.780Z - POST - /auth/login - ::1 - Referer: N/A - 200 - User_id: 648848cd334b06375318479f | username: Sam3oulation 
+Headers: {"content-type":"application/json","user-agent":"PostmanRuntime/7.32.2","accept":"*/*","postman-token":"7720f4c0-7fba-4b97-be86-df7d7fd035cd","host":"localhost:5000","accept-encoding":"gzip, deflate, br","connection":"keep-alive","content-length":"65","cookie":"connect.sid=s%3AICz3xbCMfFbayhYg47UFd_wGJyQkZiFO.2qH1%2FSEQtxmP%2B570hHyMhWJW48rR6msETBzyRPls8kg; jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODg0OGNkMzM0YjA2Mzc1MzE4NDc5ZiIsImlhdCI6MTY4NjY1MzI5OCwiZXhwIjoxNjg2NjYwNDk4fQ.1_xhmMRqS3SZgV7KylsitE5FviNLoUp9Oc8UAiOkvjo"}
+Execution Time: 13 ms
+Body: {"email":"Aziz.270700@gmail.com","password":"aziz"}
+ - undefined

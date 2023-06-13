@@ -30,6 +30,7 @@ userSchema.pre("save", async function (next) {
     const salt = await bcrypt.genSalt();
     const User = this;
     User.password = await bcrypt.hash(User.password, salt);
+    User.userType = "user";
     User.createdAt = new Date();
     User.updatedAt = new Date();
     User.enabled = false; //false

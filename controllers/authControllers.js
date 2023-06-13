@@ -67,6 +67,8 @@ module.exports.login_post = async (req, res) => {
     const user = await userModel.login(email, password);
     const token = createToken(user._id);
     res.cookie("jwt_token", token, { httpOnly: true, maxAge: maxAge * 1000 });
+    req.session.user = user;
+    console.log(req.session);
     res.status(200).json("login_post");
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -150,6 +152,7 @@ function sendWelcomeEmail(email, username , id) {
 
 module.exports.logout = (req, res) => {
   res.cookie("jwt_token", "", { maxAge: 1 });
+  req.session.destroy();
   res.status(200).json("logout");
 };
 
@@ -164,9 +167,9 @@ module.exports.getUsers = async (req, res, next) => {
     res.status(500).json({ message: error.message });
   }
 };
-module.exportsgetUser = async (req, res, next) => {
+module.exports.getUser = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const id = req.user._id.toString();
     const user = await userModel.findById(id);
     if (!user || user.length === 0) {
       throw new Error("users not found !");
@@ -213,7 +216,8 @@ module.exports.updateUser = async (req, res, next) => {
   try {
     const { first_Name, last_Name, phoneNumber, password } = req.body;
     console.log(req.body);
-    const { id } = req.params;
+    const id = req.user._id.toString();
+    console.log(req.user._id.toString());
     const checkIfusertExists = await userModel.findById(id);
     if (!checkIfusertExists) {
       throw new Error("user not found !");

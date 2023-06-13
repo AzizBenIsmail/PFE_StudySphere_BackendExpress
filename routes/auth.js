@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 const upload = require("../middlewares/upload");
 const auth = require("../controllers/authControllers");
-const { requireAuth, requireAuthUser } = require("../middlewares/authMiddleware");
+const { requireAuthUser } = require("../middlewares/authMiddleware");
 
 /* GET user by ID. */
 router.post("/signup", upload.single("image_user"), auth.signup_post);

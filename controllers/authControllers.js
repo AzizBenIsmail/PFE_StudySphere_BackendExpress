@@ -23,7 +23,7 @@ module.exports.signup_post = async (req, res) => {
       image_user: filename,
     });
     // Envoi de l'e-mail à l'adresse e-mail de l'utilisateur
-    sendWelcomeEmail(email, username);
+    // sendWelcomeEmail(email, username);
     const token = createToken(user._id);
     res.cookie("jwt_token", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user });
@@ -69,7 +69,7 @@ module.exports.login_post = async (req, res) => {
     res.cookie("jwt_token", token, { httpOnly: true, maxAge: maxAge * 1000 });
     req.session.user = user;
     console.log(req.session);
-    res.status(200).json("login_post");
+    res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

@@ -69,14 +69,19 @@ module.exports.login_post = async (req, res) => {
     res.cookie("jwt_token", token, { httpOnly: false, maxAge: maxAge * 1000 });
     req.session.user = user;
     console.log(req.session);
-    res.status(200).json(user);
+    res.status(200)
+      .json({ 
+        message: "User successfully authenticated", 
+        user: user });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ erreur: error.message,
+      message: "Incorrect username or password.",
+    });
   }
 };
 
 // Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
-function sendWelcomeEmail(email, username , id) {
+function sendWelcomeEmail(email, username, id) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -84,7 +89,9 @@ function sendWelcomeEmail(email, username , id) {
       pass: "zothevkvkhobyyzw",
     },
   });
-  const activationLink = `http://localhost:5000/auth/validation?email=${encodeURIComponent(email)}`;
+  const activationLink = `http://localhost:5000/auth/validation?email=${encodeURIComponent(
+    email
+  )}`;
   const mailOptions = {
     from: "greencrowd2223@gmail.com",
     to: email,
@@ -140,7 +147,7 @@ function sendWelcomeEmail(email, username , id) {
       </html>
     `,
   };
-  
+
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.error("Erreur lors de l'envoi de l'e-mail de bienvenue :", error);

@@ -42,6 +42,7 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000, // Durée de validité du cookie de session (en millisecondes)
   },
 }));
+app.use(express.static("public"));
 
 app.use(cors({
   origin: 'http://localhost:3000',

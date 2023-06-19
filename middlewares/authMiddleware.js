@@ -7,7 +7,7 @@ const requireAuthUser = (req, res, next) => {
   //
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(" ")[1];
-//   console.log("token", token);
+  console.log("token", token);
   if (token) {
     jwt.verify(token, "net attijari secret", async (err, decodedToken) => {
       if (err) {

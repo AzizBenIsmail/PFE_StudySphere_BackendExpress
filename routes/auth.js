@@ -14,7 +14,7 @@ router.post("/login", auth.login_post);
 router.get("/validation", requireAuthUser, auth.activation);
 
 /* GET user by ID. */
-router.get("/logout", requireAuthUser, auth.logout);
+router.get("/logout", auth.logout);
 
 /* Add User */
 router.post("/register",requireAuthUser, upload.single("image_user"), auth.addUser);

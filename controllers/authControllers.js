@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
 const nodemailer = require("nodemailer");
 
-const maxAge = 2 * 60 * 60; // 2 heures
+  const maxAge = 2 * 60 * 60; // 2 heures
 
 const createToken = (id) => {
   return jwt.sign({ id }, "net attijari secret", {
@@ -66,7 +66,7 @@ module.exports.login_post = async (req, res) => {
   try {
     const user = await userModel.login(email, password);
     const token = createToken(user._id);
-    res.cookie("jwt_token", token, { httpOnly: false, maxAge: maxAge * 1000 });
+    res.cookie("jwt_token", token, { httpOnly: false, maxAge: maxAge * 100 });
     req.session.user = user;
     console.log(req.session);
     res.status(200)
@@ -158,10 +158,17 @@ function sendWelcomeEmail(email, username, id) {
 }
 
 module.exports.logout = (req, res) => {
-  res.cookie("jwt_token", "", { maxAge: 1 });
-  req.session.destroy();
-  res.status(200).json("logout");
+  try {
+    res.cookie("jwt_token", "", { httpOnly: false, maxAge: 1 });
+    req.session.destroy();
+    res.status(200)
+      .json({ 
+        message: "User successfully authenticated", });
+  } catch (error) {
+    res.status(400).json({ erreur: error.message});
+  }
 };
+
 
 module.exports.getUsers = async (req, res, next) => {
   try {
@@ -176,7 +183,7 @@ module.exports.getUsers = async (req, res, next) => {
 };
 module.exports.getUser = async (req, res, next) => {
   try {
-    const id = req.user._id.toString();
+    const id = req.session.user._id.toString();
     const user = await userModel.findById(id);
     if (!user || user.length === 0) {
       throw new Error("users not found !");

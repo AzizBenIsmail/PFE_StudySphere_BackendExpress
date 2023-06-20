@@ -302,3 +302,28 @@ module.exports.forgotpwd = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+module.exports.upgrade = async (req, res) => {
+  try {
+    const id = req.body;
+    const checkIfusertExists = await userModel.findById(id);
+    if (!checkIfusertExists) {
+      throw new Error("user not found !");
+    }
+    const currentDate = new Date();
+    const Admin = "admin";
+    updateedUser = await userModel.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          userType : Admin,
+          updated_at : currentDate,
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json(updateedUser);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

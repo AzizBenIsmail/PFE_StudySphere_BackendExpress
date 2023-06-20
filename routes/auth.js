@@ -4,16 +4,16 @@ const upload = require("../middlewares/upload");
 const auth = require("../controllers/authControllers");
 const { requireAuthUser } = require("../middlewares/authMiddleware");
 
-/* GET user by ID. */
+/* signup. */
 router.post("/signup", upload.single("image_user"), auth.signup_post);
 
-/* GET user by ID. */
+/* login. */
 router.post("/login", auth.login_post);
 
-/* GET user by ID. */   
+/* validation by email. */   
 router.get("/validation", requireAuthUser, auth.activation);
 
-/* GET user by ID. */
+/* logout. */
 router.get("/logout", auth.logout);
 
 /* Add User */
@@ -30,5 +30,9 @@ router.get("/", requireAuthUser, auth.getUser);
 
 /* Delete user by ID. */
 router.delete("/:id", requireAuthUser, auth.deleteUser);
+
+/* upgrade user to admin. */
+router.get("/upgrade", auth.upgrade);
+
 
 module.exports = router;

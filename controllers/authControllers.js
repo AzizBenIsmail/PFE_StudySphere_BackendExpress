@@ -68,7 +68,7 @@ module.exports.login_post = async (req, res) => {
     const token = createToken(user._id);
     res.cookie("jwt_token", token, { httpOnly: false, maxAge: maxAge * 100 });
     req.session.user = user;
-    console.log(req.session);
+    // console.log(req.session);
     res.status(200)
       .json({ 
         message: "User successfully authenticated", 

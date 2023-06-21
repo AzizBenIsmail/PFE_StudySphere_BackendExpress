@@ -66,7 +66,7 @@ module.exports.login_post = async (req, res) => {
   try {
     const user = await userModel.login(email, password);
     const token = createToken(user._id);
-    res.cookie("jwt_token", token, { httpOnly: false, maxAge: maxAge * 100 });
+    res.cookie("jwt_token", token, { httpOnly: false, maxAge: maxAge * 1000 });
     req.session.user = user;
     // console.log(req.session);
     res.status(200)
@@ -307,7 +307,7 @@ module.exports.upgrade = async (req, res) => {
   try {
     const id = req.body;
     const checkIfusertExists = await userModel.findById(id);
-    if (!checkIfusertExists) {
+    if(!checkIfusertExists) {
       throw new Error("user not found !");
     }
     const currentDate = new Date();
@@ -317,6 +317,32 @@ module.exports.upgrade = async (req, res) => {
       {
         $set: {
           userType : Admin,
+          updated_at : currentDate,
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json(updateedUser);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+module.exports.downgrade = async (req, res) => {
+  try {
+    const id = req.body;
+    const checkIfusertExists = await userModel.findById(id);
+    if(!checkIfusertExists) {
+      throw new Error("user not found !");
+    }
+    const currentDate = new Date();
+    const user = "user";
+    updateedUser = await userModel.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          userType : user,
           updated_at : currentDate,
         },
       },

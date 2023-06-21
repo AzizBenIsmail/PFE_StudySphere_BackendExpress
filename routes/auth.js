@@ -32,7 +32,9 @@ router.get("/", requireAuthUser, auth.getUser);
 router.delete("/:id", requireAuthUser, auth.deleteUser);
 
 /* upgrade user to admin. */
-router.get("/upgrade", auth.upgrade);
+router.put("/upgrade",requireAuthUser, auth.upgrade);
 
+/*downgrade admin to user. */
+router.put("/downgrade",requireAuthUser, auth.downgrade);
 
 module.exports = router;

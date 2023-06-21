@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
 const nodemailer = require("nodemailer");
 
-  const maxAge = 2 * 60 * 60; // 2 heures
+const maxAge = 2 * 60 * 60; // 2 heures
 
 const createToken = (id) => {
   return jwt.sign({ id }, "net attijari secret", {
@@ -69,14 +69,17 @@ module.exports.login_post = async (req, res) => {
     res.cookie("jwt_token", token, { httpOnly: false, maxAge: maxAge * 1000 });
     req.session.user = user;
     // console.log(req.session);
-    res.status(200)
-      .json({ 
-        message: "User successfully authenticated", 
-        user: user });
-  } catch (error) {
-    res.status(400).json({ erreur: error.message,
-      message: "Incorrect username or password.",
+    res.status(200).json({
+      message: "User successfully authenticated",
+      user: user,
     });
+  } catch (error) {
+    res
+      .status(400)
+      .json({
+        erreur: error.message,
+        message: "Incorrect username or password.",
+      });
   }
 };
 
@@ -161,14 +164,13 @@ module.exports.logout = (req, res) => {
   try {
     res.cookie("jwt_token", "", { httpOnly: false, maxAge: 1 });
     req.session.destroy();
-    res.status(200)
-      .json({ 
-        message: "User successfully authenticated", });
+    res.status(200).json({
+      message: "User successfully authenticated",
+    });
   } catch (error) {
-    res.status(400).json({ erreur: error.message});
+    res.status(400).json({ erreur: error.message });
   }
 };
-
 
 module.exports.getUsers = async (req, res, next) => {
   try {
@@ -305,35 +307,41 @@ module.exports.forgotpwd = async (req, res) => {
 
 module.exports.upgrade = async (req, res) => {
   try {
-    const id = req.body;
-    const checkIfusertExists = await userModel.findById(id);
-    if(!checkIfusertExists) {
-      throw new Error("user not found !");
+    console.log("test", req.bod);
+
+    const { id } = req.body; // Récupération de l'ID depuis le corps de la requête
+    const checkIfUserExists = await userModel.findById(id);
+
+    if (!checkIfUserExists) {
+      throw new Error("User not found!");
     }
+
     const currentDate = new Date();
-    const Admin = "admin";
-    updateedUser = await userModel.findByIdAndUpdate(
+    const userType = "admin";
+
+    const updatedUser = await userModel.findByIdAndUpdate(
       id,
       {
         $set: {
-          userType : Admin,
-          updated_at : currentDate,
+          userType: userType,
+          enabled: true,
+          updated_at: currentDate,
         },
       },
       { new: true }
     );
-    res.status(200).json(updateedUser);
+
+    res.status(200).json(updatedUser);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-
 module.exports.downgrade = async (req, res) => {
   try {
-    const id = req.body;
+    const {id} = req.body;
     const checkIfusertExists = await userModel.findById(id);
-    if(!checkIfusertExists) {
+    if (!checkIfusertExists) {
       throw new Error("user not found !");
     }
     const currentDate = new Date();
@@ -342,8 +350,9 @@ module.exports.downgrade = async (req, res) => {
       id,
       {
         $set: {
-          userType : user,
-          updated_at : currentDate,
+          userType: user,
+          enabled: true,
+          updated_at: currentDate,
         },
       },
       { new: true }

@@ -195,7 +195,18 @@ module.exports.getUser = async (req, res, next) => {
     res.status(500).json({ message: error.message });
   }
 };
-
+module.exports.UserByID = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const user = await userModel.findById(id);
+    if (!user || user.length === 0) {
+      throw new Error("users not found !");
+    }
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 module.exports.addUser = async (req, res, next) => {
   try {
     const { filename } = req.file;

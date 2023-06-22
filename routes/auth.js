@@ -25,6 +25,9 @@ router.put("/update", requireAuthUser, auth.updateUser);
 /* GET users listing. */
 router.get("/AllUsers", requireAuthUser, auth.getUsers);
 
+/*get user by id */
+router.get("/User/:id", requireAuthUser, auth.UserByID);
+
 /* GET user by ID. */
 router.get("/", requireAuthUser, auth.getUser);
 

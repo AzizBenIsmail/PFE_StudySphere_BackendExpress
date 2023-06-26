@@ -40,4 +40,10 @@ router.put("/upgrade",requireAuthUser, auth.upgrade);
 /*downgrade admin to user. */
 router.put("/downgrade",requireAuthUser, auth.downgrade);
 
+/*Active */
+router.put("/active",requireAuthUser, auth.Active);
+
+/*desactive. */
+router.put("/desactive",requireAuthUser, auth.Desactive);
+
 module.exports = router;

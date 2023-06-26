@@ -372,3 +372,52 @@ module.exports.downgrade = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+module.exports.Desactive= async (req, res) => {
+  try {
+    const {id} = req.body;
+    const checkIfusertExists = await userModel.findById(id);
+    if (!checkIfusertExists) {
+      throw new Error("user not found !");
+    }
+    const currentDate = new Date();
+    updateedUser = await userModel.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          enabled: false,
+          updated_at: currentDate,
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json(updateedUser);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports.Active = async (req, res) => {
+  try {
+    const {id} = req.body;
+    const checkIfusertExists = await userModel.findById(id);
+    if (!checkIfusertExists) {
+      throw new Error("user not found !");
+    }
+    const currentDate = new Date();
+    updateedUser = await userModel.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          enabled: true,
+          updated_at: currentDate,
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json(updateedUser);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

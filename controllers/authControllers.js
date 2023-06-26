@@ -14,7 +14,6 @@ const createToken = (id) => {
 module.exports.signup_post = async (req, res) => {
   const { filename } = req.file;
   const { email, password, username } = req.body;
-
   try {
     const user = await userModel.create({
       username,

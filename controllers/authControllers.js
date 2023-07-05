@@ -22,7 +22,7 @@ module.exports.signup_post = async (req, res) => {
       image_user: filename,
     });
     // Envoi de l'e-mail à l'adresse e-mail de l'utilisateur
-    // sendWelcomeEmail(email, username);
+    sendWelcomeEmail(email, username);
     const token = createToken(user._id);
     res.cookie("jwt_token", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user });
@@ -40,25 +40,29 @@ module.exports.activation = async (req, res) => {
       throw new Error("User not found!");
     }
     if (checkIfUserExists.enabled) {
-      res.status(200).json("Utilisateur_est_deja_active");
+      return res.redirect("http://localhost:3000/login-page/?message=Utilisateur_est_deja_active");
     }
 
     const currentDate = new Date();
     const updatedUser = await userModel.findByIdAndUpdate(
-      checkIfUserExists._id,
-      {
-        $set: {
-          enabled: true,
-          updated_at: currentDate,
+        checkIfUserExists._id,
+        {
+          $set: {
+            enabled: true,
+            updated_at: currentDate,
+          },
         },
-      },
-      { new: true } // Set the { new: true } option to return the updated user
+        { new: true } // Set the { new: true } option to return the updated user
     );
-    res.status(200).json("Utilisateur_active");
+
+    return res.redirect("http://localhost:3000/login-page/?message=Utilisateur_activee_Avec_succes");
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
+
+
+
 
 module.exports.login_post = async (req, res) => {
   const { email, password } = req.body;
@@ -77,7 +81,6 @@ module.exports.login_post = async (req, res) => {
       .status(400)
       .json({
         erreur: error.message,
-        message: "Incorrect username or password.",
       });
   }
 };

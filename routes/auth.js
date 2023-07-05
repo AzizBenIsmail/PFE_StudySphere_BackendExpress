@@ -11,7 +11,7 @@ router.post("/signup", upload.single("image_user"), auth.signup_post);
 router.post("/login", auth.login_post);
 
 /* validation by email. */   
-router.get("/validation", requireAuthUser, auth.activation);
+router.get("/validation", auth.activation);
 
 /* logout. */
 router.get("/logout", auth.logout);

@@ -47,7 +47,7 @@ userSchema.statics.login = async function (email, password) {
             if (user.enabled == true) {
                 return user;
             }else{
-
+                throw new Error("compte desactive");
             }
         }
         throw new Error("incorrect password");

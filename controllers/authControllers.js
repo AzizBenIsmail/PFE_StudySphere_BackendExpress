@@ -233,6 +233,28 @@ module.exports.updateUser = async (req, res, next) => {
     }
 };
 
+module.exports.updateUserByID = async (req, res, next) => {
+    try {
+        const {first_Name, last_Name, phoneNumber, password} = req.body;
+        console.log(req.body);
+        const id = req.params.id;
+
+        const checkIfusertExists = await userModel.findById(id);
+        if (!checkIfusertExists) {
+            throw new Error("user not found !");
+        }
+        const currentDate = new Date();
+        updateedUser = await userModel.findByIdAndUpdate(id, {
+            $set: {
+                password, first_Name, last_Name, phoneNumber, updated_at: currentDate,
+            },
+        }, {new: true});
+        res.status(200).json(updateedUser);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
+
 module.exports.deleteUser = async (req, res, next) => {
     try {
         const {id} = req.params;

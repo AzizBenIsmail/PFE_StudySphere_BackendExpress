@@ -19,8 +19,11 @@ router.get("/logout", auth.logout);
 /* Add User */
 router.post("/register",requireAuthUser, upload.single("image_user"), auth.addUser);
 
-/* Update User by ID */
+/* Update User current */
 router.put("/update", requireAuthUser, auth.updateUser);
+
+/* Update User by ID */
+router.put("/updateUser/:id", requireAuthUser,upload.single("image_user"), auth.updateUserByID);
 
 /* GET users listing. */
 router.get("/AllUsers", requireAuthUser, auth.getUsers);

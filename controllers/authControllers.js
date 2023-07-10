@@ -145,6 +145,150 @@ function sendWelcomeEmail(email, username, id) {
     });
 }
 
+// Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
+function sendPasswordEmail(email, username, id) {
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: "greencrowd2223@gmail.com",
+            pass: "zothevkvkhobyyzw",
+        },
+    });
+
+    // Générer un mot de passe aléatoire respectant le format
+    const generatedPassword = generateRandomPassword();
+
+    const activationLink = `http://localhost:3000/admin/tablesUsers`;
+    const mailOptions = {
+        from: "greencrowd2223@gmail.com",
+        to: email,
+        subject: "Bienvenue sur notre site",
+        html: `
+            <html>
+            <head>
+                <style>
+                /* Add your custom styles here */
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f2f2f2;
+                    padding: 20px;
+                }
+                .container {
+                    max-width: 500px;
+                    margin: 0 auto;
+                    background-color: #ffffff;
+                    padding: 30px;
+                    border-radius: 5px;
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+                }
+                h1 {
+                    color: #333333;
+                }
+                p {
+                    color: #555555;
+                }
+                h2 {
+                    color: #0000FF;
+                }
+                .button {
+                    display: inline-block;
+                    background-color: #007bff;
+                    color: #ffffff;
+                    text-decoration: none;
+                    padding: 10px 20px;
+                    border-radius: 4px;
+                    margin-top: 20px;
+                }
+                .generated-password {
+                    background-color: #f2f2f2;
+                    padding: 10px;
+                    border-radius: 4px;
+                    margin-top: 10px;
+                }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                <h1>Bienvenue sur notre site</h1>
+                <p>Cher</p> <h2>${username},</h2>
+                <p>Nous sommes ravis de vous accueillir parmi nous !</p>
+                <p>Votre mot de passe généré aléatoirement est :</p>
+                <div class="generated-password">${formatGeneratedPassword(generatedPassword)}</div>
+                <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
+                <a href="${activationLink}" ${id} class="button">Activer mon compte</a>
+                <p>Cordialement,<br>L'équipe du site</p>
+                </div>
+            </body>
+            </html>
+        `,
+    };
+
+    // Envoyer l'e-mail
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log("E-mail de bienvenue envoyé : " + info.response);
+        }
+    });
+}
+
+// Fonction pour générer un mot de passe aléatoire respectant le format /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+function generateRandomPassword() {
+    const allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let password = "";
+    for (let i = 0; i < 8; i++) {
+        const randomIndex = Math.floor(Math.random() * allowedChars.length);
+        password += allowedChars.charAt(randomIndex);
+    }
+    return password;
+}
+
+// Fonction pour formater le mot de passe généré avec un design spécial
+function formatGeneratedPassword(password) {
+    let formattedPassword = "";
+    for (let i = 0; i < password.length; i++) {
+        formattedPassword += `<span style="padding: 2px; border: 1px solid #555555;">${password.charAt(i)}</span>`;
+    }
+    return formattedPassword;
+}
+
+
+module.exports.forgetPassword = async (req, res) => {
+    try {
+        const email = req.body.email;
+        const checkIfUserExists = await userModel.findOne({ email });
+
+        if (!checkIfUserExists) {
+            throw new Error("User not found!");
+        }
+
+        const currentDate = new Date();
+        const generatedPassword = generateRandomPassword(); // Générer le nouveau mot de passe
+
+        const updatedUser = await userModel.findOneAndUpdate(
+            { email },
+            {
+                $set: {
+                    enabled: true,
+                    updated_at: currentDate,
+                    password: generatedPassword, // Mettre à jour le mot de passe généré dans la base de données
+                },
+            },
+            { new: true } // Set the { new: true } option to return the updated user
+        );
+
+        // Envoyer l'e-mail de bienvenue avec le mot de passe généré
+        sendPasswordEmail(email, updatedUser.username, generatedPassword); // Utiliser le nouveau mot de passe généré
+
+        return res.redirect("http://localhost:3000/admin/tablesUsers");
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+
+
 module.exports.logout = (req, res) => {
     try {
         res.cookie("jwt_token", "", {httpOnly: false, maxAge: 1});

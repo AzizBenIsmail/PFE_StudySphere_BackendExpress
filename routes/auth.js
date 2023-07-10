@@ -49,4 +49,7 @@ router.put("/active",requireAuthUser, auth.Active);
 /*desactive. */
 router.put("/desactive",requireAuthUser, auth.Desactive);
 
+/*forget password. */
+router.put("/forgetPassword",requireAuthUser, auth.forgetPassword);
+
 module.exports = router;

@@ -146,7 +146,8 @@ function sendWelcomeEmail(email, username, id) {
 }
 
 // Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
-function sendPasswordEmail(email, username, id) {
+// Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
+function sendPasswordEmail(email, username, id, generatedPassword) {
     const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -155,10 +156,15 @@ function sendPasswordEmail(email, username, id) {
         },
     });
 
-    // Générer un mot de passe aléatoire respectant le format
-    const generatedPassword = generateRandomPassword();
-
     const activationLink = `http://localhost:3000/admin/tablesUsers`;
+    let formattedPassword = "";
+
+    if (generatedPassword) {
+        formattedPassword = formatGeneratedPassword(generatedPassword);
+    } else {
+        formattedPassword = "Mot de passe non disponible";
+    }
+
     const mailOptions = {
         from: "greencrowd2223@gmail.com",
         to: email,
@@ -213,7 +219,7 @@ function sendPasswordEmail(email, username, id) {
                 <p>Cher</p> <h2>${username},</h2>
                 <p>Nous sommes ravis de vous accueillir parmi nous !</p>
                 <p>Votre mot de passe généré aléatoirement est :</p>
-                <div class="generated-password">${formatGeneratedPassword(generatedPassword)}</div>
+                <div class="generated-password">${formattedPassword}</div>
                 <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
                 <a href="${activationLink}" ${id} class="button">Activer mon compte</a>
                 <p>Cordialement,<br>L'équipe du site</p>
@@ -253,7 +259,6 @@ function formatGeneratedPassword(password) {
     return formattedPassword;
 }
 
-
 module.exports.forgetPassword = async (req, res) => {
     try {
         const email = req.body.email;
@@ -264,28 +269,31 @@ module.exports.forgetPassword = async (req, res) => {
         }
 
         const currentDate = new Date();
-        const generatedPassword = generateRandomPassword(); // Générer le nouveau mot de passe
 
+        // Générer le nouveau mot de passe
+        const generatedPassword = generateRandomPassword();
+
+        // Mettre à jour le mot de passe généré dans la base de données
         const updatedUser = await userModel.findOneAndUpdate(
             { email },
             {
                 $set: {
                     enabled: true,
                     updated_at: currentDate,
-                    password: generatedPassword, // Mettre à jour le mot de passe généré dans la base de données
+                    password: generatedPassword,
                 },
             },
-            { new: true } // Set the { new: true } option to return the updated user
+            { new: true }
         );
 
         // Envoyer l'e-mail de bienvenue avec le mot de passe généré
-        sendPasswordEmail(email, updatedUser.username, generatedPassword); // Utiliser le nouveau mot de passe généré
+        sendPasswordEmail(email, updatedUser.username, updatedUser._id, generatedPassword);
 
-        return res.redirect("http://localhost:3000/admin/tablesUsers");
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
 };
+
 
 
 

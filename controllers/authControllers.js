@@ -2,6 +2,7 @@ const userModel = require("../models/userSchema");
 const jwt = require("jsonwebtoken");
 const sgMail = require("@sendgrid/mail");
 const nodemailer = require("nodemailer");
+const bcrypt = require("bcrypt");
 
 const maxAge = 2 * 60 * 60; // 2 heures
 
@@ -33,7 +34,7 @@ module.exports.activation = async (req, res) => {
         const email = req.query.email;
         const checkIfUserExists = await userModel.findOne({email});
 
-        if (!checkIfUserExists) {
+        if ( !checkIfUserExists) {
             throw new Error("User not found!");
         }
         if (checkIfUserExists.enabled) {
@@ -67,9 +68,7 @@ module.exports.login_post = async (req, res) => {
             message: "User successfully authenticated", user: user,
         });
     } catch (error) {
-        res
-        .status(400)
-        .json({
+        res.status(400).json({
             erreur: error.message,
         });
     }
@@ -82,7 +81,7 @@ function sendWelcomeEmail(email, username, id) {
             user: "greencrowd2223@gmail.com", pass: "zothevkvkhobyyzw",
         },
     });
-    const activationLink = `http://localhost:5000/auth/validation?email=${encodeURIComponent(email)}`;
+    const activationLink = `http://localhost:5000/auth/validation?email=${ encodeURIComponent(email) }`;
     const mailOptions = {
         from: "greencrowd2223@gmail.com", to: email, subject: "Bienvenue sur notre site", html: `
       <html>
@@ -125,10 +124,10 @@ function sendWelcomeEmail(email, username, id) {
         <body>
           <div class="container">
             <h1>Bienvenue sur notre site</h1>
-            <p>Cher</p> <h2> ${username},</h2>
+            <p>Cher</p> <h2> ${ username },</h2>
             <p>Nous sommes ravis de vous accueillir parmi nous !</p>
             <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
-            <a href="${activationLink}" ${id} class="button">Activer mon compte</a>
+            <a href="${ activationLink }" ${ id } class="button">Activer mon compte</a>
             <p>Cordialement,<br>L'équipe du site</p>
           </div>
         </body>
@@ -149,10 +148,8 @@ function sendWelcomeEmail(email, username, id) {
 // Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
 function sendPasswordEmail(email, username, id, generatedPassword) {
     const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: "greencrowd2223@gmail.com",
-            pass: "zothevkvkhobyyzw",
+        service: "gmail", auth: {
+            user: "greencrowd2223@gmail.com", pass: "zothevkvkhobyyzw",
         },
     });
 
@@ -166,66 +163,87 @@ function sendPasswordEmail(email, username, id, generatedPassword) {
     }
 
     const mailOptions = {
-        from: "greencrowd2223@gmail.com",
-        to: email,
-        subject: "Bienvenue sur notre site",
-        html: `
+        from: "greencrowd2223@gmail.com", to: email, subject: "Bienvenue sur notre site", html: `
             <html>
-            <head>
-                <style>
-                /* Add your custom styles here */
-                body {
-                    font-family: Arial, sans-serif;
-                    background-color: #f2f2f2;
-                    padding: 20px;
-                }
-                .container {
-                    max-width: 500px;
-                    margin: 0 auto;
-                    background-color: #ffffff;
-                    padding: 30px;
-                    border-radius: 5px;
-                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-                }
-                h1 {
-                    color: #333333;
-                }
-                p {
-                    color: #555555;
-                }
-                h2 {
-                    color: #0000FF;
-                }
-                .button {
-                    display: inline-block;
-                    background-color: #007bff;
-                    color: #ffffff;
-                    text-decoration: none;
-                    padding: 10px 20px;
-                    border-radius: 4px;
-                    margin-top: 20px;
-                }
-                .generated-password {
-                    background-color: #f2f2f2;
-                    padding: 10px;
-                    border-radius: 4px;
-                    margin-top: 10px;
-                }
-                </style>
-            </head>
-            <body>
-                <div class="container">
-                <h1>Bienvenue sur notre site</h1>
-                <p>Cher</p> <h2>${username},</h2>
-                <p>Nous sommes ravis de vous accueillir parmi nous !</p>
-                <p>Votre mot de passe généré aléatoirement est :</p>
-                <div class="generated-password">${formattedPassword}</div>
-                <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
-                <a href="${activationLink}" ${id} class="button">Activer mon compte</a>
-                <p>Cordialement,<br>L'équipe du site</p>
-                </div>
-            </body>
-            </html>
+<head>
+    <style>
+        /* Add your custom styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333333;
+            text-align: center;
+        }
+
+        p {
+            color: #555555;
+        }
+
+        h2 {
+            color: #0000FF;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        .password-container {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .password-title {
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        .password {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenue sur notre site</h1>
+        <p>Cher <span class="username">${username}</span>,</p>
+        <p>Nous sommes ravis de vous accueillir parmi nous !</p>
+        <p>Votre mot de passe généré aléatoirement est :</p>
+        <div class="password-container">
+            <h2 class="password-title">Votre nouveau mot de passe</h2>
+            <p class="password">${formattedPassword}</p>
+        </div>
+        <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
+        <a href="${activationLink}" ${id} class="button">Se Connecte</a>
+        <p>Cordialement,<br>L'équipe du Attijari Bank</p>
+    </div>
+</body>
+</html>
         `,
     };
 
@@ -243,7 +261,7 @@ function sendPasswordEmail(email, username, id, generatedPassword) {
 function generateRandomPassword() {
     const allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let password = "";
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 8; i ++) {
         const randomIndex = Math.floor(Math.random() * allowedChars.length);
         password += allowedChars.charAt(randomIndex);
     }
@@ -253,8 +271,8 @@ function generateRandomPassword() {
 // Fonction pour formater le mot de passe généré avec un design spécial
 function formatGeneratedPassword(password) {
     let formattedPassword = "";
-    for (let i = 0; i < password.length; i++) {
-        formattedPassword += `<span style="padding: 2px; border: 1px solid #555555;">${password.charAt(i)}</span>`;
+    for (let i = 0; i < password.length; i ++) {
+        formattedPassword += `<span style="padding: 2px; border: 1px solid #555555;">${ password.charAt(i) }</span>`;
     }
     return formattedPassword;
 }
@@ -262,9 +280,9 @@ function formatGeneratedPassword(password) {
 module.exports.forgetPassword = async (req, res) => {
     try {
         const email = req.body.email;
-        const checkIfUserExists = await userModel.findOne({ email });
+        const checkIfUserExists = await userModel.findOne({email});
 
-        if (!checkIfUserExists) {
+        if ( !checkIfUserExists) {
             throw new Error("User not found!");
         }
 
@@ -272,29 +290,25 @@ module.exports.forgetPassword = async (req, res) => {
 
         // Générer le nouveau mot de passe
         const generatedPassword = generateRandomPassword();
+        const salt = await bcrypt.genSalt();
+        Pwd = await bcrypt.hash(generatedPassword, salt);
 
         // Mettre à jour le mot de passe généré dans la base de données
-        const updatedUser = await userModel.findOneAndUpdate(
-            { email },
-            {
-                $set: {
-                    enabled: true,
-                    updated_at: currentDate,
-                    password: generatedPassword,
-                },
+        const updatedUser = await userModel.findOneAndUpdate({email}, {
+            $set: {
+                enabled: true, updated_at: currentDate, password: Pwd,
             },
-            { new: true }
-        );
+        }, {new: true});
 
         // Envoyer l'e-mail de bienvenue avec le mot de passe généré
         sendPasswordEmail(email, updatedUser.username, updatedUser._id, generatedPassword);
-
+        res.status(200).json({
+            message: "mot de passe modifié avec succès vérifier votre boîte mail"
+        });
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(500).json({message: error.message});
     }
 };
-
-
 
 
 module.exports.logout = (req, res) => {
@@ -312,7 +326,7 @@ module.exports.logout = (req, res) => {
 module.exports.getUsers = async (req, res, next) => {
     try {
         const users = await userModel.find();
-        if (!users || users.length === 0) {
+        if ( !users || users.length === 0) {
             throw new Error("users not found !");
         }
         res.status(200).json({users});
@@ -324,7 +338,7 @@ module.exports.getUser = async (req, res, next) => {
     try {
         const id = req.session.user._id.toString();
         const user = await userModel.findById(id);
-        if (!user || user.length === 0) {
+        if ( !user || user.length === 0) {
             throw new Error("users not found !");
         }
         res.status(200).json({user});
@@ -336,7 +350,7 @@ module.exports.UserByID = async (req, res, next) => {
     try {
         const id = req.params.id;
         const user = await userModel.findById(id);
-        if (!user || user.length === 0) {
+        if ( !user || user.length === 0) {
             throw new Error("users not found !");
         }
         res.status(200).json({user});
@@ -370,7 +384,7 @@ module.exports.updateUser = async (req, res, next) => {
         const id = req.user._id.toString();
         console.log(req.user._id.toString());
         const checkIfusertExists = await userModel.findById(id);
-        if (!checkIfusertExists) {
+        if ( !checkIfusertExists) {
             throw new Error("user not found !");
         }
         const currentDate = new Date();
@@ -392,7 +406,7 @@ module.exports.updateUserByID = async (req, res, next) => {
         const id = req.params.id;
 
         const checkIfusertExists = await userModel.findById(id);
-        if (!checkIfusertExists) {
+        if ( !checkIfusertExists) {
             throw new Error("user not found !");
         }
         const currentDate = new Date();
@@ -412,7 +426,7 @@ module.exports.deleteUser = async (req, res, next) => {
         const {id} = req.params;
         const user = await userModel.findById(id);
 
-        if (!user) {
+        if ( !user) {
             return res.status(404).json({message: "user not found!"});
         }
 
@@ -434,15 +448,12 @@ module.exports.forgotpwd = async (req, res) => {
         const msg = {
             to: email, from: "greencrowdproject@gmail.com", subject: "Welcome to Green Crowd Project", html: `
 				<h2>Click the link to reset your password</h2>
-				<p>${URL}</p>
+				<p>${ URL }</p>
 			`, //templateId: 'd-e09cf57a0a0e45e894027ffd5b6caebb',
         };
-        sgMail
-        .send(msg)
-        .then(() => {
+        sgMail.send(msg).then(() => {
             console.log("Email sent");
-        })
-        .catch((error) => {
+        }).catch((error) => {
             console.error(error);
         });
     } catch (error) {
@@ -457,7 +468,7 @@ module.exports.upgrade = async (req, res) => {
         const {id} = req.body; // Récupération de l'ID depuis le corps de la requête
         const checkIfUserExists = await userModel.findById(id);
 
-        if (!checkIfUserExists) {
+        if ( !checkIfUserExists) {
             throw new Error("User not found!");
         }
 
@@ -480,7 +491,7 @@ module.exports.downgrade = async (req, res) => {
     try {
         const {id} = req.body;
         const checkIfusertExists = await userModel.findById(id);
-        if (!checkIfusertExists) {
+        if ( !checkIfusertExists) {
             throw new Error("user not found !");
         }
         const currentDate = new Date();
@@ -501,7 +512,7 @@ module.exports.Desactive = async (req, res) => {
     try {
         const {id} = req.body;
         const checkIfusertExists = await userModel.findById(id);
-        if (!checkIfusertExists) {
+        if ( !checkIfusertExists) {
             throw new Error("user not found !");
         }
         const currentDate = new Date();
@@ -520,7 +531,7 @@ module.exports.Active = async (req, res) => {
     try {
         const {id} = req.body;
         const checkIfusertExists = await userModel.findById(id);
-        if (!checkIfusertExists) {
+        if ( !checkIfusertExists) {
             throw new Error("user not found !");
         }
         const currentDate = new Date();

@@ -28,6 +28,21 @@ router.put("/updateUser/:id", requireAuthUser,upload.single("image_user"), auth.
 /* GET users listing. */
 router.get("/AllUsers", requireAuthUser, auth.getUsers);
 
+/* GET users Admin. */
+router.get("/AllAdmin", requireAuthUser, auth.getAdmin);
+
+/* GET users Simple. */
+router.get("/AllSimpleUsers", requireAuthUser, auth.getSimpleUser);
+
+/* GET users Active. */
+router.get("/AllUsersActive", requireAuthUser, auth.getUserActive);
+
+/* GET users Desactive. */
+router.get("/AllUsersDesactive", requireAuthUser, auth.getUserDesactive);
+
+/* GET search a Users .*/
+router.get("/searchUsers", requireAuthUser, auth.searchUsers);
+
 /*get user by id */
 router.get("/User/:id", requireAuthUser, auth.UserByID);
 

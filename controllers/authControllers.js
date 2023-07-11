@@ -334,6 +334,73 @@ module.exports.getUsers = async (req, res, next) => {
         res.status(500).json({message: error.message});
     }
 };
+
+module.exports.getAdmin = async (req, res, next) => {
+    try {
+        const users = await userModel.find({ userType: "admin" });
+        if (!users || users.length === 0) {
+            throw new Error("Users not found!");
+        }
+        res.status(200).json({ users });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports.getSimpleUser = async (req, res, next) => {
+    try {
+        const users = await userModel.find({ userType: "user" });
+        if (!users || users.length === 0) {
+            throw new Error("Users not found!");
+        }
+        res.status(200).json({ users });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports.getUserActive = async (req, res, next) => {
+    try {
+        const users = await userModel.find({ enabled: "true" });
+        if (!users || users.length === 0) {
+            throw new Error("Users not found!");
+        }
+        res.status(200).json({ users });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports.getUserDesactive = async (req, res, next) => {
+    try {
+        const users = await userModel.find({ enabled: "false" });
+        if (!users || users.length === 0) {
+            throw new Error("Users not found!");
+        }
+        res.status(200).json({ users });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports.searchUsers = async (req, res, next) => {
+    try {
+        const searchTerm = req.query.term; // Récupérer le terme de recherche à partir de la requête
+
+        // Utiliser la méthode find avec un critère de recherche basé sur le terme
+        const users = await userModel.find({
+            $or: [
+                { username: { $regex: searchTerm, $options: "i" } }, // Recherche insensible à la casse dans le nom d'utilisateur
+                { email: { $regex: searchTerm, $options: "i" } } // Recherche insensible à la casse dans l'e-mail
+            ]
+        });
+
+        res.status(200).json({ users });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports.getUser = async (req, res, next) => {
     try {
         const id = req.session.user._id.toString();

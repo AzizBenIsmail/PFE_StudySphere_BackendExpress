@@ -1,15 +1,15 @@
 var express = require("express");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 var router = express.Router();
-const upload = require("../middlewares/upload");
-const {
-  getUsers,
-  getUser,
-  addUser,
-  deleteUser,
-  updateUser,
-  forgotpwd,
-} = require("../controllers/authControllers");
+// const upload = require("../middlewares/upload");
+// const {
+//   getUsers,
+//   getUser,
+//   addUser,
+//   deleteUser,
+//   updateUser,
+//   forgotpwd,
+// } = require("../controllers/authControllers");
 const session = require('express-session');
 
 const {requireAuthUser} = require("../middlewares/authMiddleware");

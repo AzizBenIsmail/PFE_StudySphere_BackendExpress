@@ -11,6 +11,7 @@ const mongoose = require('mongoose')
 
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
+var companyRouter = require('./routes/company');
 
 var app = express();
 
@@ -53,6 +54,7 @@ app.use(cors({
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/company', companyRouter);
 
 // ...
 

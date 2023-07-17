@@ -15,12 +15,13 @@ module.exports.getCompanies = async (req, res ,next) => {
 
 // Créer une nouvelle entreprise
 module.exports.createCompany = async (req, res,next) => {
-  const companyName = req.body.companyName
-  const filePath = req.file.path
+  const { companyName } = req.body
+  const originalname  = req.file.originalname
+  console.log(originalname);
   try {
     const Company = await CompanySchema.create({
-      nom: companyName,
-      fichierExcel: filePath
+      nomCompany: companyName,
+      fichierExcel: originalname
     })
     res.status(201).json({ Company })
   } catch (error) {

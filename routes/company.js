@@ -4,7 +4,7 @@ const uploadXcl = require('../middlewares/uploadXcl')
 const Company = require('../controllers/companyController')
 // const { requireAuthUser } = require("../middlewares/authMiddleware");
 
-router.get('/companies', Company.getCompanies)
+router.get('/', Company.getCompanies)
 
 router.post('/companies', uploadXcl.single('excelFile'), Company.createCompany)
 

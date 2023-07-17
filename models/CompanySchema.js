@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const companySchema = new mongoose.Schema({
-  nom: String,
+  nomCompany: String,
   fichierExcel: String
 })
 

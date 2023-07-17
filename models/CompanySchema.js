@@ -1,8 +1,10 @@
 const mongoose = require('mongoose')
 
 const companySchema = new mongoose.Schema({
-  nomCompany: String,
-  fichierExcel: String
+  nomCompagne: String,
+  fichierExcel: String,
+  image_Compagne: String,
+
 })
 
 const Company = mongoose.model('Company', companySchema)

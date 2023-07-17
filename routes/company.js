@@ -6,10 +6,10 @@ const Company = require('../controllers/companyController')
 
 router.get('/', Company.getCompanies)
 
-router.post('/companies', uploadXcl.single('excelFile'), Company.createCompany)
+router.post('/Company', uploadXcl.fields([{ name: 'excelFile', maxCount: 1 }, { name: 'image_Compagne', maxCount: 1 }]), Company.createCompany)
 
-router.put('/companies/:id', Company.updateCompany)
+router.put('/Company/:id', Company.updateCompany)
 
-router.delete('/companies/:id', Company.deleteCompany)
+router.delete('/Company/:id', Company.deleteCompany)
 
 module.exports = router;

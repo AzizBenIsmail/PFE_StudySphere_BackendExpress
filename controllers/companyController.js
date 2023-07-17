@@ -23,7 +23,7 @@ module.exports.createCompany = async (req, res,next) => {
       nomCompany: companyName,
       fichierExcel: originalname
     })
-    res.status(201).json({ Company })
+      res.status(201).json({ Company })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }

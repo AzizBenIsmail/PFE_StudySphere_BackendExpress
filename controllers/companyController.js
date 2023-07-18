@@ -24,7 +24,8 @@ module.exports.createCompany = async (req, res, next) => {
       nomCompagne: companyName,
       fichierExcel: excelFile,
       image_Compagne: image,
-      validation:false
+      validation:false,
+      createdAt : new Date()
     })
 
     const excelData = readExcelFile(`C:/Users/aziz2/OneDrive/Bureau/Attijari-Bank-BackendExpress/public/Xcl/${excelFile}`)
@@ -104,6 +105,7 @@ module.exports.Valider = async (req, res, next) => {
       return { nom, email, content, dateEnvoi }
     })
     company.validation = true ;
+    company.updatedAt = new Date();
     company.contacts = [...company.contacts, ...newContacts]
     await company.save()
     res.status(201).json({ company })

@@ -20,8 +20,8 @@ const CompanySMSSchema = new mongoose.Schema({
 CompanySMSSchema.pre('save', async function (next) {
   try {
     const CompanySMS = this
-    CompanySMS.createdAt = new Date()
-    CompanySMS.updatedAt = new Date()
+    // CompanySMS.createdAt = new Date()
+    // CompanySMS.updatedAt = new Date()
     // Company.validation = false //false
     next()
   } catch (error) {

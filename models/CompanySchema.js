@@ -24,7 +24,7 @@ companySchema.pre('save', async function (next) {
     const Company = this
     Company.createdAt = new Date()
     Company.updatedAt = new Date()
-    Company.validation = false //false
+    // Company.validation = false //false
     next()
   } catch (error) {
     next(error)

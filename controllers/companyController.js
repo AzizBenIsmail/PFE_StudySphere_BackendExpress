@@ -145,25 +145,25 @@ module.exports.getCompanieByid = async (req, res, next) => {
 }
 
 // Mettre à jour une entreprise
-module.exports.updateCompany = async (req, res, next) => {
-  try {
-    const companyId = req.params.id
-    const companyName = req.body.companyName
-    const checkIfcompanyExists = await CompanySchema.findById(id)
-    if (!checkIfcompanyExists) {
-      throw new Error('company not found !')
-    }
-    // const currentDate = new Date();
-    updateedcompany = await CompanySchema.findByIdAndUpdate(companyId, {
-      $set: {
-        companyName
-      },
-    }, { new: true })
-    res.status(200).json(updateedcompany)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
+// module.exports.updateCompany = async (req, res, next) => {
+//   try {
+//     const companyId = req.params.id
+//     const companyName = req.body.companyName
+//     const checkIfcompanyExists = await CompanySchema.findById(id)
+//     if (!checkIfcompanyExists) {
+//       throw new Error('company not found !')
+//     }
+//     // const currentDate = new Date();
+//     updateedcompany = await CompanySchema.findByIdAndUpdate(companyId, {
+//       $set: {
+//         companyName
+//       },
+//     }, { new: true })
+//     res.status(200).json(updateedcompany)
+//   } catch (error) {
+//     res.status(500).json({ message: error.message })
+//   }
+// }
 
 // Supprimer une entreprise
 module.exports.deleteCompany = async (req, res, next) => {

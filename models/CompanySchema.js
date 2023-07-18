@@ -12,7 +12,9 @@ const companySchema = new mongoose.Schema({
     {
       nom: String,
       email: String,
+      content: String,
       dateEnvoi: Date
+
     }
   ]
 })

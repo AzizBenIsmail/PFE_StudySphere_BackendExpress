@@ -1,12 +1,15 @@
 const CompanySchema = require('../models/CompanySchema')
 const xlsx = require('xlsx')
 const moment = require('moment')
-const dayjs = require('dayjs');
+const dayjs = require('dayjs')
 
 const readExcelFile = (filePath) => {
   const workbook = xlsx.readFile(filePath)
   const worksheet = workbook.Sheets[workbook.SheetNames[0]]
-  const jsonData = xlsx.utils.sheet_to_json(worksheet, { header: 1 })
+  const jsonData = xlsx.utils.sheet_to_json(worksheet, {
+    header: 1,
+    raw: false, // Ajoutez cette option pour obtenir les valeurs formatées
+  })
   return jsonData
 }
 
@@ -54,42 +57,45 @@ module.exports.createCompany = async (req, res, next) => {
     res.status(500).json({ message: error.message })
   }
 }
+
 module.exports.Valider = async (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.id
   try {
-    const company = await CompanySchema.findById(id);
-    const filePath = `C:/Users/aziz2/OneDrive/Bureau/Attijari-Bank-BackendExpress/public/Xcl/${company.fichierExcel}`;
-    const excelData = readExcelFile(filePath);
+    const company = await CompanySchema.findById(id)
+    const filePath = `C:/Users/aziz2/OneDrive/Bureau/Attijari-Bank-BackendExpress/public/Xcl/${company.fichierExcel}`
+    const excelData = readExcelFile(filePath)
     if (company.contacts.length !== 0) {
-      throw new Error('DejaVerifier');
+      throw new Error('DejaVerifier')
     }
 
     const newContacts = excelData.map((row, index) => {
-      const nom = row[0];
-      const email = row[1];
-      const content = row[2];
-      const dateEnvoi = dayjs(row[3], ['DD/MM/YYYY', 'MM/DD/YYYY']).format('YYYY-MM-DD');
-      const currentDate = moment().format('YYYY-MM-DD');
-console.log(dateEnvoi)
-      if (moment(dateEnvoi).isBefore(currentDate)) {
-        throw new Error(`DateEnvoiInvalide a la ligne ${index + 1}`);
+      const nom = row[0]
+      const email = row[1]
+      const content = row[2]
+      const dateE = row[3]
+      const dateEnvoi = dayjs(row[3], ['DD/MM/YYYY', 'MM/DD/YYYY'], 'fr').format('YYYY-MM-DD')
+      const currentDate = dayjs().format('YYYY-MM-DD')
+      console.log(dateE, content, email, nom)
+      if (dayjs(dateEnvoi).isBefore(currentDate)) {
+        throw new Error(`DateEnvoiInvalide a la ligne ${index + 1}`)
       }
 
-      const isValidEmail = validateEmail(email);
+      const isValidEmail = validateEmail(email)
       if (!isValidEmail) {
-        throw new Error(`EmailInvalid a la ligne ${index + 1}`);
+        throw new Error(`EmailInvalid a la ligne ${index + 1}`)
       }
 
-      return { nom, email, content, dateEnvoi };
-    });
+      return { nom, email, content, dateEnvoi }
+    })
 
-    company.contacts = [...company.contacts, ...newContacts];
-    await company.save();
-    res.status(201).json({ company });
+    company.contacts = [...company.contacts, ...newContacts]
+    await company.save()
+    res.status(201).json({ company })
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message })
   }
-};
+}
+
 
 // Function to validate email format
 function validateEmail (email) {

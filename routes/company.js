@@ -6,6 +6,8 @@ const Company = require('../controllers/companyController')
 
 router.get('/', Company.getCompanies)
 
+router.get('/error-log', Company.getErrorLogContent)
+
 router.get('/:id', Company.getCompanieByid)
 
 router.put('/Valider/:id', Company.Valider)

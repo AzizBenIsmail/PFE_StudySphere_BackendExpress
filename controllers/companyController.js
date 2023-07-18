@@ -2,6 +2,7 @@ const CompanySchema = require('../models/CompanySchema')
 const xlsx = require('xlsx')
 const moment = require('moment')
 const dayjs = require('dayjs')
+const fs = require('fs')
 
 const readExcelFile = (filePath) => {
   const workbook = xlsx.readFile(filePath)
@@ -17,46 +18,60 @@ module.exports.createCompany = async (req, res, next) => {
   const { companyName } = req.body
   const excelFile = req.files['excelFile'][0].originalname
   const image = req.files['image_Compagne'][0].originalname
+  const errorLog = []
   try {
     const company = await CompanySchema.create({
       nomCompagne: companyName,
       fichierExcel: excelFile,
       image_Compagne: image,
     })
-    // Lire le contenu du fichier Excel
-    // const filePath = `C:/Users/aziz2/OneDrive/Bureau/Attijari-Bank-BackendExpress/public/Xcl/${excelFile}`;
-    // const excelData = readExcelFile(filePath);
-    //
-    // // Traiter les données du fichier Excel
-    // const contacts = excelData.map((row) => {
-    //   const nom = row[0];
-    //   const email = row[1];
-    //   const content = row[2];
-    //   let dateEnvoi = moment(row[3], 'DD/MM/YYYY').format('YYYY-MM-DD');
-    //
-    //   // Vérifier si la date est valide, sinon la remplacer par une valeur par défaut
-    //   if (!moment(dateEnvoi, 'YYYY-MM-DD', true).isValid()) {
-    //     dateEnvoi = moment('01/01/2000', 'DD/MM/YYYY').format('YYYY-MM-DD');
-    //   }
-    //
-    //   return {
-    //     nom,
-    //     email,
-    //     content,
-    //     dateEnvoi,
-    //   };
-    // });
-    //
-    // // Ajouter les contacts à l'entreprise créée
-    // company.contacts = contacts;
-    //
-    // // Enregistrer les modifications de l'entreprise
-    // await company.save();
-    res.status(201).json({ company })
+
+    const excelData = readExcelFile(`C:/Users/aziz2/OneDrive/Bureau/Attijari-Bank-BackendExpress/public/Xcl/${excelFile}`)
+    const newContacts = excelData.map((row, index) => {
+      const nom = row[0]
+      const email = row[1]
+      const content = row[2]
+      const dateEnvoi = dayjs(row[3], ['DD/MM/YYYY', 'MM/DD/YYYY'], 'fr').format('YYYY-MM-DD')
+      const currentDate = dayjs().format('YYYY-MM-DD')
+      if (dayjs(dateEnvoi).isBefore(currentDate)) {
+        errorLog.push(`Date Envoi Invalide à la ligne ${index + 1}`)
+      }
+
+      const isValidEmail = validateEmail(email)
+      if (!isValidEmail) {
+        errorLog.push(`Email Invalid à la ligne ${index + 1}`)
+      }
+      return { nom, email, content, dateEnvoi }
+    })
+
+    fs.writeFileSync('errorLog.txt', errorLog.join('\n'))
+
+    const hasErrors = errorLog.length > 0 ? 1 : 0
+
+    res.status(201).json({ company, hasErrors })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
 }
+
+module.exports.getErrorLogContent = async (req, res, next) => {
+  try {
+    const filePath = 'errorLog.txt';
+
+    // Vérifier si le fichier existe
+    if (!fs.existsSync(filePath)) {
+      res.status(404).json({ error: 'Le fichier errorLog.txt n\'existe pas' });
+      return;
+    }
+
+    // Lire le contenu du fichier
+    const logContent = fs.readFileSync(filePath, 'utf8');
+    res.status(200).json({ logContent });
+  } catch (error) {
+    console.error('Une erreur s\'est produite lors de la lecture du fichier :', error);
+    res.status(500).json({ error: 'Erreur lors de la lecture du fichier' });
+  }
+};
 
 module.exports.Valider = async (req, res, next) => {
   const id = req.params.id
@@ -95,7 +110,6 @@ module.exports.Valider = async (req, res, next) => {
     res.status(500).json({ message: error.message })
   }
 }
-
 
 // Function to validate email format
 function validateEmail (email) {

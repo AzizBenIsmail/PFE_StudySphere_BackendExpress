@@ -21,8 +21,8 @@ const companySchema = new mongoose.Schema({
 companySchema.pre('save', async function (next) {
   try {
     const Company = this
-    Company.createdAt = new Date()
-    Company.updatedAt = new Date()
+    // Company.createdAt = new Date()
+    // Company.updatedAt = new Date()
     // Company.validation = false //false
     next()
   } catch (error) {

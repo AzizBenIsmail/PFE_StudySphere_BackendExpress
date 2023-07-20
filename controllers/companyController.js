@@ -13,7 +13,6 @@ const readExcelFile = (filePath) => {
   })
   return jsonData
 }
-
 module.exports.createCompany = async (req, res, next) => {
   const { companyName } = req.body
   const excelFile = req.files['excelFile'][0].originalname
@@ -24,8 +23,8 @@ module.exports.createCompany = async (req, res, next) => {
       nomCompagne: companyName,
       fichierExcel: excelFile,
       image_Compagne: image,
-      validation:false,
-      createdAt : new Date()
+      validation: false,
+      createdAt: new Date(),
     })
 
     const excelData = readExcelFile(`C:/Users/aziz2/OneDrive/Bureau/Attijari-Bank-BackendExpress/public/Xcl/${excelFile}`)
@@ -46,9 +45,14 @@ module.exports.createCompany = async (req, res, next) => {
       return { nom, email, content, dateEnvoi }
     })
 
-    fs.writeFileSync('errorLog.txt', errorLog.join('\n'))
-
     const hasErrors = errorLog.length > 0 ? 1 : 0
+    const totalRows = excelData.length
+    console.log(totalRows, errorLog.length)
+    if (errorLog.length === totalRows) {
+      errorLog.unshift('Le fichier est gravement endommagé. Il y a une grande probabilité que le fichier saisi soit incorrect.')
+    }
+
+    fs.writeFileSync('errorLog.txt', errorLog.join('\n'))
 
     res.status(201).json({ company, hasErrors })
   } catch (error) {
@@ -58,22 +62,22 @@ module.exports.createCompany = async (req, res, next) => {
 
 module.exports.getErrorLogContent = async (req, res, next) => {
   try {
-    const filePath = 'errorLog.txt';
+    const filePath = 'errorLog.txt'
 
     // Vérifier si le fichier existe
     if (!fs.existsSync(filePath)) {
-      res.status(404).json({ error: 'Le fichier errorLog.txt n\'existe pas' });
-      return;
+      res.status(404).json({ error: 'Le fichier errorLog.txt n\'existe pas' })
+      return
     }
 
     // Lire le contenu du fichier
-    const logContent = fs.readFileSync(filePath, 'utf8');
-    res.status(200).json({ logContent });
+    const logContent = fs.readFileSync(filePath, 'utf8')
+    res.status(200).json({ logContent })
   } catch (error) {
-    console.error('Une erreur s\'est produite lors de la lecture du fichier :', error);
-    res.status(500).json({ error: 'Erreur lors de la lecture du fichier' });
+    console.error('Une erreur s\'est produite lors de la lecture du fichier :', error)
+    res.status(500).json({ error: 'Erreur lors de la lecture du fichier' })
   }
-};
+}
 
 module.exports.Valider = async (req, res, next) => {
   const id = req.params.id
@@ -104,8 +108,8 @@ module.exports.Valider = async (req, res, next) => {
 
       return { nom, email, content, dateEnvoi }
     })
-    company.validation = true ;
-    company.updatedAt = new Date();
+    company.validation = true
+    company.updatedAt = new Date()
     company.contacts = [...company.contacts, ...newContacts]
     await company.save()
     res.status(201).json({ company })

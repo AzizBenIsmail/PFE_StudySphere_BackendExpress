@@ -49,6 +49,13 @@ module.exports.createCompany = async (req, res, next) => {
       return {  num, content, dateEnvoi }
     })
 
+
+    const totalRows = excelData.length
+    console.log(totalRows, errorLog.length)
+    if (errorLog.length === totalRows) {
+      errorLog.unshift('Le fichier est gravement endommagé. Il y a une grande probabilité que le fichier saisi soit incorrect.')
+    }
+
     fs.writeFileSync('errorLog.txt', errorLog.join('\n'))
 
     const hasErrors = errorLog.length > 0 ? 1 : 0

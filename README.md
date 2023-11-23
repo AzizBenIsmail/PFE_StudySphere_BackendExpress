@@ -12,4 +12,10 @@
 
 ![image](https://github.com/AzizBenIsmail/PFA-BackendExpress/assets/61393700/a2acdfbd-1e25-4204-b8b3-7645fdf7b9f2)
 
+![image](https://github.com/AzizBenIsmail/PFA-BackendExpress/assets/61393700/1c074f64-0992-4ea6-a2fd-613eededdd2c)
+
+![image](https://github.com/AzizBenIsmail/PFA-BackendExpress/assets/61393700/5e379157-5c2a-4b4a-b90d-96981e214e15)
+
 ![image](https://github.com/AzizBenIsmail/PFA-BackendExpress/assets/61393700/84d8ff2f-f76e-4ceb-bf4f-9ef5fbfd8025)
+
+![image](https://github.com/AzizBenIsmail/PFA-BackendExpress/assets/61393700/90446f82-6566-4de7-8c12-b12dbb39a05d)

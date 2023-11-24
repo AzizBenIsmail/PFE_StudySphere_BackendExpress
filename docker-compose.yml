@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+
+  mongodb:
+    image: "mongo:latest"
+    container_name: mongodb
+    # Utilisez l'image la plus récente de MongoDB
+    ports:
+      - "27020:27020"  # Port par défaut de MongoDB
+    command: mongod --port 27020
+    restart: unless-stopped
+    volumes:
+      - db:/data/db  # This line adds a volume to the MongoDB service
+
+  pfa_attijari_bank:
+    image: azizbenismail/pfa-attijari-bank-backendexpress
+    build:
+      context: ../Attijari-Bank-BackendExpress
+      dockerfile: dockerfile
+    container_name: pfa-attijari-bank-backendexpress-container
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27020/AttijariBank  # Currently this does not have any meaning and DOES NOT override the mongo db file    restart: unless-stopped
+    depends_on:
+      - mongodb
+volumes:
+  db:

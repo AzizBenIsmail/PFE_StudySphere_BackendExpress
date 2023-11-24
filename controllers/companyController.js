@@ -40,7 +40,7 @@ module.exports.createCompany = async (req, res, next) => {
       createdAt: new Date(),
     });
 
-    const excelData = readExcelFile(`C:/Users/aziz2/OneDrive/Bureau/Attijari-Bank-BackendExpress/public/Xcl/${excelFile}`);
+    const excelData = readExcelFile(`./public/Xcl/${excelFile}`);
 
     if (excelData.length === 0) {
       // The excelData array is empty, indicating an empty file or invalid format
@@ -195,7 +195,7 @@ module.exports.Valider = async (req, res, next) => {
   const id = req.params.id
   try {
     const company = await CompanySchema.findById(id)
-    const filePath = `C:/Users/aziz2/OneDrive/Bureau/Attijari-Bank-BackendExpress/public/Xcl/${company.fichierExcel}`
+    const filePath = `./public/Xcl/${company.fichierExcel}`
     const excelData = readExcelFile(filePath)
     if (company.contacts.length !== 0) {
       throw new Error('DejaVerifier')

@@ -4,13 +4,12 @@ services:
   mongodb:
     image: "mongo:latest"
     container_name: mongodb
-    # Utilisez l'image la plus récente de MongoDB
     ports:
-      - "27020:27020"  # Port par défaut de MongoDB
+      - "27020:27020"
     command: mongod --port 27020
     restart: unless-stopped
     volumes:
-      - db:/data/db  # This line adds a volume to the MongoDB service
+      - db:/data/db
 
   pfa_attijari_bank:
     image: azizbenismail/pfa-attijari-bank-backendexpress
@@ -21,8 +20,19 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=mongodb://mongodb:27020/AttijariBank  # Currently this does not have any meaning and DOES NOT override the mongo db file    restart: unless-stopped
+      - MONGO_URI=mongodb://mongodb:27020/AttijariBank
+    restart: unless-stopped
     depends_on:
       - mongodb
+
+  pfa_attijari_bank_frontend_react:
+    image: azizbenismail/pfa-attijari_bank-frontend_react:latest
+    container_name: pfa-attijari-bank-frontend-react-container
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    depends_on:
+      - pfa_attijari_bank
+
 volumes:
   db:

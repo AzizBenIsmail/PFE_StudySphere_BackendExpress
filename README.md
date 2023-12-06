@@ -1,4 +1,7 @@
 # Projet Fin D'année Automatisation Campagne Sms & Email pour Attijari Bank BackendExpress
+
+![GitHub repo size](https://img.shields.io/github/repo-size/AzizBenIsmail/PFA-Automatisation_Campagne_Sms-Email-BackendExpress)
+
 Notre projet consiste à mettre en place une solution complète de gestion des campagnes SMS et Email pour Attijari Bank, afin d'optimiser sa communication client et d'obtenir des résultats exceptionnels.
 
 La plateforme technologique avancée que nous proposons permettra à Attijari Bank de planifier, exécuter et analyser ses campagnes de communication de manière efficace et ciblée.

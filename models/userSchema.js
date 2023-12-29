@@ -9,7 +9,18 @@ userSchema = new mongoose.Schema({
   password: String,
   createdAt: Date,
   updatedAt: Date,
-  userType: String,
+  userType: {
+    type: String,
+    enum: ['user', 'centre', 'moderateur', 'admin'],
+    default: 'user',
+  },
+  domaine: String,
+  localisation: String,
+  langue: String,
+  reputation: {
+    type: Number,
+    default: 0,
+  },
   image_user: String,
   enabled: Boolean, //true or false
   phoneNumber: Number, //length 8
@@ -27,7 +38,7 @@ userSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt()
     const User = this
     User.password = await bcrypt.hash(User.password, salt)
-    User.userType = 'admin'
+    User.userType = 'user'
     User.createdAt = new Date()
     User.updatedAt = new Date()
     User.enabled = false //false

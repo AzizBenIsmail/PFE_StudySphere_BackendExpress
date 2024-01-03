@@ -15,7 +15,7 @@ userSchema = new mongoose.Schema({
     default: 'user',
   },
   domaine: String,
-  localisation: String,
+  location: String,
   langue: String,
   reputation: {
     type: Number,

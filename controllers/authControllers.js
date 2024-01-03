@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 const maxAge = 2 * 60 * 60; // 2 heures
 
 const createToken = (id) => {
-    return jwt.sign({id}, "net attijari secret", {
+    return jwt.sign({id}, "net StudySphere secret", {
         expiresIn: maxAge,
     });
 };

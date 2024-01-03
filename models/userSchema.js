@@ -11,7 +11,7 @@ userSchema = new mongoose.Schema({
   updatedAt: Date,
   userType: {
     type: String,
-    enum: ['user', 'centre', 'moderateur', 'admin'],
+    enum: ['user', 'centre', 'moderateur', 'admin','formateur'],
     default: 'user',
   },
   domaine: String,
@@ -38,7 +38,7 @@ userSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt()
     const User = this
     User.password = await bcrypt.hash(User.password, salt)
-    User.userType = 'user'
+    // User.userType = 'user'
     User.createdAt = new Date()
     User.updatedAt = new Date()
     User.enabled = false //false

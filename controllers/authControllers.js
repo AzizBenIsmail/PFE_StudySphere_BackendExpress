@@ -7,17 +7,17 @@ const bcrypt = require("bcrypt");
 const maxAge = 2 * 60 * 60; // 2 heures
 
 const createToken = (id) => {
-    return jwt.sign({id}, "net attijari secret", {
+    return jwt.sign({id}, "net StudySphere secret", {
         expiresIn: maxAge,
     });
 };
 
 module.exports.signup_post = async (req, res) => {
     const {filename} = req.file;
-    const {email, password, username} = req.body;
+    const {email, password, userType , username} = req.body;
     try {
         const user = await userModel.create({
-            username, password, email, image_user: filename,
+            username, password, email, userType, image_user: filename,
         });
         // Envoi de l'e-mail à l'adresse e-mail de l'utilisateur
         sendWelcomeEmail(email, username);

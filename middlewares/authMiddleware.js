@@ -8,7 +8,7 @@ const requireAuthUser = (req, res, next) => {
   const token = authHeader && authHeader.split(" ")[1];
   // console.log("token", token);
   if (token) {
-    jwt.verify(token, "net attijari secret", async (err, decodedToken) => {
+    jwt.verify(token, "net StudySphere secret", async (err, decodedToken) => {
       if (err) {
         console.log("il ya une erreur au niveau du token", err.message);
         req.session.user = null;

@@ -7,7 +7,7 @@
     const token = req.cookies.jwt_token;
     const startTime = new Date(); // Temps de début de la requête
     if (token) {
-      jwt.verify(token, "net attijari secret", async (err, decodedToken) => {
+      jwt.verify(token, "net StudySphere secret", async (err, decodedToken) => {
         if (err) {
           req.user = null;
         } else {

@@ -7,8 +7,17 @@ const { requireAuthUser } = require("../middlewares/authMiddleware");
 /* signup. */
 router.post("/signup", upload.single("image_user"), auth.signup_post);
 
+/* signup. */
+router.post("/inscrire", auth.signup);
+
 /* login. */
 router.post("/login", auth.login_post);
+
+/* verification email. */
+router.post("/verification", auth.verification);
+
+/* verification de l'email. */
+router.get("/VerificationEmail", auth.VerificationEmail);
 
 /* validation by email. */   
 router.get("/validation", auth.activation);

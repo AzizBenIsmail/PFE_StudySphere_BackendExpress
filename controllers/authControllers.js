@@ -14,13 +14,29 @@ const createToken = (id) => {
 
 module.exports.signup_post = async (req, res) => {
     const {filename} = req.file;
-    const {email, password, userType , username} = req.body;
+    const {email, password, surnom} = req.body;
+    consolo.log(req.body);
     try {
         const user = await userModel.create({
-            username, password, email, userType, image_user: filename,
+            surnom, password, email, image_user: filename,
         });
-        // Envoi de l'e-mail à l'adresse e-mail de l'utilisateur
-        sendWelcomeEmail(email, username);
+        sendWelcomeEmail(email, surnom);
+        const token = createToken(user._id);
+        res.cookie("jwt_token", token, {httpOnly: true, maxAge: maxAge * 1000});
+        res.status(201).json({user});
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
+
+module.exports.signup = async (req, res) => {
+    const {email, password, nom , prenom} = req.body;
+    console.log(req.body);
+    try {
+        const user = await userModel.create({
+            nom , prenom, password, email,
+        });
+        sendWelcomeEmail(email, nom);
         const token = createToken(user._id);
         res.cookie("jwt_token", token, {httpOnly: true, maxAge: maxAge * 1000});
         res.status(201).json({user});
@@ -37,14 +53,14 @@ module.exports.activation = async (req, res) => {
         if ( !checkIfUserExists) {
             throw new Error("User not found!");
         }
-        if (checkIfUserExists.enabled) {
-            return res.redirect("http://localhost:3000/login-page/?message=Utilisateur_est_deja_active");
+        if (checkIfUserExists.etat) {
+            return res.redirect("http://localhost:3000/auth/login/?message=Utilisateur_est_deja_active");
         }
 
         const currentDate = new Date();
         const updatedUser = await userModel.findByIdAndUpdate(checkIfUserExists._id, {
                 $set: {
-                    enabled: true, updated_at: currentDate,
+                    etat: true, modifier_A: currentDate,
                 },
             }, {new: true} // Set the { new: true } option to return the updated user
         );
@@ -75,15 +91,15 @@ module.exports.login_post = async (req, res) => {
 };
 
 // Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
-function sendWelcomeEmail(email, username, id) {
+function sendWelcomeEmail(email, surnom, id) {
     const transporter = nodemailer.createTransport({
         service: "gmail", auth: {
-            user: "greencrowd2223@gmail.com", pass: "zothevkvkhobyyzw",
+            user: "aziz.270700@gmail.com", pass: "vwfb ilge mcvk xwgh",
         },
     });
     const activationLink = `http://localhost:5000/auth/validation?email=${ encodeURIComponent(email) }`;
     const mailOptions = {
-        from: "greencrowd2223@gmail.com", to: email, subject: "Bienvenue sur notre site", html: `
+        from: "aziz.270700@gmail.com", to: email, subject: "Bienvenue sur notre site", html: `
       <html>
         <head>
           <style>
@@ -124,7 +140,7 @@ function sendWelcomeEmail(email, username, id) {
         <body>
           <div class="container">
             <h1>Bienvenue sur notre site</h1>
-            <p>Cher</p> <h2> ${ username },</h2>
+            <p>Cher</p> <h2> ${ surnom },</h2>
             <p>Nous sommes ravis de vous accueillir parmi nous !</p>
             <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
             <a href="${ activationLink }" ${ id } class="button">Activer mon compte</a>
@@ -146,10 +162,10 @@ function sendWelcomeEmail(email, username, id) {
 
 // Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
 // Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
-function sendPasswordEmail(email, username, id, generatedPassword) {
+function sendPasswordEmail(email, surnom, id, generatedPassword) {
     const transporter = nodemailer.createTransport({
         service: "gmail", auth: {
-            user: "greencrowd2223@gmail.com", pass: "zothevkvkhobyyzw",
+            user: "aziz.270700@gmail.com", pass: "vwfb ilge mcvk xwgh",
         },
     });
 
@@ -163,7 +179,7 @@ function sendPasswordEmail(email, username, id, generatedPassword) {
     }
 
     const mailOptions = {
-        from: "greencrowd2223@gmail.com", to: email, subject: "Bienvenue sur notre site", html: `
+        from: "attijaripfa@gmail.com", to: email, subject: "Bienvenue sur notre site", html: `
             <html>
 <head>
     <style>
@@ -231,7 +247,7 @@ function sendPasswordEmail(email, username, id, generatedPassword) {
 <body>
     <div class="container">
         <h1>Bienvenue sur notre site</h1>
-        <p>Cher <span class="username">${username}</span>,</p>
+        <p>Cher <span class="username">${surnom}</span>,</p>
         <p>Nous sommes ravis de vous accueillir parmi nous !</p>
         <p>Votre mot de passe généré aléatoirement est :</p>
         <div class="password-container">
@@ -296,12 +312,12 @@ module.exports.forgetPassword = async (req, res) => {
         // Mettre à jour le mot de passe généré dans la base de données
         const updatedUser = await userModel.findOneAndUpdate({email}, {
             $set: {
-                enabled: true, updated_at: currentDate, password: Pwd,
+                etat: true, modifier_A: currentDate, password: Pwd,
             },
         }, {new: true});
 
         // Envoyer l'e-mail de bienvenue avec le mot de passe généré
-        sendPasswordEmail(email, updatedUser.username, updatedUser._id, generatedPassword);
+        sendPasswordEmail(email, updatedUser.surnom, updatedUser._id, generatedPassword);
         res.status(200).json({
             message: "mot de passe modifié avec succès vérifier votre boîte mail"
         });
@@ -337,7 +353,7 @@ module.exports.getUsers = async (req, res, next) => {
 
 module.exports.getAdmin = async (req, res, next) => {
     try {
-        const users = await userModel.find({ userType: "admin" });
+        const users = await userModel.find({ role: "admin" });
         if (!users || users.length === 0) {
             throw new Error("Users not found!");
         }
@@ -349,7 +365,7 @@ module.exports.getAdmin = async (req, res, next) => {
 
 module.exports.getSimpleUser = async (req, res, next) => {
     try {
-        const users = await userModel.find({ userType: "user" });
+        const users = await userModel.find({ role: "client" });
         if (!users || users.length === 0) {
             throw new Error("Users not found!");
         }
@@ -361,7 +377,7 @@ module.exports.getSimpleUser = async (req, res, next) => {
 
 module.exports.getUserActive = async (req, res, next) => {
     try {
-        const users = await userModel.find({ enabled: "true" });
+        const users = await userModel.find({ etat: "true" });
         if (!users || users.length === 0) {
             throw new Error("Users not found!");
         }
@@ -373,7 +389,7 @@ module.exports.getUserActive = async (req, res, next) => {
 
 module.exports.getUserDesactive = async (req, res, next) => {
     try {
-        const users = await userModel.find({ enabled: "false" });
+        const users = await userModel.find({ etat: "false" });
         if (!users || users.length === 0) {
             throw new Error("Users not found!");
         }
@@ -390,7 +406,7 @@ module.exports.searchUsers = async (req, res, next) => {
         // Utiliser la méthode find avec un critère de recherche basé sur le terme
         const users = await userModel.find({
             $or: [
-                { username: { $regex: searchTerm, $options: "i" } }, // Recherche insensible à la casse dans le nom d'utilisateur
+                { surnom: { $regex: searchTerm, $options: "i" } }, // Recherche insensible à la casse dans le nom d'utilisateur
                 { email: { $regex: searchTerm, $options: "i" } } // Recherche insensible à la casse dans l'e-mail
             ]
         });
@@ -430,11 +446,11 @@ module.exports.addUser = async (req, res, next) => {
         const {filename} = req.file;
         console.log("filename", req.file);
         const {
-            username, password, email, first_Name, last_Name, phoneNumber, userType,
+            surnom, password, email, nom, prenom, phoneNumber, role,
         } = req.body;
         console.log(req.body);
         const user = new userModel({
-            username, password, email, first_Name, last_Name, phoneNumber, userType, image_user: filename,
+            surnom, password, email, nom, prenom, phoneNumber, role, image_user: filename,
         });
 
         const addeduser = await user.save();
@@ -446,7 +462,7 @@ module.exports.addUser = async (req, res, next) => {
 };
 module.exports.updateUser = async (req, res, next) => {
     try {
-        const {first_Name, last_Name, phoneNumber, password} = req.body;
+        const {nom, prenom, phoneNumber, password} = req.body;
         console.log(req.body);
         const id = req.user._id.toString();
         console.log(req.user._id.toString());
@@ -457,7 +473,7 @@ module.exports.updateUser = async (req, res, next) => {
         const currentDate = new Date();
         updateedUser = await userModel.findByIdAndUpdate(id, {
             $set: {
-                password, first_Name, last_Name, phoneNumber, updated_at: currentDate,
+                password, nom, prenom, phoneNumber, modifier_A: currentDate,
             },
         }, {new: true});
         res.status(200).json(updateedUser);
@@ -468,7 +484,7 @@ module.exports.updateUser = async (req, res, next) => {
 
 module.exports.updateUserByID = async (req, res, next) => {
     try {
-        const {first_Name, last_Name, phoneNumber, password} = req.body;
+        const {nom, prenom, phoneNumber, password} = req.body;
         console.log(req.body);
         const id = req.params.id;
 
@@ -479,7 +495,7 @@ module.exports.updateUserByID = async (req, res, next) => {
         const currentDate = new Date();
         updateedUser = await userModel.findByIdAndUpdate(id, {
             $set: {
-                password, first_Name, last_Name, phoneNumber, updated_at: currentDate,
+                password, nom, prenom, phoneNumber, modifier_A: currentDate,
             },
         }, {new: true});
         res.status(200).json(updateedUser);
@@ -540,11 +556,11 @@ module.exports.upgrade = async (req, res) => {
         }
 
         const currentDate = new Date();
-        const userType = "admin";
+        const role = "admin";
 
         const updatedUser = await userModel.findByIdAndUpdate(id, {
             $set: {
-                userType: userType, enabled: true, updated_at: currentDate,
+                role: role, etat: true, modifier_A: currentDate,
             },
         }, {new: true});
 
@@ -562,10 +578,10 @@ module.exports.downgrade = async (req, res) => {
             throw new Error("user not found !");
         }
         const currentDate = new Date();
-        const user = "user";
+        const client = "client";
         updateedUser = await userModel.findByIdAndUpdate(id, {
             $set: {
-                userType: user, enabled: true, updated_at: currentDate,
+                role: client, etat: true, modifier_A: currentDate,
             },
         }, {new: true});
         res.status(200).json(updateedUser);
@@ -585,7 +601,7 @@ module.exports.Desactive = async (req, res) => {
         const currentDate = new Date();
         updateedUser = await userModel.findByIdAndUpdate(id, {
             $set: {
-                enabled: false, updated_at: currentDate,
+                etat: false, modifier_A: currentDate,
             },
         }, {new: true});
         res.status(200).json(updateedUser);
@@ -604,11 +620,105 @@ module.exports.Active = async (req, res) => {
         const currentDate = new Date();
         updateedUser = await userModel.findByIdAndUpdate(id, {
             $set: {
-                enabled: true, updated_at: currentDate,
+                etat: true, modifier_A: currentDate,
             },
         }, {new: true});
         res.status(200).json(updateedUser);
     } catch (error) {
         res.status(500).json({message: error.message});
+    }
+};
+
+module.exports.verification = async (req, res) => {
+    const {email} = req.body;
+    console.log(req.body);
+    try {
+        const checkIfUserExists = await userModel.findOne({email});
+console.log(email);
+        if ( checkIfUserExists) {
+            throw new Error("User found!");
+        }
+        sendWelcomeEmailverfication(email, "surnom");
+        res.status(201).json({email});
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
+
+function sendWelcomeEmailverfication(email, surnom, id) {
+    const transporter = nodemailer.createTransport({
+        service: "gmail", auth: {
+            user: "aziz.270700@gmail.com", pass: "vwfb ilge mcvk xwgh",
+        },
+    });
+    const activationLink = `http://localhost:5000/auth/VerificationEmail?email=${ encodeURIComponent(email) }`;
+    const mailOptions = {
+        from: "aziz.270700@gmail.com", to: email, subject: "Bienvenue sur notre site", html: `
+      <html>
+        <head>
+          <style>
+            /* Add your custom styles here */
+            body {
+              font-family: Arial, sans-serif;
+              background-color: #f2f2f2;
+              padding: 20px;
+            }
+            .container {
+              max-width: 500px;
+              margin: 0 auto;
+              background-color: #ffffff;
+              padding: 30px;
+              border-radius: 5px;
+              box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+              color: #333333;
+            }
+            p {
+              color: #555555;
+            }
+            h2 {
+              color: #0000FF;
+            }
+            .button {
+              display: inline-block;
+              background-color: #007bff;
+              color: #ffffff;
+              text-decoration: none;
+              padding: 10px 20px;
+              border-radius: 4px;
+              margin-top: 20px;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h1>Bienvenue sur notre site</h1>
+            <p>Cher</p> <h2> </h2>
+            <p>Nous sommes ravis de vous accueillir parmi nous !</p>
+            <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
+            <a href="${ activationLink }" class="button">Cree mon compte</a>
+            <p>Cordialement,<br>L'équipe du site</p>
+          </div>
+        </body>
+      </html>
+    `,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.error("Erreur lors de l'envoi de l'e-mail de bienvenue :", error);
+        } else {
+            console.log("E-mail de bienvenue envoyé avec succès !");
+        }
+    });
+}
+
+module.exports.VerificationEmail = async (req, res) => {
+    try {
+        const email = req.query.email;
+
+        return res.redirect(`http://localhost:3000/auth/register/?message=Email_verifier_avec_succee&email=${email}`);    } catch (error) {
+        return res.status(500).json({message: error.message});
     }
 };

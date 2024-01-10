@@ -23,7 +23,15 @@ const utilisateurValidation = async (req, res, next) => {
       .required()
       .min(3, "Le Prenom doit contenir plus de 3 characters ")
       .max(15, "Le Prenom doit contenir plus de 15 characters"),
-    });
+      password: yup
+      .string()
+      .required("Le Mot de passe est obligatoire")
+      .min(8, "Le Mot de passe doit contenir au moins 8 caractères")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])(?=.{8,})/,
+        "Le Mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un symbole Exemple mdp : Exemple@123 | Exemple#123 | Exemple.123 | Exemple/123 | Exemple*123"
+      ),
+  });
     async function checkEmailUniqueness(email) {
       const existingUser = await UserModel.findOne({ where: { email: email } });
       return !existingUser; // Retourne true si l'email est unique, false sinon

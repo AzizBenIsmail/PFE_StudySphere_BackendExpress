@@ -34,8 +34,11 @@ const utilisateurValidation = async (req, res, next) => {
   });
     async function checkEmailUniqueness(email) {
       const existingUser = await UserModel.findOne({ where: { email: email } });
-      return !existingUser; // Retourne true si l'email est unique, false sinon
+
+      // Retourne true si l'utilisateur n'existe pas, false sinon
+      return existingUser;
     }
+
     await schema.validate(req.body);
     next();
   } catch (error) {

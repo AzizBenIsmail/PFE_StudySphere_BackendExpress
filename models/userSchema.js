@@ -5,7 +5,7 @@ userSchema = new mongoose.Schema({
   surnom: String, //unique
   nom: String,
   prenom: String,
-  email: String,
+  email: { type: String, unique: true, required: true },
   password: String,
   cree_A: Date,
   modifier_A: Date,

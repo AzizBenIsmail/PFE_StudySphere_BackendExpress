@@ -16,13 +16,13 @@ const utilisateurValidation = async (req, res, next) => {
       nom: yup
       .string()
       .required()
-      .min(3, "nom doit entre 3 characters max 15 characters")
-      .max(15, "nom doit entre 3 characters max 15 characters"),
+      .min(3, "Le Nom doit contenir plus de 3 caractères")
+      .max(15, "Le Nom doit contenir moins de 15 caractères"),
       prenom: yup
       .string()
       .required()
-      .min(3, "prenom doit entre 3 characters max 15 characters")
-      .max(15, "prenom doit entre 3 characters max 15 characters"),
+      .min(3, "Le Prenom doit contenir plus de 3 characters ")
+      .max(15, "Le Prenom doit contenir plus de 15 characters"),
     });
     async function checkEmailUniqueness(email) {
       const existingUser = await UserModel.findOne({ where: { email: email } });

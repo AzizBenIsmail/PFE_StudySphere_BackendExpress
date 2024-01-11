@@ -102,12 +102,12 @@ module.exports.login_post = async (req, res) => {
 function sendWelcomeEmail (email, surnom, id) {
   const transporter = nodemailer.createTransport({
     service: 'gmail', auth: {
-      user: 'aziz.270700@gmail.com', pass: 'vwfb ilge mcvk xwgh',
+      user: 'studyspheretn@gmail.com', pass: 'uqct kspi rgnt yzre',
     },
   })
   const activationLink = `http://localhost:5000/auth/validation?email=${encodeURIComponent(email)}`
   const mailOptions = {
-    from: 'aziz.270700@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
+    from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
       <html>
         <head>
           <style>
@@ -173,7 +173,7 @@ function sendWelcomeEmail (email, surnom, id) {
 function sendPasswordEmail (email, surnom, id, generatedPassword) {
   const transporter = nodemailer.createTransport({
     service: 'gmail', auth: {
-      user: 'aziz.270700@gmail.com', pass: 'vwfb ilge mcvk xwgh',
+      user: 'studyspheretn@gmail.com ', pass: 'uqct kspi rgnt yzre',
     },
   })
 
@@ -187,7 +187,7 @@ function sendPasswordEmail (email, surnom, id, generatedPassword) {
   }
 
   const mailOptions = {
-    from: 'attijaripfa@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
+    from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
             <html>
 <head>
     <style>
@@ -658,12 +658,12 @@ module.exports.verification = async (req, res) => {
 function sendWelcomeEmailverfication (email, surnom, id) {
   const transporter = nodemailer.createTransport({
     service: 'gmail', auth: {
-      user: 'aziz.270700@gmail.com', pass: 'vwfb ilge mcvk xwgh',
+      user: 'studyspheretn@gmail.com', pass: 'uqct kspi rgnt yzre',
     },
   })
   const activationLink = `http://localhost:5000/auth/VerificationEmail?email=${encodeURIComponent(email)}`
   const mailOptions = {
-    from: 'aziz.270700@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
+    from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
       <html>
         <head>
           <style>

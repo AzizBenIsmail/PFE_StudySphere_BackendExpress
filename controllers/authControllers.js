@@ -631,12 +631,15 @@ module.exports.Active = async (req, res) => {
 
 module.exports.verification = async (req, res) => {
     const {email} = req.body;
-    console.log(req.body);
-    try {
+    // Check if email is provided
+    if (!email) {
+        return res.status(400).json({ message: 'Email is required' });
+    }    try {
         const checkIfUserExists = await userModel.findOne({email});
-console.log(email);
-        if ( checkIfUserExists) {
-            throw new Error("User found!");
+        console.log(email);
+        if (checkIfUserExists) {
+            // If user is found, respond with 409 (Conflict)
+            return res.status(409).json({ message: 'User with this email already exists' });
         }
         sendWelcomeEmailverfication(email, "surnom");
         res.status(201).json({email});

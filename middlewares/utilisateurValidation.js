@@ -4,16 +4,15 @@ const UserModel = require("../models/userSchema");
 const utilisateurValidation = async (req, res, next) => {
   try {
     console.log("test", req.body);
-
     const schema = yup.object().shape({
-      email: yup
-      .string()
-      .required()
-      .email("Format de l'email non valide")
-      .test("email_unique", "Cet email est déjà utilisé", async function (value) {
-        const isUnique = await checkEmailUniqueness(value);
-        return isUnique;
-      }),
+      // email: yup
+      // .string()
+      // .required()
+      // .email("Format de l'email non valide")
+      // .test("email_unique", "Cet email est déjà utilisé", async function (value) {
+      //   const isUnique = await checkEmailUniqueness(value);
+      //   return isUnique;
+      // }),
       nom: yup
       .string()
       .required()
@@ -32,13 +31,12 @@ const utilisateurValidation = async (req, res, next) => {
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])(?=.{8,})/,
         "Le Mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un symbole Exemple mdp : Exemple@123 | Exemple#123 | Exemple.123 | Exemple/123 | Exemple*123"
       ),
-    });
-
+  });
     async function checkEmailUniqueness(email) {
       const existingUser = await UserModel.findOne({ where: { email: email } });
 
       // Retourne true si l'utilisateur n'existe pas, false sinon
-      return !existingUser; // Return true if the user doesn't exist, false otherwise
+      return existingUser;
     }
 
     await schema.validate(req.body);
@@ -47,5 +45,4 @@ const utilisateurValidation = async (req, res, next) => {
     res.json({ message: error.message });
   }
 };
-
 module.exports = { utilisateurValidation };

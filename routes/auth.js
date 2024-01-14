@@ -8,8 +8,11 @@ const { utilisateurValidation } = require("../middlewares/utilisateurValidation"
 /* signup. */
 router.post("/signup", upload.single("image_user"), auth.signup_post);
 
-/* signup. */
-router.post("/inscrire", utilisateurValidation , auth.signup);
+/* signup client. */
+router.post("/inscrire", utilisateurValidation , auth.signupclient);
+
+/* signup centre. */
+router.post("/inscrireCentre",  upload.single("image_user") , auth.signupcentre);
 
 /* login. */
 router.post("/login", auth.login_post);

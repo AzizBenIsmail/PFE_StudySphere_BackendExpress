@@ -37,7 +37,7 @@ userSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt()
     const User = this
     User.password = await bcrypt.hash(User.password, salt)
-    User.role = 'client'
+    // User.role = 'client'
     User.cree_A = new Date()
     User.modifier_A = new Date()
     User.etat = true //false

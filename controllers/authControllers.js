@@ -31,6 +31,8 @@ module.exports.signup_post = async (req, res) => {
 
 module.exports.signup = async (req, res) => {
   const { email, password, nom, prenom } = req.body
+  const role = 'client'
+
   console.log(req.body)
   try {
     if (!email) {
@@ -43,7 +45,7 @@ module.exports.signup = async (req, res) => {
         return res.status(200).json({ message: 'Email exists deja' })
       }
     const user = await userModel.create({
-      nom, prenom, password, email,
+      nom, prenom, password, email, role
     })
     // sendWelcomeEmail(email, nom);
     const token = createToken(user._id)

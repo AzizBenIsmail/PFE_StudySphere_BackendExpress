@@ -32,7 +32,7 @@ module.exports.signup_post = async (req, res) => {
 module.exports.signupclient = async (req, res) => {
   const { email, password, nom, prenom } = req.body
   const role = 'client'
-
+  const etat = true
   console.log(req.body)
   try {
     if (!email) {
@@ -45,7 +45,7 @@ module.exports.signupclient = async (req, res) => {
         return res.status(200).json({ message: 'Email exists deja' })
       }
     const user = await userModel.create({
-      nom, prenom, password, email, role
+      nom, prenom, password, email, role , etat
     })
     // sendWelcomeEmail(email, nom);
     const token = createToken(user._id)
@@ -59,8 +59,9 @@ module.exports.signupclient = async (req, res) => {
 module.exports.signupcentre = async (req, res) => {
   console.log(req.body)
   const { filename } = req.file
-  const { email, password, nom, prenom } = req.body
-  const role = 'client'
+  const { email, password, nom } = req.body
+  const role = 'centre'
+  const etat = false
 
   console.log(req.body)
   try {
@@ -74,9 +75,9 @@ module.exports.signupcentre = async (req, res) => {
       return res.status(200).json({ message: 'Email exists deja' })
     }
     const user = await userModel.create({
-      nom, prenom, password, email, role , image_user: filename,
+      nom, password, email, role , image_user: filename, etat
     })
-    // sendWelcomeEmail(email, nom);
+    sendWelcomeEmail(email, nom);
     const token = createToken(user._id)
     res.cookie('jwt_token', token, { httpOnly: true, maxAge: maxAge * 1000 })
     res.status(201).json({ user })
@@ -94,7 +95,7 @@ module.exports.activation = async (req, res) => {
       throw new Error('User not found!')
     }
     if (checkIfUserExists.etat) {
-      return res.redirect('http://localhost:3000/auth/login/?message=Utilisateur_est_deja_active')
+      return res.redirect('http://localhost:3000/auth/login/?message=Compte_Verifier_Avec_Succee')
     }
 
     const currentDate = new Date()
@@ -105,7 +106,7 @@ module.exports.activation = async (req, res) => {
       }, { new: true } // Set the { new: true } option to return the updated user
     )
 
-    return res.redirect('http://localhost:3000/login-page/?message=Utilisateur_activee_Avec_succes')
+    return res.redirect('http://localhost:3000/login-page/?message=Utilisateur_Activee_Avec_Succes')
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
@@ -208,7 +209,7 @@ function sendPasswordEmail (email, surnom, id, generatedPassword) {
     },
   })
 
-  const activationLink = `http://localhost:3000/admin/tablesUsers`
+  const activationLink = `http://localhost:3000/auth/login?message=Nouveau_Mot_De_Passe_Envoyer_Par_Mail`
   let formattedPassword = ''
 
   if (generatedPassword) {

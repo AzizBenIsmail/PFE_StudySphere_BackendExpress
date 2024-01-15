@@ -40,7 +40,7 @@ userSchema.pre('save', async function (next) {
     // User.role = 'client'
     User.cree_A = new Date()
     User.modifier_A = new Date()
-    User.etat = true //false
+    // User.etat = true //false
     next()
   } catch (error) {
     next(error)

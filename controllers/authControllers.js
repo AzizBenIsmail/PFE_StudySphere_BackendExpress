@@ -62,17 +62,23 @@ module.exports.signupcentre = async (req, res) => {
   const { email, password, nom } = req.body
   const role = 'centre'
   const etat = false
-
-  console.log(req.body)
   try {
     if (!email) {
       return res.status(200).json({ message: 'Email required' })
     }
     const checkIfUserExists = await userModel.findOne({ email })
-    console.log(email)
     if (checkIfUserExists) {
       // If user is found, respond with 409 (Conflict)
       return res.status(200).json({ message: 'Email exists deja' })
+    }
+    if (!nom) {
+      return res.status(200).json({ message: 'nom required' })
+    }
+    if (!filename) {
+      return res.status(200).json({ message: 'Image required' })
+    }
+    if (!password) {
+      return res.status(200).json({ message: 'Password required' })
     }
     const user = await userModel.create({
       nom, password, email, role , image_user: filename, etat

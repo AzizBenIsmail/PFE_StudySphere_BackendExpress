@@ -4,6 +4,7 @@ const upload = require("../middlewares/upload");
 const auth = require("../controllers/authControllers");
 const { requireAuthUser } = require("../middlewares/authMiddleware");
 const { utilisateurValidation } = require("../middlewares/utilisateurValidation");
+const { centreValidation } = require("../middlewares/centreValidation");
 
 /* signup. */
 router.post("/signup", upload.single("image_user"), auth.signup_post);
@@ -12,7 +13,7 @@ router.post("/signup", upload.single("image_user"), auth.signup_post);
 router.post("/inscrire", utilisateurValidation , auth.signupclient);
 
 /* signup centre. */
-router.post("/inscrireCentre",  upload.single("image_user") , auth.signupcentre);
+router.post("/inscrireCentre",upload.single("image_user") , auth.signupcentre);
 
 /* login. */
 router.post("/login", auth.login_post);

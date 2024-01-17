@@ -14,7 +14,7 @@ userSchema = new mongoose.Schema({
     enum: ['client', 'centre', 'moderateur', 'admin','formateur'],
   },
   domaine: String,
-  location: String,
+  emplacement_actuelle: String,
   langue: String,
   reputation: {
     type: Number,

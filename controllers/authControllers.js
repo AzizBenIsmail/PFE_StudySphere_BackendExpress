@@ -206,23 +206,14 @@ function sendWelcomeEmail (email, surnom, id) {
   })
 }
 
-// Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
-// Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
-function sendPasswordEmail (email, surnom, id, generatedPassword) {
+function sendPasswordEmail (email) {
   const transporter = nodemailer.createTransport({
     service: 'gmail', auth: {
       user: 'studyspheretn@gmail.com ', pass: 'uqct kspi rgnt yzre',
     },
   })
 
-  const activationLink = `http://localhost:3000/auth/login?message=Nouveau_Mot_De_Passe_Envoyer_Par_Mail`
-  let formattedPassword = ''
-
-  if (generatedPassword) {
-    formattedPassword = formatGeneratedPassword(generatedPassword)
-  } else {
-    formattedPassword = 'Mot de passe non disponible'
-  }
+  const activationLink = `http://localhost:3000/auth/Resetmdp?message=Maintenant,tu_peux_changer_votre_mot_de_passe.`
 
   const mailOptions = {
     from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
@@ -268,41 +259,16 @@ function sendPasswordEmail (email, surnom, id, generatedPassword) {
             border-radius: 4px;
             margin-top: 20px;
         }
-
-        .password-container {
-            background-color: #f2f2f2;
-            padding: 20px;
-            border-radius: 4px;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .password-title {
-            color: #333333;
-            margin-bottom: 10px;
-        }
-
-        .password {
-            font-size: 24px;
-            font-weight: bold;
-            color: #000000;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Bienvenue sur notre site</h1>
-        <p>Cher <span class="username">${surnom}</span>,</p>
+        <p>Cher <span class="username">client</span>,</p>
         <p>Nous sommes ravis de vous accueillir parmi nous !</p>
-        <p>Votre mot de passe généré aléatoirement est :</p>
-        <div class="password-container">
-            <h2 class="password-title">Votre nouveau mot de passe</h2>
-            <p class="password">${formattedPassword}</p>
-        </div>
-        <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
-        <a href="${activationLink}" ${id} class="button">Se Connecte</a>
-        <p>Cordialement,<br>L'équipe du Attijari Bank</p>
+        <p>Veuillez cliquer sur le bouton ci-dessous pour modifier votre Mots de Passe :</p>
+        <a href="${activationLink}" class="button">Se Connecte</a>
+        <p>Cordialement,<br>L'équipe du Study Sphere</p>
     </div>
 </body>
 </html>
@@ -318,52 +284,31 @@ function sendPasswordEmail (email, surnom, id, generatedPassword) {
     }
   })
 }
-
-// Fonction pour générer un mot de passe aléatoire respectant le format /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
-function generateRandomPassword () {
-  const allowedChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-  let password = ''
-  for (let i = 0; i < 8; i++) {
-    const randomIndex = Math.floor(Math.random() * allowedChars.length)
-    password += allowedChars.charAt(randomIndex)
-  }
-  return password
-}
-
-// Fonction pour formater le mot de passe généré avec un design spécial
-function formatGeneratedPassword (password) {
-  let formattedPassword = ''
-  for (let i = 0; i < password.length; i++) {
-    formattedPassword += `<span style="padding: 2px; border: 1px solid #555555;">${password.charAt(i)}</span>`
-  }
-  return formattedPassword
-}
-
 module.exports.forgetPassword = async (req, res) => {
   try {
     const email = req.body.email
     const checkIfUserExists = await userModel.findOne({ email })
 
     if (!checkIfUserExists) {
-      throw new Error('User not found!')
+      return res.status(200).json({ message: 'email non enregistre' })
     }
 
-    const currentDate = new Date()
-
-    // Générer le nouveau mot de passe
-    const generatedPassword = generateRandomPassword()
-    const salt = await bcrypt.genSalt()
-    Pwd = await bcrypt.hash(generatedPassword, salt)
-
-    // Mettre à jour le mot de passe généré dans la base de données
-    const updatedUser = await userModel.findOneAndUpdate({ email }, {
-      $set: {
-        etat: true, modifier_A: currentDate, password: Pwd,
-      },
-    }, { new: true })
+    // const currentDate = new Date()
+    //
+    // // Générer le nouveau mot de passe
+    // const generatedPassword = generateRandomPassword()
+    // const salt = await bcrypt.genSalt()
+    // Pwd = await bcrypt.hash(generatedPassword, salt)
+    //
+    // // Mettre à jour le mot de passe généré dans la base de données
+    // const updatedUser = await userModel.findOneAndUpdate({ email }, {
+    //   $set: {
+    //     etat: true, modifier_A: currentDate, password: Pwd,
+    //   },
+    // }, { new: true })
 
     // Envoyer l'e-mail de bienvenue avec le mot de passe généré
-    sendPasswordEmail(email, updatedUser.surnom, updatedUser._id, generatedPassword)
+    sendPasswordEmail(email)
     res.status(200).json({
       message: 'mot de passe modifié avec succès vérifier votre boîte mail'
     })

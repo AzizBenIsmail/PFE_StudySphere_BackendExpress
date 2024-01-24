@@ -79,6 +79,8 @@ router.put("/active",requireAuthUser, auth.Active);
 router.put("/desactive",requireAuthUser, auth.Desactive);
 
 /*forget password. */
-router.put("/forgetPassword",auth.forgetPassword);
+router.put("/forgetPassword",auth.sendforgetPassword);
+
+router.put("/Password",auth.forgetpassword);
 
 module.exports = router;

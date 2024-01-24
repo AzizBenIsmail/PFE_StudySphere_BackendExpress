@@ -213,7 +213,7 @@ function sendPasswordEmail (email) {
     },
   })
 
-  const activationLink = `http://localhost:3000/auth/Resetmdp?message=tu_peux_changer_votre_mdp.`
+  const activationLink = `http://localhost:3000/auth/Resetmdp?message=tu_peux_changer_votre_mdp&email=${email}`
 
   const mailOptions = {
     from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
@@ -284,7 +284,7 @@ function sendPasswordEmail (email) {
     }
   })
 }
-module.exports.forgetPassword = async (req, res) => {
+module.exports.sendforgetPassword = async (req, res) => {
   try {
     const email = req.body.email
     const checkIfUserExists = await userModel.findOne({ email })
@@ -293,21 +293,6 @@ module.exports.forgetPassword = async (req, res) => {
       return res.status(200).json({ message: 'email non enregistre' })
     }
 
-    // const currentDate = new Date()
-    //
-    // // Générer le nouveau mot de passe
-    // const generatedPassword = generateRandomPassword()
-    // const salt = await bcrypt.genSalt()
-    // Pwd = await bcrypt.hash(generatedPassword, salt)
-    //
-    // // Mettre à jour le mot de passe généré dans la base de données
-    // const updatedUser = await userModel.findOneAndUpdate({ email }, {
-    //   $set: {
-    //     etat: true, modifier_A: currentDate, password: Pwd,
-    //   },
-    // }, { new: true })
-
-    // Envoyer l'e-mail de bienvenue avec le mot de passe généré
     sendPasswordEmail(email)
     res.status(200).json({
       message: 'mot de passe modifié avec succès vérifier votre boîte mail'
@@ -319,37 +304,49 @@ module.exports.forgetPassword = async (req, res) => {
 
 module.exports.forgetpassword = async (req, res) => {
   try {
-    const email = req.body.email
-    const Password = req.body.Password
+    const email = req.body.user.email;
+    const Password = req.body.user.password;
 
-    const checkIfUserExists = await userModel.findOne({ email })
+    console.log(req.body);
+
+    const checkIfUserExists = await userModel.findOne({ email });
 
     if (!checkIfUserExists) {
-      return res.status(200).json({ message: 'email non enregistre' })
+      return res.status(404).json({ message: 'Email non enregistré' });
     }
 
-    const currentDate = new Date()
+    const currentDate = new Date();
 
-    // Générer le nouveau mot de passe
-    const salt = await bcrypt.genSalt()
-    Pwd = await bcrypt.hash(Password, salt)
+    console.log('Password:', Password);
 
-    // Mettre à jour le mot de passe généré dans la base de données
-    const updatedUser = await userModel.findOneAndUpdate({ email }, {
-      $set: {
-        etat: true, modifier_A: currentDate, password: Pwd,
+    if (!Password || Password.trim() === '') {
+      return res.status(400).json({ message: 'Le mot de passe est manquant ou vide' });
+    }
+
+    const salt = await bcrypt.genSalt();
+    const Pwd = await bcrypt.hash(Password, salt);
+
+    const updatedUser = await userModel.findOneAndUpdate(
+      { email },
+      {
+        $set: {
+          etat: true,
+          modifier_A: currentDate,
+          password: Pwd,
+        },
       },
-    }, { new: true })
+      { new: true }
+    );
 
-    // Envoyer l'e-mail de bienvenue avec le mot de passe généré
-    // sendPasswordEmail(email)
     res.status(200).json({
-      message: 'mot de passe modifié avec succès vérifier votre boîte mail'
-    })
+      message: 'Mot de passe modifié avec succès. Veuillez vérifier votre boîte mail.',
+    });
   } catch (error) {
-    return res.status(500).json({ message: error.message })
+    console.error(error);
+    res.status(500).json({ message: 'Une erreur s\'est produite lors de la modification du mot de passe.' });
   }
-}
+};
+
 
 module.exports.logout = (req, res) => {
   try {

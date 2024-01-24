@@ -307,7 +307,7 @@ module.exports.forgetpassword = async (req, res) => {
     const email = req.body.user.email;
     const Password = req.body.user.password;
 
-    console.log(req.body);
+    // console.log(req.body);
 
     const checkIfUserExists = await userModel.findOne({ email });
 

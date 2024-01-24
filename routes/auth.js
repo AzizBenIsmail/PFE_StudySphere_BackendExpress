@@ -5,6 +5,7 @@ const auth = require("../controllers/authControllers");
 const { requireAuthUser } = require("../middlewares/authMiddleware");
 const { utilisateurValidation } = require("../middlewares/utilisateurValidation");
 const { centreValidation } = require("../middlewares/centreValidation");
+const { Validationmotdepasse } = require("../middlewares/Validationmotdepasse");
 
 /* signup. */
 router.post("/signup", upload.single("image_user"), auth.signup_post);
@@ -24,7 +25,7 @@ router.post("/verification", auth.verification);
 /* verification de l'email. */
 router.get("/VerificationEmail", auth.VerificationEmail);
 
-/* validation by email. */   
+/* validation by email. */
 router.get("/validation", auth.activation);
 
 /* logout. */

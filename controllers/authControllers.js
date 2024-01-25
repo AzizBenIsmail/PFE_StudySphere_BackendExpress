@@ -12,6 +12,10 @@ const createToken = (id) => {
   })
 }
 
+const createTokenmdp = (id) => {
+  return jwt.sign({ id, exp: Math.floor(Date.now() / 1000) + 120 }, 'net StudySphere secret');
+};
+
 module.exports.signup_post = async (req, res) => {
   const { filename } = req.file
   const { email, password, surnom } = req.body
@@ -206,14 +210,16 @@ function sendWelcomeEmail (email, surnom, id) {
   })
 }
 
-function sendPasswordEmail (email) {
+async function sendPasswordEmail (email) {
   const transporter = nodemailer.createTransport({
     service: 'gmail', auth: {
       user: 'studyspheretn@gmail.com ', pass: 'uqct kspi rgnt yzre',
     },
   })
+  const user = await userModel.findOne({ email })
+  const token = createTokenmdp(user._id)
 
-  const activationLink = `http://localhost:3000/auth/Resetmdp?message=tu_peux_changer_votre_mdp&email=${email}`
+  const activationLink = `http://localhost:3000/auth/Resetmdp?token=${token}&message=tu_peux_changer_votre_mdp&email=${email}`
 
   const mailOptions = {
     from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
@@ -306,47 +312,50 @@ module.exports.forgetpassword = async (req, res) => {
   try {
     const email = req.body.user.email;
     const Password = req.body.user.password;
-
-    // console.log(req.body);
-
+    const token = req.body.user.token; // Récupérer le jeton depuis la requête
+    console.log(token,email);
     const checkIfUserExists = await userModel.findOne({ email });
 
     if (!checkIfUserExists) {
-      return res.status(404).json({ message: 'Email non enregistré' });
+      return res.status(200).json({ message: 'Email non enregistré' });
     }
 
     const currentDate = new Date();
 
-    console.log('Password:', Password);
-
     if (!Password || Password.trim() === '') {
-      return res.status(400).json({ message: 'Le mot de passe est manquant ou vide' });
+      return res.status(200).json({ message: 'Le mot de passe est manquant ou vide' });
     }
 
-    const salt = await bcrypt.genSalt();
-    const Pwd = await bcrypt.hash(Password, salt);
+    // Vérifier la validité du jeton
+    jwt.verify(token, 'net StudySphere secret', async (err, decoded) => {
+      if (err) {
+        return res.status(200).json({ message: 'Le lien a expiré ou est invalide.' });
+      }
 
-    const updatedUser = await userModel.findOneAndUpdate(
-      { email },
-      {
-        $set: {
-          etat: true,
-          modifier_A: currentDate,
-          password: Pwd,
+      const salt = await bcrypt.genSalt();
+      const Pwd = await bcrypt.hash(Password, salt);
+
+      const updatedUser = await userModel.findOneAndUpdate(
+        { email },
+        {
+          $set: {
+            etat: true,
+            modifier_A: currentDate,
+            password: Pwd,
+          },
         },
-      },
-      { new: true }
-    );
+      );
 
-    res.status(200).json({
-      message: 'Mot de passe modifié avec succès. Veuillez vérifier votre boîte mail.',
+      console.log(updatedUser);
+      res.status(200).json({
+        message: 'Mot de passe modifié avec succès. Veuillez vérifier votre boîte mail.',
+      });
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Une erreur s\'est produite lors de la modification du mot de passe.' });
   }
 };
-
 
 module.exports.logout = (req, res) => {
   try {

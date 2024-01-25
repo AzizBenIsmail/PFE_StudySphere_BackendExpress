@@ -7,8 +7,11 @@ const { utilisateurValidation } = require("../middlewares/utilisateurValidation"
 const { centreValidation } = require("../middlewares/centreValidation");
 const { Validationmotdepasse } = require("../middlewares/Validationmotdepasse");
 
-/* signup. */
-router.post("/signup", upload.single("image_user"), auth.signup_post);
+/* GET user by ID. */
+router.get("/", requireAuthUser, auth.getUser);
+
+/* verification email pour inscrire . */
+router.post("/verification", auth.verification);
 
 /* signup client. */
 router.post("/inscrire", utilisateurValidation , auth.signupclient);
@@ -16,72 +19,70 @@ router.post("/inscrire", utilisateurValidation , auth.signupclient);
 /* signup centre. */
 router.post("/inscrireCentre",upload.single("image_user") , auth.signupcentre);
 
-/* login. */
+/* login pour tout les utilisateurs. */
 router.post("/login", auth.login_post);
 
-/* verification email. */
-router.post("/verification", auth.verification);
-
-/* verification de l'email. */
+/*Redirection vers l'inscription. */
 router.get("/VerificationEmail", auth.VerificationEmail);
 
-/* validation by email. */
+/* activation compte par email. */
 router.get("/validation", auth.activation);
-
-/* logout. */
-router.get("/logout", auth.logout);
-
-/* Add User */
-router.post("/register",requireAuthUser, upload.single("image_user"), auth.addUser);
-
-/* Update User current */
-router.put("/update", requireAuthUser, auth.updateUser);
-
-/* Update User by ID */
-router.put("/updateUser/:id", requireAuthUser,upload.single("image_user"), auth.updateUserByID);
-
-/* GET users listing. */
-router.get("/AllUsers", requireAuthUser, auth.getUsers);
-
-/* GET users Admin. */
-router.get("/AllAdmin", requireAuthUser, auth.getAdmin);
-
-/* GET users Simple. */
-router.get("/AllSimpleUsers", requireAuthUser, auth.getSimpleUser);
-
-/* GET users Active. */
-router.get("/AllUsersActive", requireAuthUser, auth.getUserActive);
-
-/* GET users Desactive. */
-router.get("/AllUsersDesactive", requireAuthUser, auth.getUserDesactive);
-
-/* GET search a Users .*/
-router.get("/searchUsers", requireAuthUser, auth.searchUsers);
-
-/*get user by id */
-router.get("/User/:id", requireAuthUser, auth.UserByID);
-
-/* GET user by ID. */
-router.get("/", requireAuthUser, auth.getUser);
-
-/* Delete user by ID. */
-router.delete("/:id", requireAuthUser, auth.deleteUser);
-
-/* upgrade user to admin. */
-router.put("/upgrade",requireAuthUser, auth.upgrade);
-
-/*downgrade admin to user. */
-router.put("/downgrade",requireAuthUser, auth.downgrade);
-
-/*Active */
-router.put("/active",requireAuthUser, auth.Active);
-
-/*desactive. */
-router.put("/desactive",requireAuthUser, auth.Desactive);
 
 /*forget password. */
 router.put("/forgetPassword",auth.sendforgetPassword);
 
 router.put("/Password",auth.forgetpassword);
+
+/* logout. */
+router.get("/logout", auth.logout);
+// /* Add User */
+// router.post("/register",requireAuthUser, upload.single("image_user"), auth.addUser);
+
+// /* signup. */
+// router.post("/signup", upload.single("image_user"), auth.signup_post);
+
+/* Update User current */
+// router.put("/update", requireAuthUser, auth.updateUser);
+//
+// /* Update User by ID */
+// router.put("/updateUser/:id", requireAuthUser,upload.single("image_user"), auth.updateUserByID);
+//
+// /* GET users listing. */
+// router.get("/AllUsers", requireAuthUser, auth.getUsers);
+//
+// /* GET users Admin. */
+// router.get("/AllAdmin", requireAuthUser, auth.getAdmin);
+//
+// /* GET users Simple. */
+// router.get("/AllSimpleUsers", requireAuthUser, auth.getSimpleUser);
+//
+// /* GET users Active. */
+// router.get("/AllUsersActive", requireAuthUser, auth.getUserActive);
+//
+// /* GET users Desactive. */
+// router.get("/AllUsersDesactive", requireAuthUser, auth.getUserDesactive);
+//
+// /* GET search a Users .*/
+// router.get("/searchUsers", requireAuthUser, auth.searchUsers);
+//
+// /*get user by id */
+// router.get("/User/:id", requireAuthUser, auth.UserByID);
+//
+// /* Delete user by ID. */
+// router.delete("/:id", requireAuthUser, auth.deleteUser);
+//
+// /* upgrade user to admin. */
+// router.put("/upgrade",requireAuthUser, auth.upgrade);
+//
+// /*downgrade admin to user. */
+// router.put("/downgrade",requireAuthUser, auth.downgrade);
+//
+// /*Active */
+// router.put("/active",requireAuthUser, auth.Active);
+//
+// /*desactive. */
+// router.put("/desactive",requireAuthUser, auth.Desactive);
+
+
 
 module.exports = router;

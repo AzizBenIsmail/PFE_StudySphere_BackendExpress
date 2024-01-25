@@ -210,16 +210,13 @@ function sendWelcomeEmail (email, surnom, id) {
   })
 }
 
-async function sendPasswordEmail (email) {
+  async function sendPasswordEmail(email, activationLink) {
   const transporter = nodemailer.createTransport({
     service: 'gmail', auth: {
       user: 'studyspheretn@gmail.com ', pass: 'uqct kspi rgnt yzre',
     },
   })
-  const user = await userModel.findOne({ email })
-  const token = createTokenmdp(user._id)
 
-  const activationLink = `http://localhost:3000/auth/Resetmdp?token=${token}&message=tu_peux_changer_votre_mdp&email=${email}`
 
   const mailOptions = {
     from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
@@ -293,13 +290,23 @@ async function sendPasswordEmail (email) {
 module.exports.sendforgetPassword = async (req, res) => {
   try {
     const email = req.body.email
-    const checkIfUserExists = await userModel.findOne({ email })
+    const user = await userModel.findOne({ email })
 
-    if (!checkIfUserExists) {
+    if (!user) {
       return res.status(200).json({ message: 'email non enregistre' })
     }
 
-    sendPasswordEmail(email)
+    // Create a unique token for each password reset request
+    const token = createTokenmdp(user._id);
+
+    // Save the token and set the 'used' flag to false in the user document
+    user.resetPasswordToken = token;
+    user.resetPasswordUsed = false;
+    await user.save();
+
+    const activationLink = `http://localhost:3000/auth/Resetmdp?token=${token}&message=tu_peux_changer_votre_mdp&email=${email}`;
+
+    sendPasswordEmail(email,activationLink)
     res.status(200).json({
       message: 'mot de passe modifié avec succès vérifier votre boîte mail'
     })
@@ -329,7 +336,13 @@ module.exports.forgetpassword = async (req, res) => {
     // Vérifier la validité du jeton
     jwt.verify(token, 'net StudySphere secret', async (err, decoded) => {
       if (err) {
-        return res.status(200).json({ message: 'Le lien a expiré ou est invalide.' });
+        return res.status(200).json({ message: 'Le lien a expiré.' });
+      }
+
+      const user = await userModel.findOne({ email, resetPasswordToken: token, resetPasswordUsed: false });
+
+      if (!user) {
+        return res.status(200).json({ message: 'Le lien deja utiliser.' });
       }
 
       const salt = await bcrypt.genSalt();
@@ -341,6 +354,7 @@ module.exports.forgetpassword = async (req, res) => {
           $set: {
             etat: true,
             modifier_A: currentDate,
+            resetPasswordUsed : true,
             password: Pwd,
           },
         },

@@ -4,35 +4,39 @@ services:
   mongodb:
     image: "mongo:latest"
     container_name: mongodb
+    # Utilisez l'image la plus récente de MongoDB
     ports:
-      - "27020:27020"
+      - "27020:27020"  # Port par défaut de MongoDB
     command: mongod --port 27020
     restart: unless-stopped
     volumes:
-      - db:/data/db
+      - db:/data/db  # This line adds a volume to the MongoDB service
 
-  pfa_attijari_bank:
-    image: azizbenismail/pfa-attijari-bank-backendexpress
+  pfe_studysphere_backend_express:
+    image: azizbenismail/pfe_studysphere_backend_express
     build:
-      context: ../Attijari-Bank-BackendExpress
+      context: ../PFE_StudySphere-_BackendExpress
       dockerfile: dockerfile
-    container_name: pfa-attijari-bank-backendexpress-container
+    container_name: pfe_studysphere_backend_express-container
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=mongodb://mongodb:27020/AttijariBank
+      - MONGO_URI=mongodb://mongodb:27020/StudySphere
     restart: unless-stopped
     depends_on:
       - mongodb
 
-  pfa_attijari_bank_frontend_react:
-    image: azizbenismail/pfa-attijari_bank-frontend_react:latest
-    container_name: pfa-attijari-bank-frontend-react-container
+  pfe_studysphere_frontend_react:
+    image: azizbenismail/pfe_studysphere_frontend_react:latest
+    build:
+      context: ../PFE_StudySphere-_FrontOfficeReact
+      dockerfile: dockerfile
+    container_name: pfe_studysphere_frontend_react-container
     ports:
       - "3000:3000"
     restart: unless-stopped
     depends_on:
-      - pfa_attijari_bank
+      - pfe_studysphere_backend_express
 
 volumes:
   db:

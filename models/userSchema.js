@@ -23,6 +23,11 @@ userSchema = new mongoose.Schema({
   image_user: String,
   etat: Boolean, //true or false
   phoneNumber: Number, //length 8
+  resetPasswordToken: String,  // Field to store the reset password token
+  resetPasswordUsed: {
+    type: Boolean,
+    default: false,  // Default value is false, indicating the token hasn't been used
+  },
 }, { timestamps: true })
 
 //apres la creation

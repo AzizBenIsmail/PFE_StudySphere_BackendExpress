@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const { string } = require('yup')
 
 userSchema = new mongoose.Schema({
   surnom: String, //unique
@@ -9,6 +10,7 @@ userSchema = new mongoose.Schema({
   password: String,
   cree_A: Date,
   modifier_A: Date,
+  statu : String,
   role: {
     type: String,
     enum: ['client', 'centre', 'moderateur', 'admin','formateur'],
@@ -42,7 +44,7 @@ userSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt()
     const User = this
     User.password = await bcrypt.hash(User.password, salt)
-    // User.role = 'client'
+    User.statu = false
     User.cree_A = new Date()
     User.modifier_A = new Date()
     // User.etat = true //false

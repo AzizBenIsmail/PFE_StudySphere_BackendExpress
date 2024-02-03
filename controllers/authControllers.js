@@ -126,6 +126,12 @@ module.exports.login_post = async (req, res) => {
   const { email, password } = req.body
   try {
     const user = await userModel.login(email, password)
+    const updatedUser = await userModel.findByIdAndUpdate(user._id, {
+        $set: {
+          statu: true,
+        },
+      }, { new: true } // Set the { new: true } option to return the updated user
+    )
     const token = createToken(user._id)
     res.cookie('jwt_token', token, { httpOnly: false, maxAge: maxAge * 1000 })
     req.session.user = user
@@ -371,17 +377,37 @@ module.exports.forgetpassword = async (req, res) => {
   }
 };
 
-module.exports.logout = (req, res) => {
+module.exports.logout = async (req, res) => {
   try {
-    res.cookie('jwt_token', '', { httpOnly: false, maxAge: 1 })
-    req.session.destroy()
+    const id = req.params.id;
+    console.log(id);
+
+    // Utilisez findById pour trouver l'utilisateur par son ID
+    const user = await userModel.findById(id);
+    console.log(user);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Utilisez findOneAndUpdate pour mettre à jour le champ statu
+    const updatedUser = await userModel.findOneAndUpdate(
+      { _id: id }, // Utilisez _id pour correspondre à l'ID MongoDB
+      { statu: false },
+      { new: true } // Pour obtenir le document mis à jour
+    );
+
+    console.log(updatedUser);
+
+    res.cookie('jwt_token', '', { httpOnly: false, maxAge: 1 });
+    req.session.destroy();
     res.status(200).json({
-      message: 'User successfully authenticated',
-    })
+      message: 'User successfully logged out',
+    });
   } catch (error) {
-    res.status(400).json({ erreur: error.message })
+    res.status(400).json({ error: error.message });
   }
-}
+};
 
 module.exports.getUsers = async (req, res, next) => {
   try {

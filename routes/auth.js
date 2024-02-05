@@ -62,6 +62,9 @@ router.get("/AllUsersActive", requireAuthUser, auth.getUserActive);
 /* GET users Desactive. */
 router.get("/AllUsersDesactive", requireAuthUser, auth.getUserDesactive);
 
+/* GET users archiver. */
+router.get("/AllUsersarchive", requireAuthUser, auth.getUserArchive);
+
 /* GET search a Users .*/
 router.get("/searchUsers", requireAuthUser, auth.searchUsers);
 
@@ -76,6 +79,9 @@ router.put("/upgrade",requireAuthUser, auth.upgrade);
 
 /*downgrade admin to user. */
 router.put("/downgrade",requireAuthUser, auth.downgrade);
+
+/*archiver user par admin. */
+router.put("/archiver",requireAuthUser, auth.archiver);
 
 /*Active */
 router.put("/active",requireAuthUser, auth.Active);

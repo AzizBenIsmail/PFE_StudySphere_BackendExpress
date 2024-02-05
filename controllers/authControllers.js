@@ -1,4 +1,6 @@
 const userModel = require('../models/userSchema')
+const archivageModel  = require('../models/archivageSchema')
+
 const jwt = require('jsonwebtoken')
 const sgMail = require('@sendgrid/mail')
 const nodemailer = require('nodemailer')
@@ -457,6 +459,30 @@ module.exports.getUserActive = async (req, res, next) => {
   }
 }
 
+
+module.exports.getUserArchive = async (req, res, next) => {
+  try {
+    // Recherche des utilisateurs archivés en fonction de la valeur de archi
+    const archivedUsers = await User.find({ archivage: { $exists: true } })
+    .populate({
+      path: 'archivage',
+      match: { archi: true }, // Filtrer les archivages avec archi à true
+    });
+
+    if (!archivedUsers || archivedUsers.length === 0) {
+      throw new Error('Aucun utilisateur archivé trouvé !');
+    }
+
+    // Filtrer les utilisateurs avec au moins un archivage correspondant à archi=true
+    const filteredUsers = archivedUsers.filter(user => user.archivage !== null);
+
+    res.status(200).json({ users: filteredUsers });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 module.exports.getUserDesactive = async (req, res, next) => {
   try {
     const users = await userModel.find({ etat: 'false' })
@@ -590,6 +616,66 @@ module.exports.deleteUser = async (req, res, next) => {
     res.status(500).json({ message: error.message })
   }
 }
+
+
+module.exports.archiver = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    // Check if the user exists
+    const user = await userModel.findById(id);
+
+    if (!user) {
+      throw new Error('User not found!');
+    }
+
+    // Check if the user already has an archive
+    let existingArchivage = await archivageModel.findOne({ user: user._id });
+
+    if (existingArchivage) {
+      // User already has an archive, toggle the archi field
+      const updatedArchivage = await archivageModel.findByIdAndUpdate(existingArchivage._id, {
+        $set: {
+          archi: !existingArchivage.archi, // Toggle the archi field
+          modifier_A: new Date(),
+        },
+      }, { new: true });
+
+      // Update the user
+      const updatedUser = await userModel.findByIdAndUpdate(id, {
+        $set: {
+          archivage: updatedArchivage._id,
+        },
+      }, { new: true });
+
+      res.status(200).json(updatedUser);
+    } else {
+      // User doesn't have an archive, create a new one with archi set to true
+      const archivage = new archivageModel({
+        dateArchivage: new Date(),
+        raison: 'YourReasonHere', // Provide a reason for archiving
+        user: user._id, // Reference to the user
+        archi: true,
+      });
+
+      // Save the Archivage document
+      await archivage.save();
+
+      // Update the user
+      const updatedUser = await userModel.findByIdAndUpdate(id, {
+        $set: {
+          archivage: archivage._id,
+        },
+      }, { new: true });
+
+      res.status(200).json(updatedUser);
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 
 module.exports.forgotpwd = async (req, res) => {
   const { email } = req.body

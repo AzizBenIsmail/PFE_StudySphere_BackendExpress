@@ -459,11 +459,34 @@ module.exports.getUserActive = async (req, res, next) => {
   }
 }
 
+module.exports.getUserConnecter = async (req, res, next) => {
+  try {
+    const users = await userModel.find({ statu: 'true' })
+    if (!users || users.length === 0) {
+      throw new Error('Users not found!')
+    }
+    res.status(200).json({ users })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+module.exports.getUserDeConnecter = async (req, res, next) => {
+  try {
+    const users = await userModel.find({ statu: 'false' })
+    if (!users || users.length === 0) {
+      throw new Error('Users not found!')
+    }
+    res.status(200).json({ users })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
 
 module.exports.getUserArchive = async (req, res, next) => {
   try {
     // Recherche des utilisateurs archivés en fonction de la valeur de archi
-    const archivedUsers = await User.find({ archivage: { $exists: true } })
+    const archivedUsers = await userModel.find({ archivage: { $exists: true } })
     .populate({
       path: 'archivage',
       match: { archi: true }, // Filtrer les archivages avec archi à true

@@ -65,6 +65,12 @@ router.get("/AllUsersDesactive", requireAuthUser, auth.getUserDesactive);
 /* GET users archiver. */
 router.get("/AllUsersarchive", requireAuthUser, auth.getUserArchive);
 
+/* GET users archiver. */
+router.get("/AllUsersConnecter", requireAuthUser, auth.getUserConnecter);
+
+/* GET users archiver. */
+router.get("/AllUsersDeConnecter", requireAuthUser, auth.getUserDeConnecter);
+
 /* GET search a Users .*/
 router.get("/searchUsers", requireAuthUser, auth.searchUsers);
 

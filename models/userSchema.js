@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const { string } = require('yup')
+const Archivage = require('./archivageSchema');  // Import the archivageSchema
 
 userSchema = new mongoose.Schema({
   surnom: String, //unique
@@ -30,6 +31,7 @@ userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,  // Default value is false, indicating the token hasn't been used
   },
+  archivage: { type: mongoose.Schema.Types.ObjectId, ref: 'Archivage' }, // Reference to Archivage
 }, { timestamps: true })
 
 //apres la creation

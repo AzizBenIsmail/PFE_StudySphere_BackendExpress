@@ -1,54 +1,55 @@
 var express = require("express");
 var router = express.Router();
-const auth = require("../controllers/authControllers");
+const users = require("../controllers/usersControllers");
+
 const { requireAuthUser } = require("../middlewares/authMiddleware");
 
 /* GET users listing. */
-router.get("/AllUsers", requireAuthUser, auth.getUsers);
+router.get("/AllUsers", requireAuthUser, users.getUsers);
 
 /* GET users Admin. */
-router.get("/AllAdmin", requireAuthUser, auth.getAdmin);
+router.get("/AllAdmin", requireAuthUser, users.getAdmin);
 
 /* GET users Simple. */
-router.get("/AllSimpleUsers", requireAuthUser, auth.getSimpleUser);
+router.get("/AllSimpleUsers", requireAuthUser, users.getSimpleUser);
 
 /* GET users Active. */
-router.get("/AllUsersActive", requireAuthUser, auth.getUserActive);
+router.get("/AllUsersActive", requireAuthUser, users.getUserActive);
 
 /* GET users Desactive. */
-router.get("/AllUsersDesactive", requireAuthUser, auth.getUserDesactive);
+router.get("/AllUsersDesactive", requireAuthUser, users.getUserDesactive);
 
 /* GET users archiver. */
-router.get("/AllUsersarchive", requireAuthUser, auth.getUserArchive);
+router.get("/AllUsersarchive", requireAuthUser, users.getUserArchive);
 
 /* GET users archiver. */
-router.get("/AllUsersConnecter", requireAuthUser, auth.getUserConnecter);
+router.get("/AllUsersConnecter", requireAuthUser, users.getUserConnecter);
 
 /* GET users archiver. */
-router.get("/AllUsersDeConnecter", requireAuthUser, auth.getUserDeConnecter);
+router.get("/AllUsersDeConnecter", requireAuthUser, users.getUserDeConnecter);
 
 /* GET search a Users .*/
-router.get("/searchUsers", requireAuthUser, auth.searchUsers);
+router.get("/searchUsers", requireAuthUser, users.searchUsers);
 
 /*get user by id */
-router.get("/User/:id", requireAuthUser, auth.UserByID);
+router.get("/User/:id", requireAuthUser, users.UserByID);
 
 /* Delete user by ID. */
-router.delete("/:id", requireAuthUser, auth.deleteUser);
+router.delete("/:id", requireAuthUser, users.deleteUser);
 
 /* upgrade user to admin. */
-router.put("/upgrade",requireAuthUser, auth.upgrade);
+router.put("/upgrade",requireAuthUser, users.upgrade);
 
 /*downgrade admin to user. */
-router.put("/downgrade",requireAuthUser, auth.downgrade);
+router.put("/downgrade",requireAuthUser, users.downgrade);
 
 /*archiver user par admin. */
-router.put("/archiver",requireAuthUser, auth.archiver);
+router.put("/archiver",requireAuthUser, users.archiver);
 
 /*Active */
-router.put("/active",requireAuthUser, auth.Active);
+router.put("/active",requireAuthUser, users.Active);
 
 /*desactive. */
-router.put("/desactive",requireAuthUser, auth.Desactive);
+router.put("/desactive",requireAuthUser, users.Desactive);
 
 module.exports = router;

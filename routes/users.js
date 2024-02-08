@@ -13,6 +13,15 @@ router.get("/AllAdmin", requireAuthUser, users.getAdmin);
 /* GET users Simple. */
 router.get("/AllSimpleUsers", requireAuthUser, users.getSimpleUser);
 
+/* GET formateur. */
+router.get("/AllFormateur", requireAuthUser, users.getFormateur);
+
+/* GET centre. */
+router.get("/AllCentre", requireAuthUser, users.getCentre);
+
+/* GET moderateur. */
+router.get("/AllModerateur", requireAuthUser, users.getModerateur);
+
 /* GET users Active. */
 router.get("/AllUsersActive", requireAuthUser, users.getUserActive);
 

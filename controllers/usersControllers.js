@@ -37,6 +37,42 @@ module.exports.getSimpleUser = async (req, res, next) => {
   }
 }
 
+module.exports.getFormateur = async (req, res, next) => {
+  try {
+    const users = await userModel.find({ role: 'formateur' })
+    if (!users || users.length === 0) {
+      throw new Error('Users not found!')
+    }
+    res.status(200).json({ users })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+module.exports.getModerateur = async (req, res, next) => {
+  try {
+    const users = await userModel.find({ role: 'moderateur' })
+    if (!users || users.length === 0) {
+      throw new Error('Users not found!')
+    }
+    res.status(200).json({ users })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+module.exports.getCentre = async (req, res, next) => {
+  try {
+    const users = await userModel.find({ role: 'centre' })
+    if (!users || users.length === 0) {
+      throw new Error('Users not found!')
+    }
+    res.status(200).json({ users })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
 module.exports.getUserActive = async (req, res, next) => {
   try {
     const users = await userModel.find({ etat: 'true' })
@@ -115,7 +151,7 @@ module.exports.searchUsers = async (req, res, next) => {
     // Utiliser la méthode find avec un critère de recherche basé sur le terme
     const users = await userModel.find({
       $or: [
-        { surnom: { $regex: searchTerm, $options: 'i' } }, // Recherche insensible à la casse dans le nom d'utilisateur
+        { nom: { $regex: searchTerm, $options: 'i' } }, // Recherche insensible à la casse dans le nom d'utilisateur
         { email: { $regex: searchTerm, $options: 'i' } } // Recherche insensible à la casse dans l'e-mail
       ]
     })

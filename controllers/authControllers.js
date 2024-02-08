@@ -35,21 +35,48 @@ module.exports.signup_post = async (req, res) => {
   }
 }
 
+// module.exports.signupclient = async (req, res) => {
+//   const { email, password, nom, prenom } = req.body
+//   const role = 'client'
+//   const etat = true
+//   console.log(req.body)
+//   try {
+//     if (!email) {
+//       return res.status(200).json({ message: 'Email required' })
+//     }
+//       const checkIfUserExists = await userModel.findOne({ email })
+//       console.log(email)
+//       if (checkIfUserExists) {
+//         // If user is found, respond with 409 (Conflict)
+//         return res.status(200).json({ message: 'Email exists deja' })
+//       }
+//     const user = await userModel.create({
+//       nom, prenom, password, email, role , etat
+//     })
+//     // sendWelcomeEmail(email, nom);
+//     const token = createToken(user._id)
+//     res.cookie('jwt_token', token, { httpOnly: true, maxAge: maxAge * 1000 })
+//     res.status(201).json({ user })
+//   } catch (error) {
+//     res.status(500).json({ message: error.message })
+//   }
+// }
+
 module.exports.signupclient = async (req, res) => {
-  const { email, password, nom, prenom } = req.body
-  const role = 'client'
+  const { email, password, nom, prenom , role } = req.body
+  // const role = 'client'
   const etat = true
   console.log(req.body)
   try {
     if (!email) {
       return res.status(200).json({ message: 'Email required' })
     }
-      const checkIfUserExists = await userModel.findOne({ email })
-      console.log(email)
-      if (checkIfUserExists) {
-        // If user is found, respond with 409 (Conflict)
-        return res.status(200).json({ message: 'Email exists deja' })
-      }
+    const checkIfUserExists = await userModel.findOne({ email })
+    console.log(email)
+    if (checkIfUserExists) {
+      // If user is found, respond with 409 (Conflict)
+      return res.status(200).json({ message: 'Email exists deja' })
+    }
     const user = await userModel.create({
       nom, prenom, password, email, role , etat
     })

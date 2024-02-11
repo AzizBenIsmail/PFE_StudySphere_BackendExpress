@@ -414,3 +414,47 @@ module.exports.isUserArchived = async (userId) => {
     throw new Error(`Erreur lors de la détermination de l'état d'archivage de l'utilisateur : ${error.message}`);
   }
 };
+
+module.exports.updateUser = async (req, res, next) => {
+  try {
+    const { nom, prenom , password , email } = req.body
+    console.log(req.body)
+    const { id } = req.params
+
+    const checkIfusertExists = await userModel.findById(id)
+    if (!checkIfusertExists) {
+      throw new Error('user not found !')
+    }
+    const currentDate = new Date()
+    updateedUser = await userModel.findByIdAndUpdate(id, {
+      $set: {
+        password, nom, prenom, modifier_A: currentDate, email
+      },
+    }, { new: true })
+    res.status(200).json(updateedUser)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+module.exports.updateCenterByID = async (req, res, next) => {
+  try {
+    const { nom, email, password } = req.body
+    const { filename } = req.file
+    const id = req.params.id
+
+    const checkIfusertExists = await userModel.findById(id)
+    if (!checkIfusertExists) {
+      throw new Error('user not found !')
+    }
+    const currentDate = new Date()
+    updateedUser = await userModel.findByIdAndUpdate(id, {
+      $set: {
+        password, nom, email, modifier_A: currentDate, image_user: filename,
+      },
+    }, { new: true })
+    res.status(200).json(updateedUser)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}

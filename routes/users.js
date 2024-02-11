@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const users = require("../controllers/usersControllers");
+const upload = require("../middlewares/upload");
 
 const { requireAuthUser } = require("../middlewares/authMiddleware");
 
@@ -66,5 +67,12 @@ router.put("/active",requireAuthUser, users.Active);
 
 /*desactive. */
 router.put("/desactive",requireAuthUser, users.Desactive);
+
+/* Update User current */
+router.put("/update/:id", requireAuthUser, users.updateUser);
+
+/* Update User by ID */
+router.put("/updatecentre/:id", requireAuthUser,upload.single("image_user"), users.updateCenterByID);
+
 
 module.exports = router;

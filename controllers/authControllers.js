@@ -606,49 +606,6 @@ module.exports.addUser = async (req, res, next) => {
     res.status(500).json({ message: error.message })
   }
 }
-module.exports.updateUser = async (req, res, next) => {
-  try {
-    const { nom, prenom, phoneNumber, password } = req.body
-    console.log(req.body)
-    const id = req.user._id.toString()
-    console.log(req.user._id.toString())
-    const checkIfusertExists = await userModel.findById(id)
-    if (!checkIfusertExists) {
-      throw new Error('user not found !')
-    }
-    const currentDate = new Date()
-    updateedUser = await userModel.findByIdAndUpdate(id, {
-      $set: {
-        password, nom, prenom, phoneNumber, modifier_A: currentDate,
-      },
-    }, { new: true })
-    res.status(200).json(updateedUser)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-module.exports.updateUserByID = async (req, res, next) => {
-  try {
-    const { nom, prenom, phoneNumber, password } = req.body
-    console.log(req.body)
-    const id = req.params.id
-
-    const checkIfusertExists = await userModel.findById(id)
-    if (!checkIfusertExists) {
-      throw new Error('user not found !')
-    }
-    const currentDate = new Date()
-    updateedUser = await userModel.findByIdAndUpdate(id, {
-      $set: {
-        password, nom, prenom, phoneNumber, modifier_A: currentDate,
-      },
-    }, { new: true })
-    res.status(200).json(updateedUser)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
 
 module.exports.deleteUser = async (req, res, next) => {
   try {

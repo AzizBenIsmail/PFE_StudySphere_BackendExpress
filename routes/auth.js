@@ -40,11 +40,7 @@ router.get("/logout/:id", auth.logout);
 // /* signup. */
 // router.post("/signup", upload.single("image_user"), auth.signup_post);
 
-/* Update User current */
-// router.put("/update", requireAuthUser, auth.updateUser);
-//
-// /* Update User by ID */
-// router.put("/updateUser/:id", requireAuthUser,upload.single("image_user"), auth.updateUserByID);
-//
+
+
 
 module.exports = router;

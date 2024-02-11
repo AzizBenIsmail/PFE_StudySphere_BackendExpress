@@ -117,8 +117,8 @@ module.exports.signupcentre = async (req, res) => {
       nom, password, email, role , image_user: filename, etat
     })
     sendWelcomeEmail(email, nom);
-    const token = createToken(user._id)
-    res.cookie('jwt_token', token, { httpOnly: true, maxAge: maxAge * 1000 })
+    // const token = createToken(user._id)
+    // // res.cookie('jwt_token', token, { httpOnly: true, maxAge: maxAge * 1000 })
     res.status(201).json({ user })
   } catch (error) {
     res.status(500).json({ message: error.message })

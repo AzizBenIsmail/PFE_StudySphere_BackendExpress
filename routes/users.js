@@ -52,6 +52,12 @@ router.put("/upgrade",requireAuthUser, users.upgrade);
 /*downgrade admin to user. */
 router.put("/downgrade",requireAuthUser, users.downgrade);
 
+/* upgrade user to admin. */
+router.put("/upgradeModerateur",requireAuthUser, users.upgradeModerateur);
+
+/* upgrade user to admin. */
+router.put("/upgradeFormateur",requireAuthUser, users.upgradeFormateur);
+
 /*archiver user par admin. */
 router.put("/archiver",requireAuthUser, users.archiver);
 

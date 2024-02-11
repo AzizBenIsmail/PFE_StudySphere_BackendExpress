@@ -288,6 +288,58 @@ module.exports.upgrade = async (req, res) => {
   }
 }
 
+module.exports.upgradeModerateur = async (req, res) => {
+  try {
+    console.log('test', req.bod)
+
+    const { id } = req.body // Récupération de l'ID depuis le corps de la requête
+    const checkIfUserExists = await userModel.findById(id)
+
+    if (!checkIfUserExists) {
+      throw new Error('User not found!')
+    }
+
+    const currentDate = new Date()
+    const role = 'moderateur'
+
+    const updatedUser = await userModel.findByIdAndUpdate(id, {
+      $set: {
+        role: role, etat: true, modifier_A: currentDate,
+      },
+    }, { new: true })
+
+    res.status(200).json(updatedUser)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+module.exports.upgradeFormateur = async (req, res) => {
+  try {
+    console.log('test', req.bod)
+
+    const { id } = req.body // Récupération de l'ID depuis le corps de la requête
+    const checkIfUserExists = await userModel.findById(id)
+
+    if (!checkIfUserExists) {
+      throw new Error('User not found!')
+    }
+
+    const currentDate = new Date()
+    const role = 'formateur'
+
+    const updatedUser = await userModel.findByIdAndUpdate(id, {
+      $set: {
+        role: role, etat: true, modifier_A: currentDate,
+      },
+    }, { new: true })
+
+    res.status(200).json(updatedUser)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
 module.exports.downgrade = async (req, res) => {
   try {
     const { id } = req.body

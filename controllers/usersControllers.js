@@ -3,15 +3,19 @@ const archivageModel  = require('../models/archivageSchema')
 
 module.exports.getUsers = async (req, res, next) => {
   try {
-    const users = await userModel.find()
+    // Recherchez les utilisateurs sans référence d'archivage
+    const users = await userModel.find({ 'archivage': { $exists: false } });
+
     if (!users || users.length === 0) {
-      throw new Error('users not found !')
+      throw new Error('Utilisateurs non trouvés !')
     }
-    res.status(200).json({ users })
+
+    res.status(200).json({ users });
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ message: error.message });
   }
 }
+
 
 module.exports.getAdmin = async (req, res, next) => {
   try {
@@ -222,6 +226,8 @@ module.exports.desarchiver = async (req, res) => {
     if (existingArchivage) {
       // Supprimer la référence à l'archivage dans l'utilisateur
       await userModel.findByIdAndUpdate(id, { $unset: { archivage: 1 } });
+
+      await archivageModel.findByIdAndDelete(existingArchivage._id);
 
       // Mettre à jour l'archivage pour définir archi à false
       const updatedArchivage = await archivageModel.findByIdAndUpdate(existingArchivage._id, {

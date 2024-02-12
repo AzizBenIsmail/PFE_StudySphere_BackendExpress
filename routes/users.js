@@ -62,6 +62,9 @@ router.put("/upgradeFormateur",requireAuthUser, users.upgradeFormateur);
 /*archiver user par admin. */
 router.put("/archiver",requireAuthUser, users.archiver);
 
+/*desarchiver user par admin. */
+router.put("/desarchiver",requireAuthUser, users.desarchiver);
+
 /*Active */
 router.put("/active",requireAuthUser, users.Active);
 

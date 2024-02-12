@@ -205,6 +205,42 @@ module.exports.deleteUser = async (req, res, next) => {
 }
 
 
+module.exports.desarchiver = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    // Rechercher l'utilisateur
+    const user = await userModel.findById(id);
+
+    if (!user) {
+      throw new Error('Utilisateur non trouvé!');
+    }
+
+    // Rechercher l'archive de l'utilisateur
+    let existingArchivage = await archivageModel.findOne({ user: user._id });
+
+    if (existingArchivage) {
+      // Supprimer la référence à l'archivage dans l'utilisateur
+      await userModel.findByIdAndUpdate(id, { $unset: { archivage: 1 } });
+
+      // Mettre à jour l'archivage pour définir archi à false
+      const updatedArchivage = await archivageModel.findByIdAndUpdate(existingArchivage._id, {
+        $set: {
+          archi: false,
+          modifier_A: new Date(),
+        },
+      }, { new: true });
+
+      res.status(200).json(updatedArchivage);
+    } else {
+      // Aucun archivage trouvé pour cet utilisateur
+      res.status(404).json({ message: 'Aucune archive trouvée pour cet utilisateur.' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports.archiver = async (req, res) => {
   try {
     const { id } = req.body;
@@ -219,24 +255,7 @@ module.exports.archiver = async (req, res) => {
     // Check if the user already has an archive
     let existingArchivage = await archivageModel.findOne({ user: user._id });
 
-    if (existingArchivage) {
-      // User already has an archive, toggle the archi field
-      const updatedArchivage = await archivageModel.findByIdAndUpdate(existingArchivage._id, {
-        $set: {
-          archi: !existingArchivage.archi, // Toggle the archi field
-          modifier_A: new Date(),
-        },
-      }, { new: true });
 
-      // Update the user
-      const updatedUser = await userModel.findByIdAndUpdate(id, {
-        $set: {
-          archivage: updatedArchivage._id,
-        },
-      }, { new: true });
-
-      res.status(200).json(updatedUser);
-    } else {
       // User doesn't have an archive, create a new one with archi set to true
       const archivage = new archivageModel({
         dateArchivage: new Date(),
@@ -256,7 +275,7 @@ module.exports.archiver = async (req, res) => {
       }, { new: true });
 
       res.status(200).json(updatedUser);
-    }
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

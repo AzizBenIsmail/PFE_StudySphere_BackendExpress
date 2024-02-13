@@ -18,22 +18,22 @@ const createTokenmdp = (id) => {
   return jwt.sign({ id, exp: Math.floor(Date.now() / 1000) + 120 }, 'net StudySphere secret');
 };
 
-module.exports.signup_post = async (req, res) => {
-  const { filename } = req.file
-  const { email, password, surnom } = req.body
-  consolo.log(req.body)
-  try {
-    const user = await userModel.create({
-      surnom, password, email, image_user: filename,
-    })
-    sendWelcomeEmail(email, surnom)
-    const token = createToken(user._id)
-    res.cookie('jwt_token', token, { httpOnly: true, maxAge: maxAge * 1000 })
-    res.status(201).json({ user })
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
+// module.exports.signup_post = async (req, res) => {
+//   const { filename } = req.file
+//   const { email, password, surnom } = req.body
+//   consolo.log(req.body)
+//   try {
+//     const user = await userModel.create({
+//       surnom, password, email, image_user: filename,
+//     })
+//     sendWelcomeEmail(email, surnom)
+//     const token = createToken(user._id)
+//     res.cookie('jwt_token', token, { httpOnly: true, maxAge: maxAge * 1000 })
+//     res.status(201).json({ user })
+//   } catch (error) {
+//     res.status(500).json({ message: error.message })
+//   }
+// }
 
 // module.exports.signupclient = async (req, res) => {
 //   const { email, password, nom, prenom } = req.body
@@ -158,6 +158,7 @@ module.exports.login_post = async (req, res) => {
     const updatedUser = await userModel.findByIdAndUpdate(user._id, {
         $set: {
           statu: true,
+          visitsCount: user.visitsCount +1 ,
         },
       }, { new: true } // Set the { new: true } option to return the updated user
     )
@@ -176,7 +177,7 @@ module.exports.login_post = async (req, res) => {
 }
 
 // Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
-function sendWelcomeEmail (email, surnom, id) {
+function sendWelcomeEmail (email, nom, id) {
   const transporter = nodemailer.createTransport({
     service: 'gmail', auth: {
       user: 'studyspheretn@gmail.com', pass: 'uqct kspi rgnt yzre',
@@ -225,7 +226,7 @@ function sendWelcomeEmail (email, surnom, id) {
         <body>
           <div class="container">
             <h1>Bienvenue sur notre site</h1>
-            <p>Cher</p> <h2> ${surnom},</h2>
+            <p>Cher</p> <h2> ${nom},</h2>
             <p>Nous sommes ravis de vous accueillir parmi nous !</p>
             <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
             <a href="${activationLink}" ${id} class="button">Activer mon compte</a>
@@ -409,8 +410,6 @@ module.exports.forgetpassword = async (req, res) => {
 module.exports.logout = async (req, res) => {
   try {
     const id = req.params.id;
-    console.log(id);
-
     // Utilisez findById pour trouver l'utilisateur par son ID
     const user = await userModel.findById(id);
     console.log(user);
@@ -552,7 +551,7 @@ module.exports.searchUsers = async (req, res, next) => {
     // Utiliser la méthode find avec un critère de recherche basé sur le terme
     const users = await userModel.find({
       $or: [
-        { surnom: { $regex: searchTerm, $options: 'i' } }, // Recherche insensible à la casse dans le nom d'utilisateur
+        { nom: { $regex: searchTerm, $options: 'i' } }, // Recherche insensible à la casse dans le nom d'utilisateur
         { email: { $regex: searchTerm, $options: 'i' } } // Recherche insensible à la casse dans l'e-mail
       ]
     })
@@ -587,25 +586,25 @@ module.exports.UserByID = async (req, res, next) => {
     res.status(500).json({ message: error.message })
   }
 }
-module.exports.addUser = async (req, res, next) => {
-  try {
-    const { filename } = req.file
-    console.log('filename', req.file)
-    const {
-      surnom, password, email, nom, prenom, phoneNumber, role,
-    } = req.body
-    console.log(req.body)
-    const user = new userModel({
-      surnom, password, email, nom, prenom, phoneNumber, role, image_user: filename,
-    })
-
-    const addeduser = await user.save()
-
-    res.status(200).json(addeduser)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
+// module.exports.addUser = async (req, res, next) => {
+//   try {
+//     const { filename } = req.file
+//     console.log('filename', req.file)
+//     const {
+//       surnom, password, email, nom, prenom, phoneNumber, role,
+//     } = req.body
+//     console.log(req.body)
+//     const user = new userModel({
+//       surnom, password, email, nom, prenom, phoneNumber, role, image_user: filename,
+//     })
+//
+//     const addeduser = await user.save()
+//
+//     res.status(200).json(addeduser)
+//   } catch (error) {
+//     res.status(500).json({ message: error.message })
+//   }
+// }
 
 module.exports.deleteUser = async (req, res, next) => {
   try {
@@ -804,14 +803,14 @@ module.exports.verification = async (req, res) => {
       // If user is found, respond with 409 (Conflict)
       return res.status(200).json({ message: 'cette email exists déja' })
     }
-    sendWelcomeEmailverfication(email, 'surnom')
+    sendWelcomeEmailverfication(email)
     res.status(201).json({ email })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
 }
 
-function sendWelcomeEmailverfication (email, surnom, id) {
+function sendWelcomeEmailverfication (email) {
   const transporter = nodemailer.createTransport({
     service: 'gmail', auth: {
       user: 'studyspheretn@gmail.com', pass: 'uqct kspi rgnt yzre',

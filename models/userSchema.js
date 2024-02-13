@@ -1,36 +1,30 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const { string } = require('yup')
-const Archivage = require('./archivageSchema');  // Import the archivageSchema
+const Archivage = require('./archivageSchema')  // Import the archivageSchema
 
 userSchema = new mongoose.Schema({
-  surnom: String, //unique
-  nom: String,
-  prenom: String,
+  nom: String, // nom CL/F/C/M/A
+  prenom: String, // nom CL/F//M/A
   email: { type: String, unique: true, required: true },
   password: String,
   cree_A: Date,
   modifier_A: Date,
-  statu : String,
+  statu: String,
   role: {
     type: String,
-    enum: ['client', 'centre', 'moderateur', 'admin','formateur'],
+    enum: ['client', 'centre', 'moderateur', 'admin', 'formateur'],
   },
   domaine: String,
   emplacement_actuelle: String,
   langue: String,
-  reputation: {
-    type: Number,
-    default: 0,
-  },
+  reputation: { type: Number, default: 0, },
+  visitsCount: { type: Number, default: 0 },
   image_user: String,
-  etat: Boolean, //true or false
+  etat: Boolean, // True (active) false ( Non Active)
   phoneNumber: Number, //length 8
   resetPasswordToken: String,  // Field to store the reset password token
-  resetPasswordUsed: {
-    type: Boolean,
-    default: false,  // Default value is false, indicating the token hasn't been used
-  },
+  resetPasswordUsed: { type: Boolean, default: false, },
   archivage: { type: mongoose.Schema.Types.ObjectId, ref: 'Archivage' }, // Reference to Archivage
 }, { timestamps: true })
 

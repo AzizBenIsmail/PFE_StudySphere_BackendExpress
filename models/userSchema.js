@@ -19,7 +19,6 @@ userSchema = new mongoose.Schema({
   visitsCount: { type: Number, default: 0 },
   image_user: String,
   etat: Boolean, // True (active) false ( Non Active)
-  phoneNumber: Number, //length 8
   resetPasswordToken: String,  // Field to store the reset password token
   resetPasswordUsed: { type: Boolean, default: false, },
   archivage: { type: mongoose.Schema.Types.ObjectId, ref: 'Archivage' }, // Reference to Archivage

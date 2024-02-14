@@ -11,6 +11,7 @@ const mongoose = require('mongoose')
 
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
+var prefRouter = require('./routes/pref');
 var usersRouter = require('./routes/users');
 
 
@@ -56,6 +57,7 @@ app.use(cors({
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/user', usersRouter);
+app.use('/pref', prefRouter);
 
 // ...
 

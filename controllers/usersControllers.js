@@ -122,10 +122,6 @@ module.exports.getUserArchive = async (req, res, next) => {
       match: { archi: true }, // Filtrer les archivages avec archi à true
     });
 
-    if (!archivedUsers || archivedUsers.length === 0) {
-      throw new Error('Aucun utilisateur archivé trouvé !');
-    }
-
     // Filtrer les utilisateurs avec au moins un archivage correspondant à archi=true
     const filteredUsers = archivedUsers.filter(user => user.archivage !== null);
 

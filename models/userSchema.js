@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const { string } = require('yup')
 const Archivage = require('./archivageSchema')  // Import the archivageSchema
+const preferencesSchema = require('./preferencesSchema');
 
 userSchema = new mongoose.Schema({
   nom: String, // nom CL/F/C/M/A
@@ -15,10 +16,6 @@ userSchema = new mongoose.Schema({
     type: String,
     enum: ['client', 'centre', 'moderateur', 'admin', 'formateur'],
   },
-  domaine: String,
-  emplacement_actuelle: String,
-  langue: String,
-  reputation: { type: Number, default: 0, },
   visitsCount: { type: Number, default: 0 },
   image_user: String,
   etat: Boolean, // True (active) false ( Non Active)
@@ -26,6 +23,8 @@ userSchema = new mongoose.Schema({
   resetPasswordToken: String,  // Field to store the reset password token
   resetPasswordUsed: { type: Boolean, default: false, },
   archivage: { type: mongoose.Schema.Types.ObjectId, ref: 'Archivage' }, // Reference to Archivage
+  preferences: { type: mongoose.Schema.Types.ObjectId, ref: 'Preferences' },
+
 }, { timestamps: true })
 
 //apres la creation

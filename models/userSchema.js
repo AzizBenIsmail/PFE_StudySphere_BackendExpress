@@ -9,8 +9,8 @@ userSchema = new mongoose.Schema({
   prenom: String, // nom CL/F//M/A
   email: { type: String, unique: true, required: true },
   password: String,
-  cree_A: Date,
-  modifier_A: Date,
+  createdAt: Date,
+  updatedAt: Date,
   statu: String,
   role: {
     type: String,
@@ -40,8 +40,8 @@ userSchema.pre('save', async function (next) {
     const User = this
     User.password = await bcrypt.hash(User.password, salt)
     User.statu = false
-    User.cree_A = new Date()
-    User.modifier_A = new Date()
+    User.createdAt = new Date()
+    User.updatedAt = new Date()
     // User.etat = true //false
     next()
   } catch (error) {

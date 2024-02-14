@@ -231,7 +231,7 @@ module.exports.desarchiver = async (req, res) => {
       const updatedArchivage = await archivageModel.findByIdAndUpdate(existingArchivage._id, {
         $set: {
           archi: false,
-          modifier_A: new Date(),
+          updatedAt: new Date(),
         },
       }, { new: true });
 
@@ -301,7 +301,7 @@ module.exports.upgrade = async (req, res) => {
 
     const updatedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
-        role: role, etat: true, modifier_A: currentDate,
+        role: role, etat: true, updatedAt: currentDate,
       },
     }, { new: true })
 
@@ -327,7 +327,7 @@ module.exports.upgradeModerateur = async (req, res) => {
 
     const updatedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
-        role: role, etat: true, modifier_A: currentDate,
+        role: role, etat: true, updatedAt: currentDate,
       },
     }, { new: true })
 
@@ -353,7 +353,7 @@ module.exports.upgradeFormateur = async (req, res) => {
 
     const updatedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
-        role: role, etat: true, modifier_A: currentDate,
+        role: role, etat: true, updatedAt: currentDate,
       },
     }, { new: true })
 
@@ -374,7 +374,7 @@ module.exports.downgrade = async (req, res) => {
     const client = 'client'
     updateedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
-        role: client, etat: true, modifier_A: currentDate,
+        role: client, etat: true, updatedAt: currentDate,
       },
     }, { new: true })
     res.status(200).json(updateedUser)
@@ -393,7 +393,7 @@ module.exports.Desactive = async (req, res) => {
     const currentDate = new Date()
     updateedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
-        etat: false, modifier_A: currentDate,
+        etat: false, updatedAt: currentDate,
       },
     }, { new: true })
     res.status(200).json(updateedUser)
@@ -412,7 +412,7 @@ module.exports.Active = async (req, res) => {
     const currentDate = new Date()
     updateedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
-        etat: true, modifier_A: currentDate,
+        etat: true, updatedAt: currentDate,
       },
     }, { new: true })
     res.status(200).json(updateedUser)
@@ -451,7 +451,7 @@ module.exports.updateUser = async (req, res, next) => {
     const currentDate = new Date()
     updateedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
-        password, nom, prenom, modifier_A: currentDate, email
+        password, nom, prenom, updatedAt: currentDate, email
       },
     }, { new: true })
     res.status(200).json(updateedUser)
@@ -473,7 +473,7 @@ module.exports.updateCenterByID = async (req, res, next) => {
     const currentDate = new Date()
     updateedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
-        password, nom, email, modifier_A: currentDate, image_user: filename,
+        password, nom, email, updatedAt: currentDate, image_user: filename,
       },
     }, { new: true })
     res.status(200).json(updateedUser)

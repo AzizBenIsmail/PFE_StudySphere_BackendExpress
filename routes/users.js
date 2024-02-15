@@ -2,80 +2,80 @@ var express = require("express");
 var router = express.Router();
 const users = require("../controllers/usersControllers");
 const upload = require("../middlewares/upload");
-
+const usersLogMiddleware = require('../middlewares/usersLogMiddleware')
 const { requireAuthUser } = require("../middlewares/authMiddleware");
 
 /* GET users listing. */
-router.get("/AllUsers", requireAuthUser, users.getUsers);
+router.get("/AllUsers",usersLogMiddleware, requireAuthUser, users.getUsers);
 
 /* GET users Admin. */
-router.get("/AllAdmin", requireAuthUser, users.getAdmin);
+router.get("/AllAdmin",usersLogMiddleware, requireAuthUser, users.getAdmin);
 
 /* GET users Simple. */
-router.get("/AllSimpleUsers", requireAuthUser, users.getSimpleUser);
+router.get("/AllSimpleUsers",usersLogMiddleware, requireAuthUser, users.getSimpleUser);
 
 /* GET formateur. */
-router.get("/AllFormateur", requireAuthUser, users.getFormateur);
+router.get("/AllFormateur",usersLogMiddleware, requireAuthUser, users.getFormateur);
 
 /* GET centre. */
-router.get("/AllCentre", requireAuthUser, users.getCentre);
+router.get("/AllCentre",usersLogMiddleware, requireAuthUser, users.getCentre);
 
 /* GET moderateur. */
-router.get("/AllModerateur", requireAuthUser, users.getModerateur);
+router.get("/AllModerateur",usersLogMiddleware, requireAuthUser, users.getModerateur);
 
 /* GET users Active. */
-router.get("/AllUsersActive", requireAuthUser, users.getUserActive);
+router.get("/AllUsersActive",usersLogMiddleware, requireAuthUser, users.getUserActive);
 
 /* GET users Desactive. */
-router.get("/AllUsersDesactive", requireAuthUser, users.getUserDesactive);
+router.get("/AllUsersDesactive",usersLogMiddleware, requireAuthUser, users.getUserDesactive);
 
 /* GET users archiver. */
-router.get("/AllUsersarchive", requireAuthUser, users.getUserArchive);
+router.get("/AllUsersarchive",usersLogMiddleware, requireAuthUser, users.getUserArchive);
 
 /* GET users archiver. */
-router.get("/AllUsersConnecter", requireAuthUser, users.getUserConnecter);
+router.get("/AllUsersConnecter",usersLogMiddleware, requireAuthUser, users.getUserConnecter);
 
 /* GET users archiver. */
-router.get("/AllUsersDeConnecter", requireAuthUser, users.getUserDeConnecter);
+router.get("/AllUsersDeConnecter",usersLogMiddleware, requireAuthUser, users.getUserDeConnecter);
 
 /* GET search a Users .*/
-router.get("/searchUsers", requireAuthUser, users.searchUsers);
+router.get("/searchUsers",usersLogMiddleware, requireAuthUser, users.searchUsers);
 
 /*get user by id */
-router.get("/User/:id", requireAuthUser, users.UserByID);
+router.get("/User/:id",usersLogMiddleware, requireAuthUser, users.UserByID);
 
 /* Delete user by ID. */
-router.delete("/:id", requireAuthUser, users.deleteUser);
+router.delete("/:id",usersLogMiddleware, requireAuthUser, users.deleteUser);
 
 /* upgrade user to admin. */
-router.put("/upgrade",requireAuthUser, users.upgrade);
+router.put("/upgrade",usersLogMiddleware,requireAuthUser, users.upgrade);
 
 /*downgrade admin to user. */
-router.put("/downgrade",requireAuthUser, users.downgrade);
+router.put("/downgrade",usersLogMiddleware,requireAuthUser, users.downgrade);
 
 /* upgrade user to admin. */
-router.put("/upgradeModerateur",requireAuthUser, users.upgradeModerateur);
+router.put("/upgradeModerateur",usersLogMiddleware,requireAuthUser, users.upgradeModerateur);
 
 /* upgrade user to admin. */
-router.put("/upgradeFormateur",requireAuthUser, users.upgradeFormateur);
+router.put("/upgradeFormateur",usersLogMiddleware,requireAuthUser, users.upgradeFormateur);
 
 /*archiver user par admin. */
-router.put("/archiver",requireAuthUser, users.archiver);
+router.put("/archiver",usersLogMiddleware,requireAuthUser, users.archiver);
 
 /*desarchiver user par admin. */
-router.put("/desarchiver",requireAuthUser, users.desarchiver);
+router.put("/desarchiver",usersLogMiddleware,requireAuthUser, users.desarchiver);
 
 /*Active */
-router.put("/active",requireAuthUser, users.Active);
+router.put("/active",usersLogMiddleware,requireAuthUser, users.Active);
 
 /*desactive. */
-router.put("/desactive",requireAuthUser, users.Desactive);
+router.put("/desactive",usersLogMiddleware,requireAuthUser, users.Desactive);
 
 /* Update User current */
-router.put("/update/:id", requireAuthUser, users.updateUser);
+router.put("/update/:id",usersLogMiddleware, requireAuthUser, users.updateUser);
 
 /* Update User by ID */
-router.put("/updatecentre/:id", requireAuthUser,upload.single("image_user"), users.updateCenterByID);
+router.put("/updatecentre/:id",usersLogMiddleware, requireAuthUser,upload.single("image_user"), users.updateCenterByID);
 
 
 module.exports = router;

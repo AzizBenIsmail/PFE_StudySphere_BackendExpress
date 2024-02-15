@@ -3,7 +3,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const http = require("http");
 const cors = require('cors');
-const logMiddleware = require('./middlewares/logMiddleware');
+const logMiddleware = require('./middlewares/authLogMiddleware');
 const session = require('express-session');
 
 require("dotenv").config(); //configuration dotenv
@@ -35,7 +35,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(logMiddleware);
+// app.use(logMiddleware);
 app.use(session({
   secret: 'net attijari secret',
   resave: false,

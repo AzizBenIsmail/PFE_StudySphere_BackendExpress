@@ -6,9 +6,9 @@ const preferencesSchema = new mongoose.Schema({
   objectifs_de_carriere: String, //"Changer de carrière vers l'informatique", "Obtenir une promotion",
   Domaine_dinteret: String, //"Informatique", "Langues", "Finance"
   competences_dinteret: String, //"communication", "Langues", "Finance","Programmation Java", "Conception graphique
-  niveau_dexperience_professionnelle: Number, // le nombre d'années travaillées dans un domaine spécifique
+  niveau_dexperience_professionnelle: String, // le nombre d'années travaillées dans un domaine spécifique
   interets_personnels : String , //(musique, sports, arts, etc.)
-  annee_anniversaire: Number, // 2000
+  annee_anniversaire: String, // 2000
   //Niveau
   niveau_etude: String, //"Secondaire", "Baccalauréat", "Maîtrise",
   niveau_dengagement : String, // "consacrer du temps régulier à la formation 4S" , "sessions d'apprentissage plus courtes 2S" , "intermittentes 1S"

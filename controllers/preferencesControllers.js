@@ -5,28 +5,40 @@ module.exports.AddPreferences = async (req, res) => {
   try {
     const id = req.params.id;
 
-    // Check if the user exists
+    // Vérifiez si l'utilisateur existe
     const user = await userModel.findById(id);
 
     if (!user) {
       throw new Error('User not found!');
     }
-    // // Check if the user already has an archive
-    // let existingArchivage = await preferencesModel.findOne({ user: user._id });
 
-
-    // User doesn't have an archive, create a new one with archi set to true
+    // Créez un objet preferences avec les valeurs de la requête
     const preferences = new preferencesModel({
-      domaine: 'VotreDomaine',
-      emplacement_actuelle: 'VotreEmplacement',
-      langue: 'VotreLangue',
-      reputation: 0,
+      domaine_actuelle: req.body.domaine_actuelle,
+      objectifs_de_carriere: req.body.objectifs_de_carriere,
+      Domaine_dinteret: req.body.Domaine_dinteret,
+      competences_dinteret: req.body.competences_dinteret,
+      niveau_dexperience_professionnelle: req.body.niveau_dexperience_professionnelle,
+      interets_personnels: req.body.interets_personnels,
+      annee_anniversaire: req.body.annee_anniversaire,
+      niveau_etude: req.body.niveau_etude,
+      niveau_dengagement: req.body.niveau_dengagement,
+      besoin: req.body.besoin,
+      niveau_de_difficulte: req.body.niveau_de_difficulte,
+      emplacement_actuelle: req.body.emplacement_actuelle,
+      style_dapprentissage: req.body.style_dapprentissage,
+      duree_preferee: req.body.duree_preferee,
+      budget: req.body.budget,
+      disponibilite: req.body.disponibilite,
+      type_de_contenu_prefere: req.body.type_de_contenu_prefere,
+      preferences_linguistiques: req.body.preferences_linguistiques,
+      historique_dapprentissage: req.body.historique_dapprentissage,
     });
 
-    // Save the Archivage document
+    // Enregistrez le document Preferences
     await preferences.save();
 
-    // Update the user
+    // Mettez à jour l'utilisateur avec l'ID des préférences
     const updatedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
         preferences: preferences._id,
@@ -39,4 +51,3 @@ module.exports.AddPreferences = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-

@@ -8,7 +8,7 @@ const preferencesSchema = new mongoose.Schema({
   competences_dinteret: String, //"communication", "Langues", "Finance","Programmation Java", "Conception graphique
   niveau_dexperience_professionnelle: String, // le nombre d'années travaillées dans un domaine spécifique
   interets_personnels : String , //(musique, sports, arts, etc.)
-  annee_anniversaire: String, // 2000
+  date_anniversaire: String, // 2000
   //Niveau
   niveau_etude: String, //"Secondaire", "Baccalauréat", "Maîtrise",
   niveau_dengagement : String, // "consacrer du temps régulier à la formation 4S" , "sessions d'apprentissage plus courtes 2S" , "intermittentes 1S"

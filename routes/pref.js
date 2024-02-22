@@ -13,5 +13,9 @@ router.put("/addPrefCentre/:id", pref.AddPreferencesCentre);
 
 router.get("/GetPref/:id", pref.getPreferencesById);
 
+router.put("/updatePreferences/:id", pref.updatePreferences);
+
+router.put("/UpdatePreferencesCentre/:id", pref.UpdatePreferencesCentre);
+
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const userModel = require('../models/userSchema')
 const archivageModel  = require('../models/archivageSchema')
+const bcrypt = require('bcrypt')
 
 module.exports.getUsers = async (req, res, next) => {
   try {
@@ -449,9 +450,15 @@ module.exports.updateUser = async (req, res, next) => {
       throw new Error('user not found !')
     }
     const currentDate = new Date()
+    const salt = await bcrypt.genSalt();
+    const Pwd = await bcrypt.hash(password, salt);
     updateedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
-        password, nom, prenom, updatedAt: currentDate, email
+        password: Pwd,
+        nom,
+        prenom,
+        updatedAt: currentDate,
+        email
       },
     }, { new: true })
     res.status(200).json(updateedUser)
@@ -462,22 +469,37 @@ module.exports.updateUser = async (req, res, next) => {
 
 module.exports.updateCenterByID = async (req, res, next) => {
   try {
-    const { nom, email, password } = req.body
-    const { filename } = req.file
-    const id = req.params.id
+    const { nom, email, password } = req.body;
+    const id = req.params.id;
 
-    const checkIfusertExists = await userModel.findById(id)
-    if (!checkIfusertExists) {
-      throw new Error('user not found !')
+    const checkIfUserExists = await userModel.findById(id);
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    if (!checkIfUserExists) {
+      throw new Error('Utilisateur non trouvé !');
     }
-    const currentDate = new Date()
-    updateedUser = await userModel.findByIdAndUpdate(id, {
-      $set: {
-        password, nom, email, updatedAt: currentDate, image_user: filename,
-      },
-    }, { new: true })
-    res.status(200).json(updateedUser)
+
+    const currentDate = new Date();
+    const updateFields = {
+      password: hashedPassword,
+      nom,
+      email,
+      updatedAt: currentDate,
+    };
+
+    // Vérifier s'il existe une propriété req.file
+    if (req.file) {
+      const { filename } = req.file;
+      updateFields.image_user = filename;
+    }
+
+    const updatedUser = await userModel.findByIdAndUpdate(id, {
+      $set: updateFields,
+    }, { new: true });
+
+    res.status(200).json(updatedUser);
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ message: error.message });
   }
-}
+};

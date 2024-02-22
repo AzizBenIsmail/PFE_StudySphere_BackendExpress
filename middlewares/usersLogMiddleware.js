@@ -11,11 +11,9 @@
     if (token) {
       jwt.verify(token, "net StudySphere secret", async (err, decodedToken) => {
         if (err) {
-          console.log(err)
           req.user = null;
         } else {
           let user = await userModel.findById(decodedToken.id);
-          console.log(user)
           req.user = user;
         }
         appendLog(req, res, startTime);

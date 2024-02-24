@@ -24,6 +24,7 @@ const preferencesSchema = new mongoose.Schema({
   preferences_linguistiques : String, // "fr","en","arab"
   //Intérêts_specifiques
   historique_dapprentissage:String, // suivre sont interet
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Reference to User
 
   // reputation: { type: Number, default: 0 },
   // phoneNumber: Number, //length 8

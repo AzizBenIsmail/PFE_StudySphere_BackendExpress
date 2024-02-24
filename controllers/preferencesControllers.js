@@ -32,6 +32,7 @@ module.exports.AddPreferences = async (req, res) => {
       disponibilite: req.body.disponibilite,
       type_de_contenu_prefere: req.body.type_de_contenu_prefere,
       preferences_linguistiques: req.body.preferences_linguistiques,
+      user: user._id,
     });
 
     // Enregistrez le document Preferences
@@ -71,6 +72,7 @@ module.exports.AddPreferencesCentre = async (req, res) => {
       duree_preferee: req.body.duree_preferee,
       disponibilite: req.body.disponibilite,
       preferences_linguistiques: req.body.preferences_linguistiques,
+      user: user._id,
     });
 
     // Enregistrez le document Preferences

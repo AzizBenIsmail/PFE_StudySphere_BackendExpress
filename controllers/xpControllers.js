@@ -7,7 +7,7 @@ const Badge = require('../models/badgeSchema'); // Importer le modèle Badge si 
 
 module.exports.createXP = async (req, res) => {
   try {
-    const { pointsGagnes, source, niveauAtteint, badgeIds, userId } = req.body;
+    const { pointsGagnes, niveauAtteint, badgeIds, userId } = req.body;
 
     // Vérifier si l'utilisateur existe
     const user = await User.findById(userId);
@@ -34,7 +34,7 @@ module.exports.createXP = async (req, res) => {
     }
 
     // Créer la XP avec les badges associés
-    const xp = new XP({ pointsGagnes, source, niveauAtteint, badgeIds: foundBadges, user: userId });
+    const xp = new XP({ pointsGagnes, niveauAtteint, badgeIds: foundBadges, user: userId });
     const newXP = await xp.save();
     res.status(201).json(newXP);
   } catch (error) {
@@ -73,13 +73,12 @@ module.exports.getXPById = async (req, res) => {
 // Mettre à jour un XP
 module.exports.updateXP = async (req, res) => {
   try {
-    const { pointsGagnes, source, niveauAtteint, badgeId, userId } = req.body;
+    const { pointsGagnes, niveauAtteint, badgeId, userId } = req.body;
     const xp = await XP.findById(req.params.id);
     if (!xp) {
       return res.status(404).json({ message: "XP introuvable" });
     }
     xp.pointsGagnes = pointsGagnes;
-    xp.source = source;
     xp.niveauAtteint = niveauAtteint;
     xp.badgeId = badgeId;
     xp.user = userId;

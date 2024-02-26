@@ -6,7 +6,7 @@ exports.createBadge = async (req, res) => {
     const { filename } = req.file
 
     const { nom, description } = req.body;
-    const badge = new Badge({ nom, description, image_user: filename });
+    const badge = new Badge({ nom, description, image_badge: filename });
     const newBadge = await badge.save();
 
     res.status(201).json(newBadge);
@@ -53,7 +53,7 @@ exports.updateBadge = async (req, res) => {
     };
     if (req.file) {
       const { filename } = req.file;
-      updateFields.image_user = filename;
+      updateFields.image_badge = filename;
     }
     const updatedBadge = await Badge.findByIdAndUpdate(id, {
       $set: updateFields,

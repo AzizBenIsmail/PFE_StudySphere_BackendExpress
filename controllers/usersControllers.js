@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 module.exports.getUsers = async (req, res, next) => {
   try {
     // Recherchez les utilisateurs sans référence d'archivage
-    const users = await userModel.find({ 'archivage': { $exists: false } });
+    const users = await userModel.find({ 'archivage': { $exists: false } }).populate('preferences');
 
     if (!users || users.length === 0) {
       throw new Error('Utilisateurs non trouvés !')

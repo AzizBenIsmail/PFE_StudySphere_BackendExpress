@@ -5,9 +5,9 @@ const User = require('../models/userSchema'); // Importer le modèle User si ce 
 const Niveau = require('../models/niveauSchema'); // Importer le modèle Niveau si ce n'est pas déjà fait
 const Badge = require('../models/badgeSchema'); // Importer le modèle Badge si ce n'est pas déjà fait
 
-exports.createXP = async (req, res) => {
+module.exports.createXP = async (req, res) => {
   try {
-    const { pointsGagnes, source, niveauAtteint, badgeId, userId } = req.body;
+    const { pointsGagnes, source, niveauAtteint, badgeIds, userId } = req.body;
 
     // Vérifier si l'utilisateur existe
     const user = await User.findById(userId);
@@ -21,15 +21,20 @@ exports.createXP = async (req, res) => {
       return res.status(404).json({ message: "Le niveau avec cet ID n'existe pas" });
     }
 
-    // Vérifier si le badge existe
-    if (badgeId) {
-      const badge = await Badge.findById(badgeId);
-      if (!badge) {
-        return res.status(404).json({ message: "Le badge avec cet ID n'existe pas" });
+    // Vérifier si les badges existent et les stocker dans un tableau
+    const foundBadges = [];
+    if (badgeIds && badgeIds.length > 0) {
+      for (const badgeId of badgeIds) {
+        const badge = await Badge.findById(badgeId);
+        if (!badge) {
+          return res.status(404).json({ message: `Le badge avec l'ID ${badgeId} n'existe pas` });
+        }
+        foundBadges.push(badge._id); // Stocker les identifiants de badges
       }
     }
 
-    const xp = new XP({ pointsGagnes, source, niveauAtteint, badgeId, user: userId });
+    // Créer la XP avec les badges associés
+    const xp = new XP({ pointsGagnes, source, niveauAtteint, badgeIds: foundBadges, user: userId });
     const newXP = await xp.save();
     res.status(201).json(newXP);
   } catch (error) {
@@ -38,17 +43,22 @@ exports.createXP = async (req, res) => {
 };
 
 // Récupérer tous les XP
-exports.getAllXP = async (req, res) => {
+module.exports.getAllXP = async (req, res) => {
   try {
-    const xpList = await XP.find();
+    const xpList = await XP.find()
+    .populate('user')
+    .populate('niveauAtteint')
+    .populate('badgeIds'); // Utiliser le chemin 'badges' au lieu de 'badgeId'
     res.status(200).json(xpList);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+
+
 // Récupérer un XP par son ID
-exports.getXPById = async (req, res) => {
+module.exports.getXPById = async (req, res) => {
   try {
     const xp = await XP.findById(req.params.id);
     if (!xp) {
@@ -61,7 +71,7 @@ exports.getXPById = async (req, res) => {
 };
 
 // Mettre à jour un XP
-exports.updateXP = async (req, res) => {
+module.exports.updateXP = async (req, res) => {
   try {
     const { pointsGagnes, source, niveauAtteint, badgeId, userId } = req.body;
     const xp = await XP.findById(req.params.id);
@@ -81,7 +91,7 @@ exports.updateXP = async (req, res) => {
 };
 
 // Supprimer un XP
-exports.deleteXP = async (req, res) => {
+module.exports.deleteXP = async (req, res) => {
   try {
     const xp = await XP.findById(req.params.id);
     if (!xp) {

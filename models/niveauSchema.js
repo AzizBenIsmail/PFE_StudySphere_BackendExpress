@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const niveauSchema = new mongoose.Schema({
   nom: {type: String,required: true},
+  description: {type: String,required: true},
   xpRequis: {type: Number,required: true}
 
 });

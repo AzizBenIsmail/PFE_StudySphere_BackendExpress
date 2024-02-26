@@ -1,10 +1,11 @@
 const Niveau = require('../models/niveauSchema');
 
 module.exports.createNiveau = async (req, res) => {
-  const { nom, xpRequis } = req.body;
+  const { nom, xpRequis , description } = req.body;
   try {
     const niveau = new Niveau({
       nom: nom,
+      description : description,
       xpRequis: xpRequis
     });
     const newNiveau = await niveau.save();
@@ -35,13 +36,14 @@ module.exports.getNiveau = async (req, res) => {
 
 module.exports.updateNiveau = async (req, res) => {
   const niveauId = req.params.id;
-  const { nom, xpRequis } = req.body;
+  const { nom, xpRequis ,description } = req.body;
   try {
     const niveau = await Niveau.findById(niveauId);
     if (!niveau) {
       throw new Error('Niveau non trouvé');
     }
     niveau.nom = nom;
+    niveau.description = description;
     niveau.xpRequis = xpRequis;
     const updatedNiveau = await niveau.save();
     res.status(200).json(updatedNiveau);

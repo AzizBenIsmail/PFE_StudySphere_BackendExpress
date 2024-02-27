@@ -1,6 +1,9 @@
 const userModel = require('../models/userSchema')
 const archivageModel  = require('../models/archivageSchema')
 const bcrypt = require('bcrypt')
+const fs = require('fs')
+const XP = require('../models/xpSchema')
+const pref = require('../models/preferencesSchema')
 
 module.exports.getUsers = async (req, res, next) => {
   try {
@@ -189,7 +192,6 @@ module.exports.UserByID = async (req, res, next) => {
   }
 };
 
-
 module.exports.deleteUser = async (req, res, next) => {
   try {
     const { id } = req.params
@@ -200,13 +202,18 @@ module.exports.deleteUser = async (req, res, next) => {
     }
 
     await userModel.findByIdAndDelete(user._id)
+    if (user.image_user) {
+      const imagePath = `public/images/Users/${user.image_user}`;
+      fs.unlinkSync(imagePath); // Supprimer le fichier
+    }
+    await XP.deleteMany({ user: user._id });
+    await pref.deleteMany({ user: user._id });
 
     res.status(200).json('deleted')
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
 }
-
 
 module.exports.desarchiver = async (req, res) => {
   try {

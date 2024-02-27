@@ -708,7 +708,7 @@ module.exports.forgotpwd = async (req, res) => {
 
 module.exports.upgrade = async (req, res) => {
   try {
-    console.log('test', req.bod)
+    // console.log('test', req.bod)
 
     const { id } = req.body // Récupération de l'ID depuis le corps de la requête
     const checkIfUserExists = await userModel.findById(id)

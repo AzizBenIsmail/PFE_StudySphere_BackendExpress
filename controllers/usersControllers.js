@@ -288,7 +288,7 @@ module.exports.archiver = async (req, res) => {
 
 module.exports.upgrade = async (req, res) => {
   try {
-    console.log('test', req.bod)
+    // console.log('test', req.bod)
 
     const { id } = req.body // Récupération de l'ID depuis le corps de la requête
     const checkIfUserExists = await userModel.findById(id)
@@ -314,7 +314,7 @@ module.exports.upgrade = async (req, res) => {
 
 module.exports.upgradeModerateur = async (req, res) => {
   try {
-    console.log('test', req.bod)
+    // console.log('test', req.bod)
 
     const { id } = req.body // Récupération de l'ID depuis le corps de la requête
     const checkIfUserExists = await userModel.findById(id)
@@ -340,7 +340,7 @@ module.exports.upgradeModerateur = async (req, res) => {
 
 module.exports.upgradeFormateur = async (req, res) => {
   try {
-    console.log('test', req.bod)
+    // console.log('test', req.bod)
 
     const { id } = req.body // Récupération de l'ID depuis le corps de la requête
     const checkIfUserExists = await userModel.findById(id)

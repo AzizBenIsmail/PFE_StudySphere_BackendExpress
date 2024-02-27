@@ -18,9 +18,9 @@ const createDefaultNiveau = async () => {
 
       await defaultNiveau.save();
 
-      console.log('Niveau par défaut créé avec succès.');
+      // console.log('Niveau par défaut créé avec succès.');
     } else {
-      console.log('Des niveaux existent déjà. Aucun niveau par défaut n\'a été créé.');
+      // console.log('Des niveaux existent déjà. Aucun niveau par défaut n\'a été créé.');
     }
   } catch (error) {
     console.error('Erreur lors de la création du niveau par défaut :', error);
@@ -42,9 +42,9 @@ const createDefaultBadge = async () => {
       const newBadge = new Badge(defaultBadge);
       await newBadge.save();
 
-      console.log('Badge par défaut créé avec succès.');
+      // console.log('Badge par défaut créé avec succès.');
     } else {
-      console.log('Des badges existent déjà. Aucun badge par défaut n\'a été créé.');
+      // console.log('Des badges existent déjà. Aucun badge par défaut n\'a été créé.');
     }
   } catch (error) {
     console.error('Erreur lors de la création du badge par défaut :', error);
@@ -77,9 +77,9 @@ const createDefaultUser = async () => {
       await defaultAdmin.save();
       await defaultUser.save();
 
-      console.log('Utilisateur par défaut créé avec succès.');
+      // console.log('Utilisateur par défaut créé avec succès.');
     } else {
-      console.log('Des utilisateurs existent déjà. Aucun utilisateur par défaut n\'a été créé.');
+      // console.log('Des utilisateurs existent déjà. Aucun utilisateur par défaut n\'a été créé.');
     }
   } catch (error) {
     console.error('Erreur lors de la création de l\'utilisateur par défaut :', error);

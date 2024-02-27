@@ -605,24 +605,25 @@ module.exports.UserByID = async (req, res, next) => {
 //     res.status(500).json({ message: error.message })
 //   }
 // }
-
-module.exports.deleteUser = async (req, res, next) => {
-  try {
-    const { id } = req.params
-    const user = await userModel.findById(id)
-
-    if (!user) {
-      return res.status(404).json({ message: 'user not found!' })
-    }
-
-    await userModel.findByIdAndDelete(user._id)
-
-    res.status(200).json('deleted')
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
+// module.exports.deleteUser = async (req, res, next) => {
+//   try {
+//
+//     const { id } = req.params;
+//     const user = await userModel.findById(id);
+//
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found!' });
+//     }
+//
+//     await userModel.findByIdAndDelete(user._id);
+//
+//     // Envoyez la réponse JSON après la suppression
+//     res.status(200).json('User deleted successfully.');
+//   } catch (error) {
+//     // Gérez les erreurs
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 module.exports.archiver = async (req, res) => {
   try {

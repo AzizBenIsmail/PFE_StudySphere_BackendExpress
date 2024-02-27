@@ -5,7 +5,7 @@ const { requireAuthUser } = require('../middlewares/authMiddleware')
 
 
 // Routes pour les XP
-router.post("/", xp.createXP);
+router.post("/",requireAuthUser, xp.createXP);
 router.get("/",requireAuthUser, xp.getAllXP);
 router.get("/:id",requireAuthUser, xp.getXPById);
 router.put("/:id",requireAuthUser, xp.updateXP);

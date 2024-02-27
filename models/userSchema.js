@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt')
 const { string } = require('yup')
 const Archivage = require('./archivageSchema')  // Import the archivageSchema
 const preferencesSchema = require('./preferencesSchema');
+const XP = require('../models/xpSchema');
+const Niveau = require('../models/niveauSchema');
 
 userSchema = new mongoose.Schema({
   nom: String, // nom CL/F/C/M/A
@@ -42,6 +44,18 @@ userSchema.pre('save', async function (next) {
     User.createdAt = new Date()
     User.updatedAt = new Date()
     // User.etat = true //false
+
+    //creation xp
+      const defaultNiveau = await Niveau.findOne({ nom: "niveau1" }); // Trouver le niveau initial
+      const defaultXP = new XP({
+        pointsGagnes: 0,
+        niveauAtteint: defaultNiveau._id, // Utiliser l'ID du niveau initial
+        badgeIds: [], // Aucun badge initial
+        user: User._id, // Utiliser l'ID de l'utilisateur créé
+      });
+console.log(defaultXP)
+      await defaultXP.save();
+
     next()
   } catch (error) {
     next(error)

@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const badge = require("../controllers/badgeControllers");
-const upload = require("../middlewares/upload");
+const upload = require("../middlewares/uploadFils/uploadBadges");
 const { requireAuthUser } = require('../middlewares/authMiddleware')
 
 // Routes pour les badges

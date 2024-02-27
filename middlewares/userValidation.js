@@ -3,7 +3,7 @@ const UserModel = require("../models/userSchema");
 
 const userValidation = async (req, res, next) => {
   try {
-    console.log("test", req.body);
+    // console.log("test", req.body);
     const schema = yup.object().shape({
       // email: yup
       // .string()
@@ -21,7 +21,7 @@ const userValidation = async (req, res, next) => {
       prenom: yup
       .string()
       .required()
-      .min(3, "Le Prenom doit contenir plus de 3 characters ")
+      .min(3, "Le Prenom doit contenir plus de 3 characters")
       .max(15, "Le Prenom doit contenir plus de 15 characters"),
       password: yup
       .string()

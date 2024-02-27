@@ -5,6 +5,7 @@ const http = require("http");
 const cors = require('cors');
 const logMiddleware = require('./middlewares/authLogMiddleware');
 const session = require('express-session');
+require('./controllers/init');
 
 require("dotenv").config(); //configuration dotenv
 const mongoose = require('mongoose')

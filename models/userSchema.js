@@ -5,6 +5,7 @@ const Archivage = require('./archivageSchema')  // Import the archivageSchema
 const preferencesSchema = require('./preferencesSchema');
 const XP = require('../models/xpSchema');
 const Niveau = require('../models/niveauSchema');
+const Badge = require('../models/badgeSchema');
 
 userSchema = new mongoose.Schema({
   nom: String, // nom CL/F/C/M/A
@@ -25,6 +26,7 @@ userSchema = new mongoose.Schema({
   resetPasswordUsed: { type: Boolean, default: false, },
   archivage: { type: mongoose.Schema.Types.ObjectId, ref: 'Archivage' }, // Reference to Archivage
   preferences: { type: mongoose.Schema.Types.ObjectId, ref: 'Preferences' },
+  xp: { type: mongoose.Schema.Types.ObjectId, ref: 'XP' },
 
 }, { timestamps: true })
 
@@ -37,24 +39,26 @@ userSchema.post('save', function (doc, next) {
 //avant la creation
 userSchema.pre('save', async function (next) {
   try {
+    //cryptage password + statu + createdAt et updatedAt
     const salt = await bcrypt.genSalt()
     const User = this
     User.password = await bcrypt.hash(User.password, salt)
     User.statu = false
     User.createdAt = new Date()
     User.updatedAt = new Date()
-    // User.etat = true //false
 
+    const badge = await Badge.findOne({ nom: "Bienvenu" }); // Trouver le niveau initial
     //creation xp
-      const defaultNiveau = await Niveau.findOne({ nom: "niveau1" }); // Trouver le niveau initial
+      const defaultNiveau = await Niveau.findOne({ nom: "Niveau0" }); // Trouver le niveau initial
       const defaultXP = new XP({
         pointsGagnes: 0,
         niveauAtteint: defaultNiveau._id, // Utiliser l'ID du niveau initial
-        badgeIds: [], // Aucun badge initial
+        badgeIds: [badge._id], // Aucun badge initial
         user: User._id, // Utiliser l'ID de l'utilisateur créé
       });
-console.log(defaultXP)
       await defaultXP.save();
+
+    User.xp = defaultXP._id
 
     next()
   } catch (error) {
@@ -69,7 +73,7 @@ userSchema.statics.login = async function (email, password) {
   if (user) {
     const auth = await bcrypt.compare(password, user.password)
     if (auth) {
-      if (user.etat == true) {
+      if (user.etat === true) {
         return user
       } else {
         throw new Error('compte desactive')

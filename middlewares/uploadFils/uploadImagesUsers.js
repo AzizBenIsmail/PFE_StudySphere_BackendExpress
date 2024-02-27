@@ -1,7 +1,7 @@
 const multer = require("multer");
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/images')
+    cb(null, 'public/images/Users')
   },
   filename: function (req, file, cb) {
     // Generate a unique filename using timestamp and random string
@@ -11,5 +11,5 @@ var storage = multer.diskStorage({
   }
 })
 
-var upload = multer({ storage: storage });
-module.exports = upload;
+var uploadImagesUsers = multer({ storage: storage });
+module.exports = uploadImagesUsers;

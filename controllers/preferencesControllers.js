@@ -11,7 +11,12 @@ module.exports.AddPreferences = async (req, res) => {
     if (!user) {
       throw new Error('User not found!');
     }
+    // Vérifiez s'il existe déjà des préférences pour cet utilisateur
+    const existingPreferences = await preferencesModel.findOne({ user: id });
 
+    if (existingPreferences) {
+      throw new Error('Preferences already exist for this user');
+    }
     // Créez un objet preferences avec les valeurs de la requête
     const preferences = new preferencesModel({
       domaine_actuelle: req.body.domaine_actuelle,
@@ -62,7 +67,12 @@ module.exports.AddPreferencesCentre = async (req, res) => {
     if (!user) {
       throw new Error('User not found!');
     }
+    // Vérifiez s'il existe déjà des préférences pour cet utilisateur
+    const existingPreferences = await preferencesModel.findOne({ user: id });
 
+    if (existingPreferences) {
+      throw new Error('Preferences already exist for this user');
+    }
     // Créez un objet preferences avec les valeurs de la requête
     const preferences = new preferencesModel({
       domaine_actuelle: req.body.domaine_actuelle,

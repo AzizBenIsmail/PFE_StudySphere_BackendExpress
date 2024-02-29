@@ -577,7 +577,8 @@ module.exports.getUser = async (req, res, next) => {
 module.exports.UserByID = async (req, res, next) => {
   try {
     const id = req.params.id
-    const user = await userModel.findById(id)
+    const user = await userModel.findById(id).populate('xp')
+
     if (!user || user.length === 0) {
       throw new Error('users not found !')
     }

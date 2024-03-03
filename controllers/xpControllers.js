@@ -67,7 +67,10 @@ module.exports.getAllXP = async (req, res) => {
 // Récupérer un XP par son ID
 module.exports.getXPById = async (req, res) => {
   try {
-    const xp = await XP.findById(req.params.id);
+    const xp = await XP.findById(req.params.id)
+    .populate('user')
+    .populate('niveauAtteint')
+    .populate('badgeIds');
     if (!xp) {
       return res.status(404).json({ message: "XP introuvable" });
     }

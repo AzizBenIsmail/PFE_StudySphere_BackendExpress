@@ -564,16 +564,32 @@ module.exports.searchUsers = async (req, res, next) => {
 
 module.exports.getUser = async (req, res, next) => {
   try {
-    const id = req.session.user._id.toString()
+    const id = req.session.user._id.toString();
     const user = await userModel.findById(id)
-    if (!user || user.length === 0) {
-      throw new Error('users not found !')
+    .populate({
+      path: 'xp',
+      populate: {
+        path: 'niveauAtteint',
+        model: 'Niveau' // Assurez-vous que le modèle de niveau est correctement référencé ici
+      }
+    })
+    .populate({
+      path: 'xp',
+      populate: {
+        path: 'badgeIds',
+        model: 'Badge' // Assurez-vous que le modèle de badge est correctement référencé ici
+      },
+      options: { strictPopulate: false } // Utilisez l'option strictPopulate avec la valeur false pour peupler un champ non défini dans le schéma
+    });
+    if (!user) {
+      throw new Error('Utilisateur introuvable !');
     }
-    res.status(200).json({ user })
+    res.status(200).json({ user });
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ message: error.message });
   }
-}
+};
+
 module.exports.UserByID = async (req, res, next) => {
   try {
     const id = req.params.id

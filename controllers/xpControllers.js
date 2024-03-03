@@ -122,3 +122,59 @@ module.exports.deleteXP = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+module.exports.add50xp = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const xp = await XP.findOne({ user: req.params.id });
+
+    if (!xp) {
+      return res.status(404).json({ message: "XP introuvable" });
+    }
+
+    // Ajouter 50 points
+    xp.pointsGagnes += 50;
+    const updatedXP = await xp.save();
+
+    const currentLevel = await Niveau.findById(xp.niveauAtteint);
+    console.log(currentLevel);
+
+    // Récupérer le niveau suivant
+    const nextLevel = await Niveau.findOne({ xpRequis: { $gt: currentLevel.xpRequis } });
+
+    // Vérifier si l'utilisateur a atteint un nouveau niveau
+    if (updatedXP.pointsGagnes >= nextLevel.xpRequis) {
+      // Mettre à jour le niveau atteint de l'utilisateur
+      updatedXP.niveauAtteint = nextLevel;
+      await updatedXP.save();
+    }
+
+    res.status(200).json(updatedXP);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+module.exports.delete50xp = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const xp = await XP.findOne({ user: req.params.id });
+
+    if (!xp) {
+      return res.status(404).json({ message: "XP introuvable" });
+    }
+
+    // Vérifier si soustraire 50 points rendrait les points négatifs
+    if (xp.pointsGagnes < 50) {
+      return res.status(400).json({ message: "La soustraction de 50 points rendrait les points d'expérience négatifs" });
+    }
+
+    xp.pointsGagnes -= 50;
+    const updatedXP = await xp.save();
+    res.status(200).json(updatedXP);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+

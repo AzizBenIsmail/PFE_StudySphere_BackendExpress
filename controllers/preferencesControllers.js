@@ -1,4 +1,5 @@
 const userModel = require('../models/userSchema')
+const xpModel = require('../models/xpSchema')
 const preferencesModel = require('../models/preferencesSchema')
 
 module.exports.AddPreferences = async (req, res) => {
@@ -43,12 +44,17 @@ module.exports.AddPreferences = async (req, res) => {
     // Enregistrez le document Preferences
     await preferences.save();
 
-    // Mettez à jour l'utilisateur avec l'ID des préférences
     const updatedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
         preferences: preferences._id,
       },
     }, { new: true });
+
+    const xp = await xpModel.findOne({ user: id });
+    if (xp) {
+      xp.pointsGagnes += 450;
+      await xp.save();
+    }
 
     res.status(200).json(updatedUser);
 
@@ -95,8 +101,14 @@ module.exports.AddPreferencesCentre = async (req, res) => {
       },
     }, { new: true });
 
-    res.status(200).json(updatedUser);
 
+    const xp = await xpModel.findOne({ user: id });
+    if (xp) {
+      xp.pointsGagnes += 450;
+      await xp.save();
+    }
+
+    res.status(200).json(updatedUser);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -15,8 +15,68 @@ const createDefaultNiveau = async () => {
         description: 'lors de l\'inscription',
         xpRequis: 0
       });
+      const Niveau1 = new Niveau({
+        nom: 'Niveau1',
+        description: 'Apres la creation de ces preference ',
+        xpRequis: 100
+      });
+      const Niveau2 = new Niveau({
+        nom: 'Niveau2',
+        description: 'lors de l\'inscription',
+        xpRequis: 200
+      });
+      const Niveau3 = new Niveau({
+        nom: 'Niveau3',
+        description: 'lors de l\'inscription',
+        xpRequis: 300
+      });
+      const Niveau4 = new Niveau({
+        nom: 'Niveau4',
+        description: 'lors de l\'inscription',
+        xpRequis: 400
+      });
+      const Niveau5 = new Niveau({
+        nom: 'Niveau5',
+        description: 'lors de l\'inscription',
+        xpRequis: 500
+      });
+      const Niveau6 = new Niveau({
+        nom: 'Niveau6',
+        description: 'lors de l\'inscription',
+        xpRequis: 600
+      });
+      const Niveau7 = new Niveau({
+        nom: 'Niveau7',
+        description: 'lors de l\'inscription',
+        xpRequis: 700
+      });
+      const Niveau8 = new Niveau({
+        nom: 'Niveau8',
+        description: 'lors de l\'inscription',
+        xpRequis: 800
+      });
+      const Niveau9 = new Niveau({
+        nom: 'Niveau9',
+        description: 'lors de l\'inscription',
+        xpRequis: 900
+      });
+      const Niveau10 = new Niveau({
+        nom: 'Niveau10',
+        description: 'lors de l\'inscription',
+        xpRequis: 1000
+      });
 
       await defaultNiveau.save();
+      await Niveau1.save();
+      await Niveau2.save();
+      await Niveau3.save();
+      await Niveau4.save();
+      await Niveau5.save();
+      await Niveau6.save();
+      await Niveau7.save();
+      await Niveau8.save();
+      await Niveau9.save();
+      await Niveau10.save();
 
       // console.log('Niveau par défaut créé avec succès.');
     } else {

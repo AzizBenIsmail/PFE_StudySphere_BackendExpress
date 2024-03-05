@@ -565,7 +565,7 @@ module.exports.searchUsers = async (req, res, next) => {
 module.exports.getUser = async (req, res, next) => {
   try {
     const id = req.session.user._id.toString();
-    const user = await userModel.findById(id)
+    const user = await userModel.findById(id).populate('notification')
     .populate({
       path: 'xp',
       populate: {

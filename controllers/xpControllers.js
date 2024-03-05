@@ -4,6 +4,7 @@ const XP = require('../models/xpSchema');
 const User = require('../models/userSchema'); // Importer le modèle User si ce n'est pas déjà fait
 const Niveau = require('../models/niveauSchema'); // Importer le modèle Niveau si ce n'est pas déjà fait
 const Badge = require('../models/badgeSchema'); // Importer le modèle Badge si ce n'est pas déjà fait
+const { verificationNiveau } = require('./niveauControllers');
 
 module.exports.createXP = async (req, res) => {
   try {
@@ -42,6 +43,7 @@ module.exports.createXP = async (req, res) => {
     // Créer la XP avec les badges associés
     const xp = new XP({ pointsGagnes, niveauAtteint, badgeIds: foundBadges, user: userId });
     const newXP = await xp.save();
+    await verificationNiveau(userId, req, res);
     res.status(201).json(newXP);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -103,6 +105,8 @@ module.exports.updateXP = async (req, res) => {
     xp.badgeIds = foundBadges;
     xp.user = userId;
     const updatedXP = await xp.save();
+    await verificationNiveau(userId, req, res);
+
     res.status(200).json(updatedXP);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -132,29 +136,17 @@ module.exports.add50xp = async (req, res) => {
       return res.status(404).json({ message: "XP introuvable" });
     }
 
-    // Ajouter 50 points
     xp.pointsGagnes += 50;
     const updatedXP = await xp.save();
 
-    const currentLevel = await Niveau.findById(xp.niveauAtteint);
-    console.log(currentLevel);
+    await verificationNiveau(req.params.id, req, res);
 
-    // Récupérer le niveau suivant
-    const nextLevel = await Niveau.findOne({ xpRequis: { $gt: currentLevel.xpRequis } });
-
-    // Vérifier si l'utilisateur a atteint un nouveau niveau
-    if (updatedXP.pointsGagnes >= nextLevel.xpRequis) {
-      // Mettre à jour le niveau atteint de l'utilisateur
-      updatedXP.niveauAtteint = nextLevel;
-      await updatedXP.save();
-    }
 
     res.status(200).json(updatedXP);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
-
 
 module.exports.delete50xp = async (req, res) => {
   try {
@@ -165,16 +157,37 @@ module.exports.delete50xp = async (req, res) => {
       return res.status(404).json({ message: "XP introuvable" });
     }
 
-    // Vérifier si soustraire 50 points rendrait les points négatifs
     if (xp.pointsGagnes < 50) {
       return res.status(400).json({ message: "La soustraction de 50 points rendrait les points d'expérience négatifs" });
     }
 
     xp.pointsGagnes -= 50;
     const updatedXP = await xp.save();
+
+    await verificationNiveau(req.params.id, req, res);
+
     res.status(200).json(updatedXP);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+
+module.exports.addNumbrxp = async (id, pointsToAdd, req, res) => {
+  try {
+    const user = await User.findById(id);
+    const existingXP = await XP.findOne({ user: id });
+
+    if (!existingXP) {
+      return res.status(404).json({ message: "XP introuvable" });
+    }
+
+    // Ajouter les points spécifiés
+    existingXP.pointsGagnes += pointsToAdd;
+    await existingXP.save();
+
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

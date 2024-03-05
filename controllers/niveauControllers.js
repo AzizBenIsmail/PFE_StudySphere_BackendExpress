@@ -1,4 +1,6 @@
 const Niveau = require('../models/niveauSchema');
+const User = require('../models/userSchema')
+const XP = require('../models/xpSchema')
 
 module.exports.createNiveau = async (req, res) => {
   const { nom, xpRequis , description } = req.body;
@@ -65,3 +67,37 @@ module.exports.deleteNiveau = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
+
+module.exports.verificationNiveau = async (id, req, res) => {
+  try {
+    const xp = await XP.findOne({ user: id }).populate('niveauAtteint');
+
+    if (!xp) {
+      return res.status(404).json({ message: "XP introuvable" });
+    }
+
+    const niveaux = await Niveau.find().sort({ xpRequis: 1 });
+
+    let currentLevel = null;
+
+    for (let i = 0; i < niveaux.length; i++) {
+      if (xp.pointsGagnes < niveaux[i].xpRequis) {
+        break;
+      }
+      currentLevel = niveaux[i];
+    }
+
+    if (!currentLevel) {
+      return res.status(404).json({ message: "Niveau introuvable pour l'XP actuelle" });
+    }
+
+    // Mettre à jour le niveau atteint de l'utilisateur
+    xp.niveauAtteint = currentLevel;
+    await xp.save();
+
+    // res.status(200).json(currentLevel); // Retourner le niveau actuel de l'utilisateur
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+

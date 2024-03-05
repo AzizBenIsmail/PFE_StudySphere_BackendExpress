@@ -1,6 +1,8 @@
 const userModel = require('../models/userSchema')
 const xpModel = require('../models/xpSchema')
 const preferencesModel = require('../models/preferencesSchema')
+const { addNumbrxp } = require('./xpControllers');
+const { verificationNiveau } = require('./niveauControllers') // Assurez-vous que le chemin d'importation est correct
 
 module.exports.AddPreferences = async (req, res) => {
   try {
@@ -43,6 +45,8 @@ module.exports.AddPreferences = async (req, res) => {
 
     // Enregistrez le document Preferences
     await preferences.save();
+    await addNumbrxp(id, 450, req, res);
+    await verificationNiveau(id, req, res);
 
     const updatedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
@@ -50,14 +54,14 @@ module.exports.AddPreferences = async (req, res) => {
       },
     }, { new: true });
 
-    const xp = await xpModel.findOne({ user: id });
-    if (xp) {
-      xp.pointsGagnes += 450;
-      await xp.save();
-    }
+    // const xp = await xpModel.findOne({ user: id });
+    // if (xp) {
+    //   xp.pointsGagnes += 450;
+    //   await xp.save();
+    // }
+
 
     res.status(200).json(updatedUser);
-
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

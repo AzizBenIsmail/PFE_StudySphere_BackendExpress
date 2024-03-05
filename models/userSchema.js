@@ -6,6 +6,7 @@ const preferencesSchema = require('./preferencesSchema');
 const XP = require('../models/xpSchema');
 const Niveau = require('../models/niveauSchema');
 const Badge = require('../models/badgeSchema');
+const Notification = require('../models/notificationSchema');
 
 userSchema = new mongoose.Schema({
   nom: String, // nom CL/F/C/M/A
@@ -27,6 +28,7 @@ userSchema = new mongoose.Schema({
   archivage: { type: mongoose.Schema.Types.ObjectId, ref: 'Archivage' }, // Reference to Archivage
   preferences: { type: mongoose.Schema.Types.ObjectId, ref: 'Preferences' },
   xp: { type: mongoose.Schema.Types.ObjectId, ref: 'XP' },
+  notification: { type: mongoose.Schema.Types.ObjectId, ref: 'Notification' },
 
 }, { timestamps: true })
 
@@ -46,6 +48,19 @@ userSchema.pre('save', async function (next) {
     User.statu = false
     User.createdAt = new Date()
     User.updatedAt = new Date()
+
+    // Créer la notification pour le nouvel utilisateur
+    const newNotification = new Notification({
+      content: 'Bienvenue à notre plateforme!',
+      createdAt: new Date(),
+      type: "message",
+      read : false,
+      recipient: User._id,
+    });
+
+    await newNotification.save();
+
+    User.notification = newNotification._id;
 
     const badge = await Badge.findOne({ nom: "Bienvenu" }); // Trouver le niveau initial
     //creation xp

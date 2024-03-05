@@ -17,6 +17,7 @@ var usersRouter = require('./routes/users');
 var xpRouter = require('./routes/xp');
 var badgeRouter = require('./routes/badge');
 var niveauRouter = require('./routes/niveau');
+var notificationRouter = require('./routes/notification');
 
 
 var app = express();
@@ -65,6 +66,7 @@ app.use('/pref', prefRouter);
 app.use('/xp', xpRouter);
 app.use('/badge', badgeRouter);
 app.use('/niveau', niveauRouter);
+app.use('/notification', notificationRouter);
 
 // ...
 

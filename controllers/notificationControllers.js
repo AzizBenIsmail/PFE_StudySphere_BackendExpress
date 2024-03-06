@@ -84,3 +84,37 @@ module.exports.getAllNotifications = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Marquer une notification comme lue
+module.exports.markNotificationAsRead = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const notification = await Notification.findById(id);
+
+    // Vérifiez si la notification existe
+    if (!notification) {
+      return res.status(404).json({ message: "Notification introuvable" });
+    }
+
+    // Marquez la notification comme lue
+    notification.read = true;
+    await notification.save();
+
+    res.status(200).json({ message: "Notification marquée comme lue avec succès" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports.markNotificationAsRead = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const notification = await Notification.findByIdAndUpdate(id, { read: true }, { new: true });
+    if (!notification) {
+      return res.status(404).json({ message: "Notification introuvable" });
+    }
+    res.status(200).json({ message: "Notification marquée comme lue avec succès" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

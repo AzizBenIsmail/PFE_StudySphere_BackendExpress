@@ -8,7 +8,6 @@ const session = require('express-session');
 require('./controllers/init');
 
 require("dotenv").config(); //configuration dotenv
-const mongoose = require('mongoose')
 
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
@@ -18,23 +17,12 @@ var xpRouter = require('./routes/xp');
 var badgeRouter = require('./routes/badge');
 var niveauRouter = require('./routes/niveau');
 var notificationRouter = require('./routes/notification');
+const { connectToMongoDB } = require('./db/db')
 
 
 var app = express();
 
-mongoose.set('strictQuery', false);
-mongoose.connect(process.env.URL_MONGO, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(
-  () => {
-    console.log('connect to BD');
-  }
-).catch(
-  (error) => {
-    console.log(error.message);
-  }
-);
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -71,6 +59,7 @@ app.use('/notification', notificationRouter);
 // ...
 
 const server = http.createServer(app);
-server.listen(5000, () => { console.log("app is running on port 5000") });
+server.listen(5000, () => {connectToMongoDB();
+  console.log("app is running on port 5000") });
 
 module.exports = app;

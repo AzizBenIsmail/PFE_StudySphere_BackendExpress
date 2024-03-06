@@ -28,13 +28,17 @@ userSchema = new mongoose.Schema({
   archivage: { type: mongoose.Schema.Types.ObjectId, ref: 'Archivage' }, // Reference to Archivage
   preferences: { type: mongoose.Schema.Types.ObjectId, ref: 'Preferences' },
   xp: { type: mongoose.Schema.Types.ObjectId, ref: 'XP' },
-  notification: { type: mongoose.Schema.Types.ObjectId, ref: 'Notification' },
+  notifications: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notification' }],
 
 }, { timestamps: true })
 
 //apres la creation
 userSchema.post('save', function (doc, next) {
   console.log('new user was created & saved')
+  // const User = this
+  // if ( User.role === 'client') {
+  //   User.image_user = "client.png"
+  // }
   next()
 })
 
@@ -46,6 +50,7 @@ userSchema.pre('save', async function (next) {
     const User = this
     User.password = await bcrypt.hash(User.password, salt)
     User.statu = false
+
     User.createdAt = new Date()
     User.updatedAt = new Date()
 
@@ -60,7 +65,7 @@ userSchema.pre('save', async function (next) {
 
     await newNotification.save();
 
-    User.notification = newNotification._id;
+    User.notifications = newNotification._id;
 
     const badge = await Badge.findOne({ nom: "Bienvenu" }); // Trouver le niveau initial
     //creation xp

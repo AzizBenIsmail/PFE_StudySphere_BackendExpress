@@ -1,3 +1,4 @@
+const User = require('../models/userSchema');
 const Notification = require('../models/notificationSchema');
 
 // Créer une nouvelle notification
@@ -8,17 +9,24 @@ module.exports.createNotification = async (req, res) => {
     const notification = new Notification({ recipient, content, type });
     const newNotification = await notification.save();
 
+    // Ajouter la notification à l'utilisateur correspondant
+    await User.updateOne({ _id: recipient }, { $push: { notifications: newNotification._id } });
+
     res.status(201).json(newNotification);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Récupérer toutes les notifications
-module.exports.getAllNotifications = async (req, res) => {
+// Récupérer toutes les notifications d'un utilisateur
+module.exports.getUserNotifications = async (req, res) => {
   try {
-    const notifications = await Notification.find().populate('recipient');
-    res.status(200).json(notifications);
+    const userId = req.params.userId;
+    const user = await User.findById(userId).populate('notifications');
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur introuvable" });
+    }
+    res.status(200).json(user.notifications);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -63,6 +71,15 @@ module.exports.deleteNotification = async (req, res) => {
     }
     await Notification.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Notification supprimée avec succès" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports.getAllNotifications = async (req, res) => {
+  try {
+    const notifications = await Notification.find().populate('recipient');
+    res.status(200).json(notifications);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

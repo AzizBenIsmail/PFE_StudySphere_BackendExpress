@@ -9,5 +9,7 @@ router.get("/notification/:userId",requireAuthUser, notification.getUserNotifica
 router.get("/:id",requireAuthUser, notification.getNotificationById);
 router.put("/:id",requireAuthUser, notification.updateNotification);
 router.delete("/:id",requireAuthUser, notification.deleteNotification);
+router.put("/:id/read", requireAuthUser, notification.markNotificationAsRead);
+router.put('/:id/markAsRead', notification.markNotificationAsRead);
 
 module.exports = router;

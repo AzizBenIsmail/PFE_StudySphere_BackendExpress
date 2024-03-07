@@ -49,7 +49,7 @@ module.exports.AddPreferences = async (req, res) => {
     await addNumbrxp(id, 450, req, res);
     await verificationNiveau(id, req, res);
 
-    await addNotification( user._id,"+450 XP grave a preference","XP", req, res);
+    await addNotification( user._id,"+450 XP grave a preference","XP","bienvenu", req, res);
 
 
     const updatedUser = await userModel.findByIdAndUpdate(id, {

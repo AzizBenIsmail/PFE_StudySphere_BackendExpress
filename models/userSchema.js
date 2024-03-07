@@ -58,7 +58,7 @@ userSchema.pre('save', async function (next) {
     const newNotification = new Notification({
       content: 'Bienvenue à notre plateforme!',
       createdAt: new Date(),
-      type: "message",
+      type: "Bienvenue",
       read : false,
       recipient: User._id,
     });

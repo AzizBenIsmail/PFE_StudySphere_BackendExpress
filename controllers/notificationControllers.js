@@ -18,6 +18,20 @@ module.exports.createNotification = async (req, res) => {
   }
 };
 
+module.exports.addNotification = async (recipient, content, type , req, res) => {
+  try {
+
+    const notification = new Notification({ recipient, content, type });
+    const newNotification = await notification.save();
+
+    // Ajouter la notification à l'utilisateur correspondant
+    await User.updateOne({ _id: recipient }, { $push: { notifications: newNotification._id } });
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // Récupérer toutes les notifications d'un utilisateur
 module.exports.getUserNotifications = async (req, res) => {
   try {
@@ -106,10 +120,10 @@ module.exports.markNotificationAsRead = async (req, res) => {
   }
 };
 
-module.exports.markNotificationAsRead = async (req, res) => {
+module.exports.markNotificationAsvu= async (req, res) => {
   try {
     const { id } = req.params;
-    const notification = await Notification.findByIdAndUpdate(id, { read: true }, { new: true });
+    const notification = await Notification.findByIdAndUpdate(id, { vu: true }, { new: true });
     if (!notification) {
       return res.status(404).json({ message: "Notification introuvable" });
     }

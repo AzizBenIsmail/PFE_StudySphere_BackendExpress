@@ -4,9 +4,9 @@ const Notification = require('../models/notificationSchema');
 // Créer une nouvelle notification
 module.exports.createNotification = async (req, res) => {
   try {
-    const { recipient, content, type } = req.body;
+    const { recipient, content, type , url } = req.body;
 
-    const notification = new Notification({ recipient, content, type });
+    const notification = new Notification({ recipient, content, type, url});
     const newNotification = await notification.save();
 
     // Ajouter la notification à l'utilisateur correspondant
@@ -18,10 +18,10 @@ module.exports.createNotification = async (req, res) => {
   }
 };
 
-module.exports.addNotification = async (recipient, content, type , req, res) => {
+module.exports.addNotification = async (recipient, content, type ,url, req, res) => {
   try {
 
-    const notification = new Notification({ recipient, content, type });
+    const notification = new Notification({ recipient, content, type ,url });
     const newNotification = await notification.save();
 
     // Ajouter la notification à l'utilisateur correspondant

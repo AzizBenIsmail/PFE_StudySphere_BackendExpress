@@ -3,6 +3,7 @@ const xpModel = require('../models/xpSchema')
 const preferencesModel = require('../models/preferencesSchema')
 const { addNumbrxp } = require('./xpControllers');
 const { verificationNiveau } = require('./niveauControllers') // Assurez-vous que le chemin d'importation est correct
+const { addNotification } = require('./notificationControllers') // Assurez-vous que le chemin d'importation est correct
 
 module.exports.AddPreferences = async (req, res) => {
   try {
@@ -47,6 +48,9 @@ module.exports.AddPreferences = async (req, res) => {
     await preferences.save();
     await addNumbrxp(id, 450, req, res);
     await verificationNiveau(id, req, res);
+
+    await addNotification( user._id,"+450 XP grave a preference","XP", req, res);
+
 
     const updatedUser = await userModel.findByIdAndUpdate(id, {
       $set: {

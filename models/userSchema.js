@@ -60,6 +60,7 @@ userSchema.pre('save', async function (next) {
       createdAt: new Date(),
       type: "Bienvenue",
       read : false,
+      url: "bienvenu",
       recipient: User._id,
     });
 

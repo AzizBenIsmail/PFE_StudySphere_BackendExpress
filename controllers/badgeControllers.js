@@ -1,5 +1,9 @@
 const Badge = require('../models/badgeSchema');
 const fs = require('fs')
+const User = require('../models/userSchema')
+const XP = require('../models/xpSchema')
+const { addNotification } = require('./notificationControllers') // Assurez-vous que le chemin d'importation est correct
+const Notification = require('../models/notificationSchema');
 
 // Créer un nouveau badge
 exports.createBadge = async (req, res) => {
@@ -83,3 +87,35 @@ exports.deleteBadge = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+module.exports.affecterBadgeUtilisateur = async (userId, badgeNom, req, res) => {
+  try {
+    // Rechercher l'utilisateur
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error('Utilisateur introuvable');
+    }
+    // Rechercher le badge par son nom
+    const badge = await Badge.findOne({ nom: badgeNom });
+    if (!badge) {
+      throw new Error(`Badge avec le nom '${badgeNom}' non trouvé`);
+    }
+
+    // Vérifier si l'utilisateur a déjà ce badge
+    const xp = await XP.findOne({ user: userId });
+    if (xp.badgeIds.includes(badge._id)) {
+      throw new Error(`L'utilisateur a déjà le badge '${badgeNom}'`);
+    }
+
+    // Ajouter le badge aux XP de l'utilisateur
+    xp.badgeIds.push(badge._id);
+    await xp.save();
+
+    // Créer une notification pour informer l'utilisateur du badge attribué
+    await addNotification(user._id, `Vous avez obtenu le badge '${badgeNom}'!`, "Badge", "bienvenue", req, res);
+    return { message: `Badge '${badgeNom}' attribué avec succès à l'utilisateur` };
+
+  } catch (error) {
+    throw error;
+  }
+}

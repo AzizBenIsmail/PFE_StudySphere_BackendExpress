@@ -5,6 +5,14 @@ const http = require("http");
 const cors = require('cors');
 const logMiddleware = require('./middlewares/authLogMiddleware');
 const session = require('express-session');
+const multer = require("multer");
+const { fileURLToPath } = require('url');
+const path = require("path");
+
+
+const { app, server } = require("./socket/socket.js");
+
+
 require('./controllers/init');
 
 require("dotenv").config(); //configuration dotenv
@@ -17,10 +25,12 @@ var xpRouter = require('./routes/xp');
 var badgeRouter = require('./routes/badge');
 var niveauRouter = require('./routes/niveau');
 var notificationRouter = require('./routes/notification');
-const { connectToMongoDB } = require('./db/db')
+var messageRouter = require('./routes/message');
+const { connectToMongoDB } = require('./db/db');
+const { default: Message } = require('./models/messageSchema');
 
 
-var app = express();
+//var app = express();
 
 
 
@@ -47,6 +57,62 @@ app.use(cors({
   credentials: true
 }));
 
+
+
+
+
+
+// Multer configuration for handling any type of file
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    // Check the file type and set the destination accordingly
+    if (file.mimetype.startsWith('image')) {
+      cb(null, 'public/images/');
+    } else if (file.mimetype.startsWith('video')) {
+      cb(null, 'public/videos/');
+    } else {
+      cb(null, 'public/files/');
+    }
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+
+// Debugging: Log current directory path
+const currentDirname = path.dirname(__filename);
+console.log("Directory path:", currentDirname);
+
+// Serve static files from the 'public/videos' directory
+const publicVideosDirectoryPath = path.join(currentDirname, 'public/videos');
+app.use(express.static(publicVideosDirectoryPath));
+
+// Serve static files from the 'public/files' directory
+const publicFilesDirectoryPath = path.join(currentDirname, 'public/files');
+app.use(express.static(publicFilesDirectoryPath));
+
+// Serve static files from the 'public/images' directory
+const publicImagesDirectoryPath = path.join(currentDirname, 'public/images');
+app.use(express.static(publicImagesDirectoryPath));
+
+
+
+
+
+// Use the upload middleware to handle any type of file
+app.use(upload.single("file"));
+
+
+
+
+
+
+
+
+
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/user', usersRouter);
@@ -55,11 +121,14 @@ app.use('/xp', xpRouter);
 app.use('/badge', badgeRouter);
 app.use('/niveau', niveauRouter);
 app.use('/notification', notificationRouter);
+app.use('/message', messageRouter)
 
 // ...
 
-const server = http.createServer(app);
-server.listen(5000, () => {connectToMongoDB();
-  console.log("app is running on port 5000") });
+// Start the server
+server.listen(5000, () => {
+  connectToMongoDB();
+  console.log("app is running on port 5000");
+});
 
 module.exports = app;

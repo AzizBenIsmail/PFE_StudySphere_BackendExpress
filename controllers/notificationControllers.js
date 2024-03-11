@@ -32,15 +32,13 @@ module.exports.addNotification = async (recipient, content, type ,url, req, res)
   }
 };
 
-// Récupérer toutes les notifications d'un utilisateur
+// Récupérer toutes les notifications d'un utilisateur triées par date la plus récente
 module.exports.getUserNotifications = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const user = await User.findById(userId).populate('notifications');
-    if (!user) {
-      return res.status(404).json({ message: "Utilisateur introuvable" });
-    }
-    res.status(200).json(user.notifications);
+    const notifications = await Notification.find({ recipient: userId })
+    .sort({ createdAt: -1 }); // Trie par date de création décroissante (plus récente en premier)
+    res.status(200).json(notifications);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

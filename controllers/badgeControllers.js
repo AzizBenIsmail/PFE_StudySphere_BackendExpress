@@ -1,4 +1,5 @@
 const Badge = require('../models/badgeSchema');
+const fs = require('fs')
 
 // Créer un nouveau badge
 exports.createBadge = async (req, res) => {
@@ -73,6 +74,10 @@ exports.deleteBadge = async (req, res) => {
       return res.status(404).json({ message: "Badge introuvable" });
     }
     await Badge.findByIdAndDelete(req.params.id);
+    if (badge.image_badge) {
+      const imagePath = `public/images/Badges/${badge.image_badge}`;
+      fs.unlinkSync(imagePath); // Supprimer le fichier
+    }
     res.status(200).json({ message: "Badge supprimé avec succès" });
   } catch (error) {
     res.status(500).json({ message: error.message });

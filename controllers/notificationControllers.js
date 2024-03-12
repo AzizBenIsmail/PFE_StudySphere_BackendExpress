@@ -77,11 +77,21 @@ module.exports.updateNotification = async (req, res) => {
 // Supprimer une notification
 module.exports.deleteNotification = async (req, res) => {
   try {
+    // Trouver la notification à supprimer
     const notification = await Notification.findById(req.params.id);
     if (!notification) {
       return res.status(404).json({ message: "Notification introuvable" });
     }
+
+    const user = await User.findByIdAndUpdate(
+      notification.recipient,
+      { $pull: { notifications: notification._id } },
+      { new: true }
+    );
+
+    // Supprimer la notification
     await Notification.findByIdAndDelete(req.params.id);
+
     res.status(200).json({ message: "Notification supprimée avec succès" });
   } catch (error) {
     res.status(500).json({ message: error.message });

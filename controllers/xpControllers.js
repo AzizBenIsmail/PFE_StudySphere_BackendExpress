@@ -141,6 +141,7 @@ module.exports.add50xp = async (req, res) => {
     const updatedXP = await xp.save();
 
     await verificationNiveau(req.params.id, req, res);
+    await addNotification( user._id,"+50 XP par un admin","Recompense","Recompense", req, res);
 
 
     res.status(200).json(updatedXP);

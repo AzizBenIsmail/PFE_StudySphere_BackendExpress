@@ -5,6 +5,7 @@ const User = require('../models/userSchema'); // Importer le modèle User si ce 
 const Niveau = require('../models/niveauSchema'); // Importer le modèle Niveau si ce n'est pas déjà fait
 const Badge = require('../models/badgeSchema'); // Importer le modèle Badge si ce n'est pas déjà fait
 const { verificationNiveau } = require('./niveauControllers');
+const { addNotification } = require('./notificationControllers')
 
 module.exports.createXP = async (req, res) => {
   try {
@@ -165,6 +166,7 @@ module.exports.delete50xp = async (req, res) => {
     const updatedXP = await xp.save();
 
     await verificationNiveau(req.params.id, req, res);
+    await addNotification( user._id,"-50 XP par un admin","advertisement","advertisement", req, res);
 
     res.status(200).json(updatedXP);
   } catch (error) {

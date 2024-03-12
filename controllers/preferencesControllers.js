@@ -51,7 +51,7 @@ module.exports.AddPreferences = async (req, res) => {
     await addNumbrxp(id, 450, req, res);
     await verificationNiveau(id, req, res);
 
-    await addNotification( user._id,"+450 XP grave a preference","XP","bienvenu", req, res);
+    await addNotification( user._id,"+450 XP grave a preference","recompense","recompense", req, res);
 
     const updatedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
@@ -59,7 +59,7 @@ module.exports.AddPreferences = async (req, res) => {
       },
     }, { new: true });
 
-    await affecterBadgeUtilisateur(id, "Recommendation", req, res);
+    await affecterBadgeUtilisateur(id, "Recommendation","recompense","recompense", req, res);
 
     res.status(200).json(updatedUser);
   } catch (error) {

@@ -90,7 +90,7 @@ module.exports.deleteNotification = async (req, res) => {
 
 module.exports.getAllNotifications = async (req, res) => {
   try {
-    const notifications = await Notification.find().populate('recipient');
+    const notifications = await Notification.find().populate('recipient').sort({ createdAt: -1 });
     res.status(200).json(notifications);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -51,7 +51,7 @@ module.exports.AddPreferences = async (req, res) => {
     await addNumbrxp(id, 450, req, res);
     await verificationNiveau(id, req, res);
 
-    await addNotification( user._id,"+450 XP grave a preference","recompense","recompense", req, res);
+    await addNotification( user._id,"Félicitations ! Vos préférences ont été finalisées de manière satisfaisante.","préférences",`preferences/?xpGagne=450`, req, res);
 
     const updatedUser = await userModel.findByIdAndUpdate(id, {
       $set: {

@@ -38,7 +38,6 @@ var badgeRouter = require("./routes/badge");
 var niveauRouter = require("./routes/niveau");
 var notificationRouter = require("./routes/notification");
 var messageRouter = require("./routes/message");
-const { connectToMongoDB } = require("./db/db");
 const { default: Message } = require("./models/messageSchema");
 
 //var app = express();

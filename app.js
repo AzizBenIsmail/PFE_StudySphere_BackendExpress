@@ -85,7 +85,7 @@ app.use("/xp", xpRouter);
 app.use("/badge", badgeRouter);
 app.use("/niveau", niveauRouter);
 app.use("/notification", notificationRouter);
-app.use("/message", messageRouter);
+app.use("/messages", messageRouter);
 
 // ...
 

@@ -515,7 +515,7 @@ module.exports.updateCenterByID = async (req, res, next) => {
 
 module.exports.getUsersForSidebar = async (req, res) => {
 	try {
-		const loggedInUserId = req.user._id;
+		const loggedInUserId = req.session.user._id;
 
 		const filteredUsers = await userModel.find({ _id: { $ne: loggedInUserId } }).select("-password");
 

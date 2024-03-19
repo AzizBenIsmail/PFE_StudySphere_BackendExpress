@@ -59,7 +59,7 @@ module.exports.AddPreferences = async (req, res) => {
       },
     }, { new: true });
 
-    await affecterBadgeUtilisateur(id, "Recommendation","recompense","recompense", req, res);
+    await affecterBadgeUtilisateur(id, "Recommendation","recompense","BadgesNiveauXp", req, res);
 
     res.status(200).json(updatedUser);
   } catch (error) {

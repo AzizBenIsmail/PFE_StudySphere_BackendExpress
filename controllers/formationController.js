@@ -4,7 +4,7 @@ const Formation = require('../models/formationSchema');
 exports.createFormation = async (req, res) => {
   try {
     const formation = await Formation.create(req.body);
-    res.status(201).json({ success: true, data: formation });
+    res.status(201).json({   formation });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }

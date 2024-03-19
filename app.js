@@ -17,6 +17,7 @@ var xpRouter = require('./routes/xp');
 var badgeRouter = require('./routes/badge');
 var niveauRouter = require('./routes/niveau');
 var notificationRouter = require('./routes/notification');
+var formationRouter = require('./routes/formation');
 const { connectToMongoDB } = require('./db/db')
 
 
@@ -55,6 +56,8 @@ app.use('/xp', xpRouter);
 app.use('/badge', badgeRouter);
 app.use('/niveau', niveauRouter);
 app.use('/notification', notificationRouter);
+app.use('/formation', formationRouter);
+
 
 // ...
 

@@ -68,9 +68,9 @@ module.exports.getAllXP = async (req, res) => {
 
 
 // Récupérer un XP par son ID
-module.exports.getXPById = async (req, res) => {
+module.exports.getByCurrUser = async (req, res) => {
   try {
-    const xp = await XP.findById(req.params.id)
+    const xp = await XP.findOne({ user: req.session.user._id })
     .populate('user')
     .populate('niveauAtteint')
     .populate('badgeIds');

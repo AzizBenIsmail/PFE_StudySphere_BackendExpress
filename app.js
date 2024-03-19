@@ -12,6 +12,19 @@ const { upload } = require("./middlewares/uploadFils/uploadFileChat.js");
 
 const { app, server } = require("./socket/socket.js");
 
+require("dotenv").config(); //configuration dotenv
+
+var indexRouter = require('./routes/index');
+var authRouter = require('./routes/auth');
+var prefRouter = require('./routes/pref');
+var usersRouter = require('./routes/users');
+var xpRouter = require('./routes/xp');
+var badgeRouter = require('./routes/badge');
+var niveauRouter = require('./routes/niveau');
+var notificationRouter = require('./routes/notification');
+var formationRouter = require('./routes/formation');
+const { connectToMongoDB } = require('./db/db')
+
 require("./controllers/init");
 
 require("dotenv").config(); //configuration dotenv
@@ -86,6 +99,8 @@ app.use("/badge", badgeRouter);
 app.use("/niveau", niveauRouter);
 app.use("/notification", notificationRouter);
 app.use("/messages", messageRouter);
+app.use('/formation', formationRouter);
+
 
 // ...
 

@@ -5,6 +5,7 @@ const User = require('../models/userSchema'); // Importer le modèle User si ce 
 const Niveau = require('../models/niveauSchema'); // Importer le modèle Niveau si ce n'est pas déjà fait
 const Badge = require('../models/badgeSchema'); // Importer le modèle Badge si ce n'est pas déjà fait
 const { verificationNiveau } = require('./niveauControllers');
+const { addNotification } = require('./notificationControllers')
 
 module.exports.createXP = async (req, res) => {
   try {
@@ -67,9 +68,9 @@ module.exports.getAllXP = async (req, res) => {
 
 
 // Récupérer un XP par son ID
-module.exports.getXPById = async (req, res) => {
+module.exports.getByCurrUser = async (req, res) => {
   try {
-    const xp = await XP.findById(req.params.id)
+    const xp = await XP.findOne({ user: req.session.user._id })
     .populate('user')
     .populate('niveauAtteint')
     .populate('badgeIds');
@@ -140,6 +141,7 @@ module.exports.add50xp = async (req, res) => {
     const updatedXP = await xp.save();
 
     await verificationNiveau(req.params.id, req, res);
+    await addNotification( user._id,"Félicitations ! Vous avez gagné +50 XP ","recompense","reward/?xpGagne=50", req, res);
 
 
     res.status(200).json(updatedXP);
@@ -165,6 +167,7 @@ module.exports.delete50xp = async (req, res) => {
     const updatedXP = await xp.save();
 
     await verificationNiveau(req.params.id, req, res);
+      await addNotification( user._id,"Avertissement concernant la réduction de -50 XP par un admin","advertisement","warning/?xpPerdu=50", req, res);
 
     res.status(200).json(updatedXP);
   } catch (error) {
@@ -182,10 +185,16 @@ module.exports.addNumbrxp = async (id, pointsToAdd, req, res) => {
       return res.status(404).json({ message: "XP introuvable" });
     }
 
-    // Ajouter les points spécifiés
-    existingXP.pointsGagnes += pointsToAdd;
-    await existingXP.save();
-
+    // Vérifier si pointsToAdd est positif ou négatif
+    if (pointsToAdd > 0) {
+      // Si pointsToAdd est positif, envoyer une notification de félicitations
+      existingXP.pointsGagnes += pointsToAdd;
+      await existingXP.save();
+      await addNotification(user._id, `Félicitations ! Vous avez gagné ${pointsToAdd} Xp !`, 'recompense', `reward/?xpGagne=${pointsToAdd}`, req, res);
+    } else if (pointsToAdd < 0) {
+      // Si pointsToAdd est négatif, envoyer une notification d'avertissement
+      await addNotification(user._id, `Attention ! Vous avez perdu ${Math.abs(pointsToAdd)} Xp !`, 'avertissement', `warning/?xpPerdu=${Math.abs(pointsToAdd)}`, req, res);
+    }
 
   } catch (error) {
     res.status(500).json({ message: error.message });

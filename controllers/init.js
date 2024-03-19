@@ -92,15 +92,23 @@ const createDefaultBadge = async () => {
   try {
     const existingBadges = await Badge.find();
     if (existingBadges.length === 0) {
-      const defaultBadge = {
+      const BadgeBienvenu = {
         nom: 'Bienvenu',
         description: 'badge par défaut',
         image_badge: 'Bienvenu.png' // Remplacez par l'URL réelle de l'image du badge
       };
 
-      // Créer et enregistrer le badge par défaut
-      const newBadge = new Badge(defaultBadge);
-      await newBadge.save();
+      const BadgeRecommendation = {
+        nom: 'Recommendation',
+        description: 'badge pour remplier le formulaire de Recommendation',
+        image_badge: 'Recommendation.png' // Remplacez par l'URL réelle de l'image du badge
+      };
+
+      const Bienvenu = new Badge(BadgeBienvenu);
+      await Bienvenu.save();
+
+      const Recommendation = new Badge(BadgeRecommendation);
+      await Recommendation.save();
 
       // console.log('Badge par défaut créé avec succès.');
     } else {

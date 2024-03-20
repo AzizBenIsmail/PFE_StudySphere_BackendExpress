@@ -49,9 +49,10 @@ module.exports.getFormateur = async (req, res, next) => {
   try {
     const users = await userModel.find({ role: 'formateur' })
     if (!users || users.length === 0) {
-      throw new Error('Users not found!')
+      res.status(200).json({ message : 'Users not found!' })
+    }else {
+      res.status(200).json({ users })
     }
-    res.status(200).json({ users })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
@@ -73,9 +74,10 @@ module.exports.getCentre = async (req, res, next) => {
   try {
     const users = await userModel.find({ role: 'centre' })
     if (!users || users.length === 0) {
-      throw new Error('Users not found!')
+      res.status(200).json({ message : 'Users not found!' })
+    }else {
+      res.status(200).json({ users })
     }
-    res.status(200).json({ users })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }

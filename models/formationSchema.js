@@ -3,6 +3,7 @@ const { number } = require('yup')
 
 const formationSchema = new mongoose.Schema({
   titre: { type: String, required: true },
+  image_Formation: String,
   description: { type: String, required: true },
   niveauRequis: { type: String, required: true },
   niveauDengagementRequis: { type: String, required: true },

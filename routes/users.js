@@ -72,7 +72,7 @@ router.put("/active",usersLogMiddleware,requireAuthUser, users.Active);
 router.put("/desactive",usersLogMiddleware,requireAuthUser, users.Desactive);
 
 /* Update User current */
-router.put("/update/:id",usersLogMiddleware, requireAuthUser, users.updateUser);
+router.put("/update/:id",usersLogMiddleware, requireAuthUser,upload.single("image_user"), users.updateUser);
 
 /* Update User by ID */
 router.put("/updatecentre/:id",usersLogMiddleware, requireAuthUser,upload.single("image_user"), users.updateCenterByID);

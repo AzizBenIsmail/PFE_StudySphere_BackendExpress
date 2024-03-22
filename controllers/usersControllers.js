@@ -450,31 +450,41 @@ module.exports.isUserArchived = async (userId) => {
 
 module.exports.updateUser = async (req, res, next) => {
   try {
-    const { nom, prenom , password , email } = req.body
-    console.log(req.body)
-    const { id } = req.params
+    const { nom, prenom, password, email } = req.body;
+    const { id } = req.params;
 
-    const checkIfusertExists = await userModel.findById(id)
-    if (!checkIfusertExists) {
-      throw new Error('user not found !')
+    const checkIfUserExists = await userModel.findById(id);
+    if (!checkIfUserExists) {
+      throw new Error('Utilisateur non trouvé !');
     }
-    const currentDate = new Date()
+
+    const currentDate = new Date();
     const salt = await bcrypt.genSalt();
-    const Pwd = await bcrypt.hash(password, salt);
-    updateedUser = await userModel.findByIdAndUpdate(id, {
-      $set: {
-        password: Pwd,
-        nom,
-        prenom,
-        updatedAt: currentDate,
-        email
-      },
-    }, { new: true })
-    res.status(200).json(updateedUser)
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const updateFields = {
+      password: hashedPassword,
+      nom,
+      prenom,
+      email,
+      updatedAt: currentDate,
+    };
+
+    // Vérifier s'il existe une propriété req.file
+    if (req.file) {
+      const { filename } = req.file;
+      updateFields.image_user = filename;
+    }
+
+    const updatedUser = await userModel.findByIdAndUpdate(id, {
+      $set: updateFields,
+    }, { new: true });
+
+    res.status(200).json(updatedUser);
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ message: error.message });
   }
-}
+};
 
 module.exports.updateCenterByID = async (req, res, next) => {
   try {

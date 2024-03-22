@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(logMiddleware);
 app.use(session({
-  secret: 'net attijari secret',
+  secret: 'net StudySphere secret',
   resave: false,
   saveUninitialized: true,
   cookie: {

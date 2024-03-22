@@ -14,7 +14,7 @@ exports.createFormation = async (req, res) => {
 // Controller pour récupérer toutes les formations
 exports.getFormations = async (req, res) => {
   try {
-    const formations = await Formation.find().populate("centre");
+    const formations = await Formation.find().populate("centre").populate("formateur");
     res.status(200).json({ formations });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });

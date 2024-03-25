@@ -47,17 +47,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(logMiddleware);
-app.use(
-  session({
-    secret: "net attijari secret",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: false, // À définir sur true si vous utilisez HTTPS
-      maxAge: 24 * 60 * 60 * 1000, // Durée de validité du cookie de session (en millisecondes)
-    },
-  })
-);
+app.use(session({
+  secret: 'net StudySphere secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false, // À définir sur true si vous utilisez HTTPS
+    maxAge: 24 * 60 * 60 * 1000, // Durée de validité du cookie de session (en millisecondes)
+  },
+}));
 app.use(express.static("public"));
 
 app.use(

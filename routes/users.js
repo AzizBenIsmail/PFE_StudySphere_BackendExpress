@@ -44,9 +44,6 @@ router.get("/searchUsers",usersLogMiddleware, requireAuthUser, users.searchUsers
 /*get user by id */
 router.get("/User/:id",usersLogMiddleware, requireAuthUser, users.UserByID);
 
-/*get sidebar users */
-router.get("/sidebarUser" ,usersLogMiddleware ,requireAuthUser ,users.getUsersForSidebar );
-
 /* Delete user by ID. */
 router.delete("/:id",usersLogMiddleware, requireAuthUser, users.deleteUser);
 

@@ -229,6 +229,14 @@ const createDefaultFormation = async () => {
       const centerUser = await User.findOne({ nom: '9antra', role: 'centre' });
       const formateurUser = await User.findOne({ nom: 'BenIsmail', role: 'formateur' });
 
+      const Gomycode = await User.findOne({ nom: 'Gomycode', role: 'centre' });
+      const charada = await User.findOne({ nom: 'charada', role: 'formateur' });
+
+      const Circles = await User.findOne({ nom: 'Circles', role: 'centre' });
+      const imen = await User.findOne({ nom: 'imen', role: 'formateur' });
+
+      const hbiba = await User.findOne({ nom: 'hbiba', role: 'formateur' });
+
       if (!centerUser || !formateurUser) {
         console.error('Centre ou formateur par défaut non trouvé.');
         return;
@@ -277,7 +285,7 @@ const createDefaultFormation = async () => {
         dateDebut: new Date('2024-05-01'),
         dateFin: new Date('2024-07-01'),
         centre: centerUser._id,
-        formateur: formateurUser._id,
+        formateur: imen._id,
       };
 
       const BIFormation = {
@@ -299,8 +307,8 @@ const createDefaultFormation = async () => {
         duree: 120, // en minutes
         dateDebut: new Date('2024-06-01'),
         dateFin: new Date('2024-08-01'),
-        centre: centerUser._id,
-        formateur: formateurUser._id,
+        centre: Circles._id,
+        formateur: hbiba._id,
       };
 
       const springBootFormation = {
@@ -322,8 +330,8 @@ const createDefaultFormation = async () => {
         duree: 90, // en minutes
         dateDebut: new Date('2024-07-01'),
         dateFin: new Date('2024-09-01'),
-        centre: centerUser._id,
-        formateur: formateurUser._id,
+        centre: Gomycode._id,
+        formateur: charada._id,
       };
 
       const angularFormation = {
@@ -346,16 +354,14 @@ const createDefaultFormation = async () => {
         dateDebut: new Date('2024-07-01'),
         dateFin: new Date('2024-09-01'),
         centre: centerUser._id,
-        formateur: formateurUser._id,
+        formateur: charada._id,
       };
 
-      const FormationAngular = new Formation(angularFormation);
-      await FormationAngular.save();
-
+      const FormationNodejs = new Formation(Nodejs);
+      await FormationNodejs.save();
 
       const FormationSpringBoot = new Formation(springBootFormation);
       await FormationSpringBoot.save();
-
 
       const FormationBI = new Formation(BIFormation);
       await FormationBI.save();
@@ -363,8 +369,8 @@ const createDefaultFormation = async () => {
       const FormationFlutter = new Formation(FlutterFormation);
       await FormationFlutter.save();
 
-      const FormationNodejs = new Formation(Nodejs);
-      await FormationNodejs.save();
+      const FormationAngular = new Formation(angularFormation);
+      await FormationAngular.save();
 
       console.log('Formation par défaut créée avec succès.');
     } else {

@@ -141,9 +141,73 @@ const createDefaultUser = async () => {
         etat : true,
         role: 'client', // ou le rôle que vous souhaitez attribuer
       });
-
+      const defaultformateurBenIsamil = new User({
+        nom: 'BenIsmail',
+        prenom: 'Mohamed Aziz',
+        email: 'benismail@Studysphere.com',
+        password: 'Sam3oulation', // Assurez-vous de crypter le mot de passe dans un environnement de production
+        image_user: 'BenIsmail.png',
+        etat : true,
+        role: 'formateur', // ou le rôle que vous souhaitez attribuer
+      });
+      const defaultformateurCharada = new User({
+        nom: 'charada',
+        prenom: 'Mohamed Aziz',
+        email: 'charada@Studysphere.com',
+        password: 'Sam3oulation', // Assurez-vous de crypter le mot de passe dans un environnement de production
+        image_user: 'charada.png',
+        etat : true,
+        role: 'formateur', // ou le rôle que vous souhaitez attribuer
+      });
+      const defaultformateurHbiba = new User({
+        nom: 'hbiba',
+        prenom: 'Mzoghi',
+        email: 'hbiba@Studysphere.com',
+        password: 'Sam3oulation', // Assurez-vous de crypter le mot de passe dans un environnement de production
+        image_user: 'hbiba.png',
+        etat : true,
+        role: 'formateur', // ou le rôle que vous souhaitez attribuer
+      });
+      const defaultformateurImen= new User({
+        nom: 'imen',
+        prenom: 'miladi',
+        email: 'imen@Studysphere.com',
+        password: 'Sam3oulation', // Assurez-vous de crypter le mot de passe dans un environnement de production
+        image_user: 'imen.png',
+        etat : true,
+        role: 'formateur', // ou le rôle que vous souhaitez attribuer
+      });
+      const default9antra = new User({
+        nom: '9antra',
+        email: '9antra@Studysphere.com',
+        password: 'Sam3oulation', // Assurez-vous de crypter le mot de passe dans un environnement de production
+        image_user: '9antra.png',
+        etat : true,
+        role: 'centre', // ou le rôle que vous souhaitez attribuer
+      });
+      const defaultGomycode = new User({
+        nom: 'Gomycode',
+        email: 'Gomycode@Studysphere.com',
+        password: 'Sam3oulation', // Assurez-vous de crypter le mot de passe dans un environnement de production
+        image_user: 'Gomycode.png',
+        etat : true,
+        role: 'centre', // ou le rôle que vous souhaitez attribuer
+      });
+      const defaultcircle = new User({
+        nom: 'Circles',
+        email: 'Circles@Studysphere.com',
+        password: 'Sam3oulation', // Assurez-vous de crypter le mot de passe dans un environnement de production
+        image_user: 'Circles.png',
+        etat : true,
+        role: 'centre', // ou le rôle que vous souhaitez attribuer
+      });
       await defaultAdmin.save();
       await defaultUser.save();
+      await default9antra.save();
+      await defaultGomycode.save();
+      await defaultcircle.save();
+      await defaultformateurBenIsamil.save();
+      await defaultformateurCharada.save();
 
       // console.log('Utilisateur par défaut créé avec succès.');
     } else {

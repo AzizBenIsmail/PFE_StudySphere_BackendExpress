@@ -3,6 +3,7 @@ const User = require('../models/userSchema')
 const XP = require('../models/xpSchema')
 const Niveau = require('../models/niveauSchema')
 const Badge = require('../models/badgeSchema')
+const Formation = require('../models/formationSchema')
 
 
 // Fonction pour créer un niveau par défaut
@@ -164,7 +165,7 @@ const createDefaultUser = async () => {
         prenom: 'Mzoghi',
         email: 'hbiba@Studysphere.com',
         password: 'Sam3oulation', // Assurez-vous de crypter le mot de passe dans un environnement de production
-        image_user: 'hbiba.png',
+        image_user: 'hbiba.jpg',
         etat : true,
         role: 'formateur', // ou le rôle que vous souhaitez attribuer
       });
@@ -173,7 +174,7 @@ const createDefaultUser = async () => {
         prenom: 'miladi',
         email: 'imen@Studysphere.com',
         password: 'Sam3oulation', // Assurez-vous de crypter le mot de passe dans un environnement de production
-        image_user: 'imen.png',
+        image_user: 'imen.jpeg',
         etat : true,
         role: 'formateur', // ou le rôle que vous souhaitez attribuer
       });
@@ -208,6 +209,8 @@ const createDefaultUser = async () => {
       await defaultcircle.save();
       await defaultformateurBenIsamil.save();
       await defaultformateurCharada.save();
+      await defaultformateurImen.save();
+      await defaultformateurHbiba.save();
 
       // console.log('Utilisateur par défaut créé avec succès.');
     } else {
@@ -218,11 +221,170 @@ const createDefaultUser = async () => {
   }
 };
 
+const createDefaultFormation = async () => {
+  try {
+    const existingFormation = await Formation.find();
+    if (existingFormation.length === 0) {
+      // Récupérer les ID du centre et du formateur depuis la base de données
+      const centerUser = await User.findOne({ nom: '9antra', role: 'centre' });
+      const formateurUser = await User.findOne({ nom: 'BenIsmail', role: 'formateur' });
+
+      if (!centerUser || !formateurUser) {
+        console.error('Centre ou formateur par défaut non trouvé.');
+        return;
+      }
+
+      const Nodejs = {
+        titre: 'Formation Backend NodeJs',
+        description: 'Formation Backend NodeJs ExressJs MERN',
+        image_Formation: 'Nodejs.jpg',
+        niveauRequis: 'Intermédiaire',
+        niveauDengagementRequis: 'Élevé',
+        competences: 'Connaissance de base en JavaScript',
+        niveauDeDifficulte: 'Moyen',
+        styleEnseignement: 'En ligne',
+        Prix: 'Gratuit',
+        jours: 'Lundi, Mercredi, Vendredi',
+        typeContenu: 'Vidéos, Exercices pratiques',
+        langue: 'Français',
+        emplacement: 'En ligne',
+        sujetInteret: 'Développement web',
+        Tranches_Horaires: 'Matin',
+        duree: 60, // en minutes
+        dateDebut: new Date('2024-04-01'),
+        dateFin: new Date('2024-06-01'),
+        centre: centerUser._id,
+        formateur: formateurUser._id,
+      };
+
+      const FlutterFormation = {
+        titre: 'Formation Flutter',
+        description: 'Formation sur le développement mobile avec Flutter',
+        image_Formation: 'flutter.jpg',
+        niveauRequis: 'Débutant',
+        niveauDengagementRequis: 'Modéré',
+        competences: 'Connaissance de base en programmation',
+        niveauDeDifficulte: 'Facile',
+        styleEnseignement: 'En ligne',
+        Prix: 'Gratuit',
+        jours: 'Mardi, Jeudi',
+        typeContenu: 'Cours, Projets pratiques',
+        langue: 'Anglais',
+        emplacement: 'En ligne',
+        sujetInteret: 'Développement mobile',
+        Tranches_Horaires: 'Soirée',
+        duree: 90, // en minutes
+        dateDebut: new Date('2024-05-01'),
+        dateFin: new Date('2024-07-01'),
+        centre: centerUser._id,
+        formateur: formateurUser._id,
+      };
+
+      const BIFormation = {
+        titre: 'Formation Business Intelligence',
+        description: 'Formation sur les bases de la Business Intelligence',
+        image_Formation: 'bi.jpg',
+        niveauRequis: 'Intermédiaire',
+        niveauDengagementRequis: 'Élevé',
+        competences: 'Connaissance en base de données',
+        niveauDeDifficulte: 'Moyen',
+        styleEnseignement: 'En ligne',
+        Prix: 'Payant',
+        jours: 'Lundi, Mercredi, Vendredi',
+        typeContenu: 'Cours, Études de cas',
+        langue: 'Français',
+        emplacement: 'En ligne',
+        sujetInteret: 'Analyse des données',
+        Tranches_Horaires: 'Matinée',
+        duree: 120, // en minutes
+        dateDebut: new Date('2024-06-01'),
+        dateFin: new Date('2024-08-01'),
+        centre: centerUser._id,
+        formateur: formateurUser._id,
+      };
+
+      const springBootFormation = {
+        titre: 'Formation Spring Boot',
+        description: 'Formation sur le développement avec Spring Boot',
+        image_Formation: 'springboot.jpg',
+        niveauRequis: 'Intermédiaire',
+        niveauDengagementRequis: 'Élevé',
+        competences: 'Connaissance en Java, bases de données',
+        niveauDeDifficulte: 'Moyen',
+        styleEnseignement: 'En ligne',
+        Prix: 'Payant',
+        jours: 'Mardi, Jeudi, Samedi',
+        typeContenu: 'Cours, Projets pratiques',
+        langue: 'Anglais',
+        emplacement: 'En ligne',
+        sujetInteret: 'Développement Web',
+        Tranches_Horaires: 'Soirée',
+        duree: 90, // en minutes
+        dateDebut: new Date('2024-07-01'),
+        dateFin: new Date('2024-09-01'),
+        centre: centerUser._id,
+        formateur: formateurUser._id,
+      };
+
+      const angularFormation = {
+        titre: 'Formation Angular',
+        description: 'Formation sur le développement avec Angular',
+        image_Formation: 'angular.jpg',
+        niveauRequis: 'Intermédiaire',
+        niveauDengagementRequis: 'Élevé',
+        competences: 'Connaissance en HTML, CSS, JavaScript',
+        niveauDeDifficulte: 'Moyen',
+        styleEnseignement: 'En ligne',
+        Prix: 'Payant',
+        jours: 'Lundi, Mercredi, Vendredi',
+        typeContenu: 'Cours, Projets pratiques',
+        langue: 'Anglais',
+        emplacement: 'En ligne',
+        sujetInteret: 'Développement Web',
+        Tranches_Horaires: 'Soirée',
+        duree: 90, // en minutes
+        dateDebut: new Date('2024-07-01'),
+        dateFin: new Date('2024-09-01'),
+        centre: centerUser._id,
+        formateur: formateurUser._id,
+      };
+
+      const FormationAngular = new Formation(angularFormation);
+      await FormationAngular.save();
+
+
+      const FormationSpringBoot = new Formation(springBootFormation);
+      await FormationSpringBoot.save();
+
+
+      const FormationBI = new Formation(BIFormation);
+      await FormationBI.save();
+
+      const FormationFlutter = new Formation(FlutterFormation);
+      await FormationFlutter.save();
+
+      const FormationNodejs = new Formation(Nodejs);
+      await FormationNodejs.save();
+
+      console.log('Formation par défaut créée avec succès.');
+    } else {
+      console.log('Des formations existent déjà. Aucune formation par défaut n\'a été créée.');
+    }
+  } catch (error) {
+    console.error('Erreur lors de la création de la formation par défaut :', error);
+  }
+};
+
+// Appeler la fonction pour créer la formation par défaut
+
+
 // Appeler les fonctions pour créer le niveau et l'utilisateur par défaut
 const createDefaultData = async () => {
   await createDefaultBadge();
   await createDefaultNiveau();
   await createDefaultUser();
+  await createDefaultFormation();
+
 };
 
 // Appeler la fonction pour créer les données par défaut

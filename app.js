@@ -38,7 +38,7 @@ var badgeRouter = require("./routes/badge");
 var niveauRouter = require("./routes/niveau");
 var notificationRouter = require("./routes/notification");
 var messageRouter = require("./routes/message");
-const { connectToMongoDB } = require("./db/db");
+
 const { default: Message } = require("./models/messageSchema");
 
 //var app = express();
@@ -86,6 +86,10 @@ app.use(express.static(publicFilesDirectoryPath));
 // Serve static files from the 'public/images' directory
 const publicImagesDirectoryPath = path.join(currentDirname, "public/images");
 app.use(express.static(publicImagesDirectoryPath));
+
+// Serve static files from the 'public/records' directory
+const publicRecordsDirectoryPath = path.join(currentDirname, "public/records");
+app.use(express.static(publicRecordsDirectoryPath));
 
 // Use the upload middleware to handle any type of file
 app.use(upload.single("file"));

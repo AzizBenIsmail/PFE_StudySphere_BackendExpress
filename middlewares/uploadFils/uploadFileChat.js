@@ -8,8 +8,10 @@ const storage = multer.diskStorage({
       cb(null, 'public/images/');
     } else if (file.mimetype.startsWith('video')) {
       cb(null, 'public/videos/');
+    } else if (file.mimetype.startsWith('file')) { // Corrected condition for audio files
+     cb(null, 'public/files/');
     } else {
-      cb(null, 'public/files/');
+      cb(null, 'public/records/');
     }
   },
   filename: function (req, file, cb) {

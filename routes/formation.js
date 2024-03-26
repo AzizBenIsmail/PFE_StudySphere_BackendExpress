@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const formationController = require('../controllers/formationController');
-const upload = require("../middlewares/uploadFils/uploadImagesUsers");
+const upload = require("../middlewares/uploadFils/uploadFormations");
 
 // Routes pour les différentes opérations CRUD
 router.post('/',upload.single("image_Formation"), formationController.createFormation); // Créer une nouvelle formation

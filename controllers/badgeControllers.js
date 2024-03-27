@@ -88,7 +88,7 @@ exports.deleteBadge = async (req, res) => {
   }
 }
 
-module.exports.affecterBadgeUtilisateur = async (userId, badgeNom, req, res) => {
+module.exports.affecterBadgeUtilisateur = async (userId, badgeNom,url, req, res) => {
   try {
     // Rechercher l'utilisateur
     const user = await User.findById(userId)
@@ -107,7 +107,7 @@ module.exports.affecterBadgeUtilisateur = async (userId, badgeNom, req, res) => 
       throw new Error(`L'utilisateur a déjà le badge '${badgeNom}'`)
     }
 
-    await addNotification(user._id, `Vous avez obtenu le badge ${badgeNom}!`, 'Badge', 'bienvenue', req, res)
+    await addNotification(user._id, `Vous avez obtenu le badge ${badgeNom}!`, 'Badge', 'BadgesNiveauXp', req, res)
 
     xp.badgeIds.push(badge._id)
     await xp.save()

@@ -157,7 +157,7 @@ module.exports.login_post = async (req, res) => {
   try {
     const user = await userModel.login(email, password)
     if (user && user.statu === "true") {
-      await addNotification( user._id,"Alert ! Une nouvelle connexion a été détectée sur votre compte.","Securite",`reward/?xpGagne=450`, req, res);
+      await addNotification( user._id,"Alert ! Une nouvelle connexion a été détectée sur votre compte.","Securite",`warningAuth`, req, res);
     }
     const updatedUser = await userModel.findByIdAndUpdate(user._id, {
         $set: {

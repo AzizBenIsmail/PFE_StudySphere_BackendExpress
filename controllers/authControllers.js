@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const sgMail = require('@sendgrid/mail')
 const nodemailer = require('nodemailer')
 const bcrypt = require('bcrypt')
+const { addNotification } = require('./notificationControllers')
 
 const maxAge = 2 * 60 * 60 // 2 heures
 
@@ -155,6 +156,9 @@ module.exports.login_post = async (req, res) => {
   const { email, password } = req.body
   try {
     const user = await userModel.login(email, password)
+    if (user && user.statu === "true") {
+      await addNotification( user._id,"Alert ! Une nouvelle connexion a été détectée sur votre compte.","Securite",`reward/?xpGagne=450`, req, res);
+    }
     const updatedUser = await userModel.findByIdAndUpdate(user._id, {
         $set: {
           statu: true,

@@ -459,11 +459,11 @@ module.exports.updateUser = async (req, res, next) => {
     }
 
     const currentDate = new Date();
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // const salt = await bcrypt.genSalt();
+    // const hashedPassword = await bcrypt.hash(password, salt);
 
     const updateFields = {
-      password: hashedPassword,
+      // password: hashedPassword,
       nom,
       prenom,
       email,

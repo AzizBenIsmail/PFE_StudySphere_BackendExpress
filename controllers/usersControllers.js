@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const fs = require('fs')
 const XP = require('../models/xpSchema')
 const pref = require('../models/preferencesSchema')
+const jwt = require('jsonwebtoken')
 
 module.exports.getUsers = async (req, res, next) => {
   try {
@@ -524,5 +525,85 @@ module.exports.updateCenterByID = async (req, res, next) => {
     res.status(200).json(updatedUser);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+
+module.exports.forgetpasswordByAdmin = async (req, res) => {
+  try {
+    const id = req.params.id;
+    // console.log("id",id)
+    const { password } = req.body;
+    const checkIfUserExists = await userModel.findById(id);
+
+    if (!checkIfUserExists) {
+      return res.status(200).json({ message: 'User non enregistré' });
+    }
+
+    const currentDate = new Date();
+
+    if (!password || password.trim() === '') {
+      return res.status(200).json({ message: 'Le mot de passe est manquant ou vide' });
+    }
+      console.log(password)
+      const salt = await bcrypt.genSalt();
+      const Pwd = await bcrypt.hash(password, salt);
+
+    const updatedUser = await userModel.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          updatedAt: currentDate,
+          password: Pwd,
+        },
+      },
+    );
+
+      console.log(updatedUser);
+      res.status(200).json({
+        message: 'Mot de passe modifié avec succès. Veuillez vérifier votre boîte mail.',
+      });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Une erreur s\'est produite lors de la modification du mot de passe.' });
+  }
+};
+
+module.exports.forgetpassword = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const Password = req.body.user.password;
+    const checkIfUserExists = await userModel.findById(id);
+
+    if (!checkIfUserExists) {
+      return res.status(200).json({ message: 'User non enregistré' });
+    }
+
+    const currentDate = new Date();
+
+    if (!Password || Password.trim() === '') {
+      return res.status(200).json({ message: 'Le mot de passe est manquant ou vide' });
+    }
+
+    const salt = await bcrypt.genSalt();
+    const Pwd = await bcrypt.hash(Password, salt);
+
+    const updatedUser = await userModel.findOneAndUpdate(
+      { id },
+      {
+        $set: {
+          updatedAt: currentDate,
+          password: Pwd,
+        },
+      },
+    );
+
+    console.log(updatedUser);
+    res.status(200).json({
+      message: 'Mot de passe modifié avec succès. Veuillez vérifier votre boîte mail.',
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Une erreur s\'est produite lors de la modification du mot de passe.' });
   }
 };

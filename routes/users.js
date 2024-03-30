@@ -77,5 +77,6 @@ router.put("/update/:id",usersLogMiddleware, requireAuthUser,upload.single("imag
 /* Update User by ID */
 router.put("/updatecentre/:id",usersLogMiddleware, requireAuthUser,upload.single("image_user"), users.updateCenterByID);
 
+router.put("/UpdatePasswordByAdmin/:id",requireAuthUser,users.forgetpasswordByAdmin);
 
 module.exports = router;

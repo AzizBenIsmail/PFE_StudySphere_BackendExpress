@@ -477,7 +477,7 @@ module.exports.updateUser = async (req, res, next) => {
       const { filename } = req.file;
       updateFields.image_user = filename;
 
-      if (checkIfUserExists.image_user) {
+      if (checkIfUserExists.image_user && fs.existsSync(`public/images/Users/${checkIfUserExists.image_user}`)) {
         fs.unlinkSync(`public/images/Users/${checkIfUserExists.image_user}`);
       }
     }
@@ -498,8 +498,8 @@ module.exports.updateCenterByID = async (req, res, next) => {
     const id = req.params.id;
 
     const checkIfUserExists = await userModel.findById(id);
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // const salt = await bcrypt.genSalt();
+    // const hashedPassword = await bcrypt.hash(password, salt);
 
     if (!checkIfUserExists) {
       throw new Error('Utilisateur non trouvé !');
@@ -507,7 +507,7 @@ module.exports.updateCenterByID = async (req, res, next) => {
 
     const currentDate = new Date();
     const updateFields = {
-      password: hashedPassword,
+      // password: hashedPassword,
       nom,
       email,
       updatedAt: currentDate,
@@ -517,6 +517,11 @@ module.exports.updateCenterByID = async (req, res, next) => {
     if (req.file) {
       const { filename } = req.file;
       updateFields.image_user = filename;
+
+      if (checkIfUserExists.image_user && fs.existsSync(`public/images/Users/${checkIfUserExists.image_user}`)) {
+        fs.unlinkSync(`public/images/Users/${checkIfUserExists.image_user}`);
+      }
+
     }
 
     const updatedUser = await userModel.findByIdAndUpdate(id, {

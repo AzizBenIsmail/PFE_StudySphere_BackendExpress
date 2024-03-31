@@ -79,4 +79,6 @@ router.put("/updatecentre/:id",usersLogMiddleware, requireAuthUser,upload.single
 
 router.put("/UpdatePasswordByAdmin/:id",requireAuthUser,users.forgetpasswordByAdmin);
 
+router.put("/UpdatePassword",requireAuthUser,users.forgetpassword);
+
 module.exports = router;

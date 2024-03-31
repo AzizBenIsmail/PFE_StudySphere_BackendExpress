@@ -5,6 +5,7 @@ const fs = require('fs')
 const XP = require('../models/xpSchema')
 const pref = require('../models/preferencesSchema')
 const jwt = require('jsonwebtoken')
+const { addNotification } = require('./notificationControllers')
 
 module.exports.getUsers = async (req, res, next) => {
   try {
@@ -559,7 +560,10 @@ module.exports.forgetpasswordByAdmin = async (req, res) => {
       },
     );
 
-      console.log(updatedUser);
+    await addNotification( id,"Alert ! votre mots de passe a ete modifier par un admin.","Securite",`warningAuth`, req, res);
+
+
+    console.log(updatedUser);
       res.status(200).json({
         message: 'Mot de passe modifié avec succès. Veuillez vérifier votre boîte mail.',
       });
@@ -571,8 +575,10 @@ module.exports.forgetpasswordByAdmin = async (req, res) => {
 
 module.exports.forgetpassword = async (req, res) => {
   try {
-    const id = req.params.id;
-    const Password = req.body.user.password;
+    const id = req.session.user._id;
+    const { password } = req.body;
+    console.log(id,password)
+
     const checkIfUserExists = await userModel.findById(id);
 
     if (!checkIfUserExists) {
@@ -581,15 +587,15 @@ module.exports.forgetpassword = async (req, res) => {
 
     const currentDate = new Date();
 
-    if (!Password || Password.trim() === '') {
+    if (!password || password.trim() === '') {
       return res.status(200).json({ message: 'Le mot de passe est manquant ou vide' });
     }
-
+    console.log(password)
     const salt = await bcrypt.genSalt();
-    const Pwd = await bcrypt.hash(Password, salt);
+    const Pwd = await bcrypt.hash(password, salt);
 
-    const updatedUser = await userModel.findOneAndUpdate(
-      { id },
+    const updatedUser = await userModel.findByIdAndUpdate(
+      id,
       {
         $set: {
           updatedAt: currentDate,
@@ -597,6 +603,9 @@ module.exports.forgetpassword = async (req, res) => {
         },
       },
     );
+
+    await addNotification( id,"Alert ! votre mots de passe a ete modifier.","Securite",`warningAuth`, req, res);
+
 
     console.log(updatedUser);
     res.status(200).json({

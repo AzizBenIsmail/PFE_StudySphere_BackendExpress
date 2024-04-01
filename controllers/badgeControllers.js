@@ -107,7 +107,7 @@ module.exports.affecterBadgeUtilisateur = async (userId, badgeNom,url, req, res)
       throw new Error(`L'utilisateur a déjà le badge '${badgeNom}'`)
     }
 
-    await addNotification(user._id, `Vous avez obtenu le badge ${badgeNom}!`, 'Badge', 'BadgesNiveauXp', req, res)
+    await addNotification(user._id, `Vous avez obtenu le badge ${badgeNom}!`, 'Badge', 'GestionCompte/BadgesNiveauXp', req, res)
 
     xp.badgeIds.push(badge._id)
     await xp.save()

@@ -51,7 +51,7 @@ module.exports.AddPreferences = async (req, res) => {
     await addNumbrxp(id, 450, req, res);
     await verificationNiveau(id, req, res);
 
-    await addNotification( user._id,"Félicitations ! Vos préférences ont été finalisées de manière satisfaisante.","préférences",`reward/?xpGagne=450`, req, res);
+    await addNotification( user._id,"Félicitations ! Vos préférences ont été finalisées de manière satisfaisante.","préférences",`Info/reward/?xpGagne=450`, req, res);
 
     const updatedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
@@ -59,7 +59,7 @@ module.exports.AddPreferences = async (req, res) => {
       },
     }, { new: true });
 
-    await affecterBadgeUtilisateur(id, "Recommendation","recompense","BadgesNiveauXp", req, res);
+    await affecterBadgeUtilisateur(id, "Recommendation","recompense","GestionCompte/BadgesNiveauXp", req, res);
 
     res.status(200).json(updatedUser);
   } catch (error) {

@@ -74,7 +74,7 @@ module.exports.getModerateur = async (req, res, next) => {
 
 module.exports.getCentre = async (req, res, next) => {
   try {
-    const users = await userModel.find({ role: 'centre' })
+    const users = await userModel.find({ role: 'centre' }).populate('preferences');
     if (!users || users.length === 0) {
       res.status(200).json({ message : 'Users not found!' })
     }else {

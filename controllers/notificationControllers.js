@@ -35,7 +35,7 @@ module.exports.addNotification = async (recipient, content, type ,url, req, res)
 // Récupérer toutes les notifications d'un utilisateur triées par date la plus récente
 module.exports.getUserNotifications = async (req, res) => {
   try {
-    const userId = req.params.userId;
+    const userId = req.session.user._id;
     const notifications = await Notification.find({ recipient: userId })
     .sort({ createdAt: -1 }); // Trie par date de création décroissante (plus récente en premier)
     res.status(200).json(notifications);

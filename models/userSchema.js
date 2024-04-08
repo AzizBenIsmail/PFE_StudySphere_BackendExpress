@@ -29,6 +29,7 @@ userSchema = new mongoose.Schema({
   preferences: { type: mongoose.Schema.Types.ObjectId, ref: 'Preferences' },
   xp: { type: mongoose.Schema.Types.ObjectId, ref: 'XP' },
   notifications: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notification' }],
+  Formations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Formation' }],
 
 }, { timestamps: true })
 

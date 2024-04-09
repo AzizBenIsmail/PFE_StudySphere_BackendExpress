@@ -372,6 +372,53 @@ const createDefaultFormation = async () => {
       const FormationAngular = new Formation(angularFormation);
       await FormationAngular.save();
 
+      // Mise à jour des utilisateurs (formateurs et centres) avec l'ID de la nouvelle formation
+      // const Usercenter = await User.findOne({ nom: '9antra', role: 'centre' });
+      // const Userformateur = await User.findOne({ nom: 'BenIsmail', role: 'formateur' });
+      if (centerUser) {
+        centerUser.Formations.push(FormationNodejs._id);
+        await centerUser.save();
+      }
+      if (formateurUser) {
+        formateurUser.Formations.push(FormationNodejs._id);
+        await formateurUser.save();
+      }
+      //--
+      if (centerUser) {
+        centerUser.Formations.push(FormationNodejs._id);
+        await centerUser.save();
+      }
+      if (imen) {
+        imen.Formations.push(FormationNodejs._id);
+        await imen.save();
+      }
+      //--
+      if (Circles) {
+        Circles.Formations.push(FormationNodejs._id);
+        await Circles.save();
+      }
+      if (hbiba) {
+        hbiba.Formations.push(FormationNodejs._id);
+        await hbiba.save();
+      }
+      //--
+      if (Gomycode) {
+        Gomycode.Formations.push(FormationNodejs._id);
+        await Gomycode.save();
+      }
+      if (charada) {
+        charada.Formations.push(FormationNodejs._id);
+        await charada.save();
+      }
+      //--
+      if (centerUser) {
+        centerUser.Formations.push(FormationNodejs._id);
+        await centerUser.save();
+      }
+      if (charada) {
+        charada.Formations.push(FormationNodejs._id);
+        await charada.save();
+      }
       console.log('Formation par défaut créée avec succès.');
     } else {
       console.log('Des formations existent déjà. Aucune formation par défaut n\'a été créée.');

@@ -99,6 +99,21 @@ exports.deleteFormation = async (req, res) => {
     if (!formation) {
       return res.status(404).json({ success: false, error: 'Formation not found' });
     }
+
+    // Rechercher les utilisateurs formateur et centre de la formation supprimée
+    const formateur = await User.findById(formation.formateur);
+    const centre = await User.findById(formation.centre);
+
+    // Retirer l'ID de la formation supprimée des listes de formations des utilisateurs
+    if (formateur) {
+      formateur.Formations = formateur.Formations.filter(id => id.toString() !== formation._id.toString());
+      await formateur.save();
+    }
+    if (centre) {
+      centre.Formations = centre.Formations.filter(id => id.toString() !== formation._id.toString());
+      await centre.save();
+    }
+
     res.status(200).json({ success: true, data: {} });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });

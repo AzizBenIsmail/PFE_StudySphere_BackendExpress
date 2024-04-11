@@ -186,7 +186,7 @@ module.exports.getUser = async (req, res, next) => {
 module.exports.UserByID = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const user = await userModel.findById(id).populate('archivage');
+    const user = await userModel.findById(id).populate('archivage').populate("Formations").populate("preferences");
     if (!user) {
       throw new Error('User not found!');
     }

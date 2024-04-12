@@ -621,3 +621,24 @@ module.exports.forgetpassword = async (req, res) => {
     res.status(500).json({ message: 'Une erreur s\'est produite lors de la modification du mot de passe.' });
   }
 };
+
+module.exports.getCentersByDomain = async (req, res, next) => {
+  try {
+    const domaine = req.param;
+
+    const centers = await userModel.find({ role: 'centre' })
+    .populate({
+      path: 'preferences',
+      match: { domaine_actuelle: domaine }
+    })
+    .exec();
+
+    const centersWithDomain = centers.filter(center => center.preferences !== null);
+
+    res.status(200).json({ centers: centersWithDomain });
+  } catch (error) {
+    console.error('Erreur lors de la recherche des centres par domaine :', error);
+    res.status(500).json({ message: 'Une erreur est survenue lors de la recherche des centres.' });
+  }
+};
+

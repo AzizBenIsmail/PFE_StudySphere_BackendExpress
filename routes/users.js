@@ -44,6 +44,8 @@ router.get("/searchUsers",usersLogMiddleware, requireAuthUser, users.searchUsers
 /*get user by id */
 router.get("/User/:id",usersLogMiddleware, requireAuthUser, users.UserByID);
 
+router.get("/Center/:domaine",usersLogMiddleware, requireAuthUser, users.getCentersByDomain);
+
 /* Delete user by ID. */
 router.delete("/:id",usersLogMiddleware, requireAuthUser, users.deleteUser);
 

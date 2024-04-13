@@ -59,7 +59,7 @@ module.exports.AddPreferences = async (req, res) => {
       },
     }, { new: true });
 
-    await affecterBadgeUtilisateur(id, "Recommendation","recompense","GestionCompte/BadgesNiveauXp", req, res);
+    await affecterBadgeUtilisateur(id, "Recommendation","recompense","AccountManagement/BadgesNiveauXp", req, res);
 
     res.status(200).json(updatedUser);
   } catch (error) {
@@ -97,6 +97,10 @@ module.exports.AddPreferencesCentre = async (req, res) => {
 
     // Enregistrez le document Preferences
     await preferences.save();
+    await addNumbrxp(id, 450, req, res);
+    await verificationNiveau(id, req, res);
+
+    await addNotification( user._id,"Félicitations ! Vos préférences ont été finalisées de manière satisfaisante.","préférences",`Info/reward/?xpGagne=450`, req, res);
 
     // Mettez à jour l'utilisateur avec l'ID des préférences
     const updatedUser = await userModel.findByIdAndUpdate(id, {
@@ -105,12 +109,7 @@ module.exports.AddPreferencesCentre = async (req, res) => {
       },
     }, { new: true });
 
-
-    const xp = await xpModel.findOne({ user: id });
-    if (xp) {
-      xp.pointsGagnes += 450;
-      await xp.save();
-    }
+    await affecterBadgeUtilisateur(id, "Recommendation","recompense","AccountManagement/BadgesNiveauXp", req, res);
 
     res.status(200).json(updatedUser);
   } catch (error) {

@@ -3,33 +3,34 @@ const User = require('../models/userSchema'); // Importer le modèle d'utilisate
 
 exports.createFormation = async (req, res) => {
   try {
-    const { filename } = req.file; // Récupérer le nom du fichier de l'image
-    const formationData = { ...req.body, image_Formation: filename }; // Ajouter le nom du fichier au corps de la requête
+    const { filename } = req.file;
+    const formationData = { ...req.body, image_Formation: filename };
 
-    // Récupérer les ID du formateur et du centre à partir du corps de la requête
     const { formateur, centre } = req.body;
 
-    // Rechercher le formateur et le centre dans la base de données
     const Userformateur = await User.findById(formateur);
-    const Usercentre = await User.findById(centre);
+    let Usercentre = null;
 
-    // Vérifier si le formateur et le centre existent
+    // Si l'ID du centre est fourni, rechercher le centre correspondant dans la base de données
+    if (centre) {
+      Usercentre = await User.findById(centre);
+    } else {
+      // Si aucun ID de centre n'est fourni, affecter une valeur par défaut
+      Usercentre = await User.findById(req.session.user._id); // Assurez-vous d'avoir un champ dans le modèle d'utilisateur pour indiquer le centre par défaut
+    }
+
     if (!Userformateur || !Usercentre) {
       return res.status(404).json({ success: false, error: 'Formateur or centre not found' });
     }
 
-    // Associer le formateur et le centre à la formation
     formationData.formateur = Userformateur._id;
     formationData.centre = Usercentre._id;
 
-    // Créer la formation avec les données fournies
     const formation = await Formation.create(formationData);
 
-    // Ajouter la formation créée aux formateurs et centres respectifs
-    Userformateur.Formations.push(formation._id);
-    Usercentre.Formations.push(formation._id);
-    await Userformateur.save();
-    await Usercentre.save();
+    // Mise à jour des formations pour le formateur et le centre
+    await User.updateOne({ _id: formateur }, { $push: { Formations: formation._id } });
+    await User.updateOne({ _id: Usercentre._id }, { $push: { Formations: formation._id } });
 
     res.status(201).json({ formation });
   } catch (error) {
@@ -106,7 +107,6 @@ exports.updateFormation = async (req, res) => {
   }
 };
 
-// Controller pour supprimer une formation existante
 exports.deleteFormation = async (req, res) => {
   try {
     const formation = await Formation.findByIdAndDelete(req.params.id);
@@ -120,12 +120,16 @@ exports.deleteFormation = async (req, res) => {
 
     // Retirer l'ID de la formation supprimée des listes de formations des utilisateurs
     if (formateur) {
-      formateur.Formations = formateur.Formations.filter(id => id.toString() !== formation._id.toString());
-      await formateur.save();
+      await User.findOneAndUpdate(
+        { _id: formateur._id },
+        { $pull: { Formations: formation._id } }
+      );
     }
     if (centre) {
-      centre.Formations = centre.Formations.filter(id => id.toString() !== formation._id.toString());
-      await centre.save();
+      await User.findOneAndUpdate(
+        { _id: centre._id },
+        { $pull: { Formations: formation._id } }
+      );
     }
 
     res.status(200).json({ success: true, data: {} });
@@ -133,3 +137,4 @@ exports.deleteFormation = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+

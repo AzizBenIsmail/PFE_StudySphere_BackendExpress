@@ -376,48 +376,34 @@ const createDefaultFormation = async () => {
       // const Usercenter = await User.findOne({ nom: '9antra', role: 'centre' });
       // const Userformateur = await User.findOne({ nom: 'BenIsmail', role: 'formateur' });
       if (centerUser) {
-        centerUser.Formations.push(FormationNodejs._id);
-        await centerUser.save();
+        await User.findOneAndUpdate({ _id: centerUser._id }, { $push: { Formations: FormationNodejs._id } });
       }
       if (formateurUser) {
-        formateurUser.Formations.push(FormationNodejs._id);
-        await formateurUser.save();
+        await User.findOneAndUpdate({ _id: formateurUser._id }, { $push: { Formations: FormationNodejs._id } });
       }
-      //--
       if (centerUser) {
-        centerUser.Formations.push(FormationNodejs._id);
-        await centerUser.save();
+        await User.findOneAndUpdate({ _id: centerUser._id }, { $push: { Formations: FormationFlutter._id } });
       }
       if (imen) {
-        imen.Formations.push(FormationNodejs._id);
-        await imen.save();
+        await User.findOneAndUpdate({ _id: imen._id }, { $push: { Formations: FormationFlutter._id } });
       }
-      //--
       if (Circles) {
-        Circles.Formations.push(FormationNodejs._id);
-        await Circles.save();
+        await User.findOneAndUpdate({ _id: Circles._id }, { $push: { Formations: FormationBI._id } });
       }
       if (hbiba) {
-        hbiba.Formations.push(FormationNodejs._id);
-        await hbiba.save();
+        await User.findOneAndUpdate({ _id: hbiba._id }, { $push: { Formations: FormationBI._id } });
       }
-      //--
       if (Gomycode) {
-        Gomycode.Formations.push(FormationNodejs._id);
-        await Gomycode.save();
+        await User.findOneAndUpdate({ _id: Gomycode._id }, { $push: { Formations: FormationSpringBoot._id } });
       }
       if (charada) {
-        charada.Formations.push(FormationNodejs._id);
-        await charada.save();
+        await User.findOneAndUpdate({ _id: charada._id }, { $push: { Formations: FormationSpringBoot._id } });
       }
-      //--
+      if (charada) {
+        await User.findOneAndUpdate({ _id: charada._id }, { $push: { Formations: FormationAngular._id } });
+      }
       if (centerUser) {
-        centerUser.Formations.push(FormationNodejs._id);
-        await centerUser.save();
-      }
-      if (charada) {
-        charada.Formations.push(FormationNodejs._id);
-        await charada.save();
+        await User.findOneAndUpdate({ _id: centerUser._id }, { $push: { Formations: FormationAngular._id } });
       }
       console.log('Formation par défaut créée avec succès.');
     } else {

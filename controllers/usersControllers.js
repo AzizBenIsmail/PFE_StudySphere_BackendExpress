@@ -624,7 +624,7 @@ module.exports.forgetpassword = async (req, res) => {
 
 module.exports.getCentersByDomain = async (req, res, next) => {
   try {
-    const domaine = req.param;
+    const domaine = req.params.domaine;
 
     const centers = await userModel.find({ role: 'centre' })
     .populate({
@@ -634,7 +634,7 @@ module.exports.getCentersByDomain = async (req, res, next) => {
     .exec();
 
     const centersWithDomain = centers.filter(center => center.preferences !== null);
-
+    
     res.status(200).json({ centers: centersWithDomain });
   } catch (error) {
     console.error('Erreur lors de la recherche des centres par domaine :', error);

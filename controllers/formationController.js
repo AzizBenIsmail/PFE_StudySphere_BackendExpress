@@ -76,7 +76,7 @@ exports.getFormationsById = async (req, res) => {
   try {
     console.log(req.params.id)
     const formations = await Formation.find({ centre: req.params.id });
-    console.log(formations);
+    // console.log(formations);
     if (formations.length === 0) {
       return res.status(404).json({ success: false, error: 'No formations found for this centre' });
     }

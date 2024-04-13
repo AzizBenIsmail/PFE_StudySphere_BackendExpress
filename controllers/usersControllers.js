@@ -634,11 +634,44 @@ module.exports.getCentersByDomain = async (req, res, next) => {
     .exec();
 
     const centersWithDomain = centers.filter(center => center.preferences !== null);
-    
+
     res.status(200).json({ centers: centersWithDomain });
   } catch (error) {
     console.error('Erreur lors de la recherche des centres par domaine :', error);
     res.status(500).json({ message: 'Une erreur est survenue lors de la recherche des centres.' });
   }
 };
+
+const Formation = require('../models/formationSchema');
+
+exports.getInstructorsByCenter = async (req, res, next) => {
+  try {
+    const centerId = req.params.centerId;
+
+    // Recherche des formations associées au centre spécifié
+    const formations = await Formation.find({ centre: centerId }).populate('formateur');
+
+    // Création d'un ensemble pour stocker les identifiants uniques des formateurs
+    const instructorIdsSet = new Set();
+
+    // Extraction des identifiants uniques des formateurs à partir des formations
+    formations.forEach(formation => {
+      if (formation.formateur) {
+        instructorIdsSet.add(formation.formateur._id.toString());
+      }
+    });
+
+    // Conversion de l'ensemble en tableau
+    const instructorIds = Array.from(instructorIdsSet);
+
+    // Récupération des détails des formateurs à partir de leurs identifiants
+    const instructors = await userModel.find({ _id: { $in: instructorIds } });
+
+    res.status(200).json({ instructors });
+  } catch (error) {
+    console.error('Erreur lors de la recherche des formateurs par centre :', error);
+    res.status(500).json({ message: 'Une erreur est survenue lors de la recherche des formateurs.' });
+  }
+};
+
 

@@ -46,6 +46,8 @@ router.get("/User/:id",usersLogMiddleware, requireAuthUser, users.UserByID);
 
 router.get("/Center/:domaine",usersLogMiddleware, requireAuthUser, users.getCentersByDomain);
 
+router.get('/Formateur/:centerId', usersLogMiddleware, requireAuthUser , users.getInstructorsByCenter);
+
 /* Delete user by ID. */
 router.delete("/:id",usersLogMiddleware, requireAuthUser, users.deleteUser);
 

@@ -87,6 +87,19 @@ exports.getFormationsById = async (req, res) => {
   }
 };
 
+exports.getFormationByIdFormateur = async (req, res) => {
+  try {
+    console.log(req.params.id)
+    const formations = await Formation.find({ formateur: req.params.id });
+    // console.log(formations);
+    if (formations.length === 0) {
+      return res.status(404).json({ success: false, error: 'No formations found for this centre' });
+    }
+    res.status(200).json({ formations });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
 // Controller pour mettre à jour une formation existante
 exports.updateFormation = async (req, res) => {
   try {

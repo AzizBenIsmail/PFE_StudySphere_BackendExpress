@@ -13,7 +13,7 @@ services:
       - db:/data/db  # This line adds a volume to the MongoDB service
 
   pfe_studysphere_backend_express:
-    image: azizbenismail/pfe_studysphere_backend_express:1.3.3
+    image: azizbenismail/pfe_studysphere_backend_express:1.4.0
     build:
       context: ../PFE_StudySphere-_BackendExpress
       dockerfile: dockerfile
@@ -27,7 +27,7 @@ services:
       - mongodb
 
   pfe_studysphere_frontend_react:
-    image: azizbenismail/pfe_studysphere_frontend_react:1.3.2
+    image: azizbenismail/pfe_studysphere_frontend_react:1.4.0
     build:
       context: ../PFE_StudySphere-_FrontOfficeReact
       dockerfile: dockerfile

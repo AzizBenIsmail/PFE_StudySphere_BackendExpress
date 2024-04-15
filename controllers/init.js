@@ -105,6 +105,12 @@ const createDefaultBadge = async () => {
         image_badge: 'Recommendation.png' // Remplacez par l'URL réelle de l'image du badge
       };
 
+      const BadgePlusDetails = {
+        nom: 'PlusDetails',
+        description: 'badge pour remplier les details de Recommendation',
+        image_badge: 'Recommendation.png' // Remplacez par l'URL réelle de l'image du badge
+      };
+
       const Bienvenu = new Badge(BadgeBienvenu);
       await Bienvenu.save();
 

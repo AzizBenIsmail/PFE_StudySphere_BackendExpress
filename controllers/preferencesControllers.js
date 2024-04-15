@@ -220,3 +220,56 @@ module.exports.updatePreferences = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+module.exports.addPrefFormateur = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    // Vérifiez si l'utilisateur existe
+    const user = await userModel.findById(id);
+
+    if (!user) {
+      throw new Error('User not found!');
+    }
+    // Vérifiez s'il existe déjà des préférences pour cet utilisateur
+    const existingPreferences = await preferencesModel.findOne({ user: id });
+
+    if (existingPreferences) {
+      throw new Error('Preferences already exist for this user');
+    }
+    // Créez un objet preferences avec les valeurs de la requête
+    const preferences = new preferencesModel({
+      domaine_actuelle: req.body.domaine_actuelle,
+      competences_dinteret: req.body.competences_dinteret,
+      niveau_dexperience_professionnelle: req.body.niveau_dexperience_professionnelle,
+      date_anniversaire: req.body.date_anniversaire,
+      niveau_etude: req.body.niveau_etude,
+      emplacement_actuelle: req.body.emplacement_actuelle,
+      style_dapprentissage: req.body.style_dapprentissage,
+      duree_preferee: req.body.duree_preferee,
+      disponibilite: req.body.disponibilite,
+      type_de_contenu_prefere: req.body.type_de_contenu_prefere,
+      preferences_linguistiques: req.body.preferences_linguistiques,
+      user: user._id,
+    });
+
+    // Enregistrez le document Preferences
+    await preferences.save();
+    await addNumbrxp(id, 450, req, res);
+    await verificationNiveau(id, req, res);
+
+    await addNotification( user._id,"Félicitations ! Vos préférences ont été finalisées de manière satisfaisante.","préférences",`Info/reward/?xpGagne=450`, req, res);
+
+    const updatedUser = await userModel.findByIdAndUpdate(id, {
+      $set: {
+        preferences: preferences._id,
+      },
+    }, { new: true });
+
+    await affecterBadgeUtilisateur(id, "Recommendation","recompense","AccountManagement/BadgesNiveauXp", req, res);
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

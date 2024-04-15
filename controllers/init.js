@@ -117,6 +117,8 @@ const createDefaultBadge = async () => {
       const Recommendation = new Badge(BadgeRecommendation);
       await Recommendation.save();
 
+      const PlusDetails = new Badge(BadgePlusDetails);
+      await PlusDetails.save();
       // console.log('Badge par défaut créé avec succès.');
     } else {
       // console.log('Des badges existent déjà. Aucun badge par défaut n\'a été créé.');

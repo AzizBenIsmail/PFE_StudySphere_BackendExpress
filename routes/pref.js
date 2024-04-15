@@ -7,15 +7,18 @@ const { userValidation } = require("../middlewares/userValidation");
 const { centreValidation } = require("../middlewares/centreValidation");
 
 /* GET user by ID. */
-router.put("/addPref/:id", pref.AddPreferences);
+router.put("/addPref/:id",requireAuthUser, pref.AddPreferences);
 
-router.put("/addPrefCentre/:id", pref.AddPreferencesCentre);
+router.put("/addPrefCentre/:id",requireAuthUser, pref.AddPreferencesCentre);
 
-router.get("/GetPref/:id", pref.getPreferencesById);
+router.get("/GetPref/:id",requireAuthUser, pref.getPreferencesById);
 
-router.put("/updatePreferences/:id", pref.updatePreferences);
+router.put("/updatePreferences/:id",requireAuthUser, pref.updatePreferences);
 
-router.put("/UpdatePreferencesCentre/:id", pref.UpdatePreferencesCentre);
+router.put("/UpdatePreferencesCentre/:id",requireAuthUser, pref.UpdatePreferencesCentre);
 
+router.put("/addPrefFormateur/:id",requireAuthUser, pref.addPrefFormateur);
+
+router.put("/updatePreferencesFormateur/:id",requireAuthUser, pref.updatePreferences);
 
 module.exports = router;

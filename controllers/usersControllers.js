@@ -6,6 +6,7 @@ const XP = require('../models/xpSchema')
 const pref = require('../models/preferencesSchema')
 const jwt = require('jsonwebtoken')
 const { addNotification } = require('./notificationControllers')
+const preferencesModel = require('../models/preferencesSchema')
 
 module.exports.getUsers = async (req, res, next) => {
   try {
@@ -315,6 +316,7 @@ module.exports.upgrade = async (req, res) => {
       $set: {
         role: role, etat: true, updatedAt: currentDate,
       },
+      $unset: { preferences: 1 } // Supprimer complètement le champ 'preferences'
     }, { new: true })
 
     res.status(200).json(updatedUser)
@@ -341,6 +343,7 @@ module.exports.upgradeModerateur = async (req, res) => {
       $set: {
         role: role, etat: true, updatedAt: currentDate,
       },
+      $unset: { preferences: 1 } // Supprimer complètement le champ 'preferences'
     }, { new: true })
 
     res.status(200).json(updatedUser)
@@ -351,29 +354,35 @@ module.exports.upgradeModerateur = async (req, res) => {
 
 module.exports.upgradeFormateur = async (req, res) => {
   try {
-    // console.log('test', req.bod)
-
-    const { id } = req.body // Récupération de l'ID depuis le corps de la requête
-    const checkIfUserExists = await userModel.findById(id)
+    const { id } = req.body; // Récupération de l'ID depuis le corps de la requête
+    const checkIfUserExists = await userModel.findById(id);
 
     if (!checkIfUserExists) {
-      throw new Error('User not found!')
+      throw new Error('User not found!');
     }
 
-    const currentDate = new Date()
-    const role = 'formateur'
+    // Vérifier s'il existe une relation entre l'utilisateur et ses préférences
+    const existingPreferences = await preferencesModel.findOneAndDelete({ user: id });
 
+    const currentDate = new Date();
+    const role = 'formateur';
+
+    // Mettre à jour le rôle de l'utilisateur et d'autres champs
     const updatedUser = await userModel.findByIdAndUpdate(id, {
       $set: {
-        role: role, etat: true, updatedAt: currentDate,
+        role: role,
+        etat: true,
+        updatedAt: currentDate,
       },
-    }, { new: true })
+      $unset: { preferences: 1 } // Supprimer complètement le champ 'preferences'
+    }, { new: true });
 
-    res.status(200).json(updatedUser)
+    res.status(200).json(updatedUser);
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ message: error.message });
   }
-}
+};
+
 
 module.exports.downgrade = async (req, res) => {
   try {
@@ -388,6 +397,7 @@ module.exports.downgrade = async (req, res) => {
       $set: {
         role: client, etat: true, updatedAt: currentDate,
       },
+      $unset: { preferences: 1 } // Supprimer complètement le champ 'preferences'
     }, { new: true })
     res.status(200).json(updateedUser)
   } catch (error) {

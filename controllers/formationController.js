@@ -103,11 +103,13 @@ exports.getFormationByIdFormateur = async (req, res) => {
 // Controller pour mettre à jour une formation existante
 exports.updateFormation = async (req, res) => {
   try {
-    let updateData = { ...req.body };
+    const formationData = { ...req.body };
+    console.log(req.body)
     if (req.file) { // Vérifier si une nouvelle image est fournie
-      updateData.image_Formation = req.file.filename; // Mettre à jour le nom du fichier de l'image
+      formationData.image_Formation = req.file.filename; // Mettre à jour le nom du fichier de l'image
     }
-    const formation = await Formation.findByIdAndUpdate(req.params.id, updateData, {
+    console.log(formationData)
+    const formation = await Formation.findByIdAndUpdate(req.params.id, formationData, {
       new: true,
       runValidators: true,
     });

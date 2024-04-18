@@ -103,24 +103,71 @@ exports.getFormationByIdFormateur = async (req, res) => {
 // Controller pour mettre à jour une formation existante
 exports.updateFormation = async (req, res) => {
   try {
-    const formationData = { ...req.body };
-    console.log(req.body)
+    // Extraire chaque champ individuellement
+    const {
+      titre,
+      description,
+      competences,
+      styleEnseignement,
+      Prix,
+      jours,
+      typeContenu,
+      langue,
+      emplacement,
+      sujetInteret,
+      Tranches_Horaires,
+      duree,
+      niveauDengagementRequis,
+      niveauDeDifficulte,
+      niveauRequis,
+      dateDebut,
+      dateFin,
+      formateur,
+    } = req.body;
+
+    // Créer un objet avec les champs mis à jour
+    const updatedFields = {};
+
     if (req.file) { // Vérifier si une nouvelle image est fournie
-      formationData.image_Formation = req.file.filename; // Mettre à jour le nom du fichier de l'image
+      updatedFields.image_Formation = req.file.filename; // Mettre à jour le nom du fichier de l'image
     }
-    console.log(formationData)
-    const formation = await Formation.findByIdAndUpdate(req.params.id, formationData, {
+
+    // Ajouter les champs mis à jour à l'objet
+    if (titre) updatedFields.titre = titre;
+    if (description) updatedFields.description = description;
+    if (competences) updatedFields.competences = competences;
+    if (styleEnseignement) updatedFields.styleEnseignement = styleEnseignement;
+    if (Prix) updatedFields.Prix = Prix;
+    if (jours) updatedFields.jours = jours;
+    if (typeContenu) updatedFields.typeContenu = typeContenu;
+    if (langue) updatedFields.langue = langue;
+    if (emplacement) updatedFields.emplacement = emplacement;
+    if (sujetInteret) updatedFields.sujetInteret = sujetInteret;
+    if (Tranches_Horaires) updatedFields.Tranches_Horaires = Tranches_Horaires;
+    if (duree) updatedFields.duree = duree;
+    if (niveauDengagementRequis) updatedFields.niveauDengagementRequis = niveauDengagementRequis;
+    if (niveauDeDifficulte) updatedFields.niveauDeDifficulte = niveauDeDifficulte;
+    if (niveauRequis) updatedFields.niveauRequis = niveauRequis;
+    if (dateDebut) updatedFields.dateDebut = dateDebut;
+    if (dateFin) updatedFields.dateFin = dateFin;
+    if (formateur) updatedFields.formateur = formateur;
+
+    // Mettre à jour la formation avec les champs mis à jour
+    const formation = await Formation.findByIdAndUpdate(req.params.id, updatedFields, {
       new: true,
       runValidators: true,
     });
+
     if (!formation) {
       return res.status(404).json({ success: false, error: 'Formation not found' });
     }
+
     res.status(200).json({ formation });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
 
 exports.deleteFormation = async (req, res) => {
   try {

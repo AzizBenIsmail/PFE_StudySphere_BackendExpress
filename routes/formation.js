@@ -11,7 +11,7 @@ router.get('/FormationByCentre',requireAuthUser , formationController.getFormati
 router.get('/FormationByIdCentre/:id',requireAuthUser , formationController.getFormationsById); // Récupérer toutes les formations
 router.get('/FormationByIdFormateur/:id',requireAuthUser , formationController.getFormationByIdFormateur); // Récupérer toutes les formations
 router.get('/:id', formationController.getFormationById); // Récupérer une formation par son ID
-router.put('/:id', formationController.updateFormation); // Mettre à jour une formation
-router.delete('/:id', formationController.deleteFormation); // Supprimer une formation
+router.put('/:id', requireAuthUser ,upload.single("image_Formation"),formationController.updateFormation); // Mettre à jour une formation
+router.delete('/:id', requireAuthUser ,formationController.deleteFormation); // Supprimer une formation
 
 module.exports = router;

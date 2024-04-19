@@ -50,7 +50,7 @@ exports.getFormations = async (req, res) => {
 // Controller pour récupérer une seule formation par son ID
 exports.getFormationById = async (req, res) => {
   try {
-    const formation = await Formation.findById(req.params.id);
+    const formation = await Formation.findById(req.params.id).populate("centre").populate("formateur");
     if (!formation) {
       return res.status(404).json({ success: false, error: 'Formation not found' });
     }
@@ -123,8 +123,9 @@ exports.updateFormation = async (req, res) => {
       dateDebut,
       dateFin,
       formateur,
+      centre,
     } = req.body;
-
+console.log(req.body)
     // Créer un objet avec les champs mis à jour
     const updatedFields = {};
 
@@ -151,6 +152,7 @@ exports.updateFormation = async (req, res) => {
     if (dateDebut) updatedFields.dateDebut = dateDebut;
     if (dateFin) updatedFields.dateFin = dateFin;
     if (formateur) updatedFields.formateur = formateur;
+    if (centre) updatedFields.centre = centre;
 
     // Mettre à jour la formation avec les champs mis à jour
     const formation = await Formation.findByIdAndUpdate(req.params.id, updatedFields, {

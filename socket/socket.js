@@ -1,10 +1,11 @@
-const { Server } = require("socket.io");
+const mongoose = require("mongoose");
 
+
+const { Server } = require("socket.io");
 const http = require("http");
 const express = require("express");
 
 const app = express();
-
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -15,7 +16,8 @@ const io = new Server(server, {
 
 const userSocketMap = {};
 
-io.on("connection", (socket) => {
+io.on('connection', (socket) => {
+  console.log('A user connected');  // This should print when a client connects
   console.log("a user connected", socket.id);
 
   const userId = socket.handshake.query.userId;
@@ -27,7 +29,10 @@ io.on("connection", (socket) => {
     console.log("user disconnected", socket.id);
     delete userSocketMap[userId];
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
+   
   });
+
+  
 });
 
 module.exports = { app, io, server, getReceiverSocketId: (receiverId) => userSocketMap[receiverId] };

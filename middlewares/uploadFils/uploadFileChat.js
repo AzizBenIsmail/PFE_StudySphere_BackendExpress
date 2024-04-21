@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
       cb(null, 'public/images/');
     } else if (file.mimetype.startsWith('video')) {
       cb(null, 'public/videos/');
-    } else if (file.mimetype.startsWith('file')) { // Corrected condition for audio files
+    } else if (file.mimetype.startsWith('application/pdf') || file.mimetype.startsWith('text/plain') || file.mimetype.startsWith('application/vnd.openxmlformats-officedocument.wordprocessingml.document')) { // Adjusted condition for PDF, TXT, DOCX
      cb(null, 'public/files/');
     } else {
       cb(null, 'public/records/');

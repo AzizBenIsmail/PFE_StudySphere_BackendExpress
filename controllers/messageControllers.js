@@ -60,7 +60,7 @@ module.exports.getMessages = async (req, res) => {
     const { id: userToChatId } = req.params;
     const senderId = req.session.user._id;
 
-    console.log("Sender ID:", senderId);
+    console.log(" le Sender ID:", senderId);
     console.log("User to Chat ID:", userToChatId);
 
     const conversation = await Conversation.findOne({

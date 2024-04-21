@@ -41,6 +41,10 @@ var messageRouter = require("./routes/message");
 
 const { default: Message } = require("./models/messageSchema");
 
+
+
+
+
 //var app = express();
 
 app.use(logger("dev"));

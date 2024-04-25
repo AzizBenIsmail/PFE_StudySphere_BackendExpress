@@ -9,7 +9,7 @@ const { addNotification } = require('./notificationControllers') // Assurez-vous
 
 module.exports.AddPreferences = async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = req.session.user._id;
 
     // Vérifiez si l'utilisateur existe
     const user = await userModel.findById(id);
@@ -69,7 +69,7 @@ module.exports.AddPreferences = async (req, res) => {
 
 module.exports.AddPreferencesCentre = async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = req.session.user._id;
 
     // Vérifiez si l'utilisateur existe
     const user = await userModel.findById(id);
@@ -138,10 +138,10 @@ module.exports.getPreferencesById = async (req, res) => {
 
 module.exports.UpdatePreferencesCentre = async (req, res) => {
   try {
-    const userId = req.params.id;
+    // const userId = req.params.id;
 
     // Vérifiez si l'utilisateur existe
-    const user = await userModel.findById(userId);
+    const user = await userModel.findById(req.session.user._id);
 
     if (!user) {
       throw new Error('User not found!');
@@ -224,7 +224,7 @@ module.exports.updatePreferences = async (req, res) => {
 
 module.exports.addPrefFormateur = async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = req.session.user._id;
 
     // Vérifiez si l'utilisateur existe
     const user = await userModel.findById(id);

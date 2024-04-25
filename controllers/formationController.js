@@ -1,5 +1,6 @@
 const Formation = require('../models/formationSchema');
-const User = require('../models/userSchema'); // Importer le modèle d'utilisateur
+const User = require('../models/userSchema');
+const fs = require('fs') // Importer le modèle d'utilisateur
 
 exports.createFormation = async (req, res) => {
   try {
@@ -195,7 +196,10 @@ exports.deleteFormation = async (req, res) => {
         { $pull: { Formations: formation._id } }
       );
     }
-
+    if (formation.image_Formation) {
+      const imagePath = `public/images/Formations/${formation.image_Formation}`;
+      fs.unlinkSync(imagePath); // Supprimer le fichier
+    }
     res.status(200).json({ success: true, data: {} });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });

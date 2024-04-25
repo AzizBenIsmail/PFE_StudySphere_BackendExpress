@@ -10,13 +10,13 @@ const { addNotification } = require('./notificationControllers')
 const maxAge = 72 * 60 * 60 // 2 heures
 
 const createToken = (id) => {
-  return jwt.sign({ id }, 'net StudySphere secret', {
+  return jwt.sign({ id }, process.env.Net_Secret, {
     expiresIn: maxAge,
   })
 }
 
 const createTokenmdp = (id) => {
-  return jwt.sign({ id, exp: Math.floor(Date.now() / 1000) + 120 }, 'net StudySphere secret');
+  return jwt.sign({ id, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.Net_Secret);
 };
 
 // module.exports.signup_post = async (req, res) => {
@@ -374,7 +374,7 @@ module.exports.forgetpassword = async (req, res) => {
     }
 
     // Vérifier la validité du jeton
-    jwt.verify(token, 'net StudySphere secret', async (err, decoded) => {
+    jwt.verify(token, process.env.Net_Secret, async (err, decoded) => {
       if (err) {
         return res.status(200).json({ message: 'Le lien a expiré.' });
       }

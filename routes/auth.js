@@ -34,11 +34,7 @@ router.put("/Password",authLogMiddleware,auth.forgetpassword);
 
 /* logout. */
 router.get("/logout/:id",authLogMiddleware, auth.logout);
-// /* Add User */
-// router.post("/register",requireAuthUser, upload.single("image_user"), auth.addUser);
 
-// /* signup. */
-// router.post("/signup", upload.single("image_user"), auth.signup_post);
 
 
 

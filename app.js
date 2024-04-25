@@ -62,7 +62,7 @@ app.use('/formation', formationRouter);
 // ...
 
 const server = http.createServer(app);
-server.listen(5000, () => {connectToMongoDB();
+server.listen(process.env.PORT, () => {connectToMongoDB();
   console.log("app is running on port 5000") });
 
 module.exports = app;

@@ -85,4 +85,8 @@ router.put("/UpdatePasswordByAdmin/:id",requireAuthUser,users.forgetpasswordByAd
 
 router.put("/UpdatePassword",requireAuthUser,users.forgetpassword);
 
+router.put("/affecterEnseignant/:enseignantId",requireAuthUser,users.affecterEnseignant);
+
+router.put("/desinfecterFormateur/:enseignantId",requireAuthUser,users.desinfecterFormateur);
+
 module.exports = router;

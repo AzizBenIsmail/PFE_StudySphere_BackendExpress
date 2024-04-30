@@ -30,6 +30,8 @@ userSchema = new mongoose.Schema({
   xp: { type: mongoose.Schema.Types.ObjectId, ref: 'XP' },
   notifications: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notification' }],
   Formations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Formation' }],
+  staff_enseignant: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  centresTravailAssocies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 
 }, { timestamps: true })
 

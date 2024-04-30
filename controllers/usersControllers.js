@@ -684,4 +684,98 @@ exports.getInstructorsByCenter = async (req, res, next) => {
   }
 };
 
+module.exports.affecterEnseignant = async (req, res) => {
+  const { enseignantId } = req.params;
+  const userId = req.session.user;
+  try {
+    // Recherche de l'utilisateur à qui affecter un enseignant
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé" });
+    }
 
+    // Recherche de l'utilisateur enseignant à ajouter
+    const enseignant = await userModel.findById(enseignantId);
+    if (!enseignant || enseignant.role !== 'formateur') {
+      return res.status(404).json({ message: "Formateur non trouvé" });
+    }
+
+    // Vérifier si l'enseignant n'est pas déjà dans le staff
+    if (user.staff_enseignant.includes(enseignantId)) {
+      return res.status(400).json({ message: "L'enseignant est déjà dans le staff enseignant de cet utilisateur" });
+    }
+
+    // Mettre à jour l'utilisateur en ajoutant l'enseignant au staff enseignant
+    const updatedUser = await userModel.findOneAndUpdate(
+      { _id: userId },
+      { $push: { staff_enseignant: enseignantId } },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(500).json({ message: "Erreur lors de la mise à jour de l'utilisateur" });
+    }
+
+// Mettre à jour le formateur en ajoutant le centre de travail associé
+    const updatedFormateur = await userModel.findOneAndUpdate(
+      { _id: enseignantId, centresTravailAssocies: { $ne: userId } }, // Vérifie que le centre de travail n'est pas déjà associé
+      { $push: { centresTravailAssocies: userId } },
+      { new: true }
+    );
+
+    if (!updatedFormateur) {
+      return res.status(500).json({ message: "Le centre de travail est déjà associé au formateur" });
+    }
+
+
+    res.status(200).json({ message: "Formateur ajouté au staff enseignant avec succès" });
+  } catch (error) {
+    console.error("Erreur lors de l'ajout de l'enseignant au staff enseignant :", error);
+    res.status(500).json({ message: "Erreur serveur lors de l'ajout de l'enseignant au staff enseignant" });
+  }
+}
+
+module.exports.desinfecterFormateur = async (req, res) => {
+  const { enseignantId } = req.params;
+  const userId = req.session.user;
+  try {
+    // Recherche de l'utilisateur à désinfecter
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé" });
+    }
+
+    // Vérification si l'enseignant est présent dans le staff enseignant
+    if (!user.staff_enseignant.includes(enseignantId)) {
+      return res.status(400).json({ message: "L'enseignant n'est pas dans le staff enseignant de cet utilisateur" });
+    }
+
+    // Retirer l'enseignant du staff enseignant de l'utilisateur
+    const updatedUser = await userModel.findOneAndUpdate(
+      { _id: userId },
+      { $pull: { staff_enseignant: enseignantId } },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(500).json({ message: "Erreur lors de la mise à jour de l'utilisateur" });
+    }
+
+// Mettre à jour le formateur en retirant le centre de travail associé
+    const updatedFormateur = await userModel.findOneAndUpdate(
+      { _id: enseignantId },
+      { $pull: { centresTravailAssocies: user._id } }, // Assurez-vous que userId est l'ID du centre
+      { new: true }
+    );
+
+    if (!updatedFormateur) {
+      return res.status(500).json({ message: "Erreur lors de la mise à jour du formateur" });
+    }
+
+
+    res.status(200).json({ message: "Formateur retiré du staff enseignant avec succès" });
+  } catch (error) {
+    console.error("Erreur lors du retrait de l'enseignant du staff enseignant :", error);
+    res.status(500).json({ message: "Erreur serveur lors du retrait de l'enseignant du staff enseignant" });
+  }
+}

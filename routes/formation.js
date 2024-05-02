@@ -5,6 +5,7 @@ const upload = require("../middlewares/uploadFils/uploadFormations");
 const { requireAuthUser } = require('../middlewares/authMiddleware')
 
 // Routes pour les différentes opérations CRUD
+router.get('/searchemplacement',requireAuthUser, formationController.getFormationsByLocation);
 router.post('/',requireAuthUser,upload.single("image_Formation"), formationController.createFormation); // Créer une nouvelle formation
 router.get('/', formationController.getFormations); // Récupérer toutes les formations
 router.get('/FormationByCentre',requireAuthUser , formationController.getFormationsByCentre); // Récupérer toutes les formations
@@ -13,5 +14,6 @@ router.get('/FormationByIdFormateur/:id',requireAuthUser , formationController.g
 router.get('/:id',requireAuthUser, formationController.getFormationById); // Récupérer une formation par son ID
 router.put('/:id', requireAuthUser ,upload.single("image_Formation"),formationController.updateFormation); // Mettre à jour une formation
 router.delete('/:id', requireAuthUser ,formationController.deleteFormation); // Supprimer une formation
+// Route pour récupérer les formations par emplacement
 
 module.exports = router;

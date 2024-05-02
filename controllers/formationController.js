@@ -206,3 +206,17 @@ exports.deleteFormation = async (req, res) => {
   }
 };
 
+exports.getFormationsByLocation = async (req, res) => {
+  try {
+    const emplacements = req.query.emplacements
+    console.log(emplacements);
+    const formations = await Formation.find({ emplacement: { $in: emplacements } });
+
+    res.status(200).json({ formations });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+
+

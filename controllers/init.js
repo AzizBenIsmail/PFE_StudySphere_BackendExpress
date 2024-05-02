@@ -263,7 +263,7 @@ const createDefaultFormation = async () => {
         jours: 'Lundi, Mercredi, Vendredi',
         typeContenu: 'Vidéos, Exercices pratiques',
         langue: 'Français',
-        emplacement: 'En ligne',
+        emplacement: 'Béja, Goubellat',
         sujetInteret: 'Développement web',
         Tranches_Horaires: 'Matin',
         duree: 60, // en minutes

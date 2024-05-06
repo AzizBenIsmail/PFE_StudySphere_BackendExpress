@@ -569,7 +569,7 @@ module.exports.searchUsers = async (req, res, next) => {
 module.exports.getUser = async (req, res, next) => {
   try {
     const id = req.session.user._id.toString();
-    const user = await userModel.findById(id).populate('notifications').populate('staff_enseignant').populate("centresTravailAssocies")
+    const user = await userModel.findById(id).populate('notifications').populate('staff_enseignant').populate("centresTravailAssocies").populate("preferences")
     .populate({
       path: 'xp',
       populate: {

@@ -1,13 +1,13 @@
+// Import des dépendances
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const http = require("http");
 const cors = require('cors');
-const logMiddleware = require('./middlewares/authLogMiddleware');
 const session = require('express-session');
-require('./controllers/init');
-
 require("dotenv").config(); //configuration dotenv
+require('./controllers/init');
+const initializeSocket = require('./socket/socket');
 
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
@@ -18,25 +18,23 @@ var badgeRouter = require('./routes/badge');
 var niveauRouter = require('./routes/niveau');
 var notificationRouter = require('./routes/notification');
 var formationRouter = require('./routes/formation');
-const { connectToMongoDB } = require('./db/db')
 
+const { connectToMongoDB } = require('./db/db');
 
+// Création de l'application Express
 var app = express();
-
-
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(logMiddleware);
 app.use(session({
   secret: 'net StudySphere secret',
   resave: false,
   saveUninitialized: true,
   cookie: {
-    secure: false, // À définir sur true si vous utilisez HTTPS
-    maxAge: 24 * 60 * 60 * 1000, // Durée de validité du cookie de session (en millisecondes)
+    secure: false,
+    maxAge: 24 * 60 * 60 * 1000,
   },
 }));
 app.use(express.static("public"));
@@ -58,11 +56,26 @@ app.use('/niveau', niveauRouter);
 app.use('/notification', notificationRouter);
 app.use('/formation', formationRouter);
 
-
-// ...
-
+// Création du serveur HTTP en utilisant l'application Express
 const server = http.createServer(app);
-server.listen(process.env.PORT, () => {connectToMongoDB();
-  console.log("app is running on port 5000") });
+
+// Configuration de Socket.IO
+const io = initializeSocket(server);
+
+// Gestion des connexions Socket.IO
+io.on('connection', (socket) => {
+  console.log('Un client est connecté');
+
+  // Gestion de la déconnexion du client
+  socket.on('disconnect', () => {
+    console.log('Un client est déconnecté');
+  });
+});
+
+// Démarrage du serveur
+server.listen(process.env.PORT, () => {
+  connectToMongoDB();
+  console.log("app is running on port 5000");
+});
 
 module.exports = app;

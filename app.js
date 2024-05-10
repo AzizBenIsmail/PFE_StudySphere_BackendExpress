@@ -7,7 +7,6 @@ const cors = require('cors');
 const session = require('express-session');
 require("dotenv").config(); //configuration dotenv
 require('./controllers/init');
-const initializeSocket = require('./socket/socket');
 
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
@@ -59,18 +58,6 @@ app.use('/formation', formationRouter);
 // Création du serveur HTTP en utilisant l'application Express
 const server = http.createServer(app);
 
-// Configuration de Socket.IO
-const io = initializeSocket(server);
-
-// Gestion des connexions Socket.IO
-io.on('connection', (socket) => {
-  console.log('Un client est connecté');
-
-  // Gestion de la déconnexion du client
-  socket.on('disconnect', () => {
-    console.log('Un client est déconnecté');
-  });
-});
 
 // Démarrage du serveur
 server.listen(process.env.PORT, () => {

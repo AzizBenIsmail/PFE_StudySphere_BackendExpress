@@ -12,7 +12,7 @@ module.exports.createNotification = async (req, res) => {
     const newNotification = await notification.save();
 
     // Émettre un événement Socket.IO pour informer les clients connectés de la nouvelle notification
-    io.emit('newNotification', newNotification);
+    // io.emit('newNotification', newNotification);
 
     // Ajouter la notification à l'utilisateur correspondant
     await User.updateOne({ _id: recipient }, { $push: { notifications: newNotification._id } });
@@ -30,7 +30,7 @@ module.exports.addNotification = async (recipient, content, type ,url, req, res)
     const newNotification = await notification.save();
 
     // Émettre un événement Socket.IO pour informer les clients connectés de la nouvelle notification
-    io.emit('newNotification', newNotification);
+    // io.emit('newNotification', newNotification);
 
     // Ajouter la notification à l'utilisateur correspondant
     await User.updateOne({ _id: recipient }, { $push: { notifications: newNotification._id } });

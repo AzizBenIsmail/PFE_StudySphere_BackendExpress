@@ -17088,3 +17088,43 @@ Headers: {"host":"localhost:5000","connection":"keep-alive","sec-ch-ua":"\"Not A
 Execution Time: 2 ms
 Body: N/A
  - undefined
+2024-05-10T10:14:55.731Z - GET - /user/AllCentre - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 6634ddeb8a7c56271d3d16d3 | nom: Client 
+Headers: {"host":"localhost:5000","connection":"keep-alive","sec-ch-ua":"\"Opera GX\";v=\"109\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\"","accept":"application/json, text/plain, */*","sec-ch-ua-mobile":"?0","authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzRkZGViOGE3YzU2MjcxZDNkMTZkMyIsImlhdCI6MTcxNTMzMTI4MywiZXhwIjoxNzE1NTkwNDgzfQ.v3pqs_vctNudKo-TfLuMuSjuGCLlnlviHm_91XomDKA","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br, zstd","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7"}
+Execution Time: 1 ms
+Body: N/A
+ - undefined
+2024-05-10T10:18:06.697Z - GET - /user/AllFormateur - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 6634ddeb8a7c56271d3d16d8 | nom: 9antra 
+Headers: {"host":"localhost:5000","connection":"keep-alive","sec-ch-ua":"\"Opera GX\";v=\"109\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\"","accept":"application/json, text/plain, */*","sec-ch-ua-mobile":"?0","authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzRkZGViOGE3YzU2MjcxZDNkMTZkOCIsImlhdCI6MTcxNTMzNjI4MSwiZXhwIjoxNzE1NTk1NDgxfQ.upyLSl0mzuHLlXUo0qvMVRfGXq2O928Mje-5R2ZbIzs","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br, zstd","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","if-none-match":"W/\"923-KyFMUzjyDIElW+GwfaRvsECEFHg\""}
+Execution Time: 3 ms
+Body: N/A
+ - undefined
+2024-05-10T10:28:29.062Z - GET - /user/AllUsers - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 6634ddeb8a7c56271d3d16d2 | nom: Administrateur 
+Headers: {"host":"localhost:5000","connection":"keep-alive","sec-ch-ua":"\"Opera GX\";v=\"109\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\"","accept":"application/json, text/plain, */*","sec-ch-ua-mobile":"?0","authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzRkZGViOGE3YzU2MjcxZDNkMTZkMiIsImlhdCI6MTcxNTMzNjkwNiwiZXhwIjoxNzE1NTk2MTA2fQ.YzW0jQFm8Cn1rPPHnoV1I4SlSeMBbA76-ontpkPMFeA","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br, zstd","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","if-none-match":"W/\"306c-aQdSwo6Q63HrZTCOfsSTXl5KvaU\""}
+Execution Time: 6 ms
+Body: N/A
+ - undefined
+2024-05-10T10:28:38.629Z - GET - /user/AllUsersConnecter - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 6634ddeb8a7c56271d3d16d2 | nom: Administrateur 
+Headers: {"host":"localhost:5000","connection":"keep-alive","sec-ch-ua":"\"Opera GX\";v=\"109\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\"","accept":"application/json, text/plain, */*","sec-ch-ua-mobile":"?0","authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzRkZGViOGE3YzU2MjcxZDNkMTZkMiIsImlhdCI6MTcxNTMzNjkwNiwiZXhwIjoxNzE1NTk2MTA2fQ.YzW0jQFm8Cn1rPPHnoV1I4SlSeMBbA76-ontpkPMFeA","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br, zstd","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7"}
+Execution Time: 4 ms
+Body: N/A
+ - undefined
+2024-05-10T10:28:39.597Z - GET - /user/AllUsersDeConnecter - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 6634ddeb8a7c56271d3d16d2 | nom: Administrateur 
+Headers: {"host":"localhost:5000","connection":"keep-alive","sec-ch-ua":"\"Opera GX\";v=\"109\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\"","accept":"application/json, text/plain, */*","sec-ch-ua-mobile":"?0","authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzRkZGViOGE3YzU2MjcxZDNkMTZkMiIsImlhdCI6MTcxNTMzNjkwNiwiZXhwIjoxNzE1NTk2MTA2fQ.YzW0jQFm8Cn1rPPHnoV1I4SlSeMBbA76-ontpkPMFeA","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br, zstd","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7"}
+Execution Time: 4 ms
+Body: N/A
+ - undefined
+2024-05-10T12:17:10.597Z - GET - /user/AllCentre - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 6634ddeb8a7c56271d3d16d3 | nom: Client 
+Headers: {"host":"localhost:5000","connection":"keep-alive","sec-ch-ua":"\"Opera GX\";v=\"109\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\"","accept":"application/json, text/plain, */*","sec-ch-ua-mobile":"?0","authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzRkZGViOGE3YzU2MjcxZDNkMTZkMyIsImlhdCI6MTcxNTMzNzAzNywiZXhwIjoxNzE1NTk2MjM3fQ._1rQlaN5H4-VzVJKLbqHRWI1515yXIYsyHvd006llxA","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br, zstd","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","if-none-match":"W/\"88d-kHFOu2uDJAFRftP5eUsG8aRM8g4\""}
+Execution Time: 5 ms
+Body: N/A
+ - undefined
+2024-05-10T12:19:10.249Z - GET - /user/AllCentre - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 6634ddeb8a7c56271d3d16d3 | nom: Client 
+Headers: {"host":"localhost:5000","connection":"keep-alive","sec-ch-ua":"\"Opera GX\";v=\"109\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\"","accept":"application/json, text/plain, */*","sec-ch-ua-mobile":"?0","authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzRkZGViOGE3YzU2MjcxZDNkMTZkMyIsImlhdCI6MTcxNTMzNzAzNywiZXhwIjoxNzE1NTk2MjM3fQ._1rQlaN5H4-VzVJKLbqHRWI1515yXIYsyHvd006llxA","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br, zstd","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","if-none-match":"W/\"8a9-TS/pByKucnclF7Nkf202YCQugYk\""}
+Execution Time: 7 ms
+Body: N/A
+ - undefined
+2024-05-10T13:28:03.254Z - GET - /user/AllCentre - ::1 - Referer: http://localhost:3000/ - 200 - User_id: 6634ddeb8a7c56271d3d16d3 | nom: Client 
+Headers: {"host":"localhost:5000","connection":"keep-alive","sec-ch-ua":"\"Opera GX\";v=\"109\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\"","accept":"application/json, text/plain, */*","sec-ch-ua-mobile":"?0","authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzRkZGViOGE3YzU2MjcxZDNkMTZkMyIsImlhdCI6MTcxNTM0NzYyMCwiZXhwIjoxNzE1NjA2ODIwfQ.1TYkqMU76oXPQWntkRGZmXOdY7yFqxDxAsuleGf9y-I","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0","sec-ch-ua-platform":"\"Windows\"","origin":"http://localhost:3000","sec-fetch-site":"same-site","sec-fetch-mode":"cors","sec-fetch-dest":"empty","referer":"http://localhost:3000/","accept-encoding":"gzip, deflate, br, zstd","accept-language":"fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7","if-none-match":"W/\"8a9-TS/pByKucnclF7Nkf202YCQugYk\""}
+Execution Time: 2 ms
+Body: N/A
+ - undefined

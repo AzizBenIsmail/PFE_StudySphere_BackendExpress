@@ -218,6 +218,19 @@ exports.getFormationsByLocation = async (req, res) => {
   }
 };
 
+exports.getFormationsDomaine = async (req, res) => {
+  try {
+    const sujetInteret = req.query.sujetInteret
+    console.log(sujetInteret);
+    const formations = await Formation.find({ sujetInteret: { $in: sujetInteret } }).populate("centre").populate("formateur");;
+
+    res.status(200).json({ formations });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+
 exports.getFormationsParLocalisation = async (req, res) => {
   try {
     const userId = req.session.user._id; // Récupérer l'ID de l'utilisateur connecté

@@ -210,7 +210,7 @@ exports.getFormationsByLocation = async (req, res) => {
   try {
     const emplacements = req.query.emplacements
     console.log(emplacements);
-    const formations = await Formation.find({ emplacement: { $in: emplacements } });
+    const formations = await Formation.find({ emplacement: { $in: emplacements } }).populate("centre").populate("formateur");
 
     res.status(200).json({ formations });
   } catch (error) {
@@ -222,7 +222,7 @@ exports.getFormationsDomaine = async (req, res) => {
   try {
     const sujetInteret = req.query.sujetInteret
     console.log(sujetInteret);
-    const formations = await Formation.find({ sujetInteret: { $in: sujetInteret } }).populate("centre").populate("formateur");;
+    const formations = await Formation.find({ sujetInteret: { $in: sujetInteret } }).populate("centre").populate("formateur");
 
     res.status(200).json({ formations });
   } catch (error) {

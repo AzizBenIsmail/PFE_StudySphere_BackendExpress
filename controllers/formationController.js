@@ -218,6 +218,7 @@ exports.getFormationsByLocation = async (req, res) => {
   }
 };
 
+
 exports.getFormationsDomaine = async (req, res) => {
   try {
     const sujetInteret = req.query.sujetInteret
@@ -240,6 +241,32 @@ exports.getFormationsParLocalisation = async (req, res) => {
 
     // Récupérer les formations basées sur la localisation du client et qui ont le même domaine
     const formations = await Formation.find({ emplacement: userLocation, sujetInteret: userDomaine })
+    .populate('centre')
+    .populate('formateur');
+
+    res.status(200).json({ formations });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+exports.getFormationsByDayAndTime = async (req, res) => {
+  try {
+    const { jours, tranchesHoraires } = req.query;
+
+    let query = {};
+
+    if (jours) {
+      const joursArray = jours.split(',').map(jour => jour.trim());
+      query.jours = { $regex: joursArray.join('|'), $options: 'i' };
+    }
+
+    if (tranchesHoraires) {
+      const tranchesHorairesArray = tranchesHoraires.split(',').map(tranche => tranche.trim());
+      query.Tranches_Horaires = { $regex: tranchesHorairesArray.join('|'), $options: 'i' };
+    }
+
+    const formations = await Formation.find(query)
     .populate('centre')
     .populate('formateur');
 

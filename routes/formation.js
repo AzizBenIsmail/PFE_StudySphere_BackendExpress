@@ -6,6 +6,7 @@ const { requireAuthUser } = require('../middlewares/authMiddleware')
 
 // Routes pour les différentes opérations CRUD
 router.get('/searchemplacement',requireAuthUser, formationController.getFormationsByLocation);
+router.get('/FormationByDayAndTime', formationController.getFormationsByDayAndTime);
 router.get('/FormationByDomaine',requireAuthUser, formationController.getFormationsDomaine);
 router.get('/RecommandationParLocation',requireAuthUser, formationController.getFormationsParLocalisation);
 router.post('/',requireAuthUser,upload.single("image_Formation"), formationController.createFormation); // Créer une nouvelle formation

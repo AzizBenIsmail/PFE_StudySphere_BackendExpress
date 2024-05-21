@@ -231,24 +231,39 @@ exports.getFormationsDomaine = async (req, res) => {
   }
 };
 
-
-exports.getFormationsParLocalisation = async (req, res) => {
+exports.getFormationsRecomonder = async (req, res) => {
   try {
     const userId = req.session.user._id; // Récupérer l'ID de l'utilisateur connecté
     const user = await User.findById(userId).populate('preferences'); // Récupérer l'utilisateur avec ses préférences
     const userLocation = user.preferences.emplacement_actuelle; // Récupérer la localisation actuelle du client depuis ses préférences
     const userDomaine = user.preferences.domaine_actuelle; // Récupérer le domaine d'intérêt du client depuis ses préférences
 
-    // Récupérer les formations basées sur la localisation du client et qui ont le même domaine
-    const formations = await Formation.find({ emplacement: userLocation, sujetInteret: userDomaine })
+    // Rechercher les formations basées sur la localisation et le domaine
+    let formations = await Formation.find({ emplacement: userLocation, sujetInteret: userDomaine })
     .populate('centre')
     .populate('formateur');
 
+    // Si aucune formation n'est trouvée pour les deux critères, chercher par localisation seulement
+    if (formations.length === 0) {
+      formations = await Formation.find({ emplacement: userLocation })
+      .populate('centre')
+      .populate('formateur');
+    }
+
+    // Si toujours aucune formation n'est trouvée, chercher par domaine seulement
+    if (formations.length === 0) {
+      formations = await Formation.find({ sujetInteret: userDomaine })
+      .populate('centre')
+      .populate('formateur');
+    }
+
+    // Renvoyer les formations trouvées
     res.status(200).json({ formations });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
 
 exports.getFormationsByDayAndTime = async (req, res) => {
   try {

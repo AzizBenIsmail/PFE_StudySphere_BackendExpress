@@ -12,6 +12,8 @@ const { upload } = require("./middlewares/uploadFils/uploadFileChat.js");
 
 const { app, server } = require("./socket/socket.js");
 
+
+
 require("dotenv").config(); //configuration dotenv
 
 var indexRouter = require('./routes/index');
@@ -23,6 +25,7 @@ var badgeRouter = require('./routes/badge');
 var niveauRouter = require('./routes/niveau');
 var notificationRouter = require('./routes/notification');
 var formationRouter = require('./routes/formation');
+var calendarRouter = require('./routes/calendar');
 const { connectToMongoDB } = require('./db/db')
 
 require("./controllers/init");
@@ -38,6 +41,7 @@ var badgeRouter = require("./routes/badge");
 var niveauRouter = require("./routes/niveau");
 var notificationRouter = require("./routes/notification");
 var messageRouter = require("./routes/message");
+var calendarRouter = require("./routes/calendar");
 
 const { default: Message } = require("./models/messageSchema");
 
@@ -108,7 +112,7 @@ app.use("/niveau", niveauRouter);
 app.use("/notification", notificationRouter);
 app.use("/messages", messageRouter);
 app.use('/formation', formationRouter);
-
+app.use('/calendar', calendarRouter);
 
 // ...
 

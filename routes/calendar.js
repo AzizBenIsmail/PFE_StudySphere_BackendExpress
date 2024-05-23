@@ -5,7 +5,7 @@ const Event = require("../models/event.js");
 const { requireAuthUser } = require('../middlewares/authMiddleware');
 
 // Get all events
-router.get("/events", requireAuthUser, async (req, res) => {
+router.get("/events", async (req, res) => {
   try {
     const events = await Event.find();
     res.status(200).json(events);

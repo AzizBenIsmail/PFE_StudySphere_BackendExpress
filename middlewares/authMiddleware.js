@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/userSchema");
 
 const requireAuthUser = (req, res, next) => {
-  // const token = req.cookies.jwt_token;
+   //const token = req.cookies.jwt_token;
   // console.log("token", token); //token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODg5OWI0ZDViODAzM2UxY2M1MTNiMyIsImlhdCI6MTY4Njc1MzQ4NCwiZXhwIjoxNjg2NzYwNjg0fQ.KPnsNPjL0PS3oyZ5l3mMC9GUc0ymgheVr-FYt_31pN0
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(" ")[1];

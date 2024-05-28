@@ -25,6 +25,7 @@ var notificationRouter = require('./routes/notification');
 var formationRouter = require('./routes/formation');
 var blogRouter = require('./routes/blog');
 var messageRouter = require("./routes/message");
+var eventRouter = require("./routes/event");
 
 const { connectToMongoDB } = require('./db/db');
 
@@ -87,8 +88,7 @@ app.use('/notification', notificationRouter);
 app.use('/formation', formationRouter);
 app.use('/blog', blogRouter);
 app.use("/messages", messageRouter);
-
-
+app.use("/calendar", eventRouter);
 
 // Démarrage du serveur
 server.listen(process.env.PORT, () => {

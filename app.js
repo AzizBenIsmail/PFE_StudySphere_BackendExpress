@@ -5,7 +5,7 @@ var logger = require('morgan');
 const http = require("http");
 const cors = require('cors');
 const session = require('express-session');
-const multer = require("multer");
+
 require("dotenv").config(); //configuration dotenv
 require('./controllers/init');
 const { fileURLToPath } = require("url");
@@ -58,24 +58,7 @@ app.use(cors({
 const currentDirname = path.dirname(__filename);
 console.log("Directory path:", currentDirname);
 
-// Serve static files from the 'public/videos' directory
-const publicVideosDirectoryPath = path.join(currentDirname, "public/videos");
-app.use(express.static(publicVideosDirectoryPath));
 
-// Serve static files from the 'public/files' directory
-const publicFilesDirectoryPath = path.join(currentDirname, "public/files");
-app.use(express.static(publicFilesDirectoryPath));
-
-// Serve static files from the 'public/images' directory
-const publicImagesDirectoryPath = path.join(currentDirname, "public/images");
-app.use(express.static(publicImagesDirectoryPath));
-
-// Serve static files from the 'public/records' directory
-const publicRecordsDirectoryPath = path.join(currentDirname, "public/records");
-app.use(express.static(publicRecordsDirectoryPath));
-
-// Use the upload middleware to handle any type of file
-app.use(upload.single("file"));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

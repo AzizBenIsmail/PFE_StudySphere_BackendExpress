@@ -88,5 +88,7 @@ router.put("/UpdatePassword",requireAuthUser,users.forgetpassword);
 router.put("/affecterEnseignant/:enseignantId",requireAuthUser,users.affecterEnseignant);
 
 router.put("/desinfecterFormateur/:enseignantId",requireAuthUser,users.desinfecterFormateur);
+/*get sidebar users */
+router.get("/sidebarUser" ,usersLogMiddleware ,requireAuthUser ,users.getUsersForSidebar );
 
 module.exports = router;

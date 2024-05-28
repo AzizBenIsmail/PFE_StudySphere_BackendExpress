@@ -32,7 +32,8 @@ userSchema = new mongoose.Schema({
   Formations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Formation' }],
   staff_enseignant: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   centresTravailAssocies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-
+  // for blogs 
+  blogs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Blog' }],
 }, { timestamps: true })
 
 //apres la creation

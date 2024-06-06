@@ -17,6 +17,7 @@ var badgeRouter = require('./routes/badge');
 var niveauRouter = require('./routes/niveau');
 var notificationRouter = require('./routes/notification');
 var formationRouter = require('./routes/formation');
+var favorisRouter = require('./routes/Favoris');
 
 const { connectToMongoDB } = require('./db/db');
 
@@ -54,6 +55,7 @@ app.use('/badge', badgeRouter);
 app.use('/niveau', niveauRouter);
 app.use('/notification', notificationRouter);
 app.use('/formation', formationRouter);
+app.use('/fav', favorisRouter);
 
 // Création du serveur HTTP en utilisant l'application Express
 const server = http.createServer(app);

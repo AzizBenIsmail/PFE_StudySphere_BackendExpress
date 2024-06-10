@@ -231,31 +231,62 @@ exports.getFormationsDomaine = async (req, res) => {
   }
 };
 
-exports.getFormationsRecomonder = async (req, res) => {
+exports.getFormationsRecommender = async (req, res) => {
   try {
     const userId = req.session.user._id; // Récupérer l'ID de l'utilisateur connecté
     const user = await User.findById(userId).populate('preferences'); // Récupérer l'utilisateur avec ses préférences
-    const userLocation = user.preferences.emplacement_actuelle; // Récupérer la localisation actuelle du client depuis ses préférences
-    const userDomaine = user.preferences.domaine_actuelle; // Récupérer le domaine d'intérêt du client depuis ses préférences
 
-    // Rechercher les formations basées sur la localisation et le domaine
-    let formations = await Formation.find({ emplacement: userLocation, sujetInteret: userDomaine })
-    .populate('centre')
-    .populate('formateur');
-
-    // Si aucune formation n'est trouvée pour les deux critères, chercher par localisation seulement
-    if (formations.length === 0) {
-      formations = await Formation.find({ emplacement: userLocation })
-      .populate('centre')
-      .populate('formateur');
+    if (!user) {
+      return res.status(404).json({ success: false, error: "Utilisateur non trouvé" });
     }
 
-    // Si toujours aucune formation n'est trouvée, chercher par domaine seulement
-    if (formations.length === 0) {
-      formations = await Formation.find({ sujetInteret: userDomaine })
-      .populate('centre')
-      .populate('formateur');
+    // Récupérer les préférences de l'utilisateur
+    const preferences = user.preferences;
+
+    // Construire la liste des critères de recherche en fonction des préférences de l'utilisateur
+    const criteria = [
+      { emplacement: preferences.emplacement_actuelle },
+      { sujetInteret: preferences.Domaine_dinteret },
+      { styleEnseignement: preferences.style_dapprentissage },
+      { langue: { $in: preferences.preferences_linguistiques.split(',') } },
+      { competences: { $in: preferences.competences_dinteret.split(',') } }
+    ];
+
+    let formations = [];
+
+    // Fonction pour construire la requête en supprimant des critères
+    const buildQuery = (activeCriteria) => {
+      let query = {};
+      for (let criterion of activeCriteria) {
+        let key = Object.keys(criterion)[0];
+        query[key] = criterion[key];
+      }
+      return query;
+    };
+
+    // Rechercher les formations avec tous les critères
+    let activeCriteria = [...criteria];
+    formations = await Formation.find(buildQuery(activeCriteria)).populate('centre').populate('formateur');
+
+    // Réduire les critères un par un jusqu'à trouver des résultats
+    while (formations.length === 0 && activeCriteria.length > 1) {
+      activeCriteria.pop(); // Supprimer le dernier critère
+      formations = await Formation.find(buildQuery(activeCriteria)).populate('centre').populate('formateur');
     }
+
+    // Si toujours aucune formation n'est trouvée, chercher par localisation seulement
+    // if (formations.length === 0 && preferences.emplacement_actuelle) {
+    //   formations = await Formation.find({
+    //     emplacement: preferences.emplacement_actuelle
+    //   }).populate('centre').populate('formateur');
+    // }
+    //
+    // // Si toujours aucune formation n'est trouvée, chercher par domaine seulement
+    // if (formations.length === 0 && preferences.domaine_actuelle) {
+    //   formations = await Formation.find({
+    //     sujetInteret: preferences.domaine_actuelle
+    //   }).populate('centre').populate('formateur');
+    // }
 
     // Renvoyer les formations trouvées
     res.status(200).json({ formations });
@@ -263,6 +294,7 @@ exports.getFormationsRecomonder = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
 
 
 exports.getFormationsByDayAndTime = async (req, res) => {

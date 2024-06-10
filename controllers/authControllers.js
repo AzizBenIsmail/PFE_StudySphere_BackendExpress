@@ -136,67 +136,41 @@ module.exports.login_post = async (req, res) => {
   }
 }
 
-
-function sendWelcomeEmail(email, nom, id) {
+// Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
+function sendWelcomeEmail (email, nom, id) {
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'studyspheretn@gmail.com',
-      pass: 'uqct kspi rgnt yzre',
+    service: 'gmail', auth: {
+      user: 'studyspheretn@gmail.com', pass: 'uqct kspi rgnt yzre',
     },
-  });
-
-  const activationLink = `http://localhost:5000/auth/validation?email=${encodeURIComponent(email)}&id=${id}`;
+  })
+  const activationLink = `http://localhost:5000/auth/validation?email=${encodeURIComponent(email)}`
   const mailOptions = {
-    from: 'studyspheretn@gmail.com',
-    to: email,
-    subject: 'Bienvenue sur notre site',
-    html: `
+    from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
       <html>
         <head>
           <style>
+            /* Add your custom styles here */
             body {
               font-family: Arial, sans-serif;
-              background-color: #f9f9f9;
-              margin: 0;
-              padding: 0;
-              color: #333333;
-              text-align: center;
+              background-color: #f2f2f2;
+              padding: 20px;
             }
             .container {
-              max-width: 600px;
-              margin: 50px auto;
+              max-width: 500px;
+              margin: 0 auto;
               background-color: #ffffff;
-              padding: 20px;
-              border-radius: 8px;
-              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-              border: 1px solid #dddddd;
+              padding: 30px;
+              border-radius: 5px;
+              box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
             }
-            .header {
-              background-color: #007bff;
-              color: #ffffff;
-              padding: 10px 0;
-              text-align: center;
-              border-top-left-radius: 8px;
-              border-top-right-radius: 8px;
+            h1 {
+              color: #333333;
             }
-            .header img {
-              width: 50px;
-              margin-bottom: 10px;
+            p {
+              color: #555555;
             }
-            .header h1 {
-              margin: 0;
-              font-size: 24px;
-            }
-            .content {
-              padding: 20px;
-            }
-            .content h2 {
-              color: #007bff;
-            }
-            .content p {
-              line-height: 1.6;
-              margin: 10px 0;
+            h2 {
+              color: #0000FF;
             }
             .button {
               display: inline-block;
@@ -206,45 +180,30 @@ function sendWelcomeEmail(email, nom, id) {
               padding: 10px 20px;
               border-radius: 4px;
               margin-top: 20px;
-              text-align: center;
-            }
-            .footer {
-              margin-top: 20px;
-              text-align: center;
-              font-size: 12px;
-              color: #777777;
             }
           </style>
         </head>
         <body>
           <div class="container">
-            <div class="header">
-              <img src="https://image-url-of-envelope-icon.png" alt="Envelope Icon">
-              <h1>Bienvenue sur notre site</h1>
-            </div>
-            <div class="content">
-              <p>Cher <strong>${nom}</strong>,</p>
-              <p>Nous sommes ravis de vous accueillir parmi nous !</p>
-              <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
-              <a href="${activationLink}" class="button">Activer mon compte</a>
-              <p>Cordialement,<br>L'équipe du site</p>
-            </div>
-            <div class="footer">
-              <p>Si vous avez des questions, n'hésitez pas à nous contacter à l'adresse <a href="mailto:support@notresite.com">support@notresite.com</a>.</p>
-            </div>
+            <h1>Bienvenue sur notre site</h1>
+            <p>Cher</p> <h2> ${nom},</h2>
+            <p>Nous sommes ravis de vous accueillir parmi nous !</p>
+            <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
+            <a href="${activationLink}" ${id} class="button">Activer mon compte</a>
+            <p>Cordialement,<br>L'équipe du site</p>
           </div>
         </body>
       </html>
     `,
-  };
+  }
 
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.error("Erreur lors de l'envoi de l'e-mail de bienvenue :", error);
+      console.error('Erreur lors de l\'envoi de l\'e-mail de bienvenue :', error)
     } else {
-      console.log("E-mail de bienvenue envoyé avec succès !");
+      console.log('E-mail de bienvenue envoyé avec succès !')
     }
-  });
+  })
 }
 
   async function sendPasswordEmail(email, activationLink) {

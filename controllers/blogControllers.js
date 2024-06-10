@@ -81,6 +81,7 @@ exports.deleteBlog = async (request, response, next) => {
 };
 
 exports.updateBlog = async (request, response, next) => {
+  const user = request.session.user;
   const body = request.body;
 
   if (!body.likes) {
@@ -91,6 +92,8 @@ exports.updateBlog = async (request, response, next) => {
       error: "title is required",
     });
   }
+
+  
 
   const blog = {
     title: body.title,
@@ -120,6 +123,7 @@ exports.addComment = async (request, response) => {
   const comment = {
     content: body.content,
     user: user._id,
+    dateCreated: body.dateCreated || new Date(),
   };
 
   blog.comments = blog.comments.concat(comment);

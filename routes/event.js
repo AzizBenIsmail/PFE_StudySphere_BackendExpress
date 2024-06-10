@@ -9,7 +9,7 @@ const {
 } = require('../controllers/eventController');
 
 // Get all events
-router.get("/events", requireAuthUser, getAllEvents);
+router.get("/events", getAllEvents);
 
 // Create an event
 router.post("/events", requireAuthUser, createEvent);

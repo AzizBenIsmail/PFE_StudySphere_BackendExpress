@@ -8,7 +8,7 @@ const { requireAuthUser } = require('../middlewares/authMiddleware')
 router.get('/searchemplacement', formationController.getFormationsByLocation);
 router.get('/FormationByDayAndTime', formationController.getFormationsByDayAndTime);
 router.get('/FormationByDomaine', formationController.getFormationsDomaine);
-router.get('/RecommandationParLocation',requireAuthUser, formationController.getFormationsRecomonder);
+router.get('/RecommandationParLocation',requireAuthUser, formationController.getFormationsRecommender);
 router.post('/',requireAuthUser,upload.single("image_Formation"), formationController.createFormation); // Créer une nouvelle formation
 router.get('/', formationController.getFormations); // Récupérer toutes les formations
 router.get('/FormationByCentre',requireAuthUser , formationController.getFormationsByCentre); // Récupérer toutes les formations

@@ -19,50 +19,6 @@ const createTokenmdp = (id) => {
   return jwt.sign({ id, exp: Math.floor(Date.now() / 1000) + 120 }, process.env.Net_Secret);
 };
 
-// module.exports.signup_post = async (req, res) => {
-//   const { filename } = req.file
-//   const { email, password, surnom } = req.body
-//   consolo.log(req.body)
-//   try {
-//     const user = await userModel.create({
-//       surnom, password, email, image_user: filename,
-//     })
-//     sendWelcomeEmail(email, surnom)
-//     const token = createToken(user._id)
-//     res.cookie('jwt_token', token, { httpOnly: true, maxAge: maxAge * 1000 })
-//     res.status(201).json({ user })
-//   } catch (error) {
-//     res.status(500).json({ message: error.message })
-//   }
-// }
-
-// module.exports.signupclient = async (req, res) => {
-//   const { email, password, nom, prenom } = req.body
-//   const role = 'client'
-//   const etat = true
-//   console.log(req.body)
-//   try {
-//     if (!email) {
-//       return res.status(200).json({ message: 'Email required' })
-//     }
-//       const checkIfUserExists = await userModel.findOne({ email })
-//       console.log(email)
-//       if (checkIfUserExists) {
-//         // If user is found, respond with 409 (Conflict)
-//         return res.status(200).json({ message: 'Email exists deja' })
-//       }
-//     const user = await userModel.create({
-//       nom, prenom, password, email, role , etat
-//     })
-//     // sendWelcomeEmail(email, nom);
-//     const token = createToken(user._id)
-//     res.cookie('jwt_token', token, { httpOnly: true, maxAge: maxAge * 1000 })
-//     res.status(201).json({ user })
-//   } catch (error) {
-//     res.status(500).json({ message: error.message })
-//   }
-// }
-
 module.exports.signupclient = async (req, res) => {
   const { email, password, nom, prenom , role } = req.body
   // const role = 'client'
@@ -180,41 +136,67 @@ module.exports.login_post = async (req, res) => {
   }
 }
 
-// Fonction pour envoyer un e-mail de bienvenue à l'utilisateur
-function sendWelcomeEmail (email, nom, id) {
+
+function sendWelcomeEmail(email, nom, id) {
   const transporter = nodemailer.createTransport({
-    service: 'gmail', auth: {
-      user: 'studyspheretn@gmail.com', pass: 'uqct kspi rgnt yzre',
+    service: 'gmail',
+    auth: {
+      user: 'studyspheretn@gmail.com',
+      pass: 'uqct kspi rgnt yzre',
     },
-  })
-  const activationLink = `http://localhost:5000/auth/validation?email=${encodeURIComponent(email)}`
+  });
+
+  const activationLink = `http://localhost:5000/auth/validation?email=${encodeURIComponent(email)}&id=${id}`;
   const mailOptions = {
-    from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
+    from: 'studyspheretn@gmail.com',
+    to: email,
+    subject: 'Bienvenue sur notre site',
+    html: `
       <html>
         <head>
           <style>
-            /* Add your custom styles here */
             body {
               font-family: Arial, sans-serif;
-              background-color: #f2f2f2;
-              padding: 20px;
+              background-color: #f9f9f9;
+              margin: 0;
+              padding: 0;
+              color: #333333;
+              text-align: center;
             }
             .container {
-              max-width: 500px;
-              margin: 0 auto;
+              max-width: 600px;
+              margin: 50px auto;
               background-color: #ffffff;
-              padding: 30px;
-              border-radius: 5px;
-              box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+              padding: 20px;
+              border-radius: 8px;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              border: 1px solid #dddddd;
             }
-            h1 {
-              color: #333333;
+            .header {
+              background-color: #007bff;
+              color: #ffffff;
+              padding: 10px 0;
+              text-align: center;
+              border-top-left-radius: 8px;
+              border-top-right-radius: 8px;
             }
-            p {
-              color: #555555;
+            .header img {
+              width: 50px;
+              margin-bottom: 10px;
             }
-            h2 {
-              color: #0000FF;
+            .header h1 {
+              margin: 0;
+              font-size: 24px;
+            }
+            .content {
+              padding: 20px;
+            }
+            .content h2 {
+              color: #007bff;
+            }
+            .content p {
+              line-height: 1.6;
+              margin: 10px 0;
             }
             .button {
               display: inline-block;
@@ -224,30 +206,45 @@ function sendWelcomeEmail (email, nom, id) {
               padding: 10px 20px;
               border-radius: 4px;
               margin-top: 20px;
+              text-align: center;
+            }
+            .footer {
+              margin-top: 20px;
+              text-align: center;
+              font-size: 12px;
+              color: #777777;
             }
           </style>
         </head>
         <body>
           <div class="container">
-            <h1>Bienvenue sur notre site</h1>
-            <p>Cher</p> <h2> ${nom},</h2>
-            <p>Nous sommes ravis de vous accueillir parmi nous !</p>
-            <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
-            <a href="${activationLink}" ${id} class="button">Activer mon compte</a>
-            <p>Cordialement,<br>L'équipe du site</p>
+            <div class="header">
+              <img src="https://image-url-of-envelope-icon.png" alt="Envelope Icon">
+              <h1>Bienvenue sur notre site</h1>
+            </div>
+            <div class="content">
+              <p>Cher <strong>${nom}</strong>,</p>
+              <p>Nous sommes ravis de vous accueillir parmi nous !</p>
+              <p>Veuillez cliquer sur le bouton ci-dessous pour activer votre compte :</p>
+              <a href="${activationLink}" class="button">Activer mon compte</a>
+              <p>Cordialement,<br>L'équipe du site</p>
+            </div>
+            <div class="footer">
+              <p>Si vous avez des questions, n'hésitez pas à nous contacter à l'adresse <a href="mailto:support@notresite.com">support@notresite.com</a>.</p>
+            </div>
           </div>
         </body>
       </html>
     `,
-  }
+  };
 
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.error('Erreur lors de l\'envoi de l\'e-mail de bienvenue :', error)
+      console.error("Erreur lors de l'envoi de l'e-mail de bienvenue :", error);
     } else {
-      console.log('E-mail de bienvenue envoyé avec succès !')
+      console.log("E-mail de bienvenue envoyé avec succès !");
     }
-  })
+  });
 }
 
   async function sendPasswordEmail(email, activationLink) {

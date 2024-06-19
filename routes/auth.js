@@ -4,7 +4,7 @@ const upload = require("../middlewares/uploadFils/uploadImagesUsers");
 const auth = require("../controllers/authControllers");
 const { requireAuthUser } = require("../middlewares/authMiddleware");
 const { userValidation } = require("../middlewares/userValidation");
-const authLogMiddleware = require('../middlewares/authLogMiddleware')
+const authLogMiddleware = require('../middlewares/SystemeLogs/authLogMiddleware')
 
 /* GET user by ID. */
 router.get("/",authLogMiddleware, requireAuthUser, auth.getUser);

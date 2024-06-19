@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 const users = require("../controllers/usersControllers");
 const upload = require("../middlewares/uploadFils/uploadImagesUsers");
-const usersLogMiddleware = require('../middlewares/usersLogMiddleware')
+const usersLogMiddleware = require('../middlewares/SystemeLogs/usersLogMiddleware')
 const { requireAuthUser } = require("../middlewares/authMiddleware");
 
 /* GET users listing. */

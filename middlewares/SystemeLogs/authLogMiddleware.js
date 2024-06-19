@@ -35,7 +35,7 @@
     const referer = req.headers.referer || 'N/A';
     const log = `${new Date().toISOString()} - ${req.method} - ${req.originalUrl} - ${req.ip} - Referer: ${referer} - ${res.statusCode} - User_id: ${req.user ? req.user._id : 'N/A'} | nom: ${req.user ? req.user.nom : 'N/A'} \nHeaders: ${headers}\nExecution Time: ${executionTime} ms\nBody: ${body}\n - ${res.locals.data}\n`;
 
-    const logsDirectory = path.join(__dirname, '..', 'logs'); // Chemin du dossier logs, en remontant d'un niveau
+    const logsDirectory = path.join(__dirname, '..', '..', 'logs'); // Chemin du dossier logs, en remontant de deux niveaux
     const logFilePath = path.join(logsDirectory, 'auth.log'); // Chemin complet du fichier de logs
 
     // Vérifier si le dossier logs existe, sinon le créer

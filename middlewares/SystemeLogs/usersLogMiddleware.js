@@ -32,7 +32,7 @@
     const executionTime = endTime - startTime; // Temps d'exécution en millisecondes
     const body = Object.keys(req.body).length > 0 ? JSON.stringify(req.body) : 'N/A';
     const referer = req.headers.referer || 'N/A';
-    const log = `${req.method} ${req.originalUrl} ${res.statusCode} ${executionTime.toFixed(3)} ms - -\\n ${new Date().toISOString()} - ${req.method} - ${req.originalUrl} - ${req.ip} - Referer: ${referer} - ${res.statusCode} - User_id: ${req.user ? req.user._id : 'N/A'} | nom: ${req.user ? req.user.nom : 'N/A'} \nHeaders: ${headers}\nExecution Time: ${executionTime} ms\nBody: ${body}\n - ${res.locals.data}\n`;
+    const log = `${new Date().toISOString()} - ${req.method} - ${req.originalUrl} - ${req.ip} - Referer: ${referer} - ${res.statusCode} - User_id: ${req.user ? req.user._id : 'N/A'} | nom: ${req.user ? req.user.nom : 'N/A'} \nHeaders: ${headers}\nExecution Time: ${executionTime} ms\nBody: ${body}\n - ${res.locals.data}\n`;
 
     const logsDirectory = path.join(__dirname, '..', '..', 'logs'); // Chemin du dossier logs, en remontant de deux niveaux
     const logFilePath = path.join(logsDirectory, 'users.log'); // Chemin complet du fichier de logs

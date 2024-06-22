@@ -242,7 +242,6 @@ exports.getFormationsRecommender = async (req, res) => {
 
     // Récupérer les préférences de l'utilisateur
     const preferences = user.preferences;
-
     // Construire la liste des critères de recherche en fonction des préférences de l'utilisateur
     const criteria = [
       { emplacement: preferences.emplacement_actuelle },
@@ -264,29 +263,27 @@ exports.getFormationsRecommender = async (req, res) => {
       return query;
     };
 
-    // Rechercher les formations avec tous les critères
-    let activeCriteria = [...criteria];
+    // Pondération des critères
+    const weightedCriteria = [
+      { weight: 3, criterion: { emplacement: preferences.emplacement_actuelle } },
+      { weight: 3, criterion: { sujetInteret: preferences.Domaine_dinteret } },
+      { weight: 2, criterion: { competences: { $in: preferences.competences_dinteret.split(',') } } },
+      { weight: 1, criterion: { langue: { $in: preferences.preferences_linguistiques.split(',') } } },
+      { weight: 1, criterion: { styleEnseignement: preferences.style_dapprentissage } },
+
+    ];
+
+    // Tri des critères par ordre de pondération décroissant
+    weightedCriteria.sort((a, b) => b.weight - a.weight);
+
+    // Rechercher les formations en relâchant progressivement les critères
+    let activeCriteria = weightedCriteria.map(item => item.criterion);
     formations = await Formation.find(buildQuery(activeCriteria)).populate('centre').populate('formateur');
 
-    // Réduire les critères un par un jusqu'à trouver des résultats
     while (formations.length === 0 && activeCriteria.length > 1) {
       activeCriteria.pop(); // Supprimer le dernier critère
       formations = await Formation.find(buildQuery(activeCriteria)).populate('centre').populate('formateur');
     }
-
-    // Si toujours aucune formation n'est trouvée, chercher par localisation seulement
-    // if (formations.length === 0 && preferences.emplacement_actuelle) {
-    //   formations = await Formation.find({
-    //     emplacement: preferences.emplacement_actuelle
-    //   }).populate('centre').populate('formateur');
-    // }
-    //
-    // // Si toujours aucune formation n'est trouvée, chercher par domaine seulement
-    // if (formations.length === 0 && preferences.domaine_actuelle) {
-    //   formations = await Formation.find({
-    //     sujetInteret: preferences.domaine_actuelle
-    //   }).populate('centre').populate('formateur');
-    // }
 
     // Renvoyer les formations trouvées
     res.status(200).json({ formations });

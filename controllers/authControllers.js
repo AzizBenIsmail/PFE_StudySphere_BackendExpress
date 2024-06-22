@@ -262,7 +262,7 @@ function sendWelcomeEmail (email, nom, id) {
 </head>
 <body>
     <div class="container">
-        <h1>Bienvenue sur notre site</h1>
+        <h1>Réinitialiser votre mot de passe</h1>
         <p>Cher <span class="username">client</span>,</p>
         <p>Nous sommes ravis de vous accueillir parmi nous !</p>
         <p>Veuillez cliquer sur le bouton ci-dessous pour modifier votre Mots de Passe :</p>
@@ -285,31 +285,35 @@ function sendWelcomeEmail (email, nom, id) {
 }
 module.exports.sendforgetPassword = async (req, res) => {
   try {
-    const email = req.body.email
-    const user = await userModel.findOne({ email })
+    const email = req.body.email;
+    const user = await userModel.findOne({ email });
 
     if (!user) {
-      return res.status(200).json({ message: 'email non enregistre' })
+      return res.status(200).json({ message: 'email non enregistre' });
     }
 
     // Create a unique token for each password reset request
     const token = createTokenmdp(user._id);
 
-    // Save the token and set the 'used' flag to false in the user document
-    user.resetPasswordToken = token;
-    user.resetPasswordUsed = false;
-    await user.save();
+    // Find the user by ID and update the resetPasswordToken and resetPasswordUsed fields
+    await userModel.findByIdAndUpdate(
+      user._id,
+      {
+        resetPasswordToken: token,
+        resetPasswordUsed: false
+      }
+    );
 
     const activationLink = `http://localhost:3000/auth/Resetmdp?token=${token}&message=tu_peux_changer_votre_mdp&email=${email}`;
 
-    sendPasswordEmail(email,activationLink)
+    sendPasswordEmail(email, activationLink);
     res.status(200).json({
       message: 'mot de passe modifié avec succès vérifier votre boîte mail'
-    })
+    });
   } catch (error) {
-    return res.status(500).json({ message: error.message })
+    return res.status(500).json({ message: error.message });
   }
-}
+};
 
 module.exports.forgetpassword = async (req, res) => {
   try {

@@ -57,9 +57,12 @@ app.use('/notification', notificationRouter);
 app.use('/formation', formationRouter);
 app.use('/fav', favorisRouter);
 
+app.get('/check', (req, res) => {
+  res.status(200).send('Server is running');
+});
+
 // Création du serveur HTTP en utilisant l'application Express
 const server = http.createServer(app);
-
 
 // Démarrage du serveur
 server.listen(process.env.PORT, () => {

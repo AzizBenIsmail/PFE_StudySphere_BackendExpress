@@ -40,7 +40,7 @@ app.use(session({
 app.use(express.static("public"));
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: process.env.Origin_Front,
   // origin: 'https://forme9antra.netlify.app',
   methods: 'GET, POST, PUT, DELETE',
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Credentials',

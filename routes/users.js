@@ -42,11 +42,11 @@ router.get("/AllUsersDeConnecter",usersLogMiddleware, requireAuthUser, users.get
 router.get("/searchUsers",usersLogMiddleware, requireAuthUser, users.searchUsers);
 
 /*get user by id */
-router.get("/User/:id",usersLogMiddleware, requireAuthUser, users.UserByID);
+router.get("/User/:id",usersLogMiddleware, users.UserByID);
 
-router.get("/Center/:domaine",usersLogMiddleware, requireAuthUser, users.getCentersByDomain);
+router.get("/Center/:domaine",usersLogMiddleware, users.getCentersByDomain);
 
-router.get('/Formateur/:centerId', usersLogMiddleware, requireAuthUser , users.getInstructorsByCenter);
+router.get('/Formateur/:centerId', usersLogMiddleware, users.getInstructorsByCenter);
 
 /* Delete user by ID. */
 router.delete("/:id",usersLogMiddleware, requireAuthUser, users.deleteUser);

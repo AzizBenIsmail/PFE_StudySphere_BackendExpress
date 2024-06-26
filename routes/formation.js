@@ -12,9 +12,9 @@ router.get('/RecommandationParLocation',requireAuthUser, formationController.get
 router.post('/',requireAuthUser,upload.single("image_Formation"), formationController.createFormation); // Créer une nouvelle formation
 router.get('/', formationController.getFormations); // Récupérer toutes les formations
 router.get('/FormationByCentre',requireAuthUser , formationController.getFormationsByCentre); // Récupérer toutes les formations
-router.get('/FormationByIdCentre/:id',requireAuthUser , formationController.getFormationsById); // Récupérer toutes les formations
-router.get('/FormationByIdFormateur/:id',requireAuthUser , formationController.getFormationByIdFormateur); // Récupérer toutes les formations
-router.get('/:id',requireAuthUser, formationController.getFormationById); // Récupérer une formation par son ID
+router.get('/FormationByIdCentre/:id',formationController.getFormationsById); // Récupérer toutes les formations
+router.get('/FormationByIdFormateur/:id', formationController.getFormationByIdFormateur); // Récupérer toutes les formations
+router.get('/:id', formationController.getFormationById); // Récupérer une formation par son ID
 router.put('/:id', requireAuthUser ,upload.single("image_Formation"),formationController.updateFormation); // Mettre à jour une formation
 router.delete('/:id', requireAuthUser ,formationController.deleteFormation); // Supprimer une formation
 // Route pour récupérer les formations par emplacement

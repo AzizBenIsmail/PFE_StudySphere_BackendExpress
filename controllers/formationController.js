@@ -182,6 +182,7 @@ exports.deleteFormation = async (req, res) => {
     // Rechercher les utilisateurs formateur et centre de la formation supprimée
     const formateur = await User.findById(formation.formateur);
     const centre = await User.findById(formation.centre);
+    const participants = formation.participants;
 
     // Retirer l'ID de la formation supprimée des listes de formations des utilisateurs
     if (formateur) {
@@ -194,6 +195,14 @@ exports.deleteFormation = async (req, res) => {
       await User.findOneAndUpdate(
         { _id: centre._id },
         { $pull: { Formations: formation._id } }
+      );
+    }
+
+    for (let participantId of participants) {
+      await User.findByIdAndUpdate(
+        participantId,
+        { $pull: { inscriptions: formationId } },
+        { new: true }
       );
     }
     if (formation.image_Formation) {
@@ -319,3 +328,60 @@ exports.getFormationsByDayAndTime = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
+exports.inscription = async (req, res) => {
+  const { formationId } = req.params;
+  const { userId } = req.session.user._id;
+
+  try {
+  //   const formation = await Formation.findById(formationId);
+  //   if (!formation) {
+  //     return res.status(404).send({ message: 'Formation not found' });
+  //   }
+  //
+  //   if (!formation.participants.includes(userId)) {
+  //     // formation.participants.push(userId);
+  //     await formation.findByIdAndUpdate(
+  //       formationId,
+  //       { $addToSet: { participants: userId } },
+  //       { new: true }
+  //     );
+  //   }
+  //
+  //   // Ajouter la formation à l'utilisateur
+  //   await User.findByIdAndUpdate(
+  //     userId,
+  //     { $addToSet: { inscription: formationId } }, // $addToSet ajoute uniquement si l'élément n'est pas déjà présent
+  //     { new: true }
+  //   );
+
+    res.status(200).send({ message: 'User successfully enrolled in the formation' });
+  } catch (error) {
+    res.status(500).send({ message: 'Error enrolling user in the formation', error });
+  }
+}
+
+exports.desinscription = async (req, res) => {
+  const { formationId } = req.params;
+  const { userId } = req.session.user._id;
+
+  try {
+    // Retirer l'utilisateur de la formation
+    await Formation.findByIdAndUpdate(
+      formationId,
+      { $pull: { participants: userId } }, // $pull retire l'élément du tableau
+      { new: true }
+    );
+
+    // Retirer la formation de l'utilisateur
+    await User.findByIdAndUpdate(
+      userId,
+      { $pull: { inscription: formationId } }, // $pull retire l'élément du tableau
+      { new: true }
+    );
+
+    res.status(200).send({ message: 'User successfully unenrolled from the formation' });
+  } catch (error) {
+    res.status(500).send({ message: 'Error unenrolling user from the formation', error });
+  }
+}

@@ -182,6 +182,7 @@ exports.deleteFormation = async (req, res) => {
     // Rechercher les utilisateurs formateur et centre de la formation supprimée
     const formateur = await User.findById(formation.formateur);
     const centre = await User.findById(formation.centre);
+    const participants = formation.participants;
 
     // Retirer l'ID de la formation supprimée des listes de formations des utilisateurs
     if (formateur) {
@@ -194,6 +195,14 @@ exports.deleteFormation = async (req, res) => {
       await User.findOneAndUpdate(
         { _id: centre._id },
         { $pull: { Formations: formation._id } }
+      );
+    }
+
+    for (let participantId of participants) {
+      await User.findByIdAndUpdate(
+        participantId,
+        { $pull: { inscriptions: formationId } },
+        { new: true }
       );
     }
     if (formation.image_Formation) {
@@ -231,30 +240,58 @@ exports.getFormationsDomaine = async (req, res) => {
   }
 };
 
-exports.getFormationsRecomonder = async (req, res) => {
+exports.getFormationsRecommender = async (req, res) => {
   try {
     const userId = req.session.user._id; // Récupérer l'ID de l'utilisateur connecté
     const user = await User.findById(userId).populate('preferences'); // Récupérer l'utilisateur avec ses préférences
-    const userLocation = user.preferences.emplacement_actuelle; // Récupérer la localisation actuelle du client depuis ses préférences
-    const userDomaine = user.preferences.domaine_actuelle; // Récupérer le domaine d'intérêt du client depuis ses préférences
 
-    // Rechercher les formations basées sur la localisation et le domaine
-    let formations = await Formation.find({ emplacement: userLocation, sujetInteret: userDomaine })
-    .populate('centre')
-    .populate('formateur');
-
-    // Si aucune formation n'est trouvée pour les deux critères, chercher par localisation seulement
-    if (formations.length === 0) {
-      formations = await Formation.find({ emplacement: userLocation })
-      .populate('centre')
-      .populate('formateur');
+    if (!user) {
+      return res.status(404).json({ success: false, error: "Utilisateur non trouvé" });
     }
 
-    // Si toujours aucune formation n'est trouvée, chercher par domaine seulement
-    if (formations.length === 0) {
-      formations = await Formation.find({ sujetInteret: userDomaine })
-      .populate('centre')
-      .populate('formateur');
+    // Récupérer les préférences de l'utilisateur
+    const preferences = user.preferences;
+    // Construire la liste des critères de recherche en fonction des préférences de l'utilisateur
+    const criteria = [
+      { emplacement: preferences.emplacement_actuelle },
+      { sujetInteret: preferences.Domaine_dinteret },
+      { styleEnseignement: preferences.style_dapprentissage },
+      { langue: { $in: preferences.preferences_linguistiques.split(',') } },
+      { competences: { $in: preferences.competences_dinteret.split(',') } }
+    ];
+
+    let formations = [];
+
+    // Fonction pour construire la requête en supprimant des critères
+    const buildQuery = (activeCriteria) => {
+      let query = {};
+      for (let criterion of activeCriteria) {
+        let key = Object.keys(criterion)[0];
+        query[key] = criterion[key];
+      }
+      return query;
+    };
+
+    // Pondération des critères
+    const weightedCriteria = [
+      { weight: 3, criterion: { emplacement: preferences.emplacement_actuelle } },
+      { weight: 3, criterion: { sujetInteret: preferences.Domaine_dinteret } },
+      { weight: 2, criterion: { competences: { $in: preferences.competences_dinteret.split(',') } } },
+      { weight: 1, criterion: { langue: { $in: preferences.preferences_linguistiques.split(',') } } },
+      { weight: 1, criterion: { styleEnseignement: preferences.style_dapprentissage } },
+
+    ];
+
+    // Tri des critères par ordre de pondération décroissant
+    weightedCriteria.sort((a, b) => b.weight - a.weight);
+
+    // Rechercher les formations en relâchant progressivement les critères
+    let activeCriteria = weightedCriteria.map(item => item.criterion);
+    formations = await Formation.find(buildQuery(activeCriteria)).populate('centre').populate('formateur');
+
+    while (formations.length === 0 && activeCriteria.length > 1) {
+      activeCriteria.pop(); // Supprimer le dernier critère
+      formations = await Formation.find(buildQuery(activeCriteria)).populate('centre').populate('formateur');
     }
 
     // Renvoyer les formations trouvées
@@ -263,6 +300,7 @@ exports.getFormationsRecomonder = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
 
 
 exports.getFormationsByDayAndTime = async (req, res) => {
@@ -290,3 +328,60 @@ exports.getFormationsByDayAndTime = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
+exports.inscription = async (req, res) => {
+  const { formationId } = req.params;
+  const { userId } = req.session.user._id;
+
+  try {
+  //   const formation = await Formation.findById(formationId);
+  //   if (!formation) {
+  //     return res.status(404).send({ message: 'Formation not found' });
+  //   }
+  //
+  //   if (!formation.participants.includes(userId)) {
+  //     // formation.participants.push(userId);
+  //     await formation.findByIdAndUpdate(
+  //       formationId,
+  //       { $addToSet: { participants: userId } },
+  //       { new: true }
+  //     );
+  //   }
+  //
+  //   // Ajouter la formation à l'utilisateur
+  //   await User.findByIdAndUpdate(
+  //     userId,
+  //     { $addToSet: { inscription: formationId } }, // $addToSet ajoute uniquement si l'élément n'est pas déjà présent
+  //     { new: true }
+  //   );
+
+    res.status(200).send({ message: 'User successfully enrolled in the formation' });
+  } catch (error) {
+    res.status(500).send({ message: 'Error enrolling user in the formation', error });
+  }
+}
+
+exports.desinscription = async (req, res) => {
+  const { formationId } = req.params;
+  const { userId } = req.session.user._id;
+
+  try {
+    // Retirer l'utilisateur de la formation
+    await Formation.findByIdAndUpdate(
+      formationId,
+      { $pull: { participants: userId } }, // $pull retire l'élément du tableau
+      { new: true }
+    );
+
+    // Retirer la formation de l'utilisateur
+    await User.findByIdAndUpdate(
+      userId,
+      { $pull: { inscription: formationId } }, // $pull retire l'élément du tableau
+      { new: true }
+    );
+
+    res.status(200).send({ message: 'User successfully unenrolled from the formation' });
+  } catch (error) {
+    res.status(500).send({ message: 'Error unenrolling user from the formation', error });
+  }
+}

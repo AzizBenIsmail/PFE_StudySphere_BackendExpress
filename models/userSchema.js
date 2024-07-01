@@ -30,10 +30,13 @@ userSchema = new mongoose.Schema({
   xp: { type: mongoose.Schema.Types.ObjectId, ref: 'XP' },
   notifications: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notification' }],
   Formations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Formation' }],
+  Favoris: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Favoris' }], // Change to reference Favoris
   staff_enseignant: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   centresTravailAssocies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   // for blogs 
   blogs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Blog' }],
+  inscriptions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Formation' }],
+
 }, { timestamps: true })
 
 //apres la creation

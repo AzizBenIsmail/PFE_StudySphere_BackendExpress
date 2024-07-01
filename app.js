@@ -26,6 +26,7 @@ var formationRouter = require('./routes/formation');
 var blogRouter = require('./routes/blog');
 var messageRouter = require("./routes/message");
 var eventRouter = require("./routes/event");
+var favorisRouter = require('./routes/Favoris');
 
 const { connectToMongoDB } = require('./db/db');
 
@@ -48,7 +49,7 @@ app.use(session({
 app.use(express.static("public"));
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: process.env.Origin_Front,
   methods: 'GET, POST, PUT, DELETE',
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Credentials',
   credentials: true
@@ -72,6 +73,14 @@ app.use('/formation', formationRouter);
 app.use('/blog', blogRouter);
 app.use("/messages", messageRouter);
 app.use("/calendar", eventRouter);
+app.use('/fav', favorisRouter);
+
+app.get('/check', (req, res) => {
+  res.status(200).send('Server is running');
+});
+
+// Création du serveur HTTP en utilisant l'application Express
+const server = http.createServer(app);
 
 // Démarrage du serveur
 server.listen(process.env.PORT, () => {

@@ -123,12 +123,8 @@ module.exports.login_post = async (req, res) => {
       }, { new: true } // Set the { new: true } option to return the updated user
     )
     const token = createToken(user._id)
-    res.cookie('jwt_token', token, {
-      httpOnly: true, // Empêche l'accès aux cookies via JavaScript
-      secure: process.env.NODE_ENV === 'production', // Assure que le cookie est envoyé uniquement sur HTTPS
-      sameSite: 'None', // Nécessaire pour les cookies entre sites croisés
-      maxAge: 3600000, // 1 heure
-    });    req.session.user = user
+    res.cookie('jwt_token', token, { httpOnly: false, maxAge: maxAge * 1000 })
+    req.session.user = user
     // console.log(req.session);
     res.status(200).json({
       message: 'User successfully authenticated', user: user,

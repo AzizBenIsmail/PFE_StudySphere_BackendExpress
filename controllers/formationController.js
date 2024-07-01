@@ -331,43 +331,47 @@ exports.getFormationsByDayAndTime = async (req, res) => {
 
 exports.inscription = async (req, res) => {
   const { formationId } = req.params;
-  const { userId } = req.session.user._id;
+
+  if (!req.session.user || !req.session.user._id) {
+    return res.status(401).send({ message: 'User not authenticated' });
+  }
+
+  const userId = req.session.user._id;
 
   try {
-  //   const formation = await Formation.findById(formationId);
-  //   if (!formation) {
-  //     return res.status(404).send({ message: 'Formation not found' });
-  //   }
-  //
-  //   if (!formation.participants.includes(userId)) {
-  //     // formation.participants.push(userId);
-  //     await formation.findByIdAndUpdate(
-  //       formationId,
-  //       { $addToSet: { participants: userId } },
-  //       { new: true }
-  //     );
-  //   }
-  //
-  //   // Ajouter la formation à l'utilisateur
-  //   await User.findByIdAndUpdate(
-  //     userId,
-  //     { $addToSet: { inscription: formationId } }, // $addToSet ajoute uniquement si l'élément n'est pas déjà présent
-  //     { new: true }
-  //   );
+    const formation = await Formation.findById(formationId);
+    if (!formation) {
+      return res.status(404).send({ message: 'Formation not found' });
+    }
+
+    // Ajouter l'utilisateur à la formation
+    await Formation.findByIdAndUpdate(
+      formationId,
+      { $addToSet: { participants: userId } },
+      { new: true }
+    );
+
+    // Ajouter la formation à l'utilisateur
+    await User.findByIdAndUpdate(
+      userId,
+      { $addToSet: { inscriptions: formationId } },
+      { new: true }
+    );
 
     res.status(200).send({ message: 'User successfully enrolled in the formation' });
   } catch (error) {
     res.status(500).send({ message: 'Error enrolling user in the formation', error });
   }
-}
+};
+
 
 exports.desinscription = async (req, res) => {
   const { formationId } = req.params;
-  const { userId } = req.session.user._id;
+  const userId = req.session.user._id;
 
   try {
     // Retirer l'utilisateur de la formation
-    await Formation.findByIdAndUpdate(
+    const F = await Formation.findByIdAndUpdate(
       formationId,
       { $pull: { participants: userId } }, // $pull retire l'élément du tableau
       { new: true }
@@ -376,11 +380,11 @@ exports.desinscription = async (req, res) => {
     // Retirer la formation de l'utilisateur
     await User.findByIdAndUpdate(
       userId,
-      { $pull: { inscription: formationId } }, // $pull retire l'élément du tableau
+      { $pull: { inscriptions: formationId } }, // $pull retire l'élément du tableau
       { new: true }
     );
 
-    res.status(200).send({ message: 'User successfully unenrolled from the formation' });
+    res.status(200).send({ F });
   } catch (error) {
     res.status(500).send({ message: 'Error unenrolling user from the formation', error });
   }

@@ -33,6 +33,7 @@ userSchema = new mongoose.Schema({
   Favoris: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Favoris' }], // Change to reference Favoris
   staff_enseignant: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   centresTravailAssocies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  inscriptions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Formation' }],
 
 }, { timestamps: true })
 

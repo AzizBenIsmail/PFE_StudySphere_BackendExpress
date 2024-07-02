@@ -5,13 +5,11 @@ var logger = require('morgan');
 //const http = require("http");
 const cors = require('cors');
 const session = require('express-session');
-//const { fileURLToPath } = require("url");
 
-//const { upload } = require("./middlewares/uploadFils/uploadFileChat.js");
 require("dotenv").config(); //configuration dotenv
 require('./controllers/init');
 
-//const path = require("path");
+
 
 
 const { app, server } = require("./socket/socket.js");
@@ -57,17 +55,7 @@ app.use(cors({
   credentials: true
 }));
 
-// // Debugging: Log current directory path
-// const currentDirname = path.dirname(__filename);
-// console.log("Directory path:", currentDirname);
 
-// // // Serve static files from the 'public/videos' directory
-// const publicVideosDirectoryPath = path.join(currentDirname, "public/");
-// app.use(express.static(publicVideosDirectoryPath));
-
-
-// // Use the upload middleware to handle any type of file
-// app.use(upload.single("file"));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
@@ -96,3 +84,24 @@ server.listen(process.env.PORT, () => {
 });
 
 module.exports = app;
+
+
+
+//const { fileURLToPath } = require("url");// for chat
+
+//const { upload } = require("./middlewares/uploadFils/uploadFileChat.js");// for chat
+//const path = require("path");// for chat
+
+// for chat
+// // // Debugging: Log current directory path
+// const currentDirname = path.dirname(__filename);
+// console.log("Directory path:", currentDirname);
+
+// // // Serve static files from the 'public/videos' directory
+// const publicVideosDirectoryPath = path.join(currentDirname, "public/");
+// app.use(express.static(publicVideosDirectoryPath));
+
+
+// for chat
+// // Use the upload middleware to handle any type of file
+ //app.use(upload.single("file"));

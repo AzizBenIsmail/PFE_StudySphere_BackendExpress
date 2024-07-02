@@ -9,6 +9,7 @@ router.get('/', formationController.getFormations); // Récupérer toutes les fo
 router.get('/searchemplacement', formationController.getFormationsByLocation);
 router.get('/FormationByDayAndTime', formationController.getFormationsByDayAndTime);
 router.get('/FormationByDomaine', formationController.getFormationsDomaine);
+router.get('/FormationsByInscriptionByUserAuth', requireAuthUser,formationController.FormationsByInscriptionByUserAuth);
 router.get('/RecommandationParLocation',requireAuthUser, formationController.getFormationsRecommender);
 router.get('/FormationByCentre',requireAuthUser , formationController.getFormationsByCentre); // Récupérer toutes les formations
 router.get('/FormationByIdCentre/:id',formationController.getFormationsById); // Récupérer toutes les formations

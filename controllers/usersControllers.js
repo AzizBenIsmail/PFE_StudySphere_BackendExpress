@@ -50,7 +50,7 @@ module.exports.getSimpleUser = async (req, res, next) => {
 
 module.exports.getFormateur = async (req, res, next) => {
   try {
-    const users = await userModel.find({ role: 'formateur' })
+    const users = await userModel.find({ role: 'formateur' }).populate("preferences")
     if (!users || users.length === 0) {
       res.status(200).json({ message : 'Users not found!' })
     }else {

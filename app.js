@@ -2,14 +2,16 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const http = require("http");
+//const http = require("http");
 const cors = require('cors');
 const session = require('express-session');
+//const { fileURLToPath } = require("url");
 
+//const { upload } = require("./middlewares/uploadFils/uploadFileChat.js");
 require("dotenv").config(); //configuration dotenv
 require('./controllers/init');
 
-const path = require("path");
+//const path = require("path");
 
 
 const { app, server } = require("./socket/socket.js");
@@ -55,11 +57,17 @@ app.use(cors({
   credentials: true
 }));
 
-// Debugging: Log current directory path
-const currentDirname = path.dirname(__filename);
-console.log("Directory path:", currentDirname);
+// // Debugging: Log current directory path
+// const currentDirname = path.dirname(__filename);
+// console.log("Directory path:", currentDirname);
+
+// // // Serve static files from the 'public/videos' directory
+// const publicVideosDirectoryPath = path.join(currentDirname, "public/");
+// app.use(express.static(publicVideosDirectoryPath));
 
 
+// // Use the upload middleware to handle any type of file
+// app.use(upload.single("file"));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
@@ -79,8 +87,7 @@ app.get('/check', (req, res) => {
   res.status(200).send('Server is running');
 });
 
-// Création du serveur HTTP en utilisant l'application Express
-const server = http.createServer(app);
+
 
 // Démarrage du serveur
 server.listen(process.env.PORT, () => {

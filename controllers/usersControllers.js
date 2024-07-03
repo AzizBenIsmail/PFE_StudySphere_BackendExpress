@@ -575,7 +575,7 @@ module.exports.forgetpasswordByAdmin = async (req, res) => {
       },
     );
 
-    await addNotification( id,"Alert ! votre mots de passe a ete modifier par un admin.","Securite",`/Info/warningAuth`, req, res);
+    await addNotification( id,"Alert ! votre mots de passe a ete modifier par un admin.","Securite",`Info/warningAuth`, req, res);
 
 
     console.log(updatedUser);

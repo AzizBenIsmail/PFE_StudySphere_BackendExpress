@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer')
 const bcrypt = require('bcrypt')
 const { addNotification } = require('./notificationControllers')
 
-const maxAge = 72 * 60 * 60 // 2 heures
+const maxAge = 720 * 60 * 60 // 2 heures
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.Net_Secret, {

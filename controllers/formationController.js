@@ -389,3 +389,17 @@ exports.desinscription = async (req, res) => {
     res.status(500).send({ message: 'Error unenrolling user from the formation', error });
   }
 }
+exports.FormationsByInscriptionByUserAuth = async (req, res) => {
+  const userId = req.session.user._id;
+
+  try {
+    const user = await User.findById(userId).populate('inscriptions');
+    if (!user) {
+      return res.status(404).send({ message: 'User not found' });
+    }
+
+    res.status(200).json(user.inscriptions);
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving formations for user', error });
+  }
+};

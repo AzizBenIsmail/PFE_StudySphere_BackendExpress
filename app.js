@@ -33,7 +33,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    secure: false,
+    secure: true,
+    sameSite: 'None', // Utilisez 'None' pour permettre le partage entre différents domaines
     maxAge: 24 * 60 * 60 * 1000,
   },
 }));

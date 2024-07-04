@@ -132,7 +132,7 @@ module.exports.login_post = async (req, res) => {
     req.session.user = user
     // console.log(req.session);
     res.status(200).json({
-      message: 'User successfully authenticated', user: user,
+      message: 'User successfully authenticated', user: user,      token: token, // Inclure le token dans la réponse
     })
   } catch (error) {
     res.status(400).json({

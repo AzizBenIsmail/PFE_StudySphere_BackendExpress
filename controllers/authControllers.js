@@ -39,12 +39,7 @@ module.exports.signupclient = async (req, res) => {
     })
     // sendWelcomeEmail(email, nom);
     const token = createToken(user._id)
-    res.cookie('jwt_token', token, {
-      httpOnly: true, // Utiliser httpOnly pour des raisons de sécurité
-      secure: true, // Assurez-vous que votre site utilise HTTPS
-      sameSite: 'None', // Utilisez 'None' pour permettre le partage entre différents domaines
-      maxAge: 240 * 60 * 60 * 1000, // Durée de vie de 24 heures
-    });
+    res.cookie('jwt_token', token, { httpOnly: true, maxAge: maxAge * 1000 })
     res.status(201).json({ user })
   } catch (error) {
     res.status(500).json({ message: error.message })

@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer')
 const bcrypt = require('bcrypt')
 const { addNotification } = require('./notificationControllers')
 
-const maxAge = 720 * 60 * 60 // 2 heures
+const maxAge = 72 * 60 * 60 // 2 heures
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.Net_Secret, {
@@ -123,12 +123,7 @@ module.exports.login_post = async (req, res) => {
       }, { new: true } // Set the { new: true } option to return the updated user
     )
     const token = createToken(user._id)
-    res.cookie('jwt_token', token, {
-      httpOnly: true, // Utiliser httpOnly pour des raisons de sécurité
-      secure: true, // Assurez-vous que votre site utilise HTTPS
-      sameSite: 'None', // Utilisez 'None' pour permettre le partage entre différents domaines
-      maxAge: maxAge * 1000,
-    });
+    res.cookie('jwt_token', token, { httpOnly: false, maxAge: maxAge * 1000 })
     req.session.user = user
     // console.log(req.session);
     res.status(200).json({

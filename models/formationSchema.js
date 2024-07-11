@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { number } = require('yup')
 
 const formationSchema = new mongoose.Schema({
   titre: { type: String, required: true },
@@ -23,6 +22,11 @@ const formationSchema = new mongoose.Schema({
   centre: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   formateur: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   participants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  feedbacks: [{
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    score: { type: Number, required: true, min: 0, max: 5 }
+  }],
+  averageFeedback: { type: Number, default: 0 }
 });
 
 const Formation = mongoose.model('Formation', formationSchema);

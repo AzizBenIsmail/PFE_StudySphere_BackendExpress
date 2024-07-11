@@ -19,6 +19,7 @@ router.post('/inscription/:formationId',requireAuthUser, formationController.ins
 router.post('/desinscription/:formationId',requireAuthUser, formationController.desinscription );
 router.post('/',requireAuthUser,upload.single("image_Formation"), formationController.createFormation); // Créer une nouvelle formation
 router.put('/:id', requireAuthUser ,upload.single("image_Formation"),formationController.updateFormation); // Mettre à jour une formation
+router.put('/feedback/:id', requireAuthUser ,formationController.feedback); // Mettre à jour une formation
 router.delete('/:id', requireAuthUser ,formationController.deleteFormation); // Supprimer une formation
 
 module.exports = router;

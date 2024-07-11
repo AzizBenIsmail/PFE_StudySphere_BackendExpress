@@ -403,3 +403,35 @@ exports.FormationsByInscriptionByUserAuth = async (req, res) => {
     res.status(500).json({ message: 'Error retrieving formations for user', error });
   }
 };
+// Contrôleur de feedbacks (formationController.js)
+// Contrôleur de feedbacks (formationController.js)
+exports.feedback = async (req, res) => {
+  try {
+    const { score } = req.body;
+    const userId = req.session.user._id;
+
+    const formation = await Formation.findById(req.params.id);
+    if (!formation) {
+      return res.status(404).json({ success: false, error: 'Formation not found' });
+    }
+
+    // Validez le score avant de l'ajouter
+    if (isNaN(score) || score < 0 || score > 5) {
+      return res.status(400).json({ success: false, error: 'Invalid feedback score provided' });
+    }
+
+    // Ajouter le feedback à la formation
+    formation.feedbacks.push({ user: userId, score });
+
+    // Recalculer la moyenne des feedbacks
+    const totalFeedbacks = formation.feedbacks.length;
+    const sumFeedbacks = formation.feedbacks.reduce((sum, feedback) => sum + feedback.score, 0);
+    formation.averageFeedback = sumFeedbacks / totalFeedbacks;
+
+    await formation.save();
+
+    res.status(200).json({ success: true, formation });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};

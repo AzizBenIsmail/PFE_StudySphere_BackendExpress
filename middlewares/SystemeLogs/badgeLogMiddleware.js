@@ -9,7 +9,7 @@
     const token = authHeader && authHeader.split(" ")[1];
     const startTime = new Date(); // Temps de début de la requête
     if (token) {
-      jwt.verify(token, "net StudySphere secret", async (err, decodedToken) => {
+      jwt.verify(token, process.env.Net_Secret, async (err, decodedToken) => {
         if (err) {
           console.log(err)
           req.user = null;

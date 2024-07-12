@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-  secret: 'net StudySphere secret',
+  secret: process.env.Net_Secret,
   resave: false,
   saveUninitialized: true,
   cookie: {

@@ -798,7 +798,7 @@ function sendWelcomeEmailverfication (email) {
       user: 'studyspheretn@gmail.com', pass: 'uqct kspi rgnt yzre',
     },
   })
-  const activationLink = `${process.env.Origin_Front}/auth/VerificationEmail?email=${encodeURIComponent(email)}`
+  const activationLink = `${process.env.Origin_Back}/auth/VerificationEmail?email=${encodeURIComponent(email)}`
   const mailOptions = {
     from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
      <html

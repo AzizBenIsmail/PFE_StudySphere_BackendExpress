@@ -3,6 +3,7 @@
   const fs = require("fs");
   const userModel = require("../../models/userSchema");
   const path = require("path"); // Importer le module path
+  const Log = require("../../models/logSchema"); // Importer le modèle de log
 
   function authLogMiddleware(req, res, next) {
     const authHeader = req.headers.authorization;
@@ -27,7 +28,7 @@
     }
   }
 
-  function appendLog(req, res, startTime) {
+  async function appendLog(req, res, startTime) {
     const headers = JSON.stringify(req.headers);
     const endTime = new Date(); // Temps de fin de la requête
     const executionTime = endTime - startTime; // Temps d'exécution en millisecondes
@@ -38,6 +39,20 @@
     const logsDirectory = path.join(__dirname, '..', '..', 'logs'); // Chemin du dossier logs, en remontant de deux niveaux
     const logFilePath = path.join(logsDirectory, 'auth.log'); // Chemin complet du fichier de logs
 
+    const logs = new Log({
+      type: "Auth" ,
+      method: req.method,
+      url: req.originalUrl,
+      ip: req.ip,
+      referer: referer,
+      statusCode: res.statusCode,
+      user_id: req.user ? req.user._id : 'N/A',
+      user_nom: req.user ? req.user.nom : 'N/A',
+      headers: headers,
+      executionTime: executionTime,
+      body: body
+    });
+
     // Vérifier si le dossier logs existe, sinon le créer
     if (!fs.existsSync(logsDirectory)) {
       fs.mkdirSync(logsDirectory);
@@ -45,6 +60,8 @@
 
     try {
       fs.appendFileSync(logFilePath, log); // Ajouter le log au fichier de logs
+      await logs.save(); // Enregistrer le log dans la base de données
+
     } catch (err) {
       console.error("Erreur lors de l'enregistrement dans le fichier journal :", err);
     }

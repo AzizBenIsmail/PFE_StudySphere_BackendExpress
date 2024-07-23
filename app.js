@@ -18,6 +18,7 @@ var niveauRouter = require('./routes/niveau');
 var notificationRouter = require('./routes/notification');
 var formationRouter = require('./routes/formation');
 var favorisRouter = require('./routes/Favoris');
+var logRoutes = require('./routes/logs');
 
 const { connectToMongoDB } = require('./db/db');
 
@@ -56,6 +57,7 @@ app.use('/niveau', niveauRouter);
 app.use('/notification', notificationRouter);
 app.use('/formation', formationRouter);
 app.use('/fav', favorisRouter);
+app.use('/logs', logRoutes);
 
 app.get('/check', (req, res) => {
   res.status(200).send('Server is running');

@@ -91,7 +91,7 @@ module.exports.activation = async (req, res) => {
       throw new Error('User not found!')
     }
     if (checkIfUserExists.etat) {
-      return res.redirect('http://localhost:3000/auth/login/?message=Compte_Verifier_Avec_Succee')
+      return res.redirect(`${process.env.Origin_Front}/auth/login/?message=Compte_Verifier_Avec_Succee`)
     }
 
     const currentDate = new Date()
@@ -102,7 +102,7 @@ module.exports.activation = async (req, res) => {
       }, { new: true } // Set the { new: true } option to return the updated user
     )
 
-    return res.redirect('http://localhost:3000/login-page/?message=Utilisateur_Activee_Avec_Succes')
+    return res.redirect(`${process.env.Origin_Front}/login-page/?message=Utilisateur_Activee_Avec_Succes`)
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
@@ -143,7 +143,7 @@ function sendWelcomeEmail (email, nom, id) {
       user: 'studyspheretn@gmail.com', pass: 'uqct kspi rgnt yzre',
     },
   })
-  const activationLink = `http://localhost:5000/auth/validation?email=${encodeURIComponent(email)}`
+  const activationLink = `${process.env.Origin_Front}/auth/validation?email=${encodeURIComponent(email)}`
   const mailOptions = {
     from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
       <html>
@@ -304,7 +304,7 @@ module.exports.sendforgetPassword = async (req, res) => {
       }
     );
 
-    const activationLink = `http://localhost:3000/auth/Resetmdp?token=${token}&message=tu_peux_changer_votre_mdp&email=${email}`;
+    const activationLink = `${process.env.Origin_Front}/auth/Resetmdp?token=${token}&message=tu_peux_changer_votre_mdp&email=${email}`;
 
     sendPasswordEmail(email, activationLink);
     res.status(200).json({
@@ -667,7 +667,7 @@ module.exports.archiver = async (req, res) => {
 
 module.exports.forgotpwd = async (req, res) => {
   const { email } = req.body
-  const URL = 'http://localhost:3000/resetpwd'
+  const URL = `${process.env.Origin_Front}/resetpwd`
 
   try {
     res.status(200).json({ message: 'Welcome' })
@@ -798,7 +798,7 @@ function sendWelcomeEmailverfication (email) {
       user: 'studyspheretn@gmail.com', pass: 'uqct kspi rgnt yzre',
     },
   })
-  const activationLink = `http://localhost:5000/auth/VerificationEmail?email=${encodeURIComponent(email)}`
+  const activationLink = `${process.env.Origin_Front}/auth/VerificationEmail?email=${encodeURIComponent(email)}`
   const mailOptions = {
     from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
      <html
@@ -814,33 +814,10 @@ function sendWelcomeEmailverfication (email) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="telephone=no" name="format-detection" />
     <title>New Template</title>
-    <!--[if (mso 16)
-      ]><style type="text/css">
-        a {
-          text-decoration: none;
-        }
-      </style><!
-    [endif]-->
-    <!--[if gte mso 9
-      ]><style>
-        sup {
-          font-size: 100% !important;
-        }
-      </style><!
-    [endif]-->
-    <!--[if gte mso 9
-      ]><xml>
-        <o:OfficeDocumentSettings>
-          <o:AllowPNG></o:AllowPNG> <o:PixelsPerInch>96</o:PixelsPerInch>
-        </o:OfficeDocumentSettings>
-      </xml>
-    <![endif]-->
-    <!--[if !mso]><!-- -->
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap"
       rel="stylesheet"
     />
-    <!--<![endif]-->
     <style type="text/css">
       .rollover:hover .rollover-first {
         max-height: 0px !important;
@@ -1145,16 +1122,6 @@ function sendWelcomeEmailverfication (email) {
       lang="fr"
       style="background-color: #02687f"
     >
-      <!--[if gte mso 9
-        ]><v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
-          <v:fill
-            type="tile"
-            src="https://tlr.stripocdn.email/content/guids/CABINET_8fbba731b18c07448ff3a0b3cb247c11/images/group_nUw.png"
-            color="#02687F"
-            origin="0.5, 0"
-            position="0.5, 0"
-          ></v:fill> </v:background
-      ><![endif]-->
       <table
         class="es-wrapper"
         width="100%"
@@ -1218,8 +1185,6 @@ function sendWelcomeEmailverfication (email) {
                   >
                     <tr>
                       <td align="left" style="padding: 0; margin: 0">
-                        <!--[if mso]><table style="width:600px" cellpadding="0" cellspacing="0"><tr>
-<td style="width:200px" valign="top"><![endif]-->
                         <table
                           cellpadding="0"
                           cellspacing="0"
@@ -1292,7 +1257,6 @@ function sendWelcomeEmailverfication (email) {
                             </td>
                           </tr>
                         </table>
-                        <!--[if mso]></td><td style="width:20px"></td><td style="width:380px" valign="top"><![endif]-->
                         <table
                           cellpadding="0"
                           cellspacing="0"
@@ -1347,7 +1311,6 @@ function sendWelcomeEmailverfication (email) {
                             </td>
                           </tr>
                         </table>
-                        <!--[if mso]></td></tr></table><![endif]-->
                       </td>
                     </tr>
                     <tr>
@@ -2205,7 +2168,7 @@ module.exports.VerificationEmail = async (req, res) => {
   try {
     const email = req.query.email
 
-    return res.redirect(`http://localhost:3000/auth/register/?message=Email_verifier_avec_succee&email=${email}`)
+    return res.redirect(`${process.env.Origin_Front}/auth/register/?message=Email_verifier_avec_succee&email=${email}`)
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }

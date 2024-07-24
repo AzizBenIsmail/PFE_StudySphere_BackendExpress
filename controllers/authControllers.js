@@ -91,7 +91,7 @@ module.exports.activation = async (req, res) => {
       throw new Error('User not found!')
     }
     if (checkIfUserExists.etat) {
-      return res.redirect('http://localhost:3000/auth/login/?message=Compte_Verifier_Avec_Succee')
+      return res.redirect(`${process.env.Origin_Back}/auth/login/?message=Compte_Verifier_Avec_Succee`)
     }
 
     const currentDate = new Date()
@@ -102,7 +102,7 @@ module.exports.activation = async (req, res) => {
       }, { new: true } // Set the { new: true } option to return the updated user
     )
 
-    return res.redirect('http://localhost:3000/login-page/?message=Utilisateur_Activee_Avec_Succes')
+    return res.redirect(`${process.env.Origin_Front}/login-page/?message=Utilisateur_Activee_Avec_Succes`)
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
@@ -143,7 +143,7 @@ function sendWelcomeEmail (email, nom, id) {
       user: 'studyspheretn@gmail.com', pass: 'uqct kspi rgnt yzre',
     },
   })
-  const activationLink = `http://localhost:5000/auth/validation?email=${encodeURIComponent(email)}`
+  const activationLink = `${process.env.Origin_Front}/auth/validation?email=${encodeURIComponent(email)}`
   const mailOptions = {
     from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
       <html>
@@ -304,7 +304,7 @@ module.exports.sendforgetPassword = async (req, res) => {
       }
     );
 
-    const activationLink = `http://localhost:3000/auth/Resetmdp?token=${token}&message=tu_peux_changer_votre_mdp&email=${email}`;
+    const activationLink = `${process.env.Origin_Front}/auth/Resetmdp?token=${token}&message=tu_peux_changer_votre_mdp&email=${email}`;
 
     sendPasswordEmail(email, activationLink);
     res.status(200).json({
@@ -401,131 +401,6 @@ module.exports.logout = async (req, res) => {
   }
 };
 
-module.exports.getUsers = async (req, res, next) => {
-  try {
-    const users = await userModel.find()
-    if (!users || users.length === 0) {
-      throw new Error('users not found !')
-    }
-    res.status(200).json({ users })
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-module.exports.getAdmin = async (req, res, next) => {
-  try {
-    const users = await userModel.find({ role: 'admin' })
-    if (!users || users.length === 0) {
-      throw new Error('Users not found!')
-    }
-    res.status(200).json({ users })
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-module.exports.getSimpleUser = async (req, res, next) => {
-  try {
-    const users = await userModel.find({ role: 'client' })
-    if (!users || users.length === 0) {
-      throw new Error('Users not found!')
-    }
-    res.status(200).json({ users })
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-module.exports.getUserActive = async (req, res, next) => {
-  try {
-    const users = await userModel.find({ etat: 'true' })
-    if (!users || users.length === 0) {
-      throw new Error('Users not found!')
-    }
-    res.status(200).json({ users })
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-module.exports.getUserConnecter = async (req, res, next) => {
-  try {
-    const users = await userModel.find({ statu: 'true' })
-    if (!users || users.length === 0) {
-      throw new Error('Users not found!')
-    }
-    res.status(200).json({ users })
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-module.exports.getUserDeConnecter = async (req, res, next) => {
-  try {
-    const users = await userModel.find({ statu: 'false' })
-    if (!users || users.length === 0) {
-      throw new Error('Users not found!')
-    }
-    res.status(200).json({ users })
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-module.exports.getUserArchive = async (req, res, next) => {
-  try {
-    // Recherche des utilisateurs archivés en fonction de la valeur de archi
-    const archivedUsers = await userModel.find({ archivage: { $exists: true } })
-    .populate({
-      path: 'archivage',
-      match: { archi: true }, // Filtrer les archivages avec archi à true
-    });
-
-    if (!archivedUsers || archivedUsers.length === 0) {
-      throw new Error('Aucun utilisateur archivé trouvé !');
-    }
-
-    // Filtrer les utilisateurs avec au moins un archivage correspondant à archi=true
-    const filteredUsers = archivedUsers.filter(user => user.archivage !== null);
-
-    res.status(200).json({ users: filteredUsers });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-
-module.exports.getUserDesactive = async (req, res, next) => {
-  try {
-    const users = await userModel.find({ etat: 'false' })
-    if (!users || users.length === 0) {
-      throw new Error('Users not found!')
-    }
-    res.status(200).json({ users })
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-module.exports.searchUsers = async (req, res, next) => {
-  try {
-    const searchTerm = req.query.term // Récupérer le terme de recherche à partir de la requête
-
-    // Utiliser la méthode find avec un critère de recherche basé sur le terme
-    const users = await userModel.find({
-      $or: [
-        { nom: { $regex: searchTerm, $options: 'i' } }, // Recherche insensible à la casse dans le nom d'utilisateur
-        { email: { $regex: searchTerm, $options: 'i' } } // Recherche insensible à la casse dans l'e-mail
-      ]
-    })
-
-    res.status(200).json({ users })
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
 module.exports.getUser = async (req, res, next) => {
   try {
     const id = req.session.user._id.toString();
@@ -554,224 +429,6 @@ module.exports.getUser = async (req, res, next) => {
   }
 };
 
-module.exports.UserByID = async (req, res, next) => {
-  try {
-    const id = req.params.id
-    const user = await userModel.findById(id).populate('xp')
-
-    if (!user || user.length === 0) {
-      throw new Error('users not found !')
-    }
-    res.status(200).json({ user })
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-// module.exports.addUser = async (req, res, next) => {
-//   try {
-//     const { filename } = req.file
-//     console.log('filename', req.file)
-//     const {
-//       surnom, password, email, nom, prenom, phoneNumber, role,
-//     } = req.body
-//     console.log(req.body)
-//     const user = new userModel({
-//       surnom, password, email, nom, prenom, phoneNumber, role, image_user: filename,
-//     })
-//
-//     const addeduser = await user.save()
-//
-//     res.status(200).json(addeduser)
-//   } catch (error) {
-//     res.status(500).json({ message: error.message })
-//   }
-// }
-// module.exports.deleteUser = async (req, res, next) => {
-//   try {
-//
-//     const { id } = req.params;
-//     const user = await userModel.findById(id);
-//
-//     if (!user) {
-//       return res.status(404).json({ message: 'User not found!' });
-//     }
-//
-//     await userModel.findByIdAndDelete(user._id);
-//
-//     // Envoyez la réponse JSON après la suppression
-//     res.status(200).json('User deleted successfully.');
-//   } catch (error) {
-//     // Gérez les erreurs
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
-module.exports.archiver = async (req, res) => {
-  try {
-    const { id } = req.body;
-
-    // Check if the user exists
-    const user = await userModel.findById(id);
-
-    if (!user) {
-      throw new Error('User not found!');
-    }
-
-    // Check if the user already has an archive
-    let existingArchivage = await archivageModel.findOne({ user: user._id });
-
-    if (existingArchivage) {
-      // User already has an archive, toggle the archi field
-      const updatedArchivage = await archivageModel.findByIdAndUpdate(existingArchivage._id, {
-        $set: {
-          archi: !existingArchivage.archi, // Toggle the archi field
-          updatedAt: new Date(),
-        },
-      }, { new: true });
-
-      // Update the user
-      const updatedUser = await userModel.findByIdAndUpdate(id, {
-        $set: {
-          archivage: updatedArchivage._id,
-        },
-      }, { new: true });
-
-      res.status(200).json(updatedUser);
-    } else {
-      // User doesn't have an archive, create a new one with archi set to true
-      const archivage = new archivageModel({
-        dateArchivage: new Date(),
-        raison: 'YourReasonHere', // Provide a reason for archiving
-        user: user._id, // Reference to the user
-        archi: true,
-      });
-
-      // Save the Archivage document
-      await archivage.save();
-
-      // Update the user
-      const updatedUser = await userModel.findByIdAndUpdate(id, {
-        $set: {
-          archivage: archivage._id,
-        },
-      }, { new: true });
-
-      res.status(200).json(updatedUser);
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-
-
-module.exports.forgotpwd = async (req, res) => {
-  const { email } = req.body
-  const URL = 'http://localhost:3000/resetpwd'
-
-  try {
-    res.status(200).json({ message: 'Welcome' })
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-    const msg = {
-      to: email, from: 'greencrowdproject@gmail.com', subject: 'Welcome to Green Crowd Project', html: `
-				<h2>Click the link to reset your password</h2>
-				<p>${URL}</p>
-			`, //templateId: 'd-e09cf57a0a0e45e894027ffd5b6caebb',
-    }
-    sgMail.send(msg).then(() => {
-      console.log('Email sent')
-    }).catch((error) => {
-      console.error(error)
-    })
-  } catch (error) {
-    res.status(400).json({ error: error.message })
-  }
-}
-
-module.exports.upgrade = async (req, res) => {
-  try {
-    // console.log('test', req.bod)
-
-    const { id } = req.body // Récupération de l'ID depuis le corps de la requête
-    const checkIfUserExists = await userModel.findById(id)
-
-    if (!checkIfUserExists) {
-      throw new Error('User not found!')
-    }
-
-    const currentDate = new Date()
-    const role = 'admin'
-
-    const updatedUser = await userModel.findByIdAndUpdate(id, {
-      $set: {
-        role: role, etat: true, updatedAt: currentDate,
-      },
-    }, { new: true })
-
-    res.status(200).json(updatedUser)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-module.exports.downgrade = async (req, res) => {
-  try {
-    const { id } = req.body
-    const checkIfusertExists = await userModel.findById(id)
-    if (!checkIfusertExists) {
-      throw new Error('user not found !')
-    }
-    const currentDate = new Date()
-    const client = 'client'
-    updateedUser = await userModel.findByIdAndUpdate(id, {
-      $set: {
-        role: client, etat: true, updatedAt: currentDate,
-      },
-    }, { new: true })
-    res.status(200).json(updateedUser)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-module.exports.Desactive = async (req, res) => {
-  try {
-    const { id } = req.body
-    const checkIfusertExists = await userModel.findById(id)
-    if (!checkIfusertExists) {
-      throw new Error('user not found !')
-    }
-    const currentDate = new Date()
-    updateedUser = await userModel.findByIdAndUpdate(id, {
-      $set: {
-        etat: false, updatedAt: currentDate,
-      },
-    }, { new: true })
-    res.status(200).json(updateedUser)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
-module.exports.Active = async (req, res) => {
-  try {
-    const { id } = req.body
-    const checkIfusertExists = await userModel.findById(id)
-    if (!checkIfusertExists) {
-      throw new Error('user not found !')
-    }
-    const currentDate = new Date()
-    updateedUser = await userModel.findByIdAndUpdate(id, {
-      $set: {
-        etat: true, updatedAt: currentDate,
-      },
-    }, { new: true })
-    res.status(200).json(updateedUser)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
-
 module.exports.verification = async (req, res) => {
   const { email } = req.body
   // Check if email is provided
@@ -798,7 +455,7 @@ function sendWelcomeEmailverfication (email) {
       user: 'studyspheretn@gmail.com', pass: 'uqct kspi rgnt yzre',
     },
   })
-  const activationLink = `http://localhost:5000/auth/VerificationEmail?email=${encodeURIComponent(email)}`
+  const activationLink = `${process.env.Origin_Back}/auth/VerificationEmail?email=${encodeURIComponent(email)}`
   const mailOptions = {
     from: 'studyspheretn@gmail.com', to: email, subject: 'Bienvenue sur notre site', html: `
      <html
@@ -814,33 +471,10 @@ function sendWelcomeEmailverfication (email) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="telephone=no" name="format-detection" />
     <title>New Template</title>
-    <!--[if (mso 16)
-      ]><style type="text/css">
-        a {
-          text-decoration: none;
-        }
-      </style><!
-    [endif]-->
-    <!--[if gte mso 9
-      ]><style>
-        sup {
-          font-size: 100% !important;
-        }
-      </style><!
-    [endif]-->
-    <!--[if gte mso 9
-      ]><xml>
-        <o:OfficeDocumentSettings>
-          <o:AllowPNG></o:AllowPNG> <o:PixelsPerInch>96</o:PixelsPerInch>
-        </o:OfficeDocumentSettings>
-      </xml>
-    <![endif]-->
-    <!--[if !mso]><!-- -->
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap"
       rel="stylesheet"
     />
-    <!--<![endif]-->
     <style type="text/css">
       .rollover:hover .rollover-first {
         max-height: 0px !important;
@@ -1145,16 +779,6 @@ function sendWelcomeEmailverfication (email) {
       lang="fr"
       style="background-color: #02687f"
     >
-      <!--[if gte mso 9
-        ]><v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
-          <v:fill
-            type="tile"
-            src="https://tlr.stripocdn.email/content/guids/CABINET_8fbba731b18c07448ff3a0b3cb247c11/images/group_nUw.png"
-            color="#02687F"
-            origin="0.5, 0"
-            position="0.5, 0"
-          ></v:fill> </v:background
-      ><![endif]-->
       <table
         class="es-wrapper"
         width="100%"
@@ -1218,8 +842,6 @@ function sendWelcomeEmailverfication (email) {
                   >
                     <tr>
                       <td align="left" style="padding: 0; margin: 0">
-                        <!--[if mso]><table style="width:600px" cellpadding="0" cellspacing="0"><tr>
-<td style="width:200px" valign="top"><![endif]-->
                         <table
                           cellpadding="0"
                           cellspacing="0"
@@ -1292,7 +914,6 @@ function sendWelcomeEmailverfication (email) {
                             </td>
                           </tr>
                         </table>
-                        <!--[if mso]></td><td style="width:20px"></td><td style="width:380px" valign="top"><![endif]-->
                         <table
                           cellpadding="0"
                           cellspacing="0"
@@ -1347,7 +968,6 @@ function sendWelcomeEmailverfication (email) {
                             </td>
                           </tr>
                         </table>
-                        <!--[if mso]></td></tr></table><![endif]-->
                       </td>
                     </tr>
                     <tr>
@@ -2205,7 +1825,7 @@ module.exports.VerificationEmail = async (req, res) => {
   try {
     const email = req.query.email
 
-    return res.redirect(`http://localhost:3000/auth/register/?message=Email_verifier_avec_succee&email=${email}`)
+    return res.redirect(`${process.env.Origin_Front}/auth/register/?message=Email_verifier_avec_succee&email=${email}`)
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }

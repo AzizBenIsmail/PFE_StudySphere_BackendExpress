@@ -2,14 +2,15 @@
   const jwt = require("jsonwebtoken");
   const fs = require("fs");
   const userModel = require("../../models/userSchema");
-  const path = require("path"); // Importer le module path
+  const path = require("path");
+  const Log = require('../../models/logSchema') // Importer le module path
 
   function usersLogMiddleware(req, res, next) {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(" ")[1];
     const startTime = new Date(); // Temps de début de la requête
     if (token) {
-      jwt.verify(token, "net StudySphere secret", async (err, decodedToken) => {
+      jwt.verify(token, process.env.Net_Secret, async (err, decodedToken) => {
         if (err) {
           req.user = null;
         } else {
@@ -36,6 +37,20 @@
 
     const logsDirectory = path.join(__dirname, '..', '..', 'logs'); // Chemin du dossier logs, en remontant de deux niveaux
     const logFilePath = path.join(logsDirectory, 'users.log'); // Chemin complet du fichier de logs
+
+    const logs = new Log({
+      type: "users" ,
+      method: req.method,
+      url: req.originalUrl,
+      ip: req.ip,
+      referer: referer,
+      statusCode: res.statusCode,
+      user_id: req.user ? req.user._id : 'N/A',
+      user_nom: req.user ? req.user.nom : 'N/A',
+      headers: headers,
+      executionTime: executionTime,
+      body: body
+    });
 
     // Vérifier si le dossier logs existe, sinon le créer
     if (!fs.existsSync(logsDirectory)) {

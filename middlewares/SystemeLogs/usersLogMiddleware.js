@@ -27,7 +27,7 @@
     }
   }
 
-  function appendLog(req, res, startTime) {
+  async function appendLog(req, res, startTime) {
     const headers = JSON.stringify(req.headers);
     const endTime = new Date(); // Temps de fin de la requête
     const executionTime = endTime - startTime; // Temps d'exécution en millisecondes
@@ -39,7 +39,7 @@
     const logFilePath = path.join(logsDirectory, 'users.log'); // Chemin complet du fichier de logs
 
     const logs = new Log({
-      type: "users" ,
+      type: "Users" ,
       method: req.method,
       url: req.originalUrl,
       ip: req.ip,
@@ -59,6 +59,8 @@
 
     try {
       fs.appendFileSync(logFilePath, log); // Ajouter le log au fichier de logs
+      await logs.save(); // Enregistrer le log dans la base de données
+
     } catch (err) {
       console.error("Erreur lors de l'enregistrement dans le fichier journal :", err);
     }

@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const eventController = require('../controllers/eventController');
+const upload = require('../middlewares/uploadFils/uploadImagesUsers')
 
-router.post('/', eventController.createEvent);
+router.post('/',upload.single("image"), eventController.createEvent);
 router.get('/', eventController.getAllEvents);
 router.get('/:id', eventController.getEventById);
 router.patch('/:id', eventController.updateEvent);

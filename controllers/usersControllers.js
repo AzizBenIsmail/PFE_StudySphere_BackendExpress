@@ -484,8 +484,8 @@ module.exports.updateUser = async (req, res, next) => {
 
     // Vérifier s'il existe une propriété req.file
     if (req.file) {
-      const { filename } = req.file;
-      updateFields.image_user = filename;
+        const { filename } = req.file;
+        updateFields.image_user = filename;
 
       if (checkIfUserExists.image_user && fs.existsSync(`public/images/Users/${checkIfUserExists.image_user}`)) {
         fs.unlinkSync(`public/images/Users/${checkIfUserExists.image_user}`);

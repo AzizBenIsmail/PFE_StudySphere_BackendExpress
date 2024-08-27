@@ -110,5 +110,22 @@ userSchema.statics.login = async function (email, password) {
   throw Error('incorrect email')
 }
 
+userSchema.statics.getTotalUsersCount = async function() {
+  return await this.countDocuments();
+};
+
+userSchema.statics.getTotalVisitsCount = async function() {
+  const totalVisits = await this.aggregate([
+    {
+      $group: {
+        _id: null,
+        totalVisits: { $sum: "$visitsCount" }
+      }
+    }
+  ]);
+
+  return totalVisits.length > 0 ? totalVisits[0].totalVisits : 0;
+};
+
 const User = mongoose.model('User', userSchema)
 module.exports = User

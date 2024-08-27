@@ -29,6 +29,12 @@ const formationSchema = new mongoose.Schema({
   averageFeedback: { type: Number, default: 0 }
 });
 
+
+formationSchema.statics.getTotalFormationsCount = async function() {
+  return await this.countDocuments();
+};
+
+
 const Formation = mongoose.model('Formation', formationSchema);
 
 module.exports = Formation;

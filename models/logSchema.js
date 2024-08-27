@@ -15,6 +15,10 @@ const logSchema = new mongoose.Schema({
   timestamp: { type: Date, default: Date.now }
 });
 
+logSchema.statics.getTotalLogsCount = async function() {
+  return await this.countDocuments();
+};
+
 const Log = mongoose.model('Log', logSchema);
 
 module.exports = Log;
